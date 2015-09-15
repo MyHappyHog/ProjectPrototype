@@ -23,8 +23,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MainActivity extends Activity {
-    private EditText et1, et2, et3;
-    private TextView tv4;
+    private EditText editIp, editPort, editMsg;
+    private TextView viewMsg;
     private Socket socket;
     private DataOutputStream writeSocket;
     private DataInputStream readSocket;
@@ -39,11 +39,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et1 = (EditText) findViewById(R.id.editText1);
-        et2 = (EditText) findViewById(R.id.editText2);
-        et3 = (EditText) findViewById(R.id.editText3);
+        editIp = (EditText) findViewById(R.id.editText1);
+        editPort = (EditText) findViewById(R.id.editText2);
+        editMsg = (EditText) findViewById(R.id.editText3);
 
-        tv4 = (TextView) findViewById(R.id.textView4);
+        viewMsg = (TextView) findViewById(R.id.textView4);
 
         cManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -69,9 +69,9 @@ public class MainActivity extends Activity {
                 if (wifi.isConnected()) {
                     WifiManager wManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                     WifiInfo info = wManager.getConnectionInfo();
-                    tv4.setText("IP Address : " + Formatter.formatIpAddress(info.getIpAddress()));
+                    viewMsg.setText("IP Address : " + Formatter.formatIpAddress(info.getIpAddress()));
                 } else {
-                    tv4.setText("Disconnected");
+                    viewMsg.setText("Disconnected");
                 }
                 break;
             case R.id.button6:
@@ -86,8 +86,8 @@ public class MainActivity extends Activity {
             int port = 0;
 
             try {
-                ip = et1.getText().toString();
-                port = Integer.parseInt(et2.getText().toString());
+                ip = editIp.getText().toString();
+                port = Integer.parseInt(editPort.getText().toString());
             } catch (Exception e) {
                 final String recvInput = "정확히 입력하세요!";
                 mHandler.post(new Runnable() {
@@ -170,7 +170,7 @@ public class MainActivity extends Activity {
 
         public void run() {
             try {
-                int port = Integer.parseInt(et2.getText().toString());
+                int port = Integer.parseInt(editPort.getText().toString());
                 serverSocket = new ServerSocket(port);
                 final String result = "서버 포트 " + port + " 가 준비되었습니다.";
 
@@ -325,7 +325,7 @@ public class MainActivity extends Activity {
         public void run() {
             try {
                 byte[] b = new byte[100];
-                b = et3.getText().toString().getBytes();
+                b = editMsg.getText().toString().getBytes();
                 writeSocket.write(b);
 
             } catch (Exception e) {
