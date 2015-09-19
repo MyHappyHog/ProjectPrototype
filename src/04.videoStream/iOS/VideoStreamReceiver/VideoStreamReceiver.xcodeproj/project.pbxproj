@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		255BE5EB1BAC2693000B9F73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BE5EA1BAC2693000B9F73 /* AppDelegate.swift */; };
+		255BE5ED1BAC2693000B9F73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BE5EC1BAC2693000B9F73 /* ViewController.swift */; };
+		255BE5F01BAC2693000B9F73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BE5EE1BAC2693000B9F73 /* Main.storyboard */; };
+		255BE5F21BAC2693000B9F73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255BE5F11BAC2693000B9F73 /* Assets.xcassets */; };
+		255BE5F51BAC2693000B9F73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255BE5F31BAC2693000B9F73 /* LaunchScreen.storyboard */; };
+		255BE6001BAC2693000B9F73 /* VideoStreamReceiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BE5FF1BAC2693000B9F73 /* VideoStreamReceiverTests.swift */; };
+		255BE60B1BAC2693000B9F73 /* VideoStreamReceiverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BE60A1BAC2693000B9F73 /* VideoStreamReceiverUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		255BE5FC1BAC2693000B9F73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 255BE5DF1BAC2693000B9F73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 255BE5E61BAC2693000B9F73;
+			remoteInfo = VideoStreamReceiver;
+		};
+		255BE6071BAC2693000B9F73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 255BE5DF1BAC2693000B9F73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 255BE5E61BAC2693000B9F73;
+			remoteInfo = VideoStreamReceiver;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		255BE5E71BAC2693000B9F73 /* VideoStreamReceiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoStreamReceiver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		255BE5EA1BAC2693000B9F73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		255BE5EC1BAC2693000B9F73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		255BE5EF1BAC2693000B9F73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		255BE5F11BAC2693000B9F73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		255BE5F41BAC2693000B9F73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		255BE5F61BAC2693000B9F73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		255BE5FB1BAC2693000B9F73 /* VideoStreamReceiverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoStreamReceiverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		255BE5FF1BAC2693000B9F73 /* VideoStreamReceiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamReceiverTests.swift; sourceTree = "<group>"; };
+		255BE6011BAC2693000B9F73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		255BE6061BAC2693000B9F73 /* VideoStreamReceiverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoStreamReceiverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		255BE60A1BAC2693000B9F73 /* VideoStreamReceiverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamReceiverUITests.swift; sourceTree = "<group>"; };
+		255BE60C1BAC2693000B9F73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		255BE5E41BAC2693000B9F73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE5F81BAC2693000B9F73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE6031BAC2693000B9F73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		255BE5DE1BAC2693000B9F73 = {
+			isa = PBXGroup;
+			children = (
+				255BE5E91BAC2693000B9F73 /* VideoStreamReceiver */,
+				255BE5FE1BAC2693000B9F73 /* VideoStreamReceiverTests */,
+				255BE6091BAC2693000B9F73 /* VideoStreamReceiverUITests */,
+				255BE5E81BAC2693000B9F73 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		255BE5E81BAC2693000B9F73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				255BE5E71BAC2693000B9F73 /* VideoStreamReceiver.app */,
+				255BE5FB1BAC2693000B9F73 /* VideoStreamReceiverTests.xctest */,
+				255BE6061BAC2693000B9F73 /* VideoStreamReceiverUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		255BE5E91BAC2693000B9F73 /* VideoStreamReceiver */ = {
+			isa = PBXGroup;
+			children = (
+				255BE5EA1BAC2693000B9F73 /* AppDelegate.swift */,
+				255BE5EC1BAC2693000B9F73 /* ViewController.swift */,
+				255BE5EE1BAC2693000B9F73 /* Main.storyboard */,
+				255BE5F11BAC2693000B9F73 /* Assets.xcassets */,
+				255BE5F31BAC2693000B9F73 /* LaunchScreen.storyboard */,
+				255BE5F61BAC2693000B9F73 /* Info.plist */,
+			);
+			path = VideoStreamReceiver;
+			sourceTree = "<group>";
+		};
+		255BE5FE1BAC2693000B9F73 /* VideoStreamReceiverTests */ = {
+			isa = PBXGroup;
+			children = (
+				255BE5FF1BAC2693000B9F73 /* VideoStreamReceiverTests.swift */,
+				255BE6011BAC2693000B9F73 /* Info.plist */,
+			);
+			path = VideoStreamReceiverTests;
+			sourceTree = "<group>";
+		};
+		255BE6091BAC2693000B9F73 /* VideoStreamReceiverUITests */ = {
+			isa = PBXGroup;
+			children = (
+				255BE60A1BAC2693000B9F73 /* VideoStreamReceiverUITests.swift */,
+				255BE60C1BAC2693000B9F73 /* Info.plist */,
+			);
+			path = VideoStreamReceiverUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		255BE5E61BAC2693000B9F73 /* VideoStreamReceiver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 255BE60F1BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiver" */;
+			buildPhases = (
+				255BE5E31BAC2693000B9F73 /* Sources */,
+				255BE5E41BAC2693000B9F73 /* Frameworks */,
+				255BE5E51BAC2693000B9F73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoStreamReceiver;
+			productName = VideoStreamReceiver;
+			productReference = 255BE5E71BAC2693000B9F73 /* VideoStreamReceiver.app */;
+			productType = "com.apple.product-type.application";
+		};
+		255BE5FA1BAC2693000B9F73 /* VideoStreamReceiverTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 255BE6121BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiverTests" */;
+			buildPhases = (
+				255BE5F71BAC2693000B9F73 /* Sources */,
+				255BE5F81BAC2693000B9F73 /* Frameworks */,
+				255BE5F91BAC2693000B9F73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				255BE5FD1BAC2693000B9F73 /* PBXTargetDependency */,
+			);
+			name = VideoStreamReceiverTests;
+			productName = VideoStreamReceiverTests;
+			productReference = 255BE5FB1BAC2693000B9F73 /* VideoStreamReceiverTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		255BE6051BAC2693000B9F73 /* VideoStreamReceiverUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 255BE6151BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiverUITests" */;
+			buildPhases = (
+				255BE6021BAC2693000B9F73 /* Sources */,
+				255BE6031BAC2693000B9F73 /* Frameworks */,
+				255BE6041BAC2693000B9F73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				255BE6081BAC2693000B9F73 /* PBXTargetDependency */,
+			);
+			name = VideoStreamReceiverUITests;
+			productName = VideoStreamReceiverUITests;
+			productReference = 255BE6061BAC2693000B9F73 /* VideoStreamReceiverUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		255BE5DF1BAC2693000B9F73 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Yoonseung Choi";
+				TargetAttributes = {
+					255BE5E61BAC2693000B9F73 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = VT98E7PBP6;
+					};
+					255BE5FA1BAC2693000B9F73 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = VT98E7PBP6;
+						TestTargetID = 255BE5E61BAC2693000B9F73;
+					};
+					255BE6051BAC2693000B9F73 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = VT98E7PBP6;
+						TestTargetID = 255BE5E61BAC2693000B9F73;
+					};
+				};
+			};
+			buildConfigurationList = 255BE5E21BAC2693000B9F73 /* Build configuration list for PBXProject "VideoStreamReceiver" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 255BE5DE1BAC2693000B9F73;
+			productRefGroup = 255BE5E81BAC2693000B9F73 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				255BE5E61BAC2693000B9F73 /* VideoStreamReceiver */,
+				255BE5FA1BAC2693000B9F73 /* VideoStreamReceiverTests */,
+				255BE6051BAC2693000B9F73 /* VideoStreamReceiverUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		255BE5E51BAC2693000B9F73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				255BE5F51BAC2693000B9F73 /* LaunchScreen.storyboard in Resources */,
+				255BE5F21BAC2693000B9F73 /* Assets.xcassets in Resources */,
+				255BE5F01BAC2693000B9F73 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE5F91BAC2693000B9F73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE6041BAC2693000B9F73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		255BE5E31BAC2693000B9F73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				255BE5ED1BAC2693000B9F73 /* ViewController.swift in Sources */,
+				255BE5EB1BAC2693000B9F73 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE5F71BAC2693000B9F73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				255BE6001BAC2693000B9F73 /* VideoStreamReceiverTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		255BE6021BAC2693000B9F73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				255BE60B1BAC2693000B9F73 /* VideoStreamReceiverUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		255BE5FD1BAC2693000B9F73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 255BE5E61BAC2693000B9F73 /* VideoStreamReceiver */;
+			targetProxy = 255BE5FC1BAC2693000B9F73 /* PBXContainerItemProxy */;
+		};
+		255BE6081BAC2693000B9F73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 255BE5E61BAC2693000B9F73 /* VideoStreamReceiver */;
+			targetProxy = 255BE6071BAC2693000B9F73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		255BE5EE1BAC2693000B9F73 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				255BE5EF1BAC2693000B9F73 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		255BE5F31BAC2693000B9F73 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				255BE5F41BAC2693000B9F73 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		255BE60D1BAC2693000B9F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		255BE60E1BAC2693000B9F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		255BE6101BAC2693000B9F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VideoStreamReceiver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		255BE6111BAC2693000B9F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VideoStreamReceiver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		255BE6131BAC2693000B9F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VideoStreamReceiverTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoStreamReceiver.app/VideoStreamReceiver";
+			};
+			name = Debug;
+		};
+		255BE6141BAC2693000B9F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VideoStreamReceiverTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoStreamReceiver.app/VideoStreamReceiver";
+			};
+			name = Release;
+		};
+		255BE6161BAC2693000B9F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VideoStreamReceiverUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = VideoStreamReceiver;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		255BE6171BAC2693000B9F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VideoStreamReceiverUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = john.VideoStreamReceiverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = VideoStreamReceiver;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		255BE5E21BAC2693000B9F73 /* Build configuration list for PBXProject "VideoStreamReceiver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				255BE60D1BAC2693000B9F73 /* Debug */,
+				255BE60E1BAC2693000B9F73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		255BE60F1BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				255BE6101BAC2693000B9F73 /* Debug */,
+				255BE6111BAC2693000B9F73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		255BE6121BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiverTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				255BE6131BAC2693000B9F73 /* Debug */,
+				255BE6141BAC2693000B9F73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		255BE6151BAC2693000B9F73 /* Build configuration list for PBXNativeTarget "VideoStreamReceiverUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				255BE6161BAC2693000B9F73 /* Debug */,
+				255BE6171BAC2693000B9F73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 255BE5DF1BAC2693000B9F73 /* Project object */;
+}
