@@ -22,7 +22,6 @@ class ChatClientViewController: UIViewController, NSStreamDelegate, UITextFieldD
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    
     var outputStream: NSOutputStream!
     var inputStream: NSInputStream!
     

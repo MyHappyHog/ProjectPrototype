@@ -21,7 +21,6 @@ class SecondChatClientViewController: UIViewController,UITextFieldDelegate, UITa
         super.viewDidLoad()
         self.tView.delegate = self
         self.tView.dataSource = self
-        
         inputStream.delegate = self
         inputStream.open()
         
