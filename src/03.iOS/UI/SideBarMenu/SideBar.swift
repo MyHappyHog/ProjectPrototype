@@ -46,11 +46,11 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         animator = UIDynamicAnimator(referenceView: originView)
         
         let showGestureRecognizer:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipe:")
-        showGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+        showGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         originView.addGestureRecognizer(showGestureRecognizer)
         
         let hideGestureRecognizer:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipe:")
-        hideGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+        hideGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
         originView.addGestureRecognizer(hideGestureRecognizer)
     }
     
@@ -62,6 +62,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         //Add the sideBar to the originView
         originView.addSubview(sideBarContainerView)
         
+        //blur back of the ground
         let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = sideBarContainerView.bounds
         sideBarContainerView.addSubview(blurView)
@@ -81,7 +82,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     }
     
     func handleSwipe(recognizer:UISwipeGestureRecognizer){
-        if recognizer.direction == UISwipeGestureRecognizerDirection.Left {
+        if recognizer.direction == UISwipeGestureRecognizerDirection.Right {
             showSideBar(false)
             delegate?.sideBarWillClose?()
         } else {

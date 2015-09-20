@@ -14,18 +14,18 @@ class ViewController: UIViewController, SideBarDelegate {
     
     var sideBar:SideBar = SideBar()
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { //show side bar or not
         super.viewDidLoad()
         sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item"])
         sideBar.delegate = self
     }
     
-    func sideBarDidSelectButtonAtIndex(index: Int) {
+    func sideBarDidSelectButtonAtIndex(index: Int) { //which menuitem you take
         if index == 2 {
-            imageView.backgroundColor   = UIColor.redColor()
-            imageView.image             = nil
+           // imageView.backgroundColor   = UIColor.redColor()
+            //imageView.image             = nil
         } else if index == 0 {
-            imageView.image = UIImage(named: "stars")
+            //imageView.image = UIImage(named: "stars")
         }
     }
 

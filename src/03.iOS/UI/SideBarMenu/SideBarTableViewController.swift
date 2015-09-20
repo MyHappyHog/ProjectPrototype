@@ -28,23 +28,23 @@ class SideBarTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return tableData.count
+        return tableData.count //how many data
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
-            // Configure the cell...
+            // Configure the cell
 
             cell!.backgroundColor           = UIColor.clearColor()
             cell!.textLabel?.textColor      = UIColor.darkTextColor()
             
-            let selectecView:UIView         = UIView(frame: CGRect(x: 0, y: 0, width: cell!.frame.width, height: cell!.frame.height))
+            //let selectecView:UIView         = UIView(frame: CGRect(x: 0, y: 0, width: cell!.frame.width, height: cell!.frame.height))
             //Gives the blur effect
-            selectecView.backgroundColor    = UIColor.blackColor().colorWithAlphaComponent(0.3)
+          //  selectecView.backgroundColor    = UIColor.blackColor().colorWithAlphaComponent(0.3)
             
-            cell!.selectedBackgroundView    = selectecView
+          //  cell!.selectedBackgroundView    = selectecView
         }
         
         cell!.textLabel?.text               = tableData[indexPath.row]
@@ -52,7 +52,7 @@ class SideBarTableViewController: UITableViewController {
         return cell!
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {  //space between data
         return 45.0
     }
     
