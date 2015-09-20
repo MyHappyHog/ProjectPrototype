@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class ViewController: UIViewController, SideBarDelegate {
 
@@ -29,6 +30,14 @@ class ViewController: UIViewController, SideBarDelegate {
         }
     }
 
+    //share on facebook
+    @IBAction func shareToFacebook() {
+        var shareToFacebook : SLComposeViewController =
+        SLComposeViewController(forServiceType:
+        SLServiceTypeFacebook)
+        self.presentViewController(shareToFacebook, animated:
+            true, completion: nil)
+    }
 
 }
 

@@ -49,6 +49,9 @@
                                         <state key="normal" title="Button" image="social24.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareToFacebook" destination="vXZ-lx-hvc" eventType="touchUpInside" id="p63-4b-kNA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RPk-lT-dpA">
                                         <rect key="frame" x="108" y="8" width="60" height="60"/>

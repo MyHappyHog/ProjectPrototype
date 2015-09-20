@@ -24,6 +24,7 @@
 		D74B6F251BAE9EB400120C29 /* thermometer73.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1C1BAE9EB400120C29 /* thermometer73.png */; };
 		D74B6F261BAE9EB400120C29 /* thum_130913_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */; };
 		D74B6F271BAE9EB400120C29 /* water81.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1E1BAE9EB400120C29 /* water81.png */; };
+		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D74B6F1C1BAE9EB400120C29 /* thermometer73.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermometer73.png; sourceTree = "<group>"; };
 		D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thum_130913_02.jpg; sourceTree = "<group>"; };
 		D74B6F1E1BAE9EB400120C29 /* water81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water81.png; sourceTree = "<group>"; };
+		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		AC2838781A7C01C300650959 = {
 			isa = PBXGroup;
 			children = (
+				D74B6F281BAEE26E00120C29 /* Social.framework */,
 				AC2838831A7C01C300650959 /* SideBarMenu */,
 				AC2838991A7C01C300650959 /* SideBarMenuTests */,
 				AC2838821A7C01C300650959 /* Products */,
