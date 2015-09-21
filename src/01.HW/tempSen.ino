@@ -12,8 +12,6 @@ void loop()
   float celsiustemp = (voltage - 0.5) * 100 ; 
   float fahrenheittemp= celsiustemp * 9.0/5.0 + 32.0;
   // 입력받은 자료값을 수정하여 필요한 자료값으로 바꾼다.
-
-  Keyboard.print(celsiustemp);
   
   Serial.print(celsiustemp);
   Serial.println(" Celsius");
