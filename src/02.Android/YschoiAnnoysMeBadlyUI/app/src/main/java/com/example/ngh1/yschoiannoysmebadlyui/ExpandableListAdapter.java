@@ -3,7 +3,6 @@ package com.example.ngh1.yschoiannoysmebadlyui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,11 @@ import java.util.List;
  * Created by ngh1 on 2015-09-22.
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    private Context context;
-    private List<String> listDataHeader; // header titles
-    // child data in format of header title, child title
+
+    private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
+
+    private Context context;
     private Intent intent;
 
     public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData, Intent intent) {
@@ -41,7 +41,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        Log.d("getChildId", " " + childPosition);
         return childPosition;
     }
 
@@ -52,16 +51,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String childText = (String) getChild(groupPosition, childPosition);
         LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Log.d("android_sucks","hello"+(++countForTest)+" groupPos:"+groupPosition);
-
         switch (groupPosition) {
             case 0:
-                Log.d("android_sucks","case0: "+countForTest);
-
                 convertView = infalInflater.inflate(R.layout.setting_profile, null);
 
                 final EditText nameEdt = (EditText) convertView.findViewById(R.id.nameEdt);
-                EditText memoEdt = (EditText) convertView.findViewById(R.id.memoEdt);
+                final EditText memoEdt = (EditText) convertView.findViewById(R.id.memoEdt);
 
                 Button nameOkBtn = (Button) convertView.findViewById(R.id.nameOkBtn);
                 Button memoOkBtn = (Button) convertView.findViewById(R.id.memoOkBtn);
@@ -70,21 +65,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onClick(View v) {
                         intent.putExtra("title", nameEdt.getText().toString());
-                        Toast.makeText(context, "타이틀", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "타이틀이 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                memoOkBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent.putExtra("memo", memoEdt.getText().toString());
+                        Toast.makeText(context, "메모가 변경되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 break;
 
             case 1:
-                Log.d("android_sucks","case1: "+countForTest);
                 convertView = infalInflater.inflate(R.layout.setting_sensor_configuration, null);
-
                 break;
 
             case 2:
-                Log.d("android_sucks","case2: "+countForTest);
-
                 convertView = infalInflater.inflate(R.layout.setting_sensor_data, null);
                 break;
         }
@@ -94,7 +93,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.d("getChildrenCount", " " + this.listDataChild.get(this.listDataHeader.get(groupPosition)).size());
         return this.listDataChild.get(this.listDataHeader.get(groupPosition)).size();
     }
 
@@ -105,17 +103,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        Log.d("getGroupCount", " " + this.listDataHeader.size());
         return this.listDataHeader.size();
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        Log.d("getGroupId", " " + groupPosition);
         return groupPosition;
     }
-
-    static int nnnnnnnnnnnn = 0;
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
@@ -124,8 +118,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.setting_header, null);
         }
-
-        Log.d("qqqqqqqqqqqqqqqqqq", " " + (++nnnnnnnnnnnn));
 
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.settingHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);

@@ -2,4 +2,7 @@
     <string name="app_name">YschoiAnnoysMeBadlyUI</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="default_title">H\'s house</string>
+    <string name="default_memo">Happy Hedgehog House!</string>
 </resources>

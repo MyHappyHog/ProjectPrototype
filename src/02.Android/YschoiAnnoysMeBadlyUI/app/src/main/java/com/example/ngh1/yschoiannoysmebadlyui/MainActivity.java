@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    public static final int ACTIVITY_SETTING = 1;
+    public static final int ACTIVITY_SETTING = 4;
 
     private FrameLayout flContainer;
     private ImageButton sharedSnsBtn, cameraBtn, feedBtn, settingBtn;
@@ -59,8 +59,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ACTIVITY_SETTING:
-                    title.setText(data.getStringExtra("title"));
-                    db.putString("title", data.getStringExtra("title"));
+                    if (data.getStringExtra("title") != null) {
+                        db.putString("title", data.getStringExtra("title"));
+                    }
+                    if (data.getStringExtra("memo") != null) {
+                        db.putString("memo", data.getStringExtra("memo"));
+                    }
+
+                    title.setText(db.getString("title", getString(R.string.default_title)));
+                    memo.setText(db.getString("memo", getString(R.string.default_memo)));
+
                     break;
             }
         }
@@ -79,7 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void setFrameLayoutMenu() {
-        String[] navItems = {"Brown", "Cadet Blue", "Dark Olive Green", "Dark Orange", "Golden Rod"};
+        String[] navItems = {"Brown", "Cadet Blue", "Dark Olive Green", "Dark Orange", "Golden Rod", "default setting"};
         ListView lvNavList;
 
         lvNavList = (ListView) findViewById(R.id.lv_activity_main_nav_list);
@@ -99,8 +107,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         title = (TextView) findViewById(R.id.title);
         memo = (TextView) findViewById(R.id.memo);
 
-        title.setText(db.getString("title", "H's house"));
-        memo.setText(db.getString("memo", "Happy Hedgehog House!"));
+        title.setText(db.getString("title", getString(R.string.default_title)));
+        memo.setText(db.getString("memo", getString(R.string.default_memo)));
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -115,12 +123,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 case 2: backgroundColor = "#556B2F"; break;
                 case 3: backgroundColor = "#FF8C00"; break;
                 case 4: backgroundColor = "#DAA520"; break;
+                case 5: backgroundColor = "#FFFDF8";
+                    setDefaultSetting();
+                    break;
             }
 
             flContainer.setBackgroundColor(Color.parseColor(backgroundColor));
         }
     }
 
+    public void setDefaultSetting() {
+        db.putString("title", getString(R.string.default_title));
+        db.putString("memo", getString(R.string.default_memo));
+
+        title.setText(db.getString("title", getString(R.string.default_title)));
+        memo.setText(db.getString("memo", getString(R.string.default_memo)));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

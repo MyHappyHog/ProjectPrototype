@@ -7,7 +7,8 @@
 
     <FrameLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fl_activity_main_container">
+        android:id="@+id/fl_activity_main_container"
+        android:background="#FFFDF8">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -29,6 +29,20 @@ public class Setting extends Activity {
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, getIntent());
 
         expListView.setAdapter(listAdapter);
+        expListView.expandGroup(0);
+
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int groupCount = listAdapter.getGroupCount();
+                for (int i = 0; i < groupCount; i++) {
+                    if (i != groupPosition) {
+                        expListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
+
         setResult(RESULT_OK, listAdapter.getIntent());
     }
 
