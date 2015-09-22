@@ -31,8 +31,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="H's House"
-                        android:textSize="35dp"
-                        />
+                        android:textSize="35dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/memo"
                         android:text="Happy Hedgehog House!"
-                        android:textColor="#87CEFA"
+                        android:textColor="#9FC5F8"
                         android:layout_gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -57,7 +56,7 @@
                     <ImageView
                         android:layout_width="0px"
                         android:layout_height="match_parent"
-                        android:src="@drawable/thermometer73"
+                        android:src="@drawable/thermometer"
                         android:layout_weight="0.20"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,7 +65,7 @@
                     <ImageView
                         android:layout_width="0px"
                         android:layout_height="match_parent"
-                        android:src="@drawable/water81"
+                        android:src="@drawable/water"
                         android:layout_weight="0.20"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -75,7 +74,7 @@
                     <ImageView
                         android:layout_width="0px"
                         android:layout_height="match_parent"
-                        android:src="@drawable/idea13"
+                        android:src="@drawable/idea"
                         android:layout_weight="0.20"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,49 +99,48 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0px"
-                android:background="#87CEFA"
+                android:background="#9FC5F8"
                 android:layout_weight="0.15"
                 android:weightSum="1">
                 <ImageButton
-
-                    android:background="#87CEFA"
-                    android:padding="20dp"
+                    android:id="@+id/sharedSnsBtn"
+                    android:background="@drawable/social"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
-                    android:layout_weight="0.25"
-                    android:src="@drawable/social24"/>
-                <ImageButton
-
-                    android:background="#87CEFA"
-                    android:padding="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="0.25"
-                    android:src="@drawable/camera60" />
+                    android:layout_weight="0.25" />
 
                 <ImageButton
-                    android:padding="20dp"
-                    android:background="#87CEFA"
+                    android:id="@+id/cameraBtn"
+                    android:background="@drawable/camera"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
-                    android:layout_weight="0.25"
-                    android:src="@drawable/hot5" />
+                    android:layout_weight="0.25"/>
 
                 <ImageButton
-                    android:padding="20dp"
-                    android:background="#87CEFA"
+                    android:id="@+id/feedBtn"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/hot"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
-                    android:layout_weight="0.25"
-                    android:src="@drawable/gear39" />
+                    android:layout_weight="0.25" />
+
+                <ImageButton
+                    android:id="@+id/settingBtn"
+                    android:background="@drawable/gear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="0.25" />
             </LinearLayout>
 
         </LinearLayout>
@@ -153,7 +151,7 @@
     <ListView android:layout_width="240dp"
         android:layout_height="match_parent"
         android:id="@+id/lv_activity_main_nav_list"
-        android:layout_gravity="start"
+        android:layout_gravity="right"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
