@@ -25,8 +25,6 @@
 		D74B6F261BAE9EB400120C29 /* thum_130913_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */; };
 		D74B6F271BAE9EB400120C29 /* water81.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1E1BAE9EB400120C29 /* water81.png */; };
 		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
-		D766487F1BB19C1E00BA60CA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766487E1BB19C1E00BA60CA /* SettingViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		D76648841BB19DDC00BA60CA /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76648831BB19DDC00BA60CA /* Candy.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +60,6 @@
 		D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thum_130913_02.jpg; sourceTree = "<group>"; };
 		D74B6F1E1BAE9EB400120C29 /* water81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water81.png; sourceTree = "<group>"; };
 		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		D766487E1BB19C1E00BA60CA /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		D76648831BB19DDC00BA60CA /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,11 +103,17 @@
 		AC2838831A7C01C300650959 /* SideBarMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D76648801BB19C3300BA60CA /* image */,
+				D74B6F161BAE9EB400120C29 /* bowl15.png */,
+				D74B6F171BAE9EB400120C29 /* camera60.png */,
+				D74B6F181BAE9EB400120C29 /* gear39.png */,
+				D74B6F191BAE9EB400120C29 /* hot5.png */,
+				D74B6F1A1BAE9EB400120C29 /* idea13.png */,
+				D74B6F1B1BAE9EB400120C29 /* social24.png */,
+				D74B6F1C1BAE9EB400120C29 /* thermometer73.png */,
+				D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */,
+				D74B6F1E1BAE9EB400120C29 /* water81.png */,
 				AC2838861A7C01C300650959 /* AppDelegate.swift */,
-				D76648831BB19DDC00BA60CA /* Candy.swift */,
 				AC2838881A7C01C300650959 /* ViewController.swift */,
-				D766487E1BB19C1E00BA60CA /* SettingViewController.swift */,
 				AC2838A61A7C023700650959 /* SideBarTableViewController.swift */,
 				AC2838A81A7C064700650959 /* SideBar.swift */,
 				AC28388A1A7C01C300650959 /* Main.storyboard */,
@@ -145,22 +147,6 @@
 				AC28389B1A7C01C300650959 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D76648801BB19C3300BA60CA /* image */ = {
-			isa = PBXGroup;
-			children = (
-				D74B6F171BAE9EB400120C29 /* camera60.png */,
-				D74B6F181BAE9EB400120C29 /* gear39.png */,
-				D74B6F191BAE9EB400120C29 /* hot5.png */,
-				D74B6F1A1BAE9EB400120C29 /* idea13.png */,
-				D74B6F1B1BAE9EB400120C29 /* social24.png */,
-				D74B6F1C1BAE9EB400120C29 /* thermometer73.png */,
-				D74B6F1E1BAE9EB400120C29 /* water81.png */,
-				D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */,
-				D74B6F161BAE9EB400120C29 /* bowl15.png */,
-			);
-			name = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,9 +193,7 @@
 		AC2838791A7C01C300650959 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Alexandre;
 				TargetAttributes = {
 					AC2838801A7C01C300650959 = {
@@ -274,8 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D766487F1BB19C1E00BA60CA /* SettingViewController.swift in Sources */,
-				D76648841BB19DDC00BA60CA /* Candy.swift in Sources */,
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
 				AC2838A71A7C023700650959 /* SideBarTableViewController.swift in Sources */,
 				AC2838A91A7C064700650959 /* SideBar.swift in Sources */,
@@ -341,7 +323,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -405,7 +386,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SideBarMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -416,7 +396,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SideBarMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -435,7 +414,6 @@
 				);
 				INFOPLIST_FILE = SideBarMenuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideBarMenu.app/SideBarMenu";
 			};
@@ -451,7 +429,6 @@
 				);
 				INFOPLIST_FILE = SideBarMenuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideBarMenu.app/SideBarMenu";
 			};
