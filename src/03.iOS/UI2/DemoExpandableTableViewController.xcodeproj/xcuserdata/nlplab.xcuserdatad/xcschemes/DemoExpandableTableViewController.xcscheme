@@ -14,24 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC2838801A7C01C300650959"
-               BuildableName = "SideBarMenu.app"
-               BlueprintName = "SideBarMenu"
-               ReferencedContainer = "container:HappyHog.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC2838951A7C01C300650959"
-               BuildableName = "SideBarMenuTests.xctest"
-               BlueprintName = "SideBarMenuTests"
-               ReferencedContainer = "container:HappyHog.xcodeproj">
+               BlueprintIdentifier = "3FE1BD821B8C385D003205FB"
+               BuildableName = "DemoExpandableTableViewController.app"
+               BlueprintName = "DemoExpandableTableViewController"
+               ReferencedContainer = "container:DemoExpandableTableViewController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +32,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC2838951A7C01C300650959"
-               BuildableName = "SideBarMenuTests.xctest"
-               BlueprintName = "SideBarMenuTests"
-               ReferencedContainer = "container:HappyHog.xcodeproj">
+               BlueprintIdentifier = "3FE1BD971B8C385D003205FB"
+               BuildableName = "DemoExpandableTableViewControllerTests.xctest"
+               BlueprintName = "DemoExpandableTableViewControllerTests"
+               ReferencedContainer = "container:DemoExpandableTableViewController.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC2838801A7C01C300650959"
-            BuildableName = "SideBarMenu.app"
-            BlueprintName = "SideBarMenu"
-            ReferencedContainer = "container:HappyHog.xcodeproj">
+            BlueprintIdentifier = "3FE1BD821B8C385D003205FB"
+            BuildableName = "DemoExpandableTableViewController.app"
+            BlueprintName = "DemoExpandableTableViewController"
+            ReferencedContainer = "container:DemoExpandableTableViewController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -79,10 +65,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC2838801A7C01C300650959"
-            BuildableName = "SideBarMenu.app"
-            BlueprintName = "SideBarMenu"
-            ReferencedContainer = "container:HappyHog.xcodeproj">
+            BlueprintIdentifier = "3FE1BD821B8C385D003205FB"
+            BuildableName = "DemoExpandableTableViewController.app"
+            BlueprintName = "DemoExpandableTableViewController"
+            ReferencedContainer = "container:DemoExpandableTableViewController.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -98,10 +84,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC2838801A7C01C300650959"
-            BuildableName = "SideBarMenu.app"
-            BlueprintName = "SideBarMenu"
-            ReferencedContainer = "container:HappyHog.xcodeproj">
+            BlueprintIdentifier = "3FE1BD821B8C385D003205FB"
+            BuildableName = "DemoExpandableTableViewController.app"
+            BlueprintName = "DemoExpandableTableViewController"
+            ReferencedContainer = "container:DemoExpandableTableViewController.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

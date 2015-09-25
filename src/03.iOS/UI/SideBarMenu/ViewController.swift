@@ -11,12 +11,13 @@ import Social
 
 class ViewController: UIViewController, SideBarDelegate {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var backgroundView: UIView!
+  //  @IBOutlet weak var imageView: UIImageView!
     
     var sideBar:SideBar = SideBar()
     
     override func viewDidLoad() { //show side bar or not
-        super.viewDidLoad()
+
         sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item"])
         sideBar.delegate = self
     }

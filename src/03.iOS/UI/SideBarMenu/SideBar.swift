@@ -19,8 +19,8 @@ import UIKit
 
 //When an item of the sidebar is selected, and also when the sidebar will open or close
 class SideBar: NSObject, SideBarTableViewControllerDelegate {
-   
-    let barWidth:CGFloat                    = 150.0
+    
+    let barWidth:CGFloat                    = 190.0
     let sideBarTableViewTopInset:CGFloat    = 64.0
     let sideBarContainerView:UIView         = UIView()
     let sideBarTableViewController:SideBarTableViewController = SideBarTableViewController()
@@ -28,7 +28,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     
     var animator:UIDynamicAnimator!
     var delegate:SideBarDelegate!
-    var isSideBarOpen:Bool = false
+    var isSideBarOpen:Bool = true
     
     //This init only allocate memory
     override init(){
@@ -55,24 +55,23 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     }
     
     func setupSideBar(){
-        sideBarContainerView.frame              = CGRectMake(-barWidth - 1, originView.frame.origin.y, barWidth, originView.frame.size.height)
+        sideBarContainerView.frame              = CGRectMake(barWidth+190 + 1, originView.frame.origin.y, barWidth, originView.frame.size.height)
         sideBarContainerView.backgroundColor    = UIColor.clearColor()
         sideBarContainerView.clipsToBounds      = false
         
         //Add the sideBar to the originView
         originView.addSubview(sideBarContainerView)
         
-        //blur back of the ground
-        let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+       /* let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = sideBarContainerView.bounds
-        sideBarContainerView.addSubview(blurView)
+        sideBarContainerView.addSubview(blurView)*/
         
         //Setup the menu/tableView
         sideBarTableViewController.delegate                     = self
         sideBarTableViewController.tableView.frame              = sideBarContainerView.bounds
         sideBarTableViewController.tableView.clipsToBounds      = false
         sideBarTableViewController.tableView.separatorStyle     = UITableViewCellSeparatorStyle.None
-        sideBarTableViewController.tableView.backgroundColor    = UIColor.clearColor()
+        sideBarTableViewController.tableView.backgroundColor    = UIColor.whiteColor()
         sideBarTableViewController.tableView.scrollsToTop       = false
         sideBarTableViewController.tableView.contentInset       = UIEdgeInsetsMake(sideBarTableViewTopInset, 0, 0, 0)
         
@@ -85,6 +84,11 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         if recognizer.direction == UISwipeGestureRecognizerDirection.Right {
             showSideBar(false)
             delegate?.sideBarWillClose?()
+           /* let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = backgroundView.bounds
+            //view.addSubview(blurView)*/
+            
         } else {
             showSideBar(true)
             delegate?.sideBarWillOpen?()
@@ -96,8 +100,8 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         isSideBarOpen = shouldOpen
         
         //The gravity modifies the open and close speed
-        let gravityX:CGFloat    = (shouldOpen) ? 1 : -1
-        let magnitude:CGFloat   = (shouldOpen) ? 20 : -20
+        let gravityX:CGFloat    = (shouldOpen) ? -1 : 1
+        let magnitude:CGFloat   = (shouldOpen) ? -20 : 20
         let boundaryX:CGFloat   = (shouldOpen) ? barWidth : -barWidth - 1
         
         let gravity:UIGravityBehavior   = UIGravityBehavior(items: [sideBarContainerView])
@@ -122,6 +126,6 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     func sideBarControlDidSelectRow(indexPath: NSIndexPath) {
         delegate?.sideBarDidSelectButtonAtIndex(indexPath.row)
     }
- 
+    
     
 }

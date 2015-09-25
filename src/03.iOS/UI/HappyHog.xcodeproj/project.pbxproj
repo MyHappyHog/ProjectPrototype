@@ -13,8 +13,6 @@
 		AC28388E1A7C01C300650959 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28388D1A7C01C300650959 /* Images.xcassets */; };
 		AC2838911A7C01C300650959 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC28388F1A7C01C300650959 /* LaunchScreen.xib */; };
 		AC28389D1A7C01C300650959 /* SideBarMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */; };
-		AC2838A71A7C023700650959 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2838A61A7C023700650959 /* SideBarTableViewController.swift */; };
-		AC2838A91A7C064700650959 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2838A81A7C064700650959 /* SideBar.swift */; };
 		D74B6F1F1BAE9EB400120C29 /* bowl15.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F161BAE9EB400120C29 /* bowl15.png */; };
 		D74B6F201BAE9EB400120C29 /* camera60.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F171BAE9EB400120C29 /* camera60.png */; };
 		D74B6F211BAE9EB400120C29 /* gear39.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F181BAE9EB400120C29 /* gear39.png */; };
@@ -25,7 +23,18 @@
 		D74B6F261BAE9EB400120C29 /* thum_130913_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */; };
 		D74B6F271BAE9EB400120C29 /* water81.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1E1BAE9EB400120C29 /* water81.png */; };
 		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
-		D7EFB24C1BB2D8DB00CC4026 /* DemoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB24B1BB2D8DB00CC4026 /* DemoTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F71BB39D1900CC4026 /* SideBar.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB2FD1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB2FE1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB3001BB3AD1600CC4026 /* ExpandableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB3091BB3B41D00CC4026 /* BirthdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB30A1BB3B41D00CC4026 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB30B1BB3B41D00CC4026 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB30C1BB3B41D00CC4026 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB30D1BB3B41D00CC4026 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB30E1BB3B41D00CC4026 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D7EFB3101BB3E0C000CC4026 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +58,6 @@
 		AC2838961A7C01C300650959 /* SideBarMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SideBarMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28389B1A7C01C300650959 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarMenuTests.swift; sourceTree = "<group>"; };
-		AC2838A61A7C023700650959 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
-		AC2838A81A7C064700650959 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		D74B6F161BAE9EB400120C29 /* bowl15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bowl15.png; sourceTree = "<group>"; };
 		D74B6F171BAE9EB400120C29 /* camera60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera60.png; sourceTree = "<group>"; };
 		D74B6F181BAE9EB400120C29 /* gear39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear39.png; sourceTree = "<group>"; };
@@ -61,7 +68,18 @@
 		D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thum_130913_02.jpg; sourceTree = "<group>"; };
 		D74B6F1E1BAE9EB400120C29 /* water81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water81.png; sourceTree = "<group>"; };
 		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		D7EFB24B1BB2D8DB00CC4026 /* DemoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoTableViewController.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoTableViewController.swift"; sourceTree = "<group>"; };
+		D7EFB2F71BB39D1900CC4026 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
+		D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
+		D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewDatasource.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewDatasource.swift"; sourceTree = "<group>"; };
+		D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewDelegate.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewDelegate.swift"; sourceTree = "<group>"; };
+		D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewController.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewController.swift"; sourceTree = "<group>"; };
+		D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdateTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/BirthdateTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/CommonTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/DatePickerTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DescriptionTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/DescriptionTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/ListTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/TitleTableViewCell.swift"; sourceTree = "<group>"; };
+		D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExtension.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ArrayExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +180,8 @@
 		D7EFB2491BB2D85A00CC4026 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
-				AC2838A61A7C023700650959 /* SideBarTableViewController.swift */,
-				AC2838A81A7C064700650959 /* SideBar.swift */,
+				D7EFB2F71BB39D1900CC4026 /* SideBar.swift */,
+				D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */,
 			);
 			name = SideBar;
 			sourceTree = "<group>";
@@ -171,9 +189,34 @@
 		D7EFB24A1BB2D88000CC4026 /* Settings button */ = {
 			isa = PBXGroup;
 			children = (
-				D7EFB24B1BB2D8DB00CC4026 /* DemoTableViewController.swift */,
+				D7EFB3021BB3B3F600CC4026 /* Cells */,
+				D7EFB3011BB3ADF000CC4026 /* Expandablecontroller */,
 			);
 			name = "Settings button";
+			sourceTree = "<group>";
+		};
+		D7EFB3011BB3ADF000CC4026 /* Expandablecontroller */ = {
+			isa = PBXGroup;
+			children = (
+				D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */,
+				D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */,
+				D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */,
+				D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */,
+			);
+			name = Expandablecontroller;
+			sourceTree = "<group>";
+		};
+		D7EFB3021BB3B3F600CC4026 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */,
+				D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */,
+				D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */,
+				D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */,
+				D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */,
+				D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +264,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Alexandre;
 				TargetAttributes = {
 					AC2838801A7C01C300650959 = {
@@ -286,11 +329,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7EFB24C1BB2D8DB00CC4026 /* DemoTableViewController.swift in Sources */,
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
-				AC2838A71A7C023700650959 /* SideBarTableViewController.swift in Sources */,
-				AC2838A91A7C064700650959 /* SideBar.swift in Sources */,
+				D7EFB3091BB3B41D00CC4026 /* BirthdateTableViewCell.swift in Sources */,
+				D7EFB30E1BB3B41D00CC4026 /* TitleTableViewCell.swift in Sources */,
+				D7EFB30C1BB3B41D00CC4026 /* DescriptionTableViewCell.swift in Sources */,
+				D7EFB3001BB3AD1600CC4026 /* ExpandableTableViewController.swift in Sources */,
+				D7EFB2FD1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift in Sources */,
+				D7EFB30D1BB3B41D00CC4026 /* ListTableViewCell.swift in Sources */,
+				D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */,
+				D7EFB2FE1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift in Sources */,
+				D7EFB30A1BB3B41D00CC4026 /* CommonTableViewCell.swift in Sources */,
 				AC2838871A7C01C300650959 /* AppDelegate.swift in Sources */,
+				D7EFB3101BB3E0C000CC4026 /* ArrayExtension.swift in Sources */,
+				D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */,
+				D7EFB30B1BB3B41D00CC4026 /* DatePickerTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +404,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -415,6 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SideBarMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -425,6 +479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SideBarMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -443,6 +498,7 @@
 				);
 				INFOPLIST_FILE = SideBarMenuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideBarMenu.app/SideBarMenu";
 			};
@@ -458,6 +514,7 @@
 				);
 				INFOPLIST_FILE = SideBarMenuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alexandre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideBarMenu.app/SideBarMenu";
 			};
