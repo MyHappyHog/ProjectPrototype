@@ -28,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thum_130913_02.jpg" id="9Mb-YK-9bh" userLabel="hedgeImage">
-                                <rect key="frame" x="32" y="224" width="311" height="220"/>
+                                <rect key="frame" x="45" y="224" width="285" height="220"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.99484361880000005" blue="0.9738402732" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
@@ -72,6 +72,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.64070360159999995" green="0.78346478180000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" id="pP8-8D-0aW" userLabel="hideView">
+                                <rect key="frame" x="0.0" y="-29" width="375" height="696"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.99484361878745686" blue="0.97384027324906119" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.99484361880000005" blue="0.9738402732" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,8 +83,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="backgroundView" destination="kh9-bI-dsS" id="f2j-s3-8UM"/>
                         <outlet property="hedgeImage" destination="9Mb-YK-9bh" id="AyO-UW-LGy"/>
+                        <outlet property="hideView" destination="pP8-8D-0aW" id="tz2-5E-bOT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -97,7 +101,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="3jC-Qw-Gjw" style="IBUITableViewCellStyleDefault" id="h1x-pw-obq" userLabel="TitleCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h1x-pw-obq" id="Ft9-iM-a9l">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -114,7 +118,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="mKM-Wt-ph5" style="IBUITableViewCellStyleDefault" id="AV5-ZS-35s" userLabel="DescriptionCell">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="136" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AV5-ZS-35s" id="700-z8-0Ve">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -131,7 +135,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="K8f-KM-FEH" style="IBUITableViewCellStyleDefault" id="Kkw-nJ-Iv0" userLabel="BirthdateCell">
-                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kkw-nJ-Iv0" id="OTU-h5-WQV">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -148,7 +152,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="tzV-50-NNE" userLabel="DatePickerCell">
-                                <rect key="frame" x="0.0" y="160" width="375" height="148"/>
+                                <rect key="frame" x="0.0" y="224" width="375" height="148"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tzV-50-NNE" id="1Cz-a2-hAW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="147"/>
@@ -165,7 +169,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="38g-8n-I9F" style="IBUITableViewCellStyleDefault" id="jOi-Rk-rO7" userLabel="ListTitleCell">
-                                <rect key="frame" x="0.0" y="308" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="372" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jOi-Rk-rO7" id="mQN-s2-Q9g">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -182,7 +186,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="uLg-vl-CcP" style="IBUITableViewCellStyleDefault" id="YHx-6a-cB1" userLabel="ListTextCell">
-                                <rect key="frame" x="0.0" y="352" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="416" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YHx-6a-cB1" id="F1v-YS-7b8">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>

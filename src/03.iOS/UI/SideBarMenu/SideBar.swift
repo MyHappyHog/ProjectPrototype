@@ -95,7 +95,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         
         //The gravity modifies the open and close speed
         let gravityX:CGFloat    = (shouldOpen) ? -1 : 1
-        let magnitude:CGFloat   = (shouldOpen) ? -20 : 20
+        //let magnitude:CGFloat   = (shouldOpen) ? -20 : 20
         let boundaryX:CGFloat   = (shouldOpen) ? barWidth : -barWidth - 1
         
         let gravity:UIGravityBehavior   = UIGravityBehavior(items: [sideBarContainerView])
@@ -103,16 +103,16 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         animator.addBehavior(gravity)
         
         let collisionBehavior:UICollisionBehavior = UICollisionBehavior(items: [sideBarContainerView])
-        collisionBehavior.addBoundaryWithIdentifier("sideBarBoundary", fromPoint: CGPointMake(boundaryX, 20), toPoint: CGPointMake(boundaryX, originView.frame.size.height))
+        collisionBehavior.addBoundaryWithIdentifier("sideBarBoundary", fromPoint: CGPointMake(boundaryX, 100), toPoint: CGPointMake(boundaryX, originView.frame.size.height))
         animator.addBehavior(collisionBehavior)
         
-        let pushBehavior:UIPushBehavior = UIPushBehavior(items: [sideBarContainerView], mode: UIPushBehaviorMode.Instantaneous)
-        pushBehavior.magnitude = magnitude
-        animator.addBehavior(pushBehavior)
+       /* let pushBehavior:UIPushBehavior = UIPushBehavior(items: [sideBarContainerView], mode: UIPushBehaviorMode.Instantaneous)
+       // pushBehavior.magnitude = magnitude
+          animator.addBehavior(pushBehavior)
         
         let sideBarBehavior:UIDynamicItemBehavior = UIDynamicItemBehavior(items: [sideBarContainerView])
-        sideBarBehavior.elasticity = 0.3
-        animator.addBehavior(sideBarBehavior)
+       // sideBarBehavior.elasticity = 0.3
+        animator.addBehavior(sideBarBehavior)*/
         
     }
     

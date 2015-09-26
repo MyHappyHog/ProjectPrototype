@@ -11,9 +11,8 @@ import Social
 
 class ViewController: UIViewController, SideBarDelegate {
 
-    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var hedgeImage: UIImageView!
-    
+    @IBOutlet weak var hideView: UIView!
     var sideBar:SideBar = SideBar()
     
     override func viewDidLoad() { //show side bar or not
@@ -32,18 +31,18 @@ class ViewController: UIViewController, SideBarDelegate {
     }
     
     func sideBarWillOpen() {
-       /* let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = CGRectMake(0,0, 200, backgroundView.frame.size.height)
-        backgroundView.addSubview(blurView)*/
-
-        backgroundView.backgroundColor    = UIColor.grayColor()
-        self.hedgeImage.backgroundColor = UIColor.grayColor()
+       // let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        //let blurView = UIVisualEffectView(effect: blurEffect)
+       // let blurView = UIColor.grayColor()
+       // blurView.frame = CGRectMake(0,0, 200, backgroundView.frame.size.height)
+      //  backgroundView.addSubview(blurView)*/
+        hideView.hidden = false
+        hideView.backgroundColor = UIColor.grayColor()
+        hideView.alpha = 0.6
     }
     
     func sideBarWillClose() {
-        backgroundView.backgroundColor    = UIColor.whiteColor()
-        self.hedgeImage.backgroundColor = UIColor.whiteColor()
+        hideView.hidden = true
     }
 
     //share on facebook
