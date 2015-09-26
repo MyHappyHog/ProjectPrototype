@@ -12,7 +12,7 @@ import Social
 class ViewController: UIViewController, SideBarDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
-  //  @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var hedgeImage: UIImageView!
     
     var sideBar:SideBar = SideBar()
     
@@ -29,6 +29,21 @@ class ViewController: UIViewController, SideBarDelegate {
         } else if index == 0 {
             //imageView.image = UIImage(named: "stars")
         }
+    }
+    
+    func sideBarWillOpen() {
+       /* let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = CGRectMake(0,0, 200, backgroundView.frame.size.height)
+        backgroundView.addSubview(blurView)*/
+
+        backgroundView.backgroundColor    = UIColor.grayColor()
+        self.hedgeImage.backgroundColor = UIColor.grayColor()
+    }
+    
+    func sideBarWillClose() {
+        backgroundView.backgroundColor    = UIColor.whiteColor()
+        self.hedgeImage.backgroundColor = UIColor.whiteColor()
     }
 
     //share on facebook

@@ -62,9 +62,6 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         //Add the sideBar to the originView
         originView.addSubview(sideBarContainerView)
         
-       /* let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
-        blurView.frame = sideBarContainerView.bounds
-        sideBarContainerView.addSubview(blurView)*/
         
         //Setup the menu/tableView
         sideBarTableViewController.delegate                     = self
@@ -81,17 +78,14 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     }
     
     func handleSwipe(recognizer:UISwipeGestureRecognizer){
+      //  let vc = ViewController()
         if recognizer.direction == UISwipeGestureRecognizerDirection.Right {
             showSideBar(false)
-            delegate?.sideBarWillClose?()
-           /* let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let blurView = UIVisualEffectView(effect: blurEffect)
-            blurView.frame = backgroundView.bounds
-            //view.addSubview(blurView)*/
+            delegate.sideBarWillClose?()
             
         } else {
             showSideBar(true)
-            delegate?.sideBarWillOpen?()
+            delegate.sideBarWillOpen?()
         }
     }
     
