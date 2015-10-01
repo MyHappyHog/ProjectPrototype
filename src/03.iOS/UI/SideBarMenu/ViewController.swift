@@ -16,6 +16,10 @@ class ViewController: UIViewController, SideBarDelegate {
     var sideBar:SideBar = SideBar()
     
     override func viewDidLoad() { //show side bar or not
+        
+        hideView.hidden = true
+        hideView.backgroundColor = UIColor.grayColor()
+        hideView.alpha = 0.6
 
         sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item"])
         sideBar.delegate = self
@@ -37,8 +41,6 @@ class ViewController: UIViewController, SideBarDelegate {
        // blurView.frame = CGRectMake(0,0, 200, backgroundView.frame.size.height)
       //  backgroundView.addSubview(blurView)*/
         hideView.hidden = false
-        hideView.backgroundColor = UIColor.grayColor()
-        hideView.alpha = 0.6
     }
     
     func sideBarWillClose() {

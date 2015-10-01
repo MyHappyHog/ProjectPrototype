@@ -25,16 +25,6 @@
 		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
 		D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F71BB39D1900CC4026 /* SideBar.swift */; settings = {ASSET_TAGS = (); }; };
 		D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB2FD1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB2FE1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB3001BB3AD1600CC4026 /* ExpandableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB3091BB3B41D00CC4026 /* BirthdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB30A1BB3B41D00CC4026 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB30B1BB3B41D00CC4026 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB30C1BB3B41D00CC4026 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB30D1BB3B41D00CC4026 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB30E1BB3B41D00CC4026 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		D7EFB3101BB3E0C000CC4026 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,16 +60,6 @@
 		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D7EFB2F71BB39D1900CC4026 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
-		D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewDatasource.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewDatasource.swift"; sourceTree = "<group>"; };
-		D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewDelegate.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewDelegate.swift"; sourceTree = "<group>"; };
-		D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableTableViewController.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ExpandableTableViewController.swift"; sourceTree = "<group>"; };
-		D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdateTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/BirthdateTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/CommonTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/DatePickerTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DescriptionTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/DescriptionTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/ListTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleTableViewCell.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/DemoCells/TitleTableViewCell.swift"; sourceTree = "<group>"; };
-		D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExtension.swift; path = "../../../../../../../Downloads/ExpandableTableViewController-master/DemoExpandableTableViewController/ExpandableTableViewController/ArrayExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +103,6 @@
 		AC2838831A7C01C300650959 /* SideBarMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D7EFB24A1BB2D88000CC4026 /* Settings button */,
 				D7EFB2491BB2D85A00CC4026 /* SideBar */,
 				D7EFB2481BB2D7E700CC4026 /* image */,
 				AC2838861A7C01C300650959 /* AppDelegate.swift */,
@@ -184,39 +163,6 @@
 				D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */,
 			);
 			name = SideBar;
-			sourceTree = "<group>";
-		};
-		D7EFB24A1BB2D88000CC4026 /* Settings button */ = {
-			isa = PBXGroup;
-			children = (
-				D7EFB3021BB3B3F600CC4026 /* Cells */,
-				D7EFB3011BB3ADF000CC4026 /* Expandablecontroller */,
-			);
-			name = "Settings button";
-			sourceTree = "<group>";
-		};
-		D7EFB3011BB3ADF000CC4026 /* Expandablecontroller */ = {
-			isa = PBXGroup;
-			children = (
-				D7EFB30F1BB3E0C000CC4026 /* ArrayExtension.swift */,
-				D7EFB2FF1BB3AD1600CC4026 /* ExpandableTableViewController.swift */,
-				D7EFB2FB1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift */,
-				D7EFB2FC1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift */,
-			);
-			name = Expandablecontroller;
-			sourceTree = "<group>";
-		};
-		D7EFB3021BB3B3F600CC4026 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				D7EFB3031BB3B41D00CC4026 /* BirthdateTableViewCell.swift */,
-				D7EFB3041BB3B41D00CC4026 /* CommonTableViewCell.swift */,
-				D7EFB3051BB3B41D00CC4026 /* DatePickerTableViewCell.swift */,
-				D7EFB3061BB3B41D00CC4026 /* DescriptionTableViewCell.swift */,
-				D7EFB3071BB3B41D00CC4026 /* ListTableViewCell.swift */,
-				D7EFB3081BB3B41D00CC4026 /* TitleTableViewCell.swift */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,19 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
-				D7EFB3091BB3B41D00CC4026 /* BirthdateTableViewCell.swift in Sources */,
-				D7EFB30E1BB3B41D00CC4026 /* TitleTableViewCell.swift in Sources */,
-				D7EFB30C1BB3B41D00CC4026 /* DescriptionTableViewCell.swift in Sources */,
-				D7EFB3001BB3AD1600CC4026 /* ExpandableTableViewController.swift in Sources */,
-				D7EFB2FD1BB3ABE700CC4026 /* ExpandableTableViewDatasource.swift in Sources */,
-				D7EFB30D1BB3B41D00CC4026 /* ListTableViewCell.swift in Sources */,
 				D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */,
-				D7EFB2FE1BB3ABE700CC4026 /* ExpandableTableViewDelegate.swift in Sources */,
-				D7EFB30A1BB3B41D00CC4026 /* CommonTableViewCell.swift in Sources */,
 				AC2838871A7C01C300650959 /* AppDelegate.swift in Sources */,
-				D7EFB3101BB3E0C000CC4026 /* ArrayExtension.swift in Sources */,
 				D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */,
-				D7EFB30B1BB3B41D00CC4026 /* DatePickerTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
