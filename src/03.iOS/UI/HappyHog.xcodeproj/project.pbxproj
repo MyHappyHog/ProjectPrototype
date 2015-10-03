@@ -23,6 +23,8 @@
 		D74B6F261BAE9EB400120C29 /* thum_130913_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */; };
 		D74B6F271BAE9EB400120C29 /* water81.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1E1BAE9EB400120C29 /* water81.png */; };
 		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
+		D79863101BBFEE0F00DD9EBB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D79863121BBFF2AA00DD9EBB /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79863111BBFF2A900DD9EBB /* SettingView.swift */; settings = {ASSET_TAGS = (); }; };
 		D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F71BB39D1900CC4026 /* SideBar.swift */; settings = {ASSET_TAGS = (); }; };
 		D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		D74B6F1D1BAE9EB400120C29 /* thum_130913_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thum_130913_02.jpg; sourceTree = "<group>"; };
 		D74B6F1E1BAE9EB400120C29 /* water81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water81.png; sourceTree = "<group>"; };
 		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D79863111BBFF2A900DD9EBB /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		D7EFB2F71BB39D1900CC4026 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,7 @@
 		AC2838831A7C01C300650959 /* SideBarMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D765FEFD1BBD3A24008EE319 /* Settings */,
 				D7EFB2491BB2D85A00CC4026 /* SideBar */,
 				D7EFB2481BB2D7E700CC4026 /* image */,
 				AC2838861A7C01C300650959 /* AppDelegate.swift */,
@@ -138,6 +143,15 @@
 				AC28389B1A7C01C300650959 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D765FEFD1BBD3A24008EE319 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */,
+				D79863111BBFF2A900DD9EBB /* SettingView.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		D7EFB2481BB2D7E700CC4026 /* image */ = {
@@ -275,8 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D79863101BBFEE0F00DD9EBB /* SettingViewController.swift in Sources */,
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
 				D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */,
+				D79863121BBFF2AA00DD9EBB /* SettingView.swift in Sources */,
 				AC2838871A7C01C300650959 /* AppDelegate.swift in Sources */,
 				D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */,
 			);
