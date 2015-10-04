@@ -13,6 +13,7 @@
 		AC28388E1A7C01C300650959 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28388D1A7C01C300650959 /* Images.xcassets */; };
 		AC2838911A7C01C300650959 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC28388F1A7C01C300650959 /* LaunchScreen.xib */; };
 		AC28389D1A7C01C300650959 /* SideBarMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */; };
+		D72B215B1BC1311000E9491F /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B215A1BC1311000E9491F /* SettingViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		D74B6F1F1BAE9EB400120C29 /* bowl15.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F161BAE9EB400120C29 /* bowl15.png */; };
 		D74B6F201BAE9EB400120C29 /* camera60.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F171BAE9EB400120C29 /* camera60.png */; };
 		D74B6F211BAE9EB400120C29 /* gear39.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F181BAE9EB400120C29 /* gear39.png */; };
@@ -24,7 +25,6 @@
 		D74B6F271BAE9EB400120C29 /* water81.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F1E1BAE9EB400120C29 /* water81.png */; };
 		D74B6F291BAEE26E00120C29 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74B6F281BAEE26E00120C29 /* Social.framework */; };
 		D79863101BBFEE0F00DD9EBB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		D79863121BBFF2AA00DD9EBB /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79863111BBFF2A900DD9EBB /* SettingView.swift */; settings = {ASSET_TAGS = (); }; };
 		D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F71BB39D1900CC4026 /* SideBar.swift */; settings = {ASSET_TAGS = (); }; };
 		D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -50,6 +50,7 @@
 		AC2838961A7C01C300650959 /* SideBarMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SideBarMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28389B1A7C01C300650959 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarMenuTests.swift; sourceTree = "<group>"; };
+		D72B215A1BC1311000E9491F /* SettingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		D74B6F161BAE9EB400120C29 /* bowl15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bowl15.png; sourceTree = "<group>"; };
 		D74B6F171BAE9EB400120C29 /* camera60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera60.png; sourceTree = "<group>"; };
 		D74B6F181BAE9EB400120C29 /* gear39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear39.png; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		D74B6F1E1BAE9EB400120C29 /* water81.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water81.png; sourceTree = "<group>"; };
 		D74B6F281BAEE26E00120C29 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		D79863111BBFF2A900DD9EBB /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		D7EFB2F71BB39D1900CC4026 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */,
-				D79863111BBFF2A900DD9EBB /* SettingView.swift */,
+				D72B215A1BC1311000E9491F /* SettingViewCell.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				D79863101BBFEE0F00DD9EBB /* SettingViewController.swift in Sources */,
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
 				D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */,
-				D79863121BBFF2AA00DD9EBB /* SettingView.swift in Sources */,
+				D72B215B1BC1311000E9491F /* SettingViewCell.swift in Sources */,
 				AC2838871A7C01C300650959 /* AppDelegate.swift in Sources */,
 				D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */,
 			);
