@@ -73,7 +73,7 @@
                                 <color key="backgroundColor" red="0.64070360159999995" green="0.78346478180000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="pP8-8D-0aW" userLabel="hideView">
-                                <rect key="frame" x="0.0" y="-31" width="375" height="689"/>
+                                <rect key="frame" x="0.0" y="480" width="375" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                         </subviews>
@@ -83,10 +83,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="hedgeImage" destination="9Mb-YK-9bh" id="AyO-UW-LGy"/>
                         <outlet property="hideView" destination="pP8-8D-0aW" id="tz2-5E-bOT"/>
-                        <outlet property="memo" destination="NwY-iA-4d7" id="aJN-Ks-DmL"/>
-                        <outlet property="name" destination="Ape-KG-hIg" id="fib-Kv-q8Q"/>
+                        <outlet property="profileImage" destination="9Mb-YK-9bh" id="db5-Yd-9W4"/>
+                        <outlet property="profileMemo" destination="NwY-iA-4d7" id="z5Q-KS-0bK"/>
+                        <outlet property="profileName" destination="Ape-KG-hIg" id="cBU-8s-F4L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -150,24 +150,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ebG-q2-CBB">
-                                <rect key="frame" x="292" y="379" width="33" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="pencil43.png">
-                                    <color key="titleColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="nameChange:" destination="Q6V-sf-nl3" eventType="touchUpInside" id="YrX-Lw-y61"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="SLp-nn-5FY">
                                 <rect key="frame" x="89" y="386" width="179" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="nameChangeFunc:" destination="Q6V-sf-nl3" eventType="editingDidEnd" id="L7h-B3-ud9"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="gDE-HN-Arv">
                                 <rect key="frame" x="89" y="445" width="179" height="30"/>
@@ -204,9 +191,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="memo" destination="gDE-HN-Arv" id="QpB-As-zew"/>
-                        <outlet property="name" destination="SLp-nn-5FY" id="H3E-cs-xou"/>
                         <outlet property="profileImage" destination="Mui-0X-76V" id="C90-73-8Ok"/>
+                        <outlet property="profileMemo" destination="gDE-HN-Arv" id="cKC-QC-sWj"/>
+                        <outlet property="profileName" destination="SLp-nn-5FY" id="xZK-pH-BFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7c5-Jr-eAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,7 +221,6 @@
         <image name="camera60.png" width="512" height="512"/>
         <image name="gear39.png" width="512" height="512"/>
         <image name="hot5.png" width="512" height="512"/>
-        <image name="pencil43.png" width="512" height="512"/>
         <image name="social24.png" width="512" height="512"/>
         <image name="thum_130913_02.jpg" width="600" height="422"/>
     </resources>

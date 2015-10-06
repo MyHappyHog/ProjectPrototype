@@ -9,14 +9,20 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var memo: UITextField!
-    @IBOutlet weak var profileImage: UIImageView!
     
-    @IBAction func nameChangeFunc(sender: AnyObject) {
-    }
-    @IBAction func nameChange(sender: AnyObject) {
-       
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileMemo: UITextField!
+    @IBOutlet weak var profileName: UITextField!
+    var nameLabelText:String?
+    var memoLabelText:String?
+    var images: UIImage?
+    
+    
+    override func viewDidLoad() {
+        //name, memo change setting
+        profileName.text = nameLabelText
+        profileMemo.text = memoLabelText
+        profileImage.image = images
     }
     
     @IBAction func changeImageButton(sender: AnyObject) {
@@ -36,8 +42,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //change the main name, memo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destination = segue.destinationViewController as? ViewController
-        destination!.nameLabelText = name.text
-        destination!.memoLabelText = memo.text
+        destination!.nameLabelText = profileName.text
+        destination!.memoLabelText = profileMemo.text
         destination!.images = profileImage.image
     }
     

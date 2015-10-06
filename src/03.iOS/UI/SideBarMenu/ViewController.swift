@@ -10,11 +10,11 @@ import UIKit
 import Social
 
 class ViewController: UIViewController, SideBarDelegate {
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var memo: UILabel!
-
-    @IBOutlet weak var hedgeImage: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var profileMemo: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var hideView: UIView!
+    
     var sideBar:SideBar = SideBar()
     var nameLabelText:String?
     var memoLabelText:String?
@@ -31,10 +31,18 @@ class ViewController: UIViewController, SideBarDelegate {
         sideBar.delegate = self
         
         //name, memo change setting
-        name.text = nameLabelText
-        memo.text = memoLabelText
-        hedgeImage.image = images
+        profileName.text = nameLabelText
+        profileMemo.text = memoLabelText
+        profileImage.image = images
         
+    }
+    
+    //change the main name, memo
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destination = segue.destinationViewController as? ProfileViewController
+        destination!.nameLabelText = profileName.text
+        destination!.memoLabelText = profileMemo.text
+        destination!.images = profileImage.image
     }
     func sideBarDidSelectButtonAtIndex(index: Int) { //which menuitem you take
         if index == 2 {
