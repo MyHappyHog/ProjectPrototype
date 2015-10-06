@@ -14,6 +14,8 @@
 		AC2838911A7C01C300650959 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC28388F1A7C01C300650959 /* LaunchScreen.xib */; };
 		AC28389D1A7C01C300650959 /* SideBarMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */; };
 		D72B215B1BC1311000E9491F /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B215A1BC1311000E9491F /* SettingViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D72B215D1BC2815F00E9491F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B215C1BC2815F00E9491F /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D72B3F1D1BC283A800E9491F /* pencil43.png in Resources */ = {isa = PBXBuildFile; fileRef = D72B3F1C1BC283A800E9491F /* pencil43.png */; settings = {ASSET_TAGS = (); }; };
 		D74B6F1F1BAE9EB400120C29 /* bowl15.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F161BAE9EB400120C29 /* bowl15.png */; };
 		D74B6F201BAE9EB400120C29 /* camera60.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F171BAE9EB400120C29 /* camera60.png */; };
 		D74B6F211BAE9EB400120C29 /* gear39.png in Resources */ = {isa = PBXBuildFile; fileRef = D74B6F181BAE9EB400120C29 /* gear39.png */; };
@@ -51,6 +53,8 @@
 		AC28389B1A7C01C300650959 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC28389C1A7C01C300650959 /* SideBarMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarMenuTests.swift; sourceTree = "<group>"; };
 		D72B215A1BC1311000E9491F /* SettingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
+		D72B215C1BC2815F00E9491F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D72B3F1C1BC283A800E9491F /* pencil43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil43.png; path = "../../../../../../../Dropbox/H3/진행상황/SW/icon/pencil43.png"; sourceTree = "<group>"; };
 		D74B6F161BAE9EB400120C29 /* bowl15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bowl15.png; sourceTree = "<group>"; };
 		D74B6F171BAE9EB400120C29 /* camera60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera60.png; sourceTree = "<group>"; };
 		D74B6F181BAE9EB400120C29 /* gear39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear39.png; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			children = (
 				D798630F1BBFEE0F00DD9EBB /* SettingViewController.swift */,
 				D72B215A1BC1311000E9491F /* SettingViewCell.swift */,
+				D72B215C1BC2815F00E9491F /* ProfileViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 		D7EFB2481BB2D7E700CC4026 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				D72B3F1C1BC283A800E9491F /* pencil43.png */,
 				D74B6F171BAE9EB400120C29 /* camera60.png */,
 				D74B6F191BAE9EB400120C29 /* hot5.png */,
 				D74B6F181BAE9EB400120C29 /* gear39.png */,
@@ -270,6 +276,7 @@
 				AC28388E1A7C01C300650959 /* Images.xcassets in Resources */,
 				D74B6F261BAE9EB400120C29 /* thum_130913_02.jpg in Resources */,
 				D74B6F1F1BAE9EB400120C29 /* bowl15.png in Resources */,
+				D72B3F1D1BC283A800E9491F /* pencil43.png in Resources */,
 				D74B6F271BAE9EB400120C29 /* water81.png in Resources */,
 				D74B6F221BAE9EB400120C29 /* hot5.png in Resources */,
 			);
@@ -293,6 +300,7 @@
 				AC2838891A7C01C300650959 /* ViewController.swift in Sources */,
 				D7EFB2F91BB39D1900CC4026 /* SideBar.swift in Sources */,
 				D72B215B1BC1311000E9491F /* SettingViewCell.swift in Sources */,
+				D72B215D1BC2815F00E9491F /* ProfileViewController.swift in Sources */,
 				AC2838871A7C01C300650959 /* AppDelegate.swift in Sources */,
 				D7EFB2FA1BB39D1900CC4026 /* SideBarTableViewController.swift in Sources */,
 			);

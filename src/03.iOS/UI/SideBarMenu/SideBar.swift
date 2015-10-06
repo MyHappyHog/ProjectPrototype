@@ -121,5 +121,6 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         delegate?.sideBarDidSelectButtonAtIndex(indexPath.row)
     }
     
-    
 }
+
+

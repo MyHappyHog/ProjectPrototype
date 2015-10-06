@@ -10,21 +10,30 @@ import UIKit
 import Social
 
 class ViewController: UIViewController, SideBarDelegate {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var memo: UILabel!
 
     @IBOutlet weak var hedgeImage: UIImageView!
     @IBOutlet weak var hideView: UIView!
     var sideBar:SideBar = SideBar()
+    var nameLabelText:String?
+    var memoLabelText:String?
     
-    override func viewDidLoad() { //show side bar or not
+    override func viewDidLoad() {
         
+        //side bar setting
         hideView.hidden = true
         hideView.backgroundColor = UIColor.grayColor()
         hideView.alpha = 0.6
 
         sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item"])
         sideBar.delegate = self
+        
+        //name, memo change setting
+        name.text = nameLabelText
+        memo.text = memoLabelText
+        
     }
-    
     func sideBarDidSelectButtonAtIndex(index: Int) { //which menuitem you take
         if index == 2 {
            // imageView.backgroundColor   = UIColor.redColor()
