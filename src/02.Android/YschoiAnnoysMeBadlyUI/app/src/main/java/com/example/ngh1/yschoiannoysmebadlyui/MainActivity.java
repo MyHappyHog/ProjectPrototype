@@ -11,43 +11,61 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     public static final int ACTIVITY_SETTING = 4;
+    public static final int TUTORIAL_SETTING = 5;
 
     private FrameLayout flContainer;
     private ImageButton sharedSnsBtn, cameraBtn, feedBtn, settingBtn;
     private SettingDatabase db;
 
-    private TextView title, memo;
+    private TextView profileCage, profileMemo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setDatabase();
+
+        db = new SettingDatabase(this, "H3");
+        profileCage = (TextView) findViewById(R.id.profileCage);
+        profileMemo = (TextView) findViewById(R.id.profileMemo);
+
+        runTutorial();
         setMainLayout();
         setButtons();
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
+
         switch (v.getId()) {
             case R.id.sharedSnsBtn:
 
                 break;
             case R.id.cameraBtn:
 
+
                 break;
             case R.id.feedBtn:
+                intent = new Intent(getApplicationContext(), Client.class);
+                startActivity(intent);
 
                 break;
             case R.id.settingBtn:
-                Intent intent = new Intent(getApplicationContext(), Setting.class);
+                intent = new Intent(getApplicationContext(), Setting.class);
                 startActivityForResult(intent, ACTIVITY_SETTING);
+                break;
+
+            case R.id.profileImage:
+                intent = new Intent(getApplicationContext(), VideoStreaming.class);
+                startActivity(intent);
+
                 break;
         }
     }
@@ -59,18 +77,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ACTIVITY_SETTING:
-                    if (data.getStringExtra("title") != null) {
-                        db.putString("title", data.getStringExtra("title"));
+                    if (data.getStringExtra(Constants.profileCage) != null) {
+                        db.putString(Constants.profileCage, data.getStringExtra(Constants.profileCage));
                     }
-                    if (data.getStringExtra("memo") != null) {
-                        db.putString("memo", data.getStringExtra("memo"));
+                    if (data.getStringExtra(Constants.profileMemo) != null) {
+                        db.putString(Constants.profileMemo, data.getStringExtra(Constants.profileMemo));
                     }
 
-                    title.setText(db.getString("title", getString(R.string.default_title)));
-                    memo.setText(db.getString("memo", getString(R.string.default_memo)));
+                    profileCage.setText(db.getString(Constants.profileCage, getString(R.string.default_title)));
+                    profileMemo.setText(db.getString(Constants.profileMemo, getString(R.string.default_memo)));
 
                     break;
             }
+        }
+        else if (resultCode == RESULT_CANCELED) {
+            // error handling
+        }
+    }
+
+    private void runTutorial() {
+        boolean isTutorialSet = db.getBoolean("isTutorialSet", false);
+
+        // if tutorial activity create, add case ACTIVITY_TUTORIAL_SETTING in onActivityResult()
+        if (!isTutorialSet) {
+            db.putString(Constants.profileCage, getString(R.string.default_title));
+            db.putString(Constants.profileMemo, getString(R.string.default_memo));
+
+            profileCage.setText(db.getString(Constants.profileCage, getString(R.string.default_title)));
+            profileMemo.setText(db.getString(Constants.profileMemo, getString(R.string.default_memo)));
+
+            db.putInt(Constants.nCage, 1);
+            db.putBoolean("isTutorialSet", true);
         }
     }
 
@@ -79,6 +116,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         cameraBtn = (ImageButton) findViewById(R.id.cameraBtn);
         feedBtn = (ImageButton) findViewById(R.id.feedBtn);
         settingBtn = (ImageButton) findViewById(R.id.settingBtn);
+
+        ImageView imageView = (ImageView) findViewById(R.id.profileImage);
+        imageView.setOnClickListener(this);
 
         sharedSnsBtn.setOnClickListener(this);
         cameraBtn.setOnClickListener(this);
@@ -97,18 +137,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         lvNavList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
-    private void setDatabase() {
-        db = new SettingDatabase(this, "H3");
-    }
-
     private void setMainLayout() {
         setFrameLayoutMenu();
 
-        title = (TextView) findViewById(R.id.title);
-        memo = (TextView) findViewById(R.id.memo);
-
-        title.setText(db.getString("title", getString(R.string.default_title)));
-        memo.setText(db.getString("memo", getString(R.string.default_memo)));
+        profileCage.setText(db.getString(Constants.profileCage, getString(R.string.default_title)));
+        profileMemo.setText(db.getString(Constants.profileMemo, getString(R.string.default_memo)));
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -133,11 +166,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void setDefaultSetting() {
-        db.putString("title", getString(R.string.default_title));
-        db.putString("memo", getString(R.string.default_memo));
+        db.putString(Constants.profileCage, getString(R.string.default_title));
+        db.putString(Constants.profileMemo, getString(R.string.default_memo));
 
-        title.setText(db.getString("title", getString(R.string.default_title)));
-        memo.setText(db.getString("memo", getString(R.string.default_memo)));
+        profileCage.setText(db.getString(Constants.profileCage, getString(R.string.default_title)));
+        profileMemo.setText(db.getString(Constants.profileMemo, getString(R.string.default_memo)));
     }
 
     @Override

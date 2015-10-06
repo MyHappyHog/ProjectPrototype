@@ -28,10 +28,9 @@
                     android:layout_weight="0.25"
                     android:gravity="center|bottom">
                     <TextView
-                        android:id="@+id/title"
+                        android:id="@+id/profileCage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="H's House"
                         android:textSize="35dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -42,8 +41,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/memo"
-                        android:text="Happy Hedgehog House!"
+                        android:id="@+id/profileMemo"
                         android:textColor="#9FC5F8"
                         android:layout_gravity="center"/>
                 </LinearLayout>
@@ -89,6 +87,7 @@
                     android:layout_height="0px"
                     android:layout_weight="0.60">
                     <ImageView
+                        android:id="@+id/profileImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/thum_130913_02"

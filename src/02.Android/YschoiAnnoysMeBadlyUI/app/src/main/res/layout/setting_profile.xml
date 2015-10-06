@@ -12,10 +12,10 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/activity_vertical_margin">
         <ImageView
+            android:id="@+id/imageEdit"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:background="@drawable/thum_130913_02">
-            <requestFocus />
         </ImageView>
     </LinearLayout>
 
@@ -35,13 +35,8 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+            <requestFocus />
         </EditText>
-
-        <Button
-            android:id="@+id/nameOkBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ok"/>
 
     </LinearLayout>
 
@@ -62,11 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
         </EditText>
-        <Button
-            android:id="@+id/memoOkBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ok"/>
 
     </LinearLayout>
 

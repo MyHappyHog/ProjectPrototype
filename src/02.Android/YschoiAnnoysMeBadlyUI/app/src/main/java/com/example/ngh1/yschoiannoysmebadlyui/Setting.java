@@ -43,6 +43,8 @@ public class Setting extends Activity {
             }
         });
 
+        //if (listAdapter.getIntent().getStringExtra())
+
         setResult(RESULT_OK, listAdapter.getIntent());
     }
 

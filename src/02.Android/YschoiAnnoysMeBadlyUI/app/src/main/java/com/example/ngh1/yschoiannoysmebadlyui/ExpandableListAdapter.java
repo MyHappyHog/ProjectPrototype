@@ -3,14 +3,14 @@ package com.example.ngh1.yschoiannoysmebadlyui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +49,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
+
         LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         switch (groupPosition) {
@@ -58,22 +59,41 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 final EditText nameEdt = (EditText) convertView.findViewById(R.id.nameEdt);
                 final EditText memoEdt = (EditText) convertView.findViewById(R.id.memoEdt);
 
-                Button nameOkBtn = (Button) convertView.findViewById(R.id.nameOkBtn);
-                Button memoOkBtn = (Button) convertView.findViewById(R.id.memoOkBtn);
-
-                nameOkBtn.setOnClickListener(new View.OnClickListener() {
+                nameEdt.addTextChangedListener(new TextWatcher() {
                     @Override
-                    public void onClick(View v) {
-                        intent.putExtra("title", nameEdt.getText().toString());
-                        Toast.makeText(context, "타이틀이 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (!s.toString().trim().equals("")) {
+                            intent.putExtra(Constants.profileCage, s.toString());
+                        }
                     }
                 });
 
-                memoOkBtn.setOnClickListener(new View.OnClickListener() {
+                memoEdt.addTextChangedListener(new TextWatcher() {
                     @Override
-                    public void onClick(View v) {
-                        intent.putExtra("memo", memoEdt.getText().toString());
-                        Toast.makeText(context, "메모가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (!s.toString().trim().equals("")) {
+                            intent.putExtra(Constants.profileMemo, s.toString());
+                        }
                     }
                 });
 
@@ -87,7 +107,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 convertView = infalInflater.inflate(R.layout.setting_sensor_data, null);
                 break;
         }
-
         return convertView;
     }
 
