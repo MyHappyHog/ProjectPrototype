@@ -28,8 +28,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let img = info[UIImagePickerControllerOriginalImage] as? UIImage
-        profileImage.image = img
+        profileImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -39,6 +38,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let destination = segue.destinationViewController as? ViewController
         destination!.nameLabelText = name.text
         destination!.memoLabelText = memo.text
+        destination!.images = profileImage.image
     }
     
     

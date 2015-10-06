@@ -18,6 +18,7 @@ class ViewController: UIViewController, SideBarDelegate {
     var sideBar:SideBar = SideBar()
     var nameLabelText:String?
     var memoLabelText:String?
+    var images: UIImage?
     
     override func viewDidLoad() {
         
@@ -32,6 +33,7 @@ class ViewController: UIViewController, SideBarDelegate {
         //name, memo change setting
         name.text = nameLabelText
         memo.text = memoLabelText
+        hedgeImage.image = images
         
     }
     func sideBarDidSelectButtonAtIndex(index: Int) { //which menuitem you take
