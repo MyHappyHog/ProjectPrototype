@@ -10,25 +10,17 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController {
-
-
-    @IBOutlet weak var AVPlayerView: UIView!
+class VideoViewController: UIViewController {
     
+    @IBOutlet weak var AVPlayerView: UIView!
+
     override func shouldAutorotate() -> Bool {
         return false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // yoon // from local file
-//        let path = NSBundle.mainBundle().pathForResource("vid_bigbuckbunny", ofType: "mp4")!
-//        let sampleURL = NSURL(fileURLWithPath: path)
-//        let playerItem = AVPlayerItem(URL: sampleURL)
-//        let player = AVPlayer(playerItem: playerItem)
-        
+
         // yoon // from web
         let sampleURL = NSURL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
         let player = AVPlayer(URL: sampleURL)
@@ -46,11 +38,12 @@ class ViewController: UIViewController {
             (screenHeigh/2 - CGFloat(videoHeigh/2)),
             CGFloat(videoWidth),
             CGFloat(videoHeigh))
+        
         AVPlayerView.layer.addSublayer(playerLayer)
 
         
-        player.play()
-        
+       player.play()
+    
         //AVPlayerView.backgroundColor = UIColor.blackColor()
     }
 
@@ -58,12 +51,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    
-    
-    
-    
-
 }
 

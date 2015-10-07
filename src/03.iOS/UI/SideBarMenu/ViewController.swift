@@ -8,12 +8,23 @@
 
 import UIKit
 import Social
+import AVKit
+import AVFoundation
 
 class ViewController: UIViewController, SideBarDelegate {
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileMemo: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var hideView: UIView!
+    @IBOutlet weak var AVPlayerView: UIView!
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    @IBAction func videoStream(sender: AnyObject) {
+                
+    }
     
     var sideBar:SideBar = SideBar()
     var nameLabelText:String?
@@ -54,11 +65,6 @@ class ViewController: UIViewController, SideBarDelegate {
     }
     
     func sideBarWillOpen() {
-       // let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        //let blurView = UIVisualEffectView(effect: blurEffect)
-       // let blurView = UIColor.grayColor()
-       // blurView.frame = CGRectMake(0,0, 200, backgroundView.frame.size.height)
-      //  backgroundView.addSubview(blurView)*/
         hideView.hidden = false
     }
     

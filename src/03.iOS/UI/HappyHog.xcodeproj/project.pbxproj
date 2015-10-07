@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				D74B6F281BAEE26E00120C29 /* Social.framework */,
-				AC2838831A7C01C300650959 /* SideBarMenu */,
+				AC2838831A7C01C300650959 /* HappyHog */,
 				AC2838991A7C01C300650959 /* SideBarMenuTests */,
 				AC2838821A7C01C300650959 /* Products */,
 			);
@@ -108,11 +108,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AC2838831A7C01C300650959 /* SideBarMenu */ = {
+		AC2838831A7C01C300650959 /* HappyHog */ = {
 			isa = PBXGroup;
 			children = (
+				D7EAF3EF1BC3F450001AA8E9 /* VideoStreamReceiver */,
 				D765FEFD1BBD3A24008EE319 /* Settings */,
-				D7EFB2491BB2D85A00CC4026 /* SideBar */,
+				D7EFB2491BB2D85A00CC4026 /* mainSideBar */,
 				D7EFB2481BB2D7E700CC4026 /* image */,
 				AC2838861A7C01C300650959 /* AppDelegate.swift */,
 				AC2838881A7C01C300650959 /* ViewController.swift */,
@@ -121,6 +122,7 @@
 				AC28388F1A7C01C300650959 /* LaunchScreen.xib */,
 				AC2838841A7C01C300650959 /* Supporting Files */,
 			);
+			name = HappyHog;
 			path = SideBarMenu;
 			sourceTree = "<group>";
 		};
@@ -159,6 +161,13 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		D7EAF3EF1BC3F450001AA8E9 /* VideoStreamReceiver */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VideoStreamReceiver;
+			sourceTree = "<group>";
+		};
 		D7EFB2481BB2D7E700CC4026 /* image */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,13 +185,13 @@
 			name = image;
 			sourceTree = "<group>";
 		};
-		D7EFB2491BB2D85A00CC4026 /* SideBar */ = {
+		D7EFB2491BB2D85A00CC4026 /* mainSideBar */ = {
 			isa = PBXGroup;
 			children = (
 				D7EFB2F71BB39D1900CC4026 /* SideBar.swift */,
 				D7EFB2F81BB39D1900CC4026 /* SideBarTableViewController.swift */,
 			);
-			name = SideBar;
+			name = mainSideBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
