@@ -76,6 +76,16 @@
                                 <rect key="frame" x="0.0" y="480" width="375" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iVP-Nq-4gG">
+                                <rect key="frame" x="45" y="224" width="285" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="video play">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="videoStream:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="743-vo-rDl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.99484361878745686" blue="0.97384027324906119" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.99484361880000005" blue="0.9738402732" alpha="1" colorSpace="calibratedRGB"/>
@@ -87,6 +97,7 @@
                         <outlet property="profileImage" destination="9Mb-YK-9bh" id="db5-Yd-9W4"/>
                         <outlet property="profileMemo" destination="NwY-iA-4d7" id="z5Q-KS-0bK"/>
                         <outlet property="profileName" destination="Ape-KG-hIg" id="cBU-8s-F4L"/>
+                        <outlet property="video" destination="iVP-Nq-4gG" id="VcB-vA-E2n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -103,7 +114,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="200" id="Oe4-uM-eM6" customClass="SettingViewCell" customModule="SideBarMenu" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="320" height="200"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oe4-uM-eM6" id="0eQ-My-9fw">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>

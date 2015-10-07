@@ -8,10 +8,15 @@
 
 import UIKit
 import Social
+import AVKit
+import AVFoundation
+
 
 class ViewController: UIViewController, SideBarDelegate {
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileMemo: UILabel!
+
+    @IBOutlet weak var video: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var hideView: UIView!
     
@@ -20,6 +25,17 @@ class ViewController: UIViewController, SideBarDelegate {
     var memoLabelText:String?
     var images: UIImage?
     
+    @IBAction func videoStream(sender: AnyObject) {
+        let sampleURL = NSURL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
+        let player = AVPlayer(URL: sampleURL)
+        
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.presentViewController(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+
+    }
     override func viewDidLoad() {
         
         //side bar setting

@@ -10,10 +10,10 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController {
-
+class VideoViewController: UIViewController {
 
     @IBOutlet weak var AVPlayerView: UIView!
+
     
     override func shouldAutorotate() -> Bool {
         return false
