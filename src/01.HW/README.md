@@ -2,8 +2,7 @@
 # H/W Part
 
 
-@ todo list for 1st week 
- * [H/W PART] 
-    - Make a connection between Arduino and Laptop
-    - Module implementation: Raw Data Collector 
-    - Research about reliable temperature data 
+@ 15.10.11 SUN
+ESP8266 Source code for Arduino IDE is uploaded. Web connection in local network area can be available by mDNS protocol. 
+Web shows the local IP Adress and DHT Sensor Data(Temperature, Humidity)
+
