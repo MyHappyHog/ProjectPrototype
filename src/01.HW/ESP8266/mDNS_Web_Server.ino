@@ -24,14 +24,18 @@
 #define DHTPIN 5     // what pin we're connected to
 #define DHTTYPE DHT11
 
+////////////// put your router name and password //////////////
+
 const char* ssid = "ROUTER_NAME";
-const char* password = "ROUTER_PASSWORD";
+const char* password = "PASSWORD";
 
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
 
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
+
+////////////// here is a setup code //////////////
 
 void setup(void)
 {  
@@ -73,32 +77,10 @@ void setup(void)
   MDNS.addService("http", "tcp", 80);
 }
 
+////////////// here is a loop code //////////////
+
 void loop(void)
 {
-  
-  // Reading temperature or humidity takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  float h = dht.readHumidity();
-  // Read temperature as Celsius (the default)
-  float t = dht.readTemperature();
-  // Read temperature as Fahrenheit (isFahrenheit = true)
-  float f = dht.readTemperature(true);  // Reading temperature or humidity takes about 250 milliseconds!
-  
-    // Check if any reads failed and exit early (to try again).
-//  if (isnan(h) || isnan(t) || isnan(f)) {
-//    Serial.println("Failed to read from DHT sensor!");
-//    delay(1000);
-//    return;
-//
-//  } else {
-//    Serial.print("Humidity: ");
-//    Serial.print(h);
-//    Serial.print(" %\t");
-//    Serial.print("Temperature: ");
-//    Serial.print(t);
-//    Serial.print(" *C \n");  
-//  }
-  
   
   // Check if a client has connected
   WiFiClient client = server.available();
@@ -130,28 +112,45 @@ void loop(void)
   Serial.println(req);
   client.flush();
   
-  String s;
+  //String s; // yoon // remove
+  char htmlDoc[1000];
+
   if (req == "/")
   {
     IPAddress ip = WiFi.localIP();
     String ipStr = String(ip[0]) + '.' + String(ip[1]) + '.' + String(ip[2]) + '.' + String(ip[3]);
-    s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>Hello from ESP8266 at ";
-    s += ipStr;
-    s += "\nHumidity: ";
-    s += h;
-    s += "\nTemperature: ";
-    s += dht.computeHeatIndex(t, h, false);
-    s += "</html>\r\n\r\n";
+    char temperature[5];
+    char humidity[4];
+    
+    snprintf(temperature, sizeof(temperature), "%2d'C", (int)dht.readTemperature());
+    snprintf(humidity, sizeof(humidity), "%2d%", (int)dht.readHumidity());
+    
+    // write html document 
+    snprintf(htmlDoc, sizeof(htmlDoc), 
+"<html>\
+  <head>\
+    <meta http-equiv='refresh' content='10'/>\
+      <title>ESP8266 Demo</title>\
+      <style>\
+        body { background-color: #364659; font-family: Arial, Helvetica, Sans-Serif; Color: #F2F2F2; }\
+      </style>\
+    </head>\
+    <body>\
+      <h1>Hello from Happy Hedgehog House !!</h1>\
+      <p>Temperature: %s, Humidity: %s</p>\
+    </body>\
+ </html>", temperature, humidity);
+
+
     Serial.println("Sending 200");
   }
   else
   {
-    s = "HTTP/1.1 404 Not Found\r\n\r\n";
+    snprintf(htmlDoc, sizeof(htmlDoc), "HTTP/1.1 404 Not Found\r\n\r\n");
     Serial.println("Sending 404");
   }
-  client.print(s);
+  client.print(htmlDoc);
   
   Serial.println("Done with client");
 }
-
 
