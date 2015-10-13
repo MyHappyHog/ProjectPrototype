@@ -38,12 +38,19 @@ class IntroViewController: UIViewController {
         NameLabel.text = profileName
         MemoLabel.text = profileMemo
         
+        
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     @IBAction func SettingOnClicked(sender: AnyObject) {
         performSegueWithIdentifier("Setting", sender: self)

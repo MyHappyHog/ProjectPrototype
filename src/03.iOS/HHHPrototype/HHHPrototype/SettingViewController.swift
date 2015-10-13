@@ -56,11 +56,11 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
         case "Intro" :
-            let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
-            nextViewController.profileImg = CurrentProfileImage.image!
-            nextViewController.profileName = NameTextField.text!
-            nextViewController.profileMemo = MemoTextField.text!
-            
+//            let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
+//            nextViewController.profileImg = CurrentProfileImage.image!
+//            nextViewController.profileName = NameTextField.text!
+//            nextViewController.profileMemo = MemoTextField.text!
+            // change to CoreData
             break
         default:
             break
