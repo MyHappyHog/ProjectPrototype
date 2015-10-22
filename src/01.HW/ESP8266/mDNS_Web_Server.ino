@@ -24,10 +24,20 @@
 #define DHTPIN 5     // what pin we're connected to
 #define DHTTYPE DHT11
 
+#define ADC A0 // yoon // current sensor
+
+
 ////////////// put your router name and password //////////////
 
 const char* ssid = "ROUTER_NAME";
 const char* password = "PASSWORD";
+
+
+// yoon // current sensor
+int rmsArray[50];
+double result;
+int N = 50;
+int counter = 0;
 
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
@@ -81,6 +91,30 @@ void setup(void)
 
 void loop(void)
 {
+  
+  
+  // yoon // current sensor 
+  /*** begin ***/
+  
+  int value = analogRead(ADC);
+  if(counter++ < N){
+    rmsArray[counter] = value - 487.70;
+    delay(1);
+  }
+  else{
+    counter = 0;
+    result = 0;
+    for(int i = 0; i < N; i++){
+      result += pow(rmsArray[i], 2);
+    }
+    result /= N;
+    result = sqrt(result);
+    delay(5);
+    Serial.print("A0 = ");
+    Serial.println(result);
+  }
+  
+  /**** end ****/ 
   
   // Check if a client has connected
   WiFiClient client = server.available();
