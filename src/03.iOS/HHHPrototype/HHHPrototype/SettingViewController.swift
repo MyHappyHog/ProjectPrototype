@@ -22,7 +22,7 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
+        imagePicker.delegate = self // Inherit UINavigationControllerDelegate
         
         CurrentProfileImage.image = profileImg
         NameTextField.text = profileName
@@ -51,16 +51,18 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     
 
     @IBAction func DoneOnClicked(sender: AnyObject) {
-        performSegueWithIdentifier("Intro", sender: nil)
+        performSegueWithIdentifier("IntroFromSetting", sender: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
-        case "Intro" :
+        case "IntroFromSetting" :
 //            let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
 //            nextViewController.profileImg = CurrentProfileImage.image!
 //            nextViewController.profileName = NameTextField.text!
 //            nextViewController.profileMemo = MemoTextField.text!
-            // change to CoreData
+
+            /* change to CoreData */
+            
             break
         default:
             break
