@@ -5,6 +5,8 @@ int rmsArray[50];
 double result;
 int counter = 0;
  
+N = 50
+
 void setup(){
   Serial.begin(115200);
 }
@@ -13,7 +15,7 @@ void loop(){
   
   value = analogRead(pin); // get raw value of 'Vout'
   
-  if(counter++ < 50) // number of cumulated data is less than 50
+  if(counter++ < N) // number of cumulated data is less than 50
     {cumulateValue();} // cumulate data 
   
   else 
