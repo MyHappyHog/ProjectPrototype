@@ -6,6 +6,8 @@ int rmsArray[50];
 double result;
 int counter = 0;
  
+N = 50
+
 void setup(){
   Serial.begin(115200);
 }
