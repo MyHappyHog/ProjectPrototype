@@ -1,5 +1,6 @@
 int pin = A0; 
 double value = 0;
+int N = 50;
  
 int rmsArray[50];
 double result;
@@ -13,7 +14,7 @@ void loop(){
   
   value = analogRead(pin); // get raw value of 'Vout'
   
-  if(counter++ < 50) // number of cumulated data is less than 50
+  if(counter++ < N) // number of cumulated data is less than 50
     {cumulateValue();} // cumulate data 
   
   else 
