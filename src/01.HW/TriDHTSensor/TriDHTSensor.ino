@@ -96,36 +96,15 @@ void setup(void)
 
 void loop(void)
 {
-  
-  
-  // yoon // current sensor 
-  /*** begin ***/
-  
-  int value = analogRead(ADC);
-  if(counter++ < N){
-    rmsArray[counter] = value - 487.70;
-    delay(1);
-  }
-  else{
-    counter = 0;
-    result = 0;
-    for(int i = 0; i < N; i++){
-      result += pow(rmsArray[i], 2);
-    }
-    result /= N;
-    result = sqrt(result);
-    delay(5);
-    Serial.print("A0 = ");
-    Serial.println(result);
-  }
-  
-  /**** end ****/ 
-  
+   
+  /* Normalization Code be placed in here */
+
   // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) {
     return;
-  }
+  } // Do nothing if there is no client
+  
   Serial.println("");
   Serial.println("New client");
 
@@ -167,13 +146,6 @@ void loop(void)
     snprintf(dataOfDHT2, sizeof(dataOfDHT2), "%2d'C, %2d%", (int)dht2.readTemperature(), (int)dht2.readHumidity());
     snprintf(dataOfDHT3, sizeof(dataOfDHT3), "%2d'C, %2d%", (int)dht3.readTemperature(), (int)dht3.readHumidity());
     
-// original code
-//    char temperature[5];
-//    char humidity[4];
-//    
-//    snprintf(temperature, sizeof(temperature), "%2d'C", (int)dht.readTemperature());
-//    snprintf(humidity, sizeof(humidity), "%2d%", (int)dht.readHumidity());
-    
     // write html document 
     snprintf(htmlDoc, sizeof(htmlDoc), 
 "<html>\
@@ -190,15 +162,15 @@ void loop(void)
     </body>\
  </html>", dataOfDHT1, dataOfDHT2, dataOfDHT3);
 
-
     Serial.println("Sending 200");
-  }
+  } // for 'index.html' request
   else
   {
     snprintf(htmlDoc, sizeof(htmlDoc), "HTTP/1.1 404 Not Found\r\n\r\n");
     Serial.println("Sending 404");
-  }
-  client.print(htmlDoc);
+  } // for another page request
+  
+  client.print(htmlDoc); // send html data to client
   
   Serial.println("Done with client");
 }
