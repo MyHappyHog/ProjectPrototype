@@ -1,9 +1,7 @@
 /*
   ESP8266 mDNS responder 
-
   This is an example of an HTTP server that is accessible
   via http://hhh.local URL thanks to mDNS responder.
-
   Instructions:
   - Update WiFi SSID and password as necessary.
   - Flash the sketch to the ESP8266 board
@@ -12,7 +10,6 @@
     - For Windows, install Bonjour (http://www.apple.com/support/bonjour/).
     - For Mac OSX and iOS support is built in through Bonjour already.
   - Point your browser to http://hhh.local, you should see a response.
-
  */
 
 
@@ -25,22 +22,25 @@
 #define DHTPIN2 4     
 #define DHTPIN3 2     
 
-#define DHTTYPE DHT11
+/* Measurement Range: 0-50'C*/
+#define TEMP_MIN 0
+#define TEMP_MAX 50
 
-#define ADC A0 // yoon // current sensor
+/* Measurement Range: 20-90%RH*/
+#define HUMI_MIN 20
+#define HUMI_MAX 90
+
+#define DHTTYPE DHT11
+#define NUM_OF_DHT 3
 
 
 ////////////// put your router name and password //////////////
 
-const char* ssid = "ROUTER_NAME";
-const char* password = "PASSWORD";
+//const char* ssid = "ROUTER_NAME";
+//const char* password = "PASSWORD";
 
-
-// yoon // current sensor
-int rmsArray[50];
-double result;
-int N = 50;
-int counter = 0;
+const char* ssid = "Johnny";
+const char* password = "net12345";
 
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
@@ -99,6 +99,18 @@ void loop(void)
    
   /* Normalization Code be placed in here */
 
+  int temperature[NUM_OF_DHT];
+  int humidity[NUM_OF_DHT];
+  char DHTDataText[NUM_OF_DHT][10];
+
+  getDHTData(temperature, humidity);
+     
+  for (int i = 0; i < NUM_OF_DHT; i++) {
+     snprintf(DHTDataText[i], sizeof(DHTDataText[i]), "%2d'C, %2d%", temperature[i], humidity[i]);
+    }
+  
+  /* Web Server */
+  
   // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) {
@@ -137,17 +149,11 @@ void loop(void)
   {
     IPAddress ip = WiFi.localIP();
     String ipStr = String(ip[0]) + '.' + String(ip[1]) + '.' + String(ip[2]) + '.' + String(ip[3]);
-    
-    char dataOfDHT1[10];
-    char dataOfDHT2[10];
-    char dataOfDHT3[10];
-    
-    snprintf(dataOfDHT1, sizeof(dataOfDHT1), "%2d'C, %2d%", (int)dht1.readTemperature(), (int)dht1.readHumidity());
-    snprintf(dataOfDHT2, sizeof(dataOfDHT2), "%2d'C, %2d%", (int)dht2.readTemperature(), (int)dht2.readHumidity());
-    snprintf(dataOfDHT3, sizeof(dataOfDHT3), "%2d'C, %2d%", (int)dht3.readTemperature(), (int)dht3.readHumidity());
+
+    printDHTData(temperature, humidity);
     
     // write html document 
-    snprintf(htmlDoc, sizeof(htmlDoc), 
+    snprintf(htmlDoc, sizeof(htmlDoc),
 "<html>\
   <head>\
     <meta http-equiv='refresh' content='10'/>\
@@ -158,9 +164,10 @@ void loop(void)
     </head>\
     <body>\
       <h1>Hello from Happy Hedgehog House !!</h1>\
+      <p>local IP Address: %d.%d.%d.%d</p>\
       <p>data1: %s / data2: %s / data3: %s</p>\
     </body>\
- </html>", dataOfDHT1, dataOfDHT2, dataOfDHT3);
+ </html>", ip[0], ip[1], ip[2], ip[3], DHTDataText[0], DHTDataText[1], DHTDataText[2]);
 
     Serial.println("Sending 200");
   } // for 'index.html' request
@@ -175,3 +182,41 @@ void loop(void)
   Serial.println("Done with client");
 }
 
+void getDHTData(int* temperature, int* humidity) {
+
+  int temp[NUM_OF_DHT], humid[NUM_OF_DHT];
+  
+  temp[0] = (int)dht1.readTemperature();
+  humid[0] = (int)dht1.readHumidity();
+  
+  temp[1] = (int)dht2.readTemperature();
+  humid[1] = (int)dht2.readHumidity();
+  
+  temp[2] = (int)dht3.readTemperature();
+  humid[2] = (int)dht3.readHumidity();
+  
+  for (int i = 0; i < NUM_OF_DHT; i++) {
+    
+    
+    if (TEMP_MIN <= temp[i] && temp[i] <= TEMP_MAX) {
+      temperature[i] = temp[i];
+    }
+    if(HUMI_MIN <= humid[i] && humid[i] <= HUMI_MAX) {
+      humidity[i] = humid[i];
+    }
+    
+  }
+}
+
+void printDHTData(int* temp, int* humid) {
+  for(int i = 0; i < NUM_OF_DHT; i++){
+    
+    Serial.print("DHT No. ");
+    Serial.print(i);
+    Serial.print(", temp: ");
+    Serial.print(temp[i]);
+    Serial.print(", humidity: ");
+    Serial.print(humid[i]);
+    Serial.println();
+  }
+}
