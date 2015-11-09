@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 class IntroViewController: UIViewController {
 
     var profileImg:UIImage = UIImage(named: "samplehog")!
@@ -44,6 +45,57 @@ class IntroViewController: UIViewController {
 
         }
         
+        /*let myUrl = NSURL(string: "http://www.google.co.kr")
+        let request = NSMutableURLRequest(URL: myUrl!)
+        request.HTTPMethod = "POST"
+        
+        let task : NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+        
+        // notice that I can omit the types of data, response and error
+        
+        // your code
+        if error != nil {
+        NSLog("error = %s", error!)
+        return
+        }
+        
+        print(response)
+        print(" ")
+        print(" ")
+        
+        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        //print(responseString)
+        print(" ")
+        print(" ")
+        
+        
+        });*/
+        
+        
+        
+        //let postString = "first"
+        /* let task = NSURLSession.sharedSession().dataTaskWithRequest(request){
+        data, response, error in
+        
+        if error != nil {
+        NSLog("error = %s", error!)
+        return
+        }
+        
+        print(response)
+        print(" ")
+        print(" ")
+        
+        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        print(responseString)
+        print(" ")
+        print(" ")
+        }*/
+        
+        //task.resume()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +118,9 @@ class IntroViewController: UIViewController {
             nextViewController.profileName = NameLabel.text
             nextViewController.profileMemo = MemoLabel.text
             break
+        case "Web":
             
+            break;
         default:
             break
             

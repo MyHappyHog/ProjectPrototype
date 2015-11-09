@@ -20,6 +20,65 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var MemoTextField: UITextField!
     @IBOutlet weak var DeviceTextField: UITextField!
     
+    
+    //////
+    @IBOutlet weak var cb: UIView!
+    @IBOutlet weak var sdfsdfsdf: UIImageView!
+    @IBOutlet weak var taaaa: UITableViewCell!
+    @IBOutlet weak var profile_btn: UIButton!
+    var clikedProfile = false
+    
+    @IBAction func profileOnCilcked(sender: AnyObject) {
+        clikedProfile = !clikedProfile
+        tableView.reloadData()
+        /*if(!clikedProfile){
+            cb.hidden = true
+            //taaaa.hidden = true
+            clikedProfile = true
+            taaaa.constraints
+        }else {
+            cb.hidden = false
+            clikedProfile = false
+        }*/
+
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        if indexPath.row == 1 {
+        /*let x: Int = indexPath.row
+        let a = String(x)
+        NSLog(a + "Aaa", indexPath.row)
+        
+            tableView.reloadData()*/
+  //      }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //let x: Int = indexPath.row
+        //let a = String(x)
+        //NSLog(a + "abc", indexPath.row)
+        if indexPath.row > 0 && indexPath.row < 5 && clikedProfile == false {
+            return 0.0
+        }
+        /*if indexPath.row == 2 {
+            if clikedProfile == false || clikedProfile == false {
+                return 0.0
+            }
+            return 165.0
+        }*/
+        if indexPath.row == 1{
+            return 200.0
+        }
+        return 44.0
+    }
+
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+    
+    //////
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self // Inherit UINavigationControllerDelegate
@@ -27,6 +86,9 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
         CurrentProfileImage.image = profileImg
         NameTextField.text = profileName
         MemoTextField.text = profileMemo
+        
+        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     
@@ -53,13 +115,14 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     @IBAction func DoneOnClicked(sender: AnyObject) {
         performSegueWithIdentifier("IntroFromSetting", sender: nil)
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
         case "IntroFromSetting" :
-//            let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
-//            nextViewController.profileImg = CurrentProfileImage.image!
-//            nextViewController.profileName = NameTextField.text!
-//            nextViewController.profileMemo = MemoTextField.text!
+            let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
+            nextViewController.profileImg = CurrentProfileImage.image!
+            nextViewController.profileName = NameTextField.text!
+            nextViewController.profileMemo = MemoTextField.text!
 
             /* change to CoreData */
             
