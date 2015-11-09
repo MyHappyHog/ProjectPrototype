@@ -42,6 +42,8 @@
 const char* ssid = "Johnny";
 const char* password = "net12345";
 
+char htmlDoc[1000];
+
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
 
@@ -121,8 +123,16 @@ void loop(void)
   Serial.println("New client");
 
   // Wait for data from client to become available
+  int count = 0;
   while(client.connected() && !client.available()){
     delay(1);
+    
+    count+=1;
+    if (count == 3000) {
+      snprintf(htmlDoc, sizeof(htmlDoc), "HTTP/1.1 404 Not Found\r\n\r\n");
+      Serial.println("Sending 404");
+      client.print(htmlDoc); // send html data to client
+    } // close connect if no response until 3 sec
   }
   
   // Read the first line of HTTP request
@@ -141,9 +151,6 @@ void loop(void)
   Serial.print("Request: ");
   Serial.println(req);
   client.flush();
-  
-  //String s; // yoon // remove
-  char htmlDoc[1000];
 
   if (req == "/")
   {
@@ -171,8 +178,8 @@ void loop(void)
 
     Serial.println("Sending 200");
   } // for 'index.html' request
-  else
-  {
+  else if (req == "favicon.ico") {return;} // do nothing
+  else {
     snprintf(htmlDoc, sizeof(htmlDoc), "HTTP/1.1 404 Not Found\r\n\r\n");
     Serial.println("Sending 404");
   } // for another page request
