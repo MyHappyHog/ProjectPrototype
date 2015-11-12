@@ -29,6 +29,8 @@ void setup() {
 
 }
 
+int count = 0;
+
 void loop() {
   
   delay(500);
@@ -42,8 +44,41 @@ void loop() {
   lcd.setCursor(0,1);// first box of second line
   lcd.print("Humid:");
   
-  lcd.setCursor(7,1); // eighth box of first line
+  lcd.setCursor(7,1); // eighth box of second line
   lcd.print((int)dht.readHumidity());
   lcd.print(" %");
-
+  
+  //---  TicTac  ---//
+  count = (count+1) % 4;
+  
+  if(count == 0) {
+    lcd.setCursor(14,0); 
+    lcd.print(". ");
+    lcd.setCursor(14,1); 
+    lcd.print("  ");
+  }
+  else if(count == 1) {
+    lcd.setCursor(14,0); 
+    lcd.print(" .");
+    lcd.setCursor(14,1); 
+    lcd.print("  ");
+  }
+  else if(count == 2) {
+    lcd.setCursor(14,0); 
+    lcd.print("  ");
+    lcd.setCursor(14,1); 
+    lcd.print(" .");
+  }
+  else if(count == 3) {
+    lcd.setCursor(14,0); 
+    lcd.print("  ");
+    lcd.setCursor(14,1); 
+    lcd.print(". ");
+  }
+  else {
+    lcd.setCursor(14,0); 
+    lcd.print("  ");
+    lcd.setCursor(14,1); 
+    lcd.print("  ");
+  }
 }
