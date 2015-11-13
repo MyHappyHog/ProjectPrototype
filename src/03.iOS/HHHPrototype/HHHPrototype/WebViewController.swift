@@ -12,7 +12,7 @@ import UIKit
 //github
 //https://github.com/Alamofire/Alamofire
 import Alamofire
-//github 
+//github
 //https://github.com/drmohundro/SWXMLHash
 import SWXMLHash
 //github
@@ -29,53 +29,18 @@ class WebViewController: UIViewController {
         //link webview address
         
         //set url
-        let url = NSURL(string: "http://www.google.co.kr")
+        let url = NSURL(string: "http://52.68.82.234:19918")
         //set urlrequest
         let requestObj = NSURLRequest(URL: url!)
         //load address
         myWebView.loadRequest(requestObj)
-    
         
-        //get http source
-        //use Alamofire library
-        Alamofire.request(.GET, "http://www.google.co.kr")
-            .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)     ")
-                
-                //var xml = SWXMLHash.parse(response.result.value!)
-                
-                //let count = xml["html"].all.count
-                
-                //print("Count     \(count)")
-                
-                
-
-                if let doc = Kanna.HTML(html: response.result.value!, encoding: NSUTF8StringEncoding) {
-                    print("TITLE: \(doc.title)")
-
-                    
-                    // Search for nodes by CSS
-                    for link in doc.css("a") {
-                        print("text === \(link.text)")
-                        //print("ㅎㄱㄷㄹ == \(link["class"])")
-                    }
-                
-                    
-                   /* print("Adfasdfasdfasdfasdfasdf")
-                    // Search for nodes by XPath
-                    for link in doc.xpath("//a | //link") {
-                        print(link.text)
-                        print(link["href"])
-                    }*/
-                }
-                
-            }
-            /*.response { request, response, data, error in
-                print(request)
-                print(response)
-                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-                print(error)
+        
+        /*.response { request, response, data, error in
+        print(request)
+        print(response)
+        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        print(error)
         }*/
         
         
