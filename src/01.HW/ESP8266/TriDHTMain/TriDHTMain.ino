@@ -16,14 +16,6 @@
 #define DHTPIN2 4     
 #define DHTPIN3 2     
 
-/* Measurement Range: 0-50'C*/
-#define TEMP_MIN 0
-#define TEMP_MAX 50
-
-/* Measurement Range: 20-90%RH*/
-#define HUMI_MIN 20
-#define HUMI_MAX 90
-
 /* DHT Configurations */
 #define DHTTYPE DHT11
 #define NUM_OF_DHT 3
@@ -38,9 +30,6 @@
 //const char* ssid = "ROUTER_NAME";
 //const char* password = "PASSWORD";
 
-const char* ssid = "Johnny";
-const char* password = "net12345";
-
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
 
@@ -54,6 +43,9 @@ DHT dht3(DHTPIN3, DHTTYPE);
 void setup(void)
 {  
   Serial.begin(115200);
+//  
+//  WiFi.mode(WIFI_AP_STA);
+//  WiFi.softAP("esp", "net12345");
   
   // Connect to WiFi network
   WiFi.begin(ssid, password);
@@ -168,11 +160,12 @@ void loop(void)
   switch (todo) {
     
   case INFO: // html service for DHT information
-    SendInfoHTML(client, DHTDataText[1], DHTDataText[2], DHTDataText[3]);
+    SendInfoHTML(client, DHTDataText[0], DHTDataText[1], DHTDataText[2]);
     break;
     
   case SETTING: // html service for modify configurations
-  // to be implement 
+    SendSettingHTML(client); // to be implement 
+    break;
   
   case NOTFOUND:
   default:

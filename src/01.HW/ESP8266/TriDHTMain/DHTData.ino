@@ -1,4 +1,12 @@
 
+/* Measurement Range: 0-50'C*/
+#define TEMP_MIN 0
+#define TEMP_MAX 50
+
+/* Measurement Range: 20-90%RH*/
+#define HUMI_MIN 20
+#define HUMI_MAX 90
+
 void getDHTData(int* temperature, int* humidity) {
 
   int temp[NUM_OF_DHT], humid[NUM_OF_DHT];
