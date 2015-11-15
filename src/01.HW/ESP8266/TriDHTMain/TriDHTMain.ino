@@ -46,6 +46,28 @@ void setup(void)
 //  
 //  WiFi.mode(WIFI_AP_STA);
 //  WiFi.softAP("esp", "net12345");
+
+
+  // Initialize digital pins for Relay Modules
+  
+  /*
+   * Do not use Pin 16
+   * 
+   * It always turns on when ESP Turns on
+   * And on the state for firmware upload 
+   */
+   
+  pinMode(12, OUTPUT);
+  pinMode(14, OUTPUT);
+  pinMode(13, OUTPUT);
+
+  digitalWrite(12, HIGH);
+  digitalWrite(14, HIGH);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(12, LOW);
+  digitalWrite(14, LOW);
+  digitalWrite(13, LOW);
   
   // Connect to WiFi network
   WiFi.begin(ssid, password);
