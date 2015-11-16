@@ -32,7 +32,7 @@
 
 #define DHTTYPE DHT11
 #define NUM_OF_DHT 3
-#define NUM_OF_DATA 30    // number of nomalization data
+#define NUM_OF_DATA 10    // number of nomalization data
 #define TRIM_PERCENT 20   // percent of trimmed mean
 
 
@@ -41,8 +41,8 @@
 //const char* ssid = "ROUTER_NAME";
 //const char* password = "PASSWORD";
 
-const char* ssid = "KMU";
-const char* password = "gpwld123";
+const char* ssid = "nlp";
+const char* password = "nlp12345";
 
 char htmlDoc[1000];
 
@@ -102,16 +102,15 @@ void loop(void)
 {
    
   /* Normalization Code be placed in here */
-  double temperature[NUM_OF_DATA];
-  double humidity[NUM_OF_DATA];
+  double temperature[NUM_OF_DATA] = {0, };
+  double humidity[NUM_OF_DATA] = {0, };
   char DHTDataText[10];
 
  double temp = getTemData(temperature);
  double humid = getHumData(humidity);
      snprintf(DHTDataText, sizeof(DHTDataText), "%2d'C, %2d%",   temp, 
   humid);
-    
-  
+//
   /* Web Server */
   
   // Check if a client has connected
@@ -190,7 +189,7 @@ void loop(void)
   Serial.println("Done with client");
 }
 
-double getTemData(double* temperature) {
+double getTemData(double temperature[]) {
 
   double temp[NUM_OF_DATA];
 
@@ -199,14 +198,20 @@ double getTemData(double* temperature) {
   temp[i] = (double)dht1.readTemperature();
   temp[i + 1] = (double)dht2.readTemperature();
   temp[i + 2] = (double)dht3.readTemperature();
-  
+  delay(1000);
+
+  if (TEMP_MIN <= temp[i] && temp[i] <= TEMP_MAX) {
+      temperature[i] = temp[i];
+      temperature[i+1] = temp[i+1];
+      temperature[i+2] = temp[i+2];
+    }
   }
-  findTrimmed(temp,TRIM_PERCENT);
-  return zScore(temp);
+  findTrimmed(temperature,TRIM_PERCENT);
+  return zScore(temperature);
 }
 
 
-double getHumData(double* humidity) {
+double getHumData(double humidity[]) {
 
   double humid[NUM_OF_DATA];
 
@@ -215,10 +220,15 @@ double getHumData(double* humidity) {
   humid[i] = (double)dht1.readHumidity();
   humid[i + 1] = (double)dht2.readHumidity();
   humid[i + 2] = (double)dht3.readHumidity();
-  
+  delay(1000);
+    if(HUMI_MIN <= humid[i] && humid[i] <= HUMI_MAX) {
+      humidity[i] = humid[i];
+      humidity[i+1] = humid[i+1];
+      humidity[i+2] = humid[i+2];
+    }
   }
-  findTrimmed(humid,TRIM_PERCENT);
-  return zScore(humid);
+  findTrimmed(humidity,TRIM_PERCENT);
+  return zScore(humidity);
 }
 
 double findMean(double arr[]){
@@ -227,9 +237,7 @@ double findMean(double arr[]){
   for (int i = 0; i < NUM_OF_DATA; i++){
     addAll += arr[i];
   }
-
   meanResult = addAll / double(NUM_OF_DATA);
-
   return meanResult;
 }
 
@@ -297,5 +305,3 @@ void printDHTData(double temp, double humid) {
     Serial.print(humid);
     Serial.println();
 }
-
-
