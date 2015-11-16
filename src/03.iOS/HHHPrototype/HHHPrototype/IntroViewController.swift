@@ -14,9 +14,6 @@ import CoreData
 //https://github.com/Alamofire/Alamofire
 import Alamofire
 //github
-//https://github.com/drmohundro/SWXMLHash
-import SWXMLHash
-//github
 //https://github.com/tid-kijyun/Kanna
 import Kanna
 
@@ -65,8 +62,6 @@ class IntroViewController: UIViewController {
     func setData(){
         // 취소되기 전까지 무한루프
         while NSThread.currentThread().cancelled == false {
-            
-            
             //get http source
             //use Alamofire library
             Alamofire.request(.GET, "http://52.68.82.234:19918")
@@ -74,42 +69,26 @@ class IntroViewController: UIViewController {
                     print("Success: \(response.result.isSuccess)")
                     print("Response String: \(response.result.value)     ")
                     
-                    //var xml = SWXMLHash.parse(response.result.value!)
                     
-                    //let count = xml["html"].all.count
-                    
-                    //print("Count     \(count)")
-                    
-                    
-                    
-                    if let doc = Kanna.HTML(html: response.result.value!, encoding: NSUTF8StringEncoding) {
-                        print("TITLE: \(doc.title)")
-                        
-                        
-                        // Search for nodes by CSS
-                        /*for link in doc.css("p") {
-                            print("text === \(link.text)")
-                            //print("ㅎㄱㄷㄹ == \(link["class"])")
-                        }*/
-                        
-                        let data_string = doc.css("p").at(1)?.text
-                        
-                        
-                        let data_string_split = data_string!.componentsSeparatedByString(" / ")
-                        let tem_string = data_string_split[0], humid_string = data_string_split[1];
-                        
-                        let tem = tem_string.componentsSeparatedByString(": ")
-                        let humid = humid_string.componentsSeparatedByString(": ")
-                        
-                        self.TempLabel.text = tem[1] + "도"
-                        self.HumidLabel.text = humid[1] + "%"
-                        
+                    if(response.result.isSuccess){
+                        if let doc = Kanna.HTML(html: response.result.value!, encoding: NSUTF8StringEncoding) {
+                            //http 소스 중 p 태그의 2번쨰 택스트
+                            let data_string = doc.css("p").at(1)?.text
+                            
+                            //텍스트 분할
+                            let data_string_split = data_string!.componentsSeparatedByString(" / ")
+                            let tem_string = data_string_split[0], humid_string = data_string_split[1];
+                            
+                            let tem = tem_string.componentsSeparatedByString(": ")
+                            let humid = humid_string.componentsSeparatedByString(": ")
+                            
+                            self.TempLabel.text = tem[1] + "도"
+                            self.HumidLabel.text = humid[1] + "%"
+                            
+                        }
                     }
-                    
-                    
             }
-            
-            // 1초간 휴식
+            // 30초간 휴식
             NSThread.sleepForTimeInterval(30)
         }
     }
