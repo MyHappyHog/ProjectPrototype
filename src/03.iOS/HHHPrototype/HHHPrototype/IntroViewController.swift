@@ -68,24 +68,31 @@ class IntroViewController: UIViewController {
                 .responseString { response in
                     print("Success: \(response.result.isSuccess)")
                     print("Response String: \(response.result.value)     ")
-                    
-                    
+                    //GET 성공시 텍스트 분석
                     if(response.result.isSuccess){
+                        //http parser library -> Kanna
                         if let doc = Kanna.HTML(html: response.result.value!, encoding: NSUTF8StringEncoding) {
                             //http 소스 중 p 태그의 2번쨰 택스트
                             let data_string = doc.css("p").at(1)?.text
                             
                             //텍스트 분할
+                            //현자 텍스트는 
+                            // 데이터1 : -- / 데이터2: -- / 데이터3: --
+                            //이므로 우선 " / " 으로 텍스트 분한
                             let data_string_split = data_string!.componentsSeparatedByString(" / ")
                             let tem_string = data_string_split[0], humid_string = data_string_split[1];
                             
+                            //분할된 텍스트에서 숫자만 가져오기 위해서 ": " 으로 분할
                             let tem = tem_string.componentsSeparatedByString(": ")
                             let humid = humid_string.componentsSeparatedByString(": ")
                             
-                            self.TempLabel.text = tem[1] + "도"
-                            self.HumidLabel.text = humid[1] + "%"
+                            self.TempLabel.text = tem[1] + " 도"
+                            self.HumidLabel.text = humid[1] + " %"
                             
                         }
+                    }else{
+                        self.TempLabel.text = "-- 도"
+                        self.HumidLabel.text = "-- %"
                     }
             }
             // 30초간 휴식
