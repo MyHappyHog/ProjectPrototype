@@ -17,6 +17,7 @@
 		25843CCF1BCDB86D0005D164 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25843CCE1BCDB86D0005D164 /* SWRevealViewController.m */; };
 		25843CD21BCDC1290005D164 /* SWPetListviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25843CD11BCDC1290005D164 /* SWPetListviewController.swift */; };
 		67D6A5481BDFD32F004DC8BB /* HLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D6A5471BDFD32F004DC8BB /* HLSViewController.swift */; };
+		DA15A8E71BFB8B10005AD941 /* HttpReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15A8E61BFB8B10005AD941 /* HttpReference.swift */; };
 		DAFE35B71BEF8D850050D823 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE35B61BEF8D850050D823 /* WebViewController.swift */; };
 		DAFE35D01BEF8F240050D823 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFE35C31BEF8E9C0050D823 /* Alamofire.framework */; };
 		DAFE35D11BEF8F240050D823 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DAFE35C31BEF8E9C0050D823 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -207,6 +208,7 @@
 		25843CCE1BCDB86D0005D164 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		25843CD11BCDC1290005D164 /* SWPetListviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWPetListviewController.swift; sourceTree = "<group>"; };
 		67D6A5471BDFD32F004DC8BB /* HLSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSViewController.swift; sourceTree = "<group>"; };
+		DA15A8E61BFB8B10005AD941 /* HttpReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpReference.swift; sourceTree = "<group>"; };
 		DAFE35B61BEF8D850050D823 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DAFE35B81BEF8E9B0050D823 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		DAFE35D61BEFBAA90050D823 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = "SWXMLHash-master/SWXMLHash.xcodeproj"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				252C69711BCD8A2F00C0FEFB /* SettingViewController.swift */,
 				67D6A5471BDFD32F004DC8BB /* HLSViewController.swift */,
 				DAFE35B61BEF8D850050D823 /* WebViewController.swift */,
+				DA15A8E61BFB8B10005AD941 /* HttpReference.swift */,
 			);
 			name = src;
 			path = HHHPrototype;
@@ -552,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				252C695A1BCD88E000C0FEFB /* IntroViewController.swift in Sources */,
+				DA15A8E71BFB8B10005AD941 /* HttpReference.swift in Sources */,
 				25843CC71BCDAEA40005D164 /* Profile.xcdatamodeld in Sources */,
 				67D6A5481BDFD32F004DC8BB /* HLSViewController.swift in Sources */,
 				25843CD21BCDC1290005D164 /* SWPetListviewController.swift in Sources */,
