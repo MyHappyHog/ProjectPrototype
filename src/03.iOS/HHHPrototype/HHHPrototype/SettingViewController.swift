@@ -15,11 +15,26 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     var profileName: String!
     var profileMemo: String!
     
+    var temp_img: UIImage!
+    var temp_name: String!
+    var temp_memo: String!
+    var isCancel: Bool = false
+    
     @IBOutlet weak var CurrentProfileImage: UIImageView!
     @IBOutlet weak var NameTextField: UITextField!
     @IBOutlet weak var MemoTextField: UITextField!
     @IBOutlet weak var DeviceTextField: UITextField!
     
+    // close func
+    @IBAction func clikedCancel(sender: AnyObject) {
+        isCancel = true
+        performSegueWithIdentifier("IntroFromSetting", sender: nil)
+    }
+    
+    @IBAction func clikedDone(sender: AnyObject) {
+        performSegueWithIdentifier("IntroFromSetting", sender: nil)
+    }
+    //
     
     //////
     @IBOutlet weak var cb: UIView!
@@ -29,29 +44,32 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     var clikedProfile = false
     
     @IBAction func profileOnCilcked(sender: AnyObject) {
-        clikedProfile = !clikedProfile
-        tableView.reloadData()
+        
         /*if(!clikedProfile){
-            cb.hidden = true
-            //taaaa.hidden = true
-            clikedProfile = true
-            taaaa.constraints
+        cb.hidden = true
+        //taaaa.hidden = true
+        clikedProfile = true
+        taaaa.constraints
         }else {
-            cb.hidden = false
-            clikedProfile = false
+        cb.hidden = false
+        clikedProfile = false
         }*/
-
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        if indexPath.row == 1 {
+        //        if indexPath.row == 1 {
         /*let x: Int = indexPath.row
         let a = String(x)
         NSLog(a + "Aaa", indexPath.row)
         
-            tableView.reloadData()*/
-  //      }
+        tableView.reloadData()*/
+        //      }
+        if(indexPath.row == 0){
+            clikedProfile = !clikedProfile
+            tableView.reloadData()
+        }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -63,17 +81,17 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
             return 0.0
         }
         /*if indexPath.row == 2 {
-            if clikedProfile == false || clikedProfile == false {
-                return 0.0
-            }
-            return 165.0
+        if clikedProfile == false || clikedProfile == false {
+        return 0.0
+        }
+        return 165.0
         }*/
         if indexPath.row == 1{
             return 200.0
         }
         return 44.0
     }
-
+    
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 44.0
     }
@@ -86,6 +104,10 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
         CurrentProfileImage.image = profileImg
         NameTextField.text = profileName
         MemoTextField.text = profileMemo
+        
+        temp_img = CurrentProfileImage.image
+        temp_name = NameTextField.text
+        temp_memo = MemoTextField.text
         
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -111,7 +133,7 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-
+    
     @IBAction func DoneOnClicked(sender: AnyObject) {
         performSegueWithIdentifier("IntroFromSetting", sender: nil)
     }
@@ -120,13 +142,20 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
         switch segue.identifier! {
         case "IntroFromSetting" :
             let nextViewController:IntroViewController = segue.destinationViewController as! IntroViewController
-            nextViewController.profileImg = CurrentProfileImage.image!
-            nextViewController.profileName = NameTextField.text!
-            nextViewController.profileMemo = MemoTextField.text!
-
+            if isCancel{
+                nextViewController.profileImg = CurrentProfileImage.image!
+                nextViewController.profileName = NameTextField.text!
+                nextViewController.profileMemo = MemoTextField.text!
+            }else{
+                nextViewController.profileImg = temp_img
+                nextViewController.profileName = temp_name
+                nextViewController.profileMemo = temp_memo
+            }
+            
             /* change to CoreData */
             
             break
+            
         default:
             break
             

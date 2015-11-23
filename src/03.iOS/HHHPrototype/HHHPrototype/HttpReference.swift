@@ -28,7 +28,7 @@ class HttpReference{
     }
     
     
-    func getResponse(completionHandler: (result: Bool) -> Void){
+    func getResponse(completionHandler: (result: Bool, temperature: String, humidity: String) -> Void){
         //get http source
         //use Alamofire library
         print("aaaa")
@@ -40,18 +40,17 @@ class HttpReference{
                     
                     //http parser library -> Kanna
                     if let doc = Kanna.HTML(html: response.result.value!, encoding: NSUTF8StringEncoding) {
-                        //http 소스 중 p 태그의 2번쨰 택스트
+                        //http 소스 중 p 태그의 2번 택스트
                         self.response_result_value = doc.css("p").at(1)?.text
                         
                     }else{
                         self.response_result_value = nil
                     }
-                    //Alamofire.end
-                    completionHandler(result: true)
+                    completionHandler(result: true, temperature: self.getData(self.type_temperature), humidity: self.getData(self.type_humidity))
                     
                 }else{
                     self.response_result_value = nil
-                    completionHandler(result: false)
+                    completionHandler(result: false, temperature: "--", humidity: "--")
                 }
                 
         }

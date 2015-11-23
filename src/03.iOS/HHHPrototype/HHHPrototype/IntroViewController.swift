@@ -45,29 +45,33 @@ class IntroViewController: UIViewController {
         NameLabel.text = profileName
         MemoLabel.text = profileMemo
         
+
         
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
+                    //self.revealViewController().panGestureRecognizer().enabled = true
         
         http_reference = HttpReference(server_addr)
         
         //타이머 시간 설정
-        let http_timer_interval:NSTimeInterval = 100.0
+        let http_timer_interval:NSTimeInterval = 10.0
         
         //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
         sendHttpGet();
+
         http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "sendHttpGet", userInfo:  nil, repeats: true)
-        
         
     }
     
     func sendHttpGet(){
-        http_reference!.getResponse({(result) -> Void in
+        http_reference!.getResponse({(result, temperature, humidity) -> Void in
             if(result == true){
-                self.TempLabel.text = self.http_reference!.getData(0)
-                self.HumidLabel.text = self.http_reference!.getData(1)
+                //self.TempLabel.text = self.http_reference!.getData(0)
+                //self.HumidLabel.text = self.http_reference!.getData(1)
+                self.TempLabel.text = temperature
+                self.HumidLabel.text = humidity
             }else{
                 return
             }
@@ -90,10 +94,18 @@ class IntroViewController: UIViewController {
         
         switch segue.identifier! {
         case "Setting":
-            let nextViewController = segue.destinationViewController as! SettingViewController
+            
+            http_timer.invalidate()
+            
+            self.revealViewController().panGestureRecognizer().enabled = false
+            
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let nextViewController = destinationNavigationController.topViewController as! SettingViewController//segue.destinationViewController as! SettingViewController
             nextViewController.profileImg = ProfileImage.image
             nextViewController.profileName = NameLabel.text
             nextViewController.profileMemo = MemoLabel.text
+            
+            
             break
         case "Web":
             

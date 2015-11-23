@@ -6,4 +6,8 @@
 //  Copyright © 2015년 Yoonseung Choi. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class SWPetListviewController : UITableViewController{
+    
+}
