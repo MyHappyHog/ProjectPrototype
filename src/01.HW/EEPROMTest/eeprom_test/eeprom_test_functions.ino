@@ -62,3 +62,24 @@ void EEPROM_READ(){
     Serial.println();
   }
 }
+
+/* change functions to get Parameter
+String EEPROM_READ(int firstAddress, int length){
+  String readText = String();
+  
+  for(int forI = 0; forI < length; forI++){
+    readText += EEPROM.read(firstAddress++);
+  }
+
+  return readText;
+}
+
+int EEPROM_WRITE(int address, String writeText) {
+  
+  for(int i = 0; i < writeText.length(); i++) {
+    EEPROM.write(address++, writeText.charAt(i));
+  }
+  EEPROM.commit();
+
+  return address;
+}*/
