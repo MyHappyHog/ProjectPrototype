@@ -1,4 +1,3 @@
-
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
@@ -15,12 +14,17 @@
 </html>"
 
 #define WEB_PORT 12345
+
 #define STATION_BOOT_MODE 0
 #define AP_BOOT_MODE 1
+
+#define CLOSE 0
 
 /* 와이파이 ssid 와 password */
 const char *ssid = "happyhog";
 const char *password = "hog12345";
+
+const char HTML[] PROGMEM = HTML_TEMPLATE;
 
 byte bootMode;
 
@@ -32,7 +36,7 @@ ESP8266WebServer server(WEB_PORT);
 
 // 메인화면 Test data들을 출력해준다.
 void handleRoot() {
-  String rootText = HTML_TEMPLATE;
+  String rootText = FPSTR(HTML);
   rootText.replace("<titleContent>", "ESP8266 Demo");
   rootText.replace("<bodyContent>", String("<h1>Hello from Happy Hedgehog house !!</h1>")
                    + "<h1>안녕하세요. 해피 호구 하우스입니다!!</h1>"
@@ -65,9 +69,15 @@ void handleSettingForm() {
       EEPROM.write(511, bootMode);
       EEPROM.commit();
 
-      // 현재 모드 disconnect
-      WiFi.disconnect();
+      // AP 모드 끔
+      // 모드가 변경되었는지 확인하고 변경되지 않았으면 기다림.
       WiFi.mode( WIFI_OFF );
+      while (WiFi.getMode() != WIFI_OFF) {
+        delay(500);
+        Serial.print(".");
+      }
+      Serial.println( "close AP mode" );
+      Serial.println( "" );
 
       // 이전 server 클래스에 등록한 handler를 지울 방법이 없으므로..
       // 인스턴스를 다시 만듦.
@@ -77,7 +87,7 @@ void handleSettingForm() {
     }
   } else {
     // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
-    String formMessage = HTML_TEMPLATE;
+    String formMessage = FPSTR(HTML_TEMPLATE);
     formMessage.replace("<titleContent>", "MyHappyHog Setting");
     formMessage.replace("<bodyContent>", "<form action=\"" + server.uri() + "\" method=\"POST\">"
                         + "ssid : <input type=\"text\" name=\"ssid\"/><br/>"
@@ -123,36 +133,52 @@ void openSoftAP() {
 // Station 모드로 공유기를 이용하여 mdns 서버 열기
 void openStation() {
   Serial.println("Configuring station mode...");
-  WiFi.begin ( "kmucs" );
+  WiFi.begin ( "Johnny", "net12345" );
 
   // Wait for connection
-  if ( WiFi.waitForConnectResult() == WL_CONNECTED ) {
-    Serial.println ( "WiFi Connected" );
+  // 연결되지 않으면 계속 연결 시도 함.
+  while ( WiFi.waitForConnectResult() != WL_CONNECTED ) {
+    delay(500);
+    Serial.println ( "WiFi Not Connected reconnect" );
+    WiFi.begin ( "Johnny", "net12345" );
   }
-  
+
   Serial.println ( "" );
   Serial.print ( "Connected to " );
   Serial.println ( ssid );
   Serial.print ( "IP address: " );
   Serial.println ( WiFi.localIP() );
+  Serial.println ( "" );
 
   // mdns 열기
-  if ( MDNS.begin ( "esp8266" ) ) {
-    Serial.println ( "esp8266 MDNS responder started" );
+  // 연결되지 않으면 계속 연결 시도 함.
+  Serial.println ( "start MDNS" );
+  while ( !MDNS.begin ( "esp8266" ) ) {
+    delay(500);
+    Serial.print ( "." );
   }
+  Serial.println ( "esp8266 MDNS responder started" );
 
   // 서버의 url 주소 핸들링
   server.on ( "/", handleRoot );
   server.on ( "/setting", handleSettingForm );
   server.onNotFound ( handleNotFound );
 
-  // Add service to MDNS-SD
+  // http를 서비스에 등록한다.
   MDNS.addService("http", "tcp", WEB_PORT);
 }
 
+// 웹 서버를 시작한다.
+// 만약 begin 이후에도 서버가 close 상태라면
+// 연결이 될 때까지 계속 시도 함.
 void startServer() {
   server.begin();
-
+  while ( server.status() == CLOSE ) {
+    delay(500);
+    Serial.println( "." );
+    server.begin();
+  }
+  Serial.println( "" );
   Serial.println("HTTP server started");
 }
 
