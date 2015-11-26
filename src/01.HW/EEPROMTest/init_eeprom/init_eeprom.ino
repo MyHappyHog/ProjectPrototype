@@ -53,7 +53,7 @@ String EEPROM_READ(int firstAddress, int length){
   String readText = String();
   
   for(int forI = 0; forI < length; forI++){
-    readText += EEPROM.read(firstAddress++);
+    readText += char(EEPROM.read(firstAddress++));
   }
   return readText;
 }
