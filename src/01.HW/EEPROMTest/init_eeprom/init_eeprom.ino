@@ -44,12 +44,12 @@ void loop() {
   delay(1000);
 }
 
-void EEPROM_CLEAR() {
+void clear_eeprom() {
     for ( int i = 0 ; i < EEPROM_SIZE ; i++ )
       EEPROM.write(i, 0);
 }
 
-String EEPROM_READ(int firstAddress, int length){
+String read_eeprom(int firstAddress, int length){
   String readText = String();
   
   for(int forI = 0; forI < length; forI++){
@@ -58,7 +58,7 @@ String EEPROM_READ(int firstAddress, int length){
   return readText;
 }
 
-int EEPROM_WRITE(int address, String writeText) {
+int write_eeprom(int address, String writeText) {
   
   for(int i = 0; i < writeText.length(); i++) {
     EEPROM.write(address++, writeText.charAt(i));
