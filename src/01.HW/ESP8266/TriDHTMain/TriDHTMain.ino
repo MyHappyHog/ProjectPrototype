@@ -1,3 +1,4 @@
+
 /*
   TriDHTMain
   
@@ -6,11 +7,10 @@
   via http://hhh.local/ URL thanks to mDNS responder.
   
  */
- 
-#include <ESP8266WiFi.h>
+#include <DHT.h> 
+#include <ESP8266WiFi.h>  
 #include <ESP8266mDNS.h>
 #include <WiFiClient.h>
-#include <DHT.h>
 
 #define DHTPIN1 5     
 #define DHTPIN2 4     
@@ -19,6 +19,7 @@
 /* DHT Configurations */
 #define DHTTYPE DHT11
 #define NUM_OF_DHT 3
+#define NUM_OF_DATA 30    // number of nomalization data
 
 /* Case of html service */
 #define NOTFOUND    0
@@ -27,8 +28,8 @@
 
 // put your router name and password 
 
-//const char* ssid = "ROUTER_NAME";
-//const char* password = "PASSWORD";
+const char* ssid = "Johnny";
+const char* password = "net12345";
 
 // TCP server at port 80 will respond to HTTP requests
 WiFiServer server(80);
@@ -38,6 +39,7 @@ DHT dht1(DHTPIN1, DHTTYPE);
 DHT dht2(DHTPIN2, DHTTYPE);
 DHT dht3(DHTPIN3, DHTTYPE);
 
+uint32_t lastreadtime;
 //--------------- here is a setup code ---------------//
 
 void setup(void)
@@ -103,27 +105,46 @@ void setup(void)
   
   // Add service to MDNS-SD
   MDNS.addService("http", "tcp", 80);
+
+  lastreadtime = millis();
 }
 
 //--------------- here is a loop code ---------------//
 
+ char DHTDataText[10][3];
+ double temperature[NUM_OF_DATA];
+ double humidity[NUM_OF_DATA];
+ int count = 1;  //센싱하는 카운터 변수
+ double temp;
+ double humid;
+ 
 void loop(void)
 {
   /***** Get and Normalize DHT Values *****/
    
   /* Normalization Code be placed in here */
-  
-  int temperature[NUM_OF_DHT];
-  int humidity[NUM_OF_DHT];
-  char DHTDataText[NUM_OF_DHT][10];
-  
-  getDHTData(temperature, humidity);
-     
-  for (int i = 0; i < NUM_OF_DHT; i++) {
-     snprintf(DHTDataText[i], sizeof(DHTDataText[i]), \
-     "%2d'C, %2d%", temperature[i], humidity[i]);
+
+  // 2초이상 지나면 현재 시간 저장
+  uint32_t currenttime = millis();
+  if ( (currenttime - lastreadtime) > 2000 ) {
+      if(count > 60){
+ 
+      temp = nomalization(temperature);
+      humid = nomalization(humidity);
+
+      snprintf(DHTDataText[0], sizeof(DHTDataText), "%2d'C, %2d%",   temp, humid);
+      count = 1;
+      }
   }
+  lastreadtime = currenttime;
+
+  getHumData(humidity, count);
+  getTemData(temperature, count);
+  count++;
   
+
+    
+
   /***** Check client and Get request *****/
   
   // Check if a client has connected
@@ -200,7 +221,7 @@ void loop(void)
   Serial.print("Local IP: ");
   Serial.println(WiFi.localIP());
   
-  printDHTData(temperature, humidity);
+  printDHTData(temp, humid);
 }
 
 

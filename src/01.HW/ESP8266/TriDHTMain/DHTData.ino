@@ -7,41 +7,33 @@
 #define HUMI_MIN 20
 #define HUMI_MAX 90
 
-void getDHTData(int* temperature, int* humidity) {
+#define NUM_OF_DATA 30    // number of nomalization data
+#define TRIM_PERCENT 20   // percent of trimmed mean
 
-  int temp[NUM_OF_DHT], humid[NUM_OF_DHT];
-  
-  temp[0] = (int)dht1.readTemperature();
-  humid[0] = (int)dht1.readHumidity();
-  
-  temp[1] = (int)dht2.readTemperature();
-  humid[1] = (int)dht2.readHumidity();
-  
-  temp[2] = (int)dht3.readTemperature();
-  humid[2] = (int)dht3.readHumidity();
-  
-  for (int i = 0; i < NUM_OF_DHT; i++) {
-    
-    
-    if (TEMP_MIN <= temp[i] && temp[i] <= TEMP_MAX) {
-      temperature[i] = temp[i];
-    }
-    if(HUMI_MIN <= humid[i] && humid[i] <= HUMI_MAX) {
-      humidity[i] = humid[i];
-    }
-    
-  }
+
+void getTemData(double* temp, int i) {
+
+      temp[i*3 - 1] = (double)dht1.readTemperature();
+      temp[i*3] = (double)dht2.readTemperature();
+      temp[i*3 + 1] = (double)dht3.readTemperature();
+
 }
 
-void printDHTData(int* temp, int* humid) {
-  for(int i = 0; i < NUM_OF_DHT; i++){
-    
-    Serial.print("DHT No. ");
-    Serial.print(i);
+
+void getHumData(double* humid, int i) {
+
+      humid[i*3 - 1] = (double)dht1.readHumidity();
+      humid[i*3] = (double)dht2.readHumidity();
+      humid[i*3 + 1] = (double)dht3.readHumidity();
+  
+}
+
+void printDHTData(double temp, double humid) {
+ 
     Serial.print(", temp: ");
-    Serial.print(temp[i]);
+    Serial.print(temp);
     Serial.print(", humidity: ");
-    Serial.print(humid[i]);
+    Serial.print(humid);
     Serial.println();
-  }
+  
 }
