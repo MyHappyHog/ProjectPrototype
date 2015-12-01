@@ -20,7 +20,7 @@
   </body>\
 </html>"
 
-/*  
+/*
  * EEPROM에서 사용할 size. 아마도.. 20KB까지 가능하지 않나 생각됨.
  * ESP-12E 의 flash size 는 4MB임. 아래는 참고자료
  * https://github.com/esp8266/Arduino/blob/master/tools/sdk/ld/eagle.flash.4m.ld
@@ -66,7 +66,7 @@ double humidity = 35.5;
 
 ESP8266WebServer server(WEB_PORT);
 
-/* 
+/*
  *  설정된 값들을 eeprom에서 읽어오는 함수
  *  ssid, password, bootmode 를 읽어 옴.
  */
@@ -76,13 +76,13 @@ String loadConfigure() {
   password = read_password_from_eeprom( FIRST_ADDRESS_OF_PASSWORD );
   bootMode = EEPROM.read( IS_FIRST_BOOT );
 }
-/* 
+/*
  *  EEPROM에서 ssid를 읽어들이는 함수
  */
 String read_ssid_from_eeprom( int firstAddress ) {
   String read_ssid = String();
   int ssid_length = int(EEPROM.read(firstAddress++));
-  
+
   for (int forLen = 0; forLen < ssid_length; forLen++) {
     read_ssid += char(EEPROM.read(firstAddress++));
   }
@@ -93,10 +93,10 @@ String read_ssid_from_eeprom( int firstAddress ) {
   // 읽은 데이터를 String object로 리턴 함.
 }
 
-/* 
+/*
  *  EEPROM에서 ssid를 읽어들이는 함수
  */
-void write_ssid_to_eeprom(int address, String _ssid ) {
+void write_ssid_to_eeprom( int address, String _ssid ) {
 
   for (int i = 0; i <= _ssid.length(); i++) {
     if (i == 0) {
@@ -117,24 +117,24 @@ void write_ssid_to_eeprom(int address, String _ssid ) {
   // 100 자리 이상일 경우에는 업데이트하지 않고 함수 종료
 }
 
-/* 
+/*
  *  EEPROM에서 password를 읽어들이는 함수
  */
 String read_password_from_eeprom( int firstAddress ) {
   String read_password = String();
   int ssid_length = int(EEPROM.read(firstAddress++));
-  
+
   for (int forLen = 0; forLen < ssid_length; forLen++) {
     read_password += char(EEPROM.read(firstAddress++));
   }
   return read_password;
 }
 
-/* 
+/*
  *  EEPROM에서 password를 읽어들이는 함수
  */
 void write_password_to_eeprom(int address, String _password ) {
-  
+
   for (int i = 0; i <= _password.length(); i++) {
     if (i == 0) {
       EEPROM.write(address++, _password.length());
@@ -157,7 +157,7 @@ void handleRoot() {
   server.send(200, "text/html;", rootText);
 }
 
-/* 
+/*
  * setting 관련.. form 태그 이용. 변경하기 버튼 클릭시 리다이렉션 됨.
  * 리다이렉션시 POST메소드로 arg에 입력한 내용이 들어있음.
  * TOOD : 허용하지 않는 입력 처리하기.
@@ -172,14 +172,14 @@ void handleSettingForm() {
 
       // form 으로 전달된 데이터 중에서 아규먼트 이름이 ssid나 password 인 아규먼트를
       // ssid 와 password 로 assign 하고 eeprom을 업데이트.(write)
-      if( _argName.equals(ARG_NAME_SSID) ) {
+      if ( _argName.equals(ARG_NAME_SSID) ) {
         ssid = String( _arg );
-        write_ssid_to_eeprom( ssid );
+        write_ssid_to_eeprom( FIRST_ADDRESS_OF_SSID, ssid );
       } else if ( _argName.equals(ARG_NAME_PASSWORD) ) {
         password = String( _arg );
-        write_password_to_eeprom( ssid );
+        write_password_to_eeprom( FIRST_ADDRESS_OF_PASSWORD, password );
       }
-      
+
       message += _argName + ": " + _arg + "<br/>";
     }
 
@@ -196,13 +196,8 @@ void handleSettingForm() {
       EEPROM.write( IS_FIRST_BOOT, bootMode );
       EEPROM.commit();
 
-      // AP 모드 끔
-      // 모드가 변경되었는지 확인하고 변경되지 않았으면 기다림.
-      WiFi.mode( WIFI_OFF );
-      while (WiFi.getMode() != WIFI_OFF) {
-        delay(500);
-        Serial.print(".");
-      }
+      // softAP의 연결을 종료하고 WiFi를 끔.
+      WiFi.softAPdisconnect( true );
       Serial.println( "close AP mode" );
       Serial.println( "" );
 
@@ -211,7 +206,7 @@ void handleSettingForm() {
       server = ESP8266WebServer(WEB_PORT);
       openStation();
       startServer();
-    }
+    } 
   } else {
     // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
     String formMessage = FPSTR(HTML_TEMPLATE);
@@ -259,14 +254,17 @@ void openSoftAP() {
 
 // Station 모드로 공유기를 이용하여 mdns 서버 열기
 void openStation() {
+  delay(1000);
   Serial.println("Configuring station mode...");
+  Serial.println(ssid);
+  Serial.println(password);
   WiFi.begin ( ssid.c_str(), password.c_str() );
 
   // Wait for connection
   // 연결되지 않으면 계속 연결 시도 함.
   while ( WiFi.waitForConnectResult() != WL_CONNECTED ) {
     delay(500);
-    Serial.println ( "WiFi Not Connected reconnect" );
+    Serial.println ( "WiFi Not Connected.. and reconnect..." );
     WiFi.begin ( ssid.c_str(), password.c_str() );
   }
 
@@ -295,23 +293,25 @@ void openStation() {
   MDNS.addService("http", "tcp", WEB_PORT);
 }
 
-/* 
+/*
  * 웹 서버를 시작한다.
  * 만약 begin 이후에도 서버가 close 상태라면
- * 연결이 될 때까지 계속 시도 함. 
+ * 연결이 될 때까지 계속 시도 함.
  */
 void startServer() {
   server.begin();
+  /*
   while ( server.status() == CLOSE ) {
     delay(500);
-    Serial.println( "." );
+    Serial.print( "." );
     server.begin();
   }
+  */
   Serial.println( "" );
   Serial.println("HTTP server started");
 }
 
-/* 
+/*
  *  Serial을 연결하고 EEPROM의 설정을 로드함.
  *  EEPROM의 모드에 따라 AP 혹은 STATION 웹 서버를 엶.
  */
@@ -321,6 +321,8 @@ void setup() {
 
   loadConfigure();
 
+  Serial.println(ssid.c_str());
+  Serial.println(password.c_str());
   // 모드에 따라 다른 서버를 엶.
   switch (bootMode) {
     case AP_BOOT_MODE:
