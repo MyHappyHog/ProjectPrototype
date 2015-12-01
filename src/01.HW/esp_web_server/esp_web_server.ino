@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 // 이 헤더는 수정됨. 윈도우 기준으로..
 // C:\Users\<UserName>\AppData\Roaming\Arduino15\packages\esp8266\hardware\esp8266\2.0.0-rc2\libraries\ESP8266WebServer\src
-// 내의 소스 코드를 깃허브 내에 이 코드 상위의 폴더에 있는 ESP8266WebServer.h and .cpp로 변경하길 바람..
+// 내의 소스 코드를 깃허브 내에 이 코드 상위의 폴더에 있는 ESP8266Webserver.h and .cpp로 변경하길 바람..
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <EEPROM.h>
@@ -203,10 +203,24 @@ void handleSettingForm() {
 
       // 이전 server 클래스에 등록한 handler를 지울 방법이 없으므로..
       // 인스턴스를 다시 만듦.
-      server = ESP8266WebServer(WEB_PORT);
+      server.deleteAllHandler();
       openStation();
-      startServer();
-    } 
+      
+      Serial.println( "" );
+      Serial.println("HTTP server started");
+    } else {
+      Serial.println( "" );
+      Serial.println( "change WIFI" );
+      
+      // 현재 WiFi 연결을 끊음.
+      WiFi.disconnect();
+      
+      // Station모드로 새로운 ssid에 연결
+      openStation();
+
+      Serial.println( "" );
+      Serial.println("HTTP server started");
+    }
   } else {
     // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
     String formMessage = FPSTR(HTML_TEMPLATE);
@@ -240,6 +254,7 @@ void handleNotFound() {
 
 // AP 모드로 Server 열기
 void openSoftAP() {
+  Serial.println( "" );
   Serial.print("Configuring access point...");
   WiFi.softAP( ssid.c_str(), password.c_str() );
 
@@ -254,10 +269,8 @@ void openSoftAP() {
 
 // Station 모드로 공유기를 이용하여 mdns 서버 열기
 void openStation() {
-  delay(1000);
+  Serial.println( "" );
   Serial.println("Configuring station mode...");
-  Serial.println(ssid);
-  Serial.println(password);
   WiFi.begin ( ssid.c_str(), password.c_str() );
 
   // Wait for connection
@@ -300,13 +313,14 @@ void openStation() {
  */
 void startServer() {
   server.begin();
-  /*
+  
   while ( server.status() == CLOSE ) {
     delay(500);
     Serial.print( "." );
+    Serial.print( server.status() );
     server.begin();
   }
-  */
+  
   Serial.println( "" );
   Serial.println("HTTP server started");
 }
@@ -321,8 +335,6 @@ void setup() {
 
   loadConfigure();
 
-  Serial.println(ssid.c_str());
-  Serial.println(password.c_str());
   // 모드에 따라 다른 서버를 엶.
   switch (bootMode) {
     case AP_BOOT_MODE:
