@@ -66,8 +66,9 @@ public:
   void begin();
   void handleClient();
 
-  // added by jongho lim
+  //added code
   uint8_t status();
+  void deleteAllHandler();
 
   typedef std::function<void(void)> THandlerFunction;
   void on(const char* uri, THandlerFunction handler);

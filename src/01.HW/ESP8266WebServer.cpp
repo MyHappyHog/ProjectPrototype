@@ -59,12 +59,7 @@ ESP8266WebServer::~ESP8266WebServer() {
   if (_currentHeaders)
     delete[]_currentHeaders;
   _headerKeysCount = 0;
-  RequestHandler* handler = _firstHandler;
-  while (handler) {
-    RequestHandler* next = handler->next();
-    delete handler;
-    handler = next;
-  }
+  deleteAllHandler();
 }
 
 void ESP8266WebServer::begin() {
@@ -127,10 +122,21 @@ void ESP8266WebServer::handleClient() {
   _handleRequest();
 }
 
-// added by jongho lim
+// added happyhog code
 uint8_t ESP8266WebServer::status() {
 	return _server.status();
 }
+
+void ESP8266WebServer::deleteAllHandler() {
+	RequestHandler* handler = _firstHandler;
+	while (handler) {
+		RequestHandler* next = handler->next();
+		delete handler;
+		handler = next;
+	}
+	_firstHandler = _lastHandler = 0;
+}
+
 void ESP8266WebServer::sendHeader(const String& name, const String& value, bool first) {
   String headerLine = name;
   headerLine += ": ";
