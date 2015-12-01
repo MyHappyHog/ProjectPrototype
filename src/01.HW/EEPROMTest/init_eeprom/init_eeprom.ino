@@ -7,6 +7,7 @@
 
 String ssid = "happyhog";
 String password = "hog12345";
+byte bootMode;
 
 #define IS_FIRST_BOOT 511
 
@@ -14,47 +15,43 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   EEPROM.begin(EEPROM_SIZE);
-  
-  EEPROM_CLEAR();
+
+  //EEPROM_CLEAR();
 
   // init ssid
-  EEPROM.write( FIRST_ADDRESS_OF_SSID, ssid.length() );
-  EEPROM_WRITE( FIRST_ADDRESS_OF_SSID + 1, ssid );
+  write_ssid_to_eeprom( FIRST_ADDRESS_OF_SSID, ssid );
 
   // init password
-  EEPROM.write( FIRST_ADDRESS_OF_PASSWORD, password.length() );
-  EEPROM_WRITE( FIRST_ADDRESS_OF_PASSWORD + 1, password );
+  write_password_to_eeprom( FIRST_ADDRESS_OF_PASSWORD, password );
 
   // init isFirstBoot
   EEPROM.write( IS_FIRST_BOOT, 1 );
 
   EEPROM.commit();
+  loadConfigure();
 }
 
 void loop() {
+
   // check data
-  byte ssid_length = EEPROM.read( FIRST_ADDRESS_OF_SSID );
-  Serial.println( EEPROM_READ( FIRST_ADDRESS_OF_SSID + 1, ssid_length ) );
+  Serial.println( ssid );
+  Serial.println( password );
+  Serial.println( bootMode );
 
-  byte password_length = EEPROM.read( FIRST_ADDRESS_OF_PASSWORD );
-  Serial.println( EEPROM_READ( FIRST_ADDRESS_OF_PASSWORD + 1, password_length ) );
-
-  Serial.println( EEPROM.read( IS_FIRST_BOOT ) );
-
+  Serial.println( "" );
   delay(1000);
 }
 
 String loadConfigure() {
-  EEPROM.begin( EEPROM_SIZE );
   ssid = read_ssid_from_eeprom( FIRST_ADDRESS_OF_SSID );
   password = read_password_from_eeprom( FIRST_ADDRESS_OF_PASSWORD );
-  //bootMode = EEPROM.read( IS_FIRST_BOOT );
+  bootMode = EEPROM.read( IS_FIRST_BOOT );
 }
 
 String read_ssid_from_eeprom( int firstAddress ) {
   String read_ssid = String();
   int ssid_length = int(EEPROM.read(firstAddress++));
-  
+
   for (int forLen = 0; forLen < ssid_length; forLen++) {
     read_ssid += char(EEPROM.read(firstAddress++));
   }
@@ -92,7 +89,7 @@ void write_ssid_to_eeprom(int address, String _ssid ) {
 String read_password_from_eeprom( int firstAddress ) {
   String read_password = String();
   int ssid_length = int(EEPROM.read(firstAddress++));
-  
+
   for (int forLen = 0; forLen < ssid_length; forLen++) {
     read_password += char(EEPROM.read(firstAddress++));
   }
@@ -100,7 +97,7 @@ String read_password_from_eeprom( int firstAddress ) {
 }
 
 void write_password_to_eeprom(int address, String _password ) {
-  
+
   for (int i = 0; i <= _password.length(); i++) {
     if (i == 0) {
       EEPROM.write(address++, _password.length());
