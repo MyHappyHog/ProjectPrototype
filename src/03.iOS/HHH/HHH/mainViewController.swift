@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 import Alamofire
 import Kanna
 
 
-class IntroViewController: UIViewController {
+class mainViewController: UIViewController {
     
     var profileImg:UIImage = UIImage(named: "samplehog")!
     var profileName: String = "Happyhog"
@@ -22,7 +22,7 @@ class IntroViewController: UIViewController {
     var http_reference : HttpReference?
     var http_timer = NSTimer();
     
-    var now_pet = [NSManagedObject]()
+    //var now_pet = [NSManagedObject]()
     
     @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var MemoLabel: UILabel!
@@ -45,45 +45,21 @@ class IntroViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         ProfileImage.image = profileImg
-
+        
         
         MemoLabel.text = profileMemo
-                //NameLabel.text = profileName
+        //NameLabel.text = profileName
         TitleLabel.title = profileName
         
         
-        //1
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let managedContext = appDelegate.managedObjectContext
-        
-        //2
-        let entity =  NSEntityDescription.entityForName("Profile",
-            inManagedObjectContext:managedContext)
-        
-        let person = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext: managedContext)
-        
-        //3
-        person.setValue(profileName, forKey: "name")
-        person.setValue(profileMemo, forKey: "memo")
-        person.setValue("samplehog", forKey: "image")
-        //4
-        do {
-            try managedContext.save()
-            //5
-            now_pet.append(person)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
         
         
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
-                    //self.revealViewController().panGestureRecognizer().enabled = true
+        //self.revealViewController().panGestureRecognizer().enabled = true
         
         http_reference = HttpReference(server_addr)
         
@@ -92,7 +68,7 @@ class IntroViewController: UIViewController {
         
         //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
         sendHttpGet();
-
+        
         http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "sendHttpGet", userInfo:  nil, repeats: true)
         
     }
@@ -128,13 +104,13 @@ class IntroViewController: UIViewController {
         case "Setting":
             
             http_timer.invalidate()
-
             
-//            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-//            let nextViewController = destinationNavigationController.topViewController as! SettingViewController//segue.destinationViewController as! SettingViewController
-//            nextViewController.profileImg = ProfileImage.image
-//            nextViewController.profileName = NameLabel.text
-//            nextViewController.profileMemo = MemoLabel.text
+            
+            //            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            //            let nextViewController = destinationNavigationController.topViewController as! SettingViewController//segue.destinationViewController as! SettingViewController
+            //            nextViewController.profileImg = ProfileImage.image
+            //            nextViewController.profileName = NameLabel.text
+            //            nextViewController.profileMemo = MemoLabel.text
             
             //core data save
             

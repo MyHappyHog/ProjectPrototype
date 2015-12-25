@@ -10,7 +10,7 @@
             <objects>
                 <viewController id="geh-8y-4cd" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="WN2-qe-eWy"/>
+                        <segue destination="n4s-r6-6GN" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="WN2-qe-eWy"/>
                         <segue destination="tK7-o0-gYt" kind="custom" identifier="sw_right" customClass="SWRevealViewControllerSegueSetController" id="kd4-Yb-KJD"/>
                     </connections>
                 </viewController>
@@ -18,7 +18,7 @@
             </objects>
             <point key="canvasLocation" x="-563" y="284"/>
         </scene>
-        <!--Intro View Controller-->
+        <!--sdfsdf-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="IntroViewController" customModule="HHHPrototype" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,7 +54,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="SettingOnClicked:" destination="BYZ-38-t0r" id="rbI-QV-XNV"/>
-                                            <segue destination="Nke-rh-hU1" kind="modal" identifier="Setting" id="FT8-zU-dlX"/>
+                                            <segue destination="sRm-fA-EA6" kind="push" identifier="Setting" id="xBv-7N-M1x"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kFw-Z7-YuU"/>
@@ -73,20 +73,6 @@
                                 <rect key="frame" x="248" y="181" width="30" height="30"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="H's House" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hy5-8r-ePh">
-                                <rect key="frame" x="40" y="67" width="240" height="40"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happy Hedgehog House!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mu-BT-pX1">
-                                <rect key="frame" x="40" y="115" width="240" height="40"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
-                                <color key="textColor" red="0.46274509800000002" green="0.73725490199999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="humid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMf-uS-Vsa">
                                 <rect key="frame" x="183" y="176" width="60" height="40"/>
                                 <animations/>
@@ -105,26 +91,33 @@
                                 <rect key="frame" x="40" y="248" width="240" height="240"/>
                                 <animations/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happy Hedgehog House!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mu-BT-pX1">
+                                <rect key="frame" x="40" y="72" width="240" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.46274509800000002" green="0.73725490199999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" id="ftj-Kw-V1B"/>
+                    <navigationItem key="navigationItem" title="sdfsdf" id="ftj-Kw-V1B"/>
                     <connections>
                         <outlet property="HumidImage" destination="4ac-UK-gzB" id="pyp-ms-oOe"/>
                         <outlet property="HumidLabel" destination="YMf-uS-Vsa" id="8lx-xU-8HB"/>
                         <outlet property="LightImage" destination="m8E-o7-vlN" id="Uw5-LL-wac"/>
                         <outlet property="MemoLabel" destination="4mu-BT-pX1" id="qlG-rD-0Va"/>
-                        <outlet property="NameLabel" destination="Hy5-8r-ePh" id="DrL-vK-LUp"/>
                         <outlet property="ProfileImage" destination="rWv-ZA-8re" id="McM-62-SNh"/>
                         <outlet property="TempImage" destination="4Lh-Pz-w5o" id="u1g-eQ-dgt"/>
                         <outlet property="TempLabel" destination="E2Q-7l-OpQ" id="fMd-vq-eqT"/>
+                        <outlet property="TitleLabel" destination="ftj-Kw-V1B" id="dow-cE-NYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-111" y="252"/>
+            <point key="canvasLocation" x="421" y="252"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bF5-gF-7A8">
@@ -146,7 +139,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="BackButtonPushed:" destination="SeO-lD-NXQ" id="lcA-th-8mt"/>
-                                            <segue destination="BYZ-38-t0r" kind="modal" identifier="IntroFromHLS" id="b1A-Jf-rRF"/>
+                                            <segue destination="n4s-r6-6GN" kind="modal" identifier="IntroFromHLS" id="b1A-Jf-rRF"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="260-aI-gC0">
@@ -176,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGO-W6-0Qd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="650"/>
+            <point key="canvasLocation" x="214" y="934"/>
         </scene>
         <!--Pet List Table View Controller-->
         <scene sceneID="aBa-n1-Ota">
@@ -454,14 +447,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Setting" id="2ls-Il-0PA">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qwR-k8-pn5">
-                            <connections>
-                                <action selector="clikedCancel:" destination="sRm-fA-EA6" id="d58-mk-0Fh"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="u9X-vU-s1J">
                             <connections>
-                                <action selector="clikedDone:" destination="sRm-fA-EA6" id="gtR-LR-EuV"/>
+                                <action selector="qwe:" destination="sRm-fA-EA6" id="Gl7-Un-Any"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -473,16 +461,11 @@
                         <outlet property="cb" destination="pfu-8B-oQt" id="ZVD-F6-jMV"/>
                         <outlet property="sdfsdfsdf" destination="1io-M2-LR0" id="tZ6-g5-yek"/>
                         <outlet property="taaaa" destination="hTA-b7-WiP" id="DuN-br-ycz"/>
-                        <segue destination="BYZ-38-t0r" kind="modal" identifier="IntroFromSetting" id="PgS-Ot-AtY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ir-PI-OTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationBar contentMode="scaleToFill" id="vM0-Gp-UIk">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                </navigationBar>
             </objects>
-            <point key="canvasLocation" x="876" y="-354"/>
+            <point key="canvasLocation" x="798" y="177"/>
         </scene>
         <!--Pet List Table View Controller-->
         <scene sceneID="cQC-dH-qtH">
@@ -565,22 +548,22 @@
             <point key="canvasLocation" x="-576" y="1676"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="X6k-L5-ngF">
+        <scene sceneID="SiT-Ya-4H4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nke-rh-hU1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n4s-r6-6GN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wbv-7C-8en">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOm-wq-DfI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="sRm-fA-EA6" kind="relationship" relationship="rootViewController" id="row-uv-b4a"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="XDp-t1-KR3"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wLO-if-s90" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xbX-T8-kJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="54"/>
+            <point key="canvasLocation" x="-111" y="252"/>
         </scene>
     </scenes>
     <resources>
@@ -594,6 +577,6 @@
         <image name="samplehog" width="300" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b1A-Jf-rRF"/>
+        <segue reference="WN2-qe-eWy"/>
     </inferredMetricsTieBreakers>
 </document>

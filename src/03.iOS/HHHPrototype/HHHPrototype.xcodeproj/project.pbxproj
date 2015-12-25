@@ -17,10 +17,18 @@
 		25843CCF1BCDB86D0005D164 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25843CCE1BCDB86D0005D164 /* SWRevealViewController.m */; };
 		25843CD21BCDC1290005D164 /* SWPetListviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25843CD11BCDC1290005D164 /* SWPetListviewController.swift */; };
 		67D6A5481BDFD32F004DC8BB /* HLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D6A5471BDFD32F004DC8BB /* HLSViewController.swift */; };
+		DA0A432C1C03945000340C36 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0A43221C03945000340C36 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA0A432D1C03945100340C36 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0A43241C03945000340C36 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA0A432E1C03945100340C36 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0A43261C03945000340C36 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA0A432F1C03945100340C36 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0A43281C03945000340C36 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA0A43301C03945100340C36 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0A432B1C03945000340C36 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA0A43411C0394B100340C36 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0A43401C0394B100340C36 /* libsqlite3.0.tbd */; };
 		DA150AD21C0232E5004D34A5 /* PetListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA150AD11C0232E5004D34A5 /* PetListTableViewController.swift */; };
 		DA150AD41C0238C5004D34A5 /* PetListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA150AD31C0238C5004D34A5 /* PetListTableViewCell.swift */; };
 		DA150AD61C023E48004D34A5 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA150AD51C023E48004D34A5 /* SidePets.swift */; };
 		DA15A8E71BFB8B10005AD941 /* HttpReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15A8E61BFB8B10005AD941 /* HttpReference.swift */; };
+		DA565C1C1C03B82C009DDB46 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C1A1C03B82C009DDB46 /* Profile+CoreDataProperties.swift */; };
+		DA565C1D1C03B82C009DDB46 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C1B1C03B82C009DDB46 /* Profile.swift */; };
 		DAFE35B71BEF8D850050D823 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE35B61BEF8D850050D823 /* WebViewController.swift */; };
 		DAFE35D01BEF8F240050D823 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFE35C31BEF8E9C0050D823 /* Alamofire.framework */; };
 		DAFE35D11BEF8F240050D823 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DAFE35C31BEF8E9C0050D823 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -211,10 +219,24 @@
 		25843CCE1BCDB86D0005D164 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		25843CD11BCDC1290005D164 /* SWPetListviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWPetListviewController.swift; sourceTree = "<group>"; };
 		67D6A5471BDFD32F004DC8BB /* HLSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSViewController.swift; sourceTree = "<group>"; };
+		DA0A43211C03945000340C36 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		DA0A43221C03945000340C36 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		DA0A43231C03945000340C36 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		DA0A43241C03945000340C36 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		DA0A43251C03945000340C36 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		DA0A43261C03945000340C36 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		DA0A43271C03945000340C36 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		DA0A43281C03945000340C36 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		DA0A43291C03945000340C36 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		DA0A432A1C03945000340C36 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		DA0A432B1C03945000340C36 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		DA0A43401C0394B100340C36 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		DA150AD11C0232E5004D34A5 /* PetListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetListTableViewController.swift; sourceTree = "<group>"; };
 		DA150AD31C0238C5004D34A5 /* PetListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetListTableViewCell.swift; sourceTree = "<group>"; };
 		DA150AD51C023E48004D34A5 /* SidePets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidePets.swift; sourceTree = "<group>"; };
 		DA15A8E61BFB8B10005AD941 /* HttpReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpReference.swift; sourceTree = "<group>"; };
+		DA565C1A1C03B82C009DDB46 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA565C1B1C03B82C009DDB46 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		DAFE35B61BEF8D850050D823 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DAFE35B81BEF8E9B0050D823 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		DAFE35D61BEFBAA90050D823 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = "SWXMLHash-master/SWXMLHash.xcodeproj"; sourceTree = "<group>"; };
@@ -226,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0A43411C0394B100340C36 /* libsqlite3.0.tbd in Frameworks */,
 				DAFE35EB1BEFBAB40050D823 /* SWXMLHash.framework in Frameworks */,
 				DAFE35D01BEF8F240050D823 /* Alamofire.framework in Frameworks */,
 				DAFE36071BF0854D0050D823 /* Kanna.framework in Frameworks */,
@@ -238,6 +261,9 @@
 		252C694B1BCD88E000C0FEFB = {
 			isa = PBXGroup;
 			children = (
+				DA565C1A1C03B82C009DDB46 /* Profile+CoreDataProperties.swift */,
+				DA565C1B1C03B82C009DDB46 /* Profile.swift */,
+				DA0A43401C0394B100340C36 /* libsqlite3.0.tbd */,
 				DAFE35EF1BF085440050D823 /* Kanna.xcodeproj */,
 				DAFE35D61BEFBAA90050D823 /* SWXMLHash.xcodeproj */,
 				DAFE35B81BEF8E9B0050D823 /* Alamofire.xcodeproj */,
@@ -297,6 +323,17 @@
 		25843CCA1BCDB8320005D164 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				DA0A43211C03945000340C36 /* FMDatabase.h */,
+				DA0A43221C03945000340C36 /* FMDatabase.m */,
+				DA0A43231C03945000340C36 /* FMDatabaseAdditions.h */,
+				DA0A43241C03945000340C36 /* FMDatabaseAdditions.m */,
+				DA0A43251C03945000340C36 /* FMDatabasePool.h */,
+				DA0A43261C03945000340C36 /* FMDatabasePool.m */,
+				DA0A43271C03945000340C36 /* FMDatabaseQueue.h */,
+				DA0A43281C03945000340C36 /* FMDatabaseQueue.m */,
+				DA0A43291C03945000340C36 /* FMDB.h */,
+				DA0A432A1C03945000340C36 /* FMResultSet.h */,
+				DA0A432B1C03945000340C36 /* FMResultSet.m */,
 				25843CCD1BCDB86D0005D164 /* SWRevealViewController.h */,
 				25843CCE1BCDB86D0005D164 /* SWRevealViewController.m */,
 				25843CCB1BCDB86C0005D164 /* HHHPrototype-Bridging-Header.h */,
@@ -383,7 +420,7 @@
 						DevelopmentTeam = VT98E7PBP6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -570,13 +607,20 @@
 			files = (
 				252C695A1BCD88E000C0FEFB /* IntroViewController.swift in Sources */,
 				DA15A8E71BFB8B10005AD941 /* HttpReference.swift in Sources */,
+				DA565C1C1C03B82C009DDB46 /* Profile+CoreDataProperties.swift in Sources */,
+				DA0A432C1C03945000340C36 /* FMDatabase.m in Sources */,
 				25843CC71BCDAEA40005D164 /* Profile.xcdatamodeld in Sources */,
 				67D6A5481BDFD32F004DC8BB /* HLSViewController.swift in Sources */,
+				DA0A432D1C03945100340C36 /* FMDatabaseAdditions.m in Sources */,
 				DA150AD41C0238C5004D34A5 /* PetListTableViewCell.swift in Sources */,
+				DA565C1D1C03B82C009DDB46 /* Profile.swift in Sources */,
+				DA0A432E1C03945100340C36 /* FMDatabasePool.m in Sources */,
 				25843CD21BCDC1290005D164 /* SWPetListviewController.swift in Sources */,
+				DA0A432F1C03945100340C36 /* FMDatabaseQueue.m in Sources */,
 				25843CCF1BCDB86D0005D164 /* SWRevealViewController.m in Sources */,
 				252C69581BCD88E000C0FEFB /* AppDelegate.swift in Sources */,
 				DA150AD21C0232E5004D34A5 /* PetListTableViewController.swift in Sources */,
+				DA0A43301C03945100340C36 /* FMResultSet.m in Sources */,
 				252C69721BCD8A2F00C0FEFB /* SettingViewController.swift in Sources */,
 				DA150AD61C023E48004D34A5 /* SidePets.swift in Sources */,
 				DAFE35B71BEF8D850050D823 /* WebViewController.swift in Sources */,
