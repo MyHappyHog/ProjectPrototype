@@ -9,9 +9,10 @@
 import UIKit
 
 class PetListTableViewCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var petImage: UIImageView!
+    
+    @IBOutlet weak var cellBackground: UIView!
+    
     
     func strToImage(name: String?) -> UIImage?{
         let Name = name
@@ -19,8 +20,8 @@ class PetListTableViewCell: UITableViewCell {
     }
     var sidePet: SidePets!{
         didSet{
-            titleLabel.text = sidePet.title
-            memoLabel.text = sidePet.memo
+            //titleLabel.text = sidePet.title
+            //memoLabel.text = sidePet.memo
             petImage.image = strToImage(sidePet.image)
         }
     }

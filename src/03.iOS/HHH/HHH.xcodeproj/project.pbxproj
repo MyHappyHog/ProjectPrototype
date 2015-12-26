@@ -27,7 +27,7 @@
 		DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC31C04D363009DDB46 /* SidePets.swift */; };
 		DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */; };
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
-		DA565CD51C04DD52009DDB46 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */; };
+		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,8 +200,8 @@
 		DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SWPetListviewController.swift; path = HHH/SWPetListviewController.swift; sourceTree = "<group>"; };
 		DA565CC61C04D363009DDB46 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = HHH/WebViewController.swift; sourceTree = "<group>"; };
 		DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HHH-Bridging-Header.h"; sourceTree = "<group>"; };
-		DA565CD31C04DD52009DDB46 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
-		DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
+		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
+		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,8 +349,8 @@
 		DA565CD11C04DD42009DDB46 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				DA565CD31C04DD52009DDB46 /* SWRevealViewController.h */,
-				DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */,
+				DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */,
+				DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */,
 				DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */,
 			);
 			name = lib;
@@ -612,7 +612,7 @@
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
-				DA565CD51C04DD52009DDB46 /* SWRevealViewController.m in Sources */,
+				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

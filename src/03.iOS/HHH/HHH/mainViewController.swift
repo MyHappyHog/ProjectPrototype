@@ -24,8 +24,8 @@ class mainViewController: UIViewController {
     
     //var now_pet = [NSManagedObject]()
     
-    @IBOutlet weak var NameLabel: UILabel!
-    @IBOutlet weak var MemoLabel: UILabel!
+    //@IBOutlet weak var NameLabel: UILabel!
+    //@IBOutlet weak var MemoLabel: UILabel!
     
     @IBOutlet weak var TitleLabel: UINavigationItem!
     @IBOutlet weak var TempImage: UIImageView!
@@ -38,6 +38,11 @@ class mainViewController: UIViewController {
     
     @IBOutlet weak var ProfileImage: UIImageView!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
+    
+    
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
@@ -47,12 +52,9 @@ class mainViewController: UIViewController {
         ProfileImage.image = profileImg
         
         
-        MemoLabel.text = profileMemo
-        //NameLabel.text = profileName
-        TitleLabel.title = profileName
-        
-        
-        
+        memoLabel.text = profileMemo
+        nameLabel.text = profileName
+        //TitleLabel.title = profileName
         
         
         if self.revealViewController() != nil {
@@ -81,6 +83,8 @@ class mainViewController: UIViewController {
                 self.TempLabel.text = temperature
                 self.HumidLabel.text = humidity
             }else{
+                self.TempLabel.text = temperature
+                self.HumidLabel.text = humidity
                 return
             }
         })

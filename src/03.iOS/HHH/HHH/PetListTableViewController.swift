@@ -15,13 +15,21 @@ let petData = [
 ]
 
 class PetListTableViewController: UITableViewController {
+    @IBOutlet weak var abc: UIBarButtonItem!
     
     var pets:[SidePets] = petData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+    }
+    @IBAction func clickabc(sender: AnyObject) {
+        print("ASdgerga")
+        pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
         
+        let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
         
+        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,16 +57,20 @@ class PetListTableViewController: UITableViewController {
         
         return cell
     }
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         print(indexPath.row)
-        if indexPath.row == pets.count - 1{
-            pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
-            
-            let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
-            
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        }
+        /*if indexPath.row == pets.count - 1{
+        pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
+        
+        let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
+        
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }*/
     }
+    
+    
 }
