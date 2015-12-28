@@ -114,8 +114,8 @@ void setup(void)
  char DHTDataText[10][3];
  double temperature[NUM_OF_DATA];
  double humidity[NUM_OF_DATA];
- int count = 1;  //센싱하는 카운터 변수
- int countNum = NUM_OF_DATA / 3;
+ int count = 0;  //센싱 카운터 변수
+ int countNum = NUM_OF_DATA / 3;   //센서 별 데이터 수
  double temp;
  double humid;
  
@@ -127,7 +127,7 @@ void loop(void)
   // 2초이상 지나면 현재 시간 저장
   uint32_t currenttime = millis();
   if ( (currenttime - lastreadtime) > 2000 ) {
-      if(count > countNum){
+      if(count >= countNum){    
 
  // 정규화한 결과 저장
       temp = nomalization(temperature);
@@ -158,10 +158,10 @@ void loop(void)
   Serial.println("New client");
 
   // Wait for data from client to become available
-  int count = 0;
+  int counting = 0;
   while(client.connected() && !client.available()) {
     delay(1);
-    if (count++ == 10*1000) {
+    if (counting++ == 10*1000) {
       // Close the current connection if there is
       // no response from client until 10 sec. 
       return;
