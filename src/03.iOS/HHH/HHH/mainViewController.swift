@@ -66,7 +66,7 @@ class mainViewController: UIViewController {
         http_reference = HttpReference(server_addr)
         
         //타이머 시간 설정
-        let http_timer_interval:NSTimeInterval = 10.0
+        let http_timer_interval:NSTimeInterval = 50.0
         
         //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
         sendHttpGet();

@@ -296,14 +296,12 @@
 		DA565C5C1C04D1B8009DDB46 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				DAFDB86C1C315A4F009E9011 /* mainSide */,
 				DA565CD11C04DD42009DDB46 /* lib */,
 				DA565CD01C04D373009DDB46 /* http */,
 				DA565C2C1C048F40009DDB46 /* mainViewController.swift */,
 				DA565CBE1C04D363009DDB46 /* HLSViewController.swift */,
-				DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */,
-				DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */,
 				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
-				DA565CC31C04D363009DDB46 /* SidePets.swift */,
 				DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */,
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 			);
@@ -354,6 +352,16 @@
 				DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		DAFDB86C1C315A4F009E9011 /* mainSide */ = {
+			isa = PBXGroup;
+			children = (
+				DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */,
+				DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */,
+				DA565CC31C04D363009DDB46 /* SidePets.swift */,
+			);
+			name = mainSide;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

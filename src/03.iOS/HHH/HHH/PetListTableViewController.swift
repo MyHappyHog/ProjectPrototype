@@ -8,24 +8,25 @@
 
 import UIKit
 
-let petData = [
-    SidePets(title: "1", memo: "2", image: "Temp")//,
+/*let petData = [
+    SidePets(image: "Temp")//,
     //SidePets(title: "2", memo: "3", image: "Temp"),
     //SidePets(title: "3", memo: "4", image: "Temp")
-]
+]*/
 
 class PetListTableViewController: UITableViewController {
-    @IBOutlet weak var abc: UIBarButtonItem!
+
+    @IBOutlet weak var btnAddCell: UIBarButtonItem!
     
-    var pets:[SidePets] = petData
+    //var pets:[SidePets] = petData
+    var pets = [SidePets]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
     }
-    @IBAction func clickabc(sender: AnyObject) {
-        print("ASdgerga")
-        pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
+    @IBAction func clickBtnAddCell(sender: AnyObject) {
+        pets.append(SidePets(image: "samplehog", server_addr: "http://52.68.82.234:19918"))
         
         let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
         
@@ -46,12 +47,11 @@ class PetListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print(pets.count)
+        print(indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("PetListTableViewCell", forIndexPath: indexPath) as! PetListTableViewCell
         
         let pet = pets[indexPath.row] as SidePets
-        //cell.titleLabel?.text = pet.title
-        //cell.memoLabel?.text = pet.memo
-        //cell.imageView?.image = UIImage(named: pet.image!)
         cell.sidePet = pet
         print(pet)
         

@@ -627,7 +627,8 @@ const int FrontViewPositionNone = 0xff;
     _rearViewRevealOverdraw = 60.0f;
     _rearViewRevealDisplacement = 40.0f;
     _rightViewRevealWidth = 260.0f;
-    _rightViewRevealOverdraw = 60.0f;
+    //
+    _rightViewRevealOverdraw = 00.0f;
     _rightViewRevealDisplacement = 40.0f;
     _bounceBackOnOverdraw = YES;
     _bounceBackOnLeftOverdraw = YES;
