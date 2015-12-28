@@ -19,7 +19,7 @@
 /* DHT Configurations */
 #define DHTTYPE DHT11
 #define NUM_OF_DHT 3
-#define NUM_OF_DATA 30    // number of nomalization data
+#define NUM_OF_DATA 60    // number of nomalization data
 
 /* Case of html service */
 #define NOTFOUND    0
@@ -115,6 +115,7 @@ void setup(void)
  double temperature[NUM_OF_DATA];
  double humidity[NUM_OF_DATA];
  int count = 1;  //센싱하는 카운터 변수
+ int countNum = NUM_OF_DATA / 3;
  double temp;
  double humid;
  
@@ -122,24 +123,24 @@ void loop(void)
 {
   /***** Get and Normalize DHT Values *****/
    
-  /* Normalization Code be placed in here */
 
   // 2초이상 지나면 현재 시간 저장
   uint32_t currenttime = millis();
   if ( (currenttime - lastreadtime) > 2000 ) {
-      if(count > 60){
- 
+      if(count > countNum){
+
+ // 정규화한 결과 저장
       temp = nomalization(temperature);
       humid = nomalization(humidity);
 
       snprintf(DHTDataText[0], sizeof(DHTDataText), "%2d'C, %2d%",   temp, humid);
-      count = 1;
+      count = 0;
       }
   }
   lastreadtime = currenttime;
 
-  getHumData(humidity, count);
-  getTemData(temperature, count);
+  checkHumData(humidity, count);
+  checkTemData(temperature, count);
   count++;
   
 

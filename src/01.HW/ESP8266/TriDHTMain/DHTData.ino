@@ -11,21 +11,21 @@
 #define TRIM_PERCENT 20   // percent of trimmed mean
 
 
-void getTemData(double* temp, int i) {
+void checkTemData(double* temp, int i) {
 
-      temp[i*3 - 1] = (double)dht1.readTemperature();
-      temp[i*3] = (double)dht2.readTemperature();
-      temp[i*3 + 1] = (double)dht3.readTemperature();
+      temp[i*3] = (double)dht1.readTemperature();
+      temp[i*3 + 1] = (double)dht2.readTemperature();
+      temp[i*3 + 2] = (double)dht3.readTemperature();
 
 }
 
 
-void getHumData(double* humid, int i) {
+void checkHumData(double* humid, int i) {
 
-      humid[i*3 - 1] = (double)dht1.readHumidity();
-      humid[i*3] = (double)dht2.readHumidity();
-      humid[i*3 + 1] = (double)dht3.readHumidity();
-  
+      humid[i*3] = (double)dht1.readHumidity();
+      humid[i*3 + 1] = (double)dht2.readHumidity();
+      humid[i*3 + 2] = (double)dht3.readHumidity();
+      
 }
 
 void printDHTData(double temp, double humid) {
