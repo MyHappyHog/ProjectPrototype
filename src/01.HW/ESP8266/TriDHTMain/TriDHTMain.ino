@@ -26,6 +26,8 @@
 #define INFO        1  
 #define SETTING     2
 
+//enum {relayMat = 6};
+
 // put your router name and password 
 
 const char* ssid = "Johnny";
@@ -62,6 +64,8 @@ void setup(void)
   pinMode(12, OUTPUT);
   pinMode(14, OUTPUT);
   pinMode(13, OUTPUT);
+  pinMode(6, OUTPUT);
+  //pinMode(relayMat, OUTPUT);
 
   digitalWrite(12, HIGH);
   digitalWrite(14, HIGH);
@@ -105,6 +109,7 @@ void setup(void)
   
   // Add service to MDNS-SD
   MDNS.addService("http", "tcp", 80);
+  
 
   lastreadtime = millis();
 }
@@ -118,7 +123,8 @@ void setup(void)
  int countNum = NUM_OF_DATA / 3;   //센서 별 데이터 수
  double temp;
  double humid;
- 
+ float celsiustemp = 0;
+
 void loop(void)
 {
   /***** Get and Normalize DHT Values *****/
