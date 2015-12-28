@@ -19,6 +19,80 @@
             </objects>
             <point key="canvasLocation" x="-444" y="817"/>
         </scene>
+        <!--Dochi ProFile-->
+        <scene sceneID="b5b-ZA-zw9">
+            <objects>
+                <viewController id="5Tl-vv-mYW" customClass="ProFileViewController" customModule="HHH" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GIP-uP-dfb"/>
+                        <viewControllerLayoutGuide type="bottom" id="UKU-eZ-z2b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L8J-Wj-J0k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OOP-nM-Cyx">
+                                <rect key="frame" x="40" y="84" width="240" height="210"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3N-Wj-oqr">
+                                <rect key="frame" x="72" y="347" width="48" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MEMO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4r4-7r-nvT">
+                                <rect key="frame" x="68" y="393" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DevNum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zY2-vR-A4D">
+                                <rect key="frame" x="53" y="445" width="67" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zYG-uI-v4E">
+                                <rect key="frame" x="151" y="343" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y9B-Ex-QRf">
+                                <rect key="frame" x="151" y="389" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j5K-Dc-bzg">
+                                <rect key="frame" x="151" y="441" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ci7-q9-bIs">
+                                <rect key="frame" x="142" y="518" width="37" height="30"/>
+                                <state key="normal" title="SAVE"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDs-Ft-zK3">
+                                <rect key="frame" x="240" y="295" width="40" height="40"/>
+                                <state key="normal" image="camera3"/>
+                                <connections>
+                                    <action selector="ChangeProfileImage:" destination="5Tl-vv-mYW" eventType="touchDown" id="d0k-ED-Zgh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Dochi ProFile" id="7CJ-f6-ePH"/>
+                    <connections>
+                        <outlet property="currentProfileImg" destination="OOP-nM-Cyx" id="tp6-Gq-qWe"/>
+                        <outlet property="textFieldDevice" destination="j5K-Dc-bzg" id="s3v-j0-1FW"/>
+                        <outlet property="textFieldMemo" destination="y9B-Ex-QRf" id="7Kj-ij-7UR"/>
+                        <outlet property="textFieldName" destination="zYG-uI-v4E" id="B79-Hg-pbZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jwS-ML-Ila" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="494" y="143"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="hf4-6L-HgA">
             <objects>
@@ -133,8 +207,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="ySk-Ic-pPC">
                         <rightBarButtonItems>
-                            <barButtonItem image="circle132" id="BgC-fY-MCJ"/>
-                            <barButtonItem image="info34" id="EFe-em-nZ6"/>
+                            <barButtonItem image="circle132" id="BgC-fY-MCJ">
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.45098039220000002" alpha="1" colorSpace="deviceRGB"/>
+                            </barButtonItem>
+                            <barButtonItem image="info34" id="EFe-em-nZ6">
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.45098039220000002" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <segue destination="5Tl-vv-mYW" kind="push" identifier="profile" id="eG5-wm-vlK"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -524,6 +605,7 @@
         <image name="MenuSetting" width="32" height="32"/>
         <image name="MenuShare" width="32" height="32"/>
         <image name="Temp" width="40" height="40"/>
+        <image name="camera3" width="64" height="64"/>
         <image name="circle132" width="16" height="16"/>
         <image name="info34" width="16" height="16"/>
         <image name="lightbulb58" width="32" height="32"/>
