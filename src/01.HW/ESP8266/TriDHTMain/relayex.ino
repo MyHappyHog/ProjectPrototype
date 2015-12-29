@@ -1,4 +1,5 @@
 enum {outputTemperature = 5}; 
+enum {relayMat = 6};
 
 float checkTemperature(int outputpin){
   
