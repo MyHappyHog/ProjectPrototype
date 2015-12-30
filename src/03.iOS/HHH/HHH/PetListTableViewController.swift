@@ -16,10 +16,18 @@ import UIKit
 
 class PetListTableViewController: UITableViewController {
 
+
     @IBOutlet weak var btnAddCell: UIBarButtonItem!
     
     //var pets:[SidePets] = petData
     var pets = [SidePets]()
+    
+    let colors : [UIColor] = [
+        UIColor(red: 16/255, green: 2/255, blue: 48/255, alpha: 1.0),
+        UIColor(red: 205/255, green: 204/255, blue: 195/255, alpha: 1.0),
+        UIColor(red: 41/255, green: 2/255, blue: 48/255, alpha: 1.0),
+        UIColor(red: 33/255, green: 35/255, blue: 33/255, alpha: 1.0),
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +62,7 @@ class PetListTableViewController: UITableViewController {
         let pet = pets[indexPath.row] as SidePets
         cell.sidePet = pet
         print(pet)
+        cell.cellToolBar.barTintColor = colors[pets.count % 4]
         
         return cell
     }

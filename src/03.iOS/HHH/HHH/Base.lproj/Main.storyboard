@@ -313,8 +313,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiF-Bd-eJz">
+                                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiF-Bd-eJz">
                                             <rect key="frame" x="0.0" y="101" width="320" height="44"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <items>
                                                 <barButtonItem image="MenuCapture" id="Sps-7Z-i0D" userLabel="Capture">
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -337,10 +338,13 @@
                                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="xms-cb-QeD"/>
                                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="zp5-Pi-1YL"/>
                                             </items>
-                                            <color key="barTintColor" red="0.46274509800000002" green="0.73725490199999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </toolbar>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info34" translatesAutoresizingMaskIntoConstraints="NO" id="KMJ-ba-DtC">
+                                            <rect key="frame" x="154" y="6" width="101" height="93"/>
+                                        </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qfw-pB-0UJ">
-                                            <rect key="frame" x="13" y="0.0" width="124" height="99"/>
+                                            <rect key="frame" x="13" y="3" width="124" height="96"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Temp" translatesAutoresizingMaskIntoConstraints="NO" id="ucl-d8-VJ5" userLabel="Temperature">
                                                     <rect key="frame" x="20" y="4" width="25" height="25"/>
@@ -372,13 +376,11 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.83137254900000002" green="0.83137254900000002" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info34" translatesAutoresizingMaskIntoConstraints="NO" id="KMJ-ba-DtC">
-                                            <rect key="frame" x="158" y="8" width="101" height="93"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="cellToolBar" destination="eiF-Bd-eJz" id="YjX-Vs-8wK"/>
                                     <outlet property="humidLabel" destination="FlD-PO-tFt" id="ULq-1p-8zJ"/>
                                     <outlet property="lightLabel" destination="ybO-bh-Qhd" id="g1Z-Tg-YRa"/>
                                     <outlet property="petImage" destination="KMJ-ba-DtC" id="8ae-nL-9Xb"/>

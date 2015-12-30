@@ -11,6 +11,7 @@ import UIKit
 class PetListTableViewCell: UITableViewCell {
     @IBOutlet weak var petImage: UIImageView!
     
+    @IBOutlet weak var cellToolBar: UIToolbar!
     
     @IBOutlet weak var lightLabel: UILabel!
     @IBOutlet weak var humidLabel: UILabel!
