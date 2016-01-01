@@ -29,6 +29,7 @@
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
+		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +205,7 @@
 		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
 		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
 		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
+		DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingSchedulerCell.swift; path = HHH/SettingSchedulerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +363,7 @@
 				DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */,
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
+				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
 				DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */,
+				DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */,
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
