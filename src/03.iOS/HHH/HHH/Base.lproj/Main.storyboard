@@ -219,15 +219,11 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="HumidImage" destination="0Bo-VA-dJG" id="Uu9-Or-58m"/>
                         <outlet property="HumidLabel" destination="VII-ot-7le" id="nJk-iY-XOO"/>
-                        <outlet property="LightImage" destination="NqE-9P-De5" id="vRO-NV-zoN"/>
                         <outlet property="ProfileImage" destination="E1d-aw-YeZ" id="g9M-cg-OyA"/>
-                        <outlet property="TempImage" destination="3xe-MH-wfs" id="9JN-4x-RrS"/>
                         <outlet property="TempLabel" destination="7wa-OR-34P" id="XsN-RN-khU"/>
                         <outlet property="memoLabel" destination="jmt-MM-PEL" id="8F9-cO-8G7"/>
                         <outlet property="nameLabel" destination="K3B-eS-sIb" id="wqx-Vv-YQJ"/>
-                        <outlet property="titleLabel" destination="K3B-eS-sIb" id="ev7-6a-575"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JiA-Jr-hNu" sceneMemberID="firstResponder"/>

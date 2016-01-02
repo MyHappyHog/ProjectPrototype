@@ -63,9 +63,7 @@ class SettingViewController: UITableViewController {
         return 0.0
         }
         return 165.0
-        }*/
-                print(indexPath.row)
-        
+        }*/        
         let index = indexPath.row
         
         if(index == 1){

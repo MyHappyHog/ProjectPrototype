@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */; };
+		DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F11C377843002E696A /* coredataAlarm.swift */; };
+		DA5294F81C377843002E696A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F21C377843002E696A /* User+CoreDataProperties.swift */; };
+		DA5294F91C377843002E696A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F31C377843002E696A /* User.swift */; };
+		DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */; };
+		DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52950A1C37845E002E696A /* coredataprofileProfile.swift */; };
 		DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2A1C048F40009DDB46 /* AppDelegate.swift */; };
 		DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2C1C048F40009DDB46 /* mainViewController.swift */; };
 		DA565C301C048F40009DDB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA565C2E1C048F40009DDB46 /* Main.storyboard */; };
@@ -177,6 +183,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5294F11C377843002E696A /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
+		DA5294F21C377843002E696A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "HHH/coredata/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5294F31C377843002E696A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = HHH/coredata/User.swift; sourceTree = "<group>"; };
+		DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataprofileProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataprofileProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA52950A1C37845E002E696A /* coredataprofileProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataprofileProfile.swift; path = HHH/coredata/coredataprofileProfile.swift; sourceTree = "<group>"; };
 		DA565C271C048F40009DDB46 /* HHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA565C2A1C048F40009DDB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA565C2C1C048F40009DDB46 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = mainViewController.swift; path = HHH/mainViewController.swift; sourceTree = "<group>"; };
@@ -235,9 +247,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA5295061C377858002E696A /* coredata */ = {
+			isa = PBXGroup;
+			children = (
+				DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */,
+				DA52950A1C37845E002E696A /* coredataprofileProfile.swift */,
+				DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */,
+				DA5294F11C377843002E696A /* coredataAlarm.swift */,
+				DA5294F21C377843002E696A /* User+CoreDataProperties.swift */,
+				DA5294F31C377843002E696A /* User.swift */,
+			);
+			name = coredata;
+			sourceTree = "<group>";
+		};
 		DA565C1E1C048F40009DDB46 = {
 			isa = PBXGroup;
 			children = (
+				DA5295061C377858002E696A /* coredata */,
 				DA565C8D1C04D2AC009DDB46 /* Kanna.xcodeproj */,
 				DA565C5D1C04D26D009DDB46 /* Alamofire.xcodeproj */,
 				DA565C5C1C04D1B8009DDB46 /* src */,
@@ -627,13 +653,19 @@
 				DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */,
 				DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */,
 				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
+				DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */,
 				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
+				DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
 				DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */,
+				DA5294F91C377843002E696A /* User.swift in Sources */,
 				DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */,
+				DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */,
+				DA5294F81C377843002E696A /* User+CoreDataProperties.swift in Sources */,
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
+				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,

@@ -55,8 +55,6 @@ class PetListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(pets.count)
-        print(indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("PetListTableViewCell", forIndexPath: indexPath) as! PetListTableViewCell
         
         let pet = pets[indexPath.row] as SidePets
