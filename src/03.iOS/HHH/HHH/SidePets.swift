@@ -9,14 +9,12 @@
 import UIKit
 
 struct SidePets{
-    var title: String?
-    var memo: String?
     var image: String?
+    var server_addr: String?
     
-    init(title: String?, memo: String?, image: String?){
-        self.title = title
-        self.memo = memo
+    init(image: String?, server_addr: String?){
         self.image = image
+        self.server_addr = server_addr
     }
 }
 

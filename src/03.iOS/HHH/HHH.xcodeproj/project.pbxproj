@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */; };
+		DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F11C377843002E696A /* coredataAlarm.swift */; };
+		DA5294F81C377843002E696A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F21C377843002E696A /* User+CoreDataProperties.swift */; };
+		DA5294F91C377843002E696A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F31C377843002E696A /* User.swift */; };
+		DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */; };
+		DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52950A1C37845E002E696A /* coredataprofileProfile.swift */; };
 		DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2A1C048F40009DDB46 /* AppDelegate.swift */; };
 		DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2C1C048F40009DDB46 /* mainViewController.swift */; };
 		DA565C301C048F40009DDB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA565C2E1C048F40009DDB46 /* Main.storyboard */; };
@@ -27,7 +33,9 @@
 		DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC31C04D363009DDB46 /* SidePets.swift */; };
 		DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */; };
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
-		DA565CD51C04DD52009DDB46 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */; };
+		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
+		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
+		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +183,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5294F11C377843002E696A /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
+		DA5294F21C377843002E696A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "HHH/coredata/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5294F31C377843002E696A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = HHH/coredata/User.swift; sourceTree = "<group>"; };
+		DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataprofileProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataprofileProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA52950A1C37845E002E696A /* coredataprofileProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataprofileProfile.swift; path = HHH/coredata/coredataprofileProfile.swift; sourceTree = "<group>"; };
 		DA565C271C048F40009DDB46 /* HHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA565C2A1C048F40009DDB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA565C2C1C048F40009DDB46 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = mainViewController.swift; path = HHH/mainViewController.swift; sourceTree = "<group>"; };
@@ -200,8 +214,10 @@
 		DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SWPetListviewController.swift; path = HHH/SWPetListviewController.swift; sourceTree = "<group>"; };
 		DA565CC61C04D363009DDB46 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = HHH/WebViewController.swift; sourceTree = "<group>"; };
 		DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HHH-Bridging-Header.h"; sourceTree = "<group>"; };
-		DA565CD31C04DD52009DDB46 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
-		DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
+		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
+		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
+		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
+		DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingSchedulerCell.swift; path = HHH/SettingSchedulerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,9 +247,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA5295061C377858002E696A /* coredata */ = {
+			isa = PBXGroup;
+			children = (
+				DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */,
+				DA52950A1C37845E002E696A /* coredataprofileProfile.swift */,
+				DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */,
+				DA5294F11C377843002E696A /* coredataAlarm.swift */,
+				DA5294F21C377843002E696A /* User+CoreDataProperties.swift */,
+				DA5294F31C377843002E696A /* User.swift */,
+			);
+			name = coredata;
+			sourceTree = "<group>";
+		};
 		DA565C1E1C048F40009DDB46 = {
 			isa = PBXGroup;
 			children = (
+				DA5295061C377858002E696A /* coredata */,
 				DA565C8D1C04D2AC009DDB46 /* Kanna.xcodeproj */,
 				DA565C5D1C04D26D009DDB46 /* Alamofire.xcodeproj */,
 				DA565C5C1C04D1B8009DDB46 /* src */,
@@ -296,16 +326,11 @@
 		DA565C5C1C04D1B8009DDB46 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				DA949E181C31CD6B0055A1FC /* ViewController */,
+				DAFDB86C1C315A4F009E9011 /* mainSide */,
 				DA565CD11C04DD42009DDB46 /* lib */,
 				DA565CD01C04D373009DDB46 /* http */,
 				DA565C2C1C048F40009DDB46 /* mainViewController.swift */,
-				DA565CBE1C04D363009DDB46 /* HLSViewController.swift */,
-				DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */,
-				DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */,
-				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
-				DA565CC31C04D363009DDB46 /* SidePets.swift */,
-				DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */,
-				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -349,11 +374,34 @@
 		DA565CD11C04DD42009DDB46 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				DA565CD31C04DD52009DDB46 /* SWRevealViewController.h */,
-				DA565CD41C04DD52009DDB46 /* SWRevealViewController.m */,
+				DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */,
+				DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */,
 				DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		DA949E181C31CD6B0055A1FC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DA565CBE1C04D363009DDB46 /* HLSViewController.swift */,
+				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
+				DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */,
+				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
+				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
+				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		DAFDB86C1C315A4F009E9011 /* mainSide */ = {
+			isa = PBXGroup;
+			children = (
+				DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */,
+				DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */,
+				DA565CC31C04D363009DDB46 /* SidePets.swift */,
+			);
+			name = mainSide;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -604,15 +652,23 @@
 				DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */,
 				DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */,
 				DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */,
+				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
+				DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */,
 				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
+				DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
 				DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */,
+				DA5294F91C377843002E696A /* User.swift in Sources */,
+				DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */,
+				DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */,
+				DA5294F81C377843002E696A /* User+CoreDataProperties.swift in Sources */,
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
+				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
-				DA565CD51C04DD52009DDB46 /* SWRevealViewController.m in Sources */,
+				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

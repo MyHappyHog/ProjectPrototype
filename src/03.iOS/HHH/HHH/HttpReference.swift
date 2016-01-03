@@ -49,6 +49,7 @@ class HttpReference{
                     completionHandler(result: true, temperature: self.getData(self.type_temperature), humidity: self.getData(self.type_humidity))
                     
                 }else{
+                    print("nono")
                     self.response_result_value = nil
                     completionHandler(result: false, temperature: "--", humidity: "--")
                 }

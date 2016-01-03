@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import CoreData
+import CoreData
 import Alamofire
 import Kanna
 
@@ -17,28 +17,20 @@ class mainViewController: UIViewController {
     var profileImg:UIImage = UIImage(named: "samplehog")!
     var profileName: String = "Happyhog"
     var profileMemo: String = "Happy Hedgehog House !"
-    var server_addr: String = "http://52.68.82.234:19918"
+    var server_addr: String? = "http://52.68.82.234:19918"
     
     var http_reference : HttpReference?
     var http_timer = NSTimer();
     
     //var now_pet = [NSManagedObject]()
     
-    @IBOutlet weak var NameLabel: UILabel!
-    @IBOutlet weak var MemoLabel: UILabel!
-    
-    @IBOutlet weak var TitleLabel: UINavigationItem!
-    @IBOutlet weak var TempImage: UIImageView!
     @IBOutlet weak var TempLabel: UILabel!
-    
-    @IBOutlet weak var HumidImage: UIImageView!
     @IBOutlet weak var HumidLabel: UILabel!
-    
-    @IBOutlet weak var LightImage: UIImageView!
-    
     @IBOutlet weak var ProfileImage: UIImageView!
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +39,9 @@ class mainViewController: UIViewController {
         ProfileImage.image = profileImg
         
         
-        MemoLabel.text = profileMemo
-        //NameLabel.text = profileName
-        TitleLabel.title = profileName
-        
-        
-        
+        memoLabel.text = profileMemo
+        nameLabel.text = profileName
+        //TitleLabel.title = profileName
         
         
         if self.revealViewController() != nil {
@@ -61,19 +50,94 @@ class mainViewController: UIViewController {
         }
         //self.revealViewController().panGestureRecognizer().enabled = true
         
-        http_reference = HttpReference(server_addr)
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
-        //타이머 시간 설정
-        let http_timer_interval:NSTimeInterval = 10.0
         
-        //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
-        sendHttpGet();
         
-        http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "sendHttpGet", userInfo:  nil, repeats: true)
+        //insert core data
+        let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
+        
+        /*let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        contact.title = "고슴도치"
+        contact.memo = "내꺼"
+        contact.image = "sampleHog"*/
+        
+        do{
+            //try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
+        
+        //get core data
+        let entityDescription = NSEntityDescription.entityForName(/*"Profile"*/"User", inManagedObjectContext: managedObjectContext!)
+        
+        let request = NSFetchRequest()
+        request.entity = entityDescription
+        
+        //let pred = NSPredicate(format: "(title = %@)", TitleLabel.text)
+        //request.predicate = pred
+
+        
+        do{
+            var objects = try managedObjectContext!.executeFetchRequest(request)
+        
+
+            print(objects.count)
+            
+            if objects.count == 0{
+                self.nameLabel.text = "--"
+                self.memoLabel.text = "--"
+                self.ProfileImage.image = UIImage(named: "sampleant")
+                self.server_addr = nil
+            }else{
+                let value = objects[0] as! NSManagedObject
+                //deleteAllItem()
+            }
+        }catch{
+            print(error)
+        }
+        
+        settingProfile()
+        
         
     }
     
-    func sendHttpGet(){
+    func deleteAllItem(){
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDel.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let incidents = try context.executeFetchRequest(request)
+            
+            if incidents.count > 0 {
+                
+                for result: AnyObject in incidents{
+                    context.deleteObject(result as! NSManagedObject)
+                    print("NSManagedObject has been Deleted")
+                }
+                try context.save() } } catch {}
+    }
+
+    
+    func settingProfile(){
+        if server_addr != nil {
+        http_reference = HttpReference(server_addr)
+        
+        
+        //타이머 시간 설정
+        let http_timer_interval:NSTimeInterval = 50.0
+        
+        //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
+        getHttpMsg();
+        
+        http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
+        }
+
+    }
+    
+    func getHttpMsg(){
         http_reference!.getResponse({(result, temperature, humidity) -> Void in
             if(result == true){
                 //self.TempLabel.text = self.http_reference!.getData(0)
@@ -81,6 +145,8 @@ class mainViewController: UIViewController {
                 self.TempLabel.text = temperature
                 self.HumidLabel.text = humidity
             }else{
+                self.TempLabel.text = temperature
+                self.HumidLabel.text = humidity
                 return
             }
         })
