@@ -43,6 +43,7 @@ void openStation() {
   // 서버의 url 주소 핸들링
   server->on ( "/", handleRoot );
   server->on ( "/setting", handleSettingForm );
+  server->on ( "/step", handleStep );
   server->onNotFound ( handleNotFound );
 
   // http를 서비스에 등록한다.

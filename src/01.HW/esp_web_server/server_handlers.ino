@@ -2,12 +2,12 @@
 // 메인화면 Test data들을 출력해준다.
 void handleRoot() {
   String rootText = FPSTR(HTML);
-  temperature = random(15, 30);
-  humidity = random(30, 70);
+  //temperature = random(15, 30);
+  //humidity = random(30, 70);
   rootText.replace("<titleContent>", "ESP8266 Demo");
   rootText.replace("<bodyContent>", String("<h1>Hello from Happy Hedgehog house !!</h1>")
                    + "<h1>안녕하세요. 해피 호구 하우스입니다!!</h1>"
-                   + "<p>Temperature: " + temperature + ", Humidity: " + humidity + "</p>");
+                   + "<p>Temperature: " + temp + ", Humidity: " + humid + "</p>");
   server->send(200, "text/html;", rootText);
 }
 
@@ -27,6 +27,12 @@ void handleNotFound() {
   }
 
   server->send ( 404, "text/plain", message );
+}
+
+void handleStep() {
+  motor.setSpeed(15);
+  motor.step(MOTER_STEP/4); // 90도
+  server->send(200, "text/plain", "run 50 step");
 }
 /*
  * setting 관련.. form 태그 이용. 변경하기 버튼 클릭시 리다이렉션 됨.
