@@ -36,6 +36,7 @@
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
 		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
+		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,6 +219,7 @@
 		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
 		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
 		DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingSchedulerCell.swift; path = HHH/SettingSchedulerCell.swift; sourceTree = "<group>"; };
+		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +333,7 @@
 				DA565CD11C04DD42009DDB46 /* lib */,
 				DA565CD01C04D373009DDB46 /* http */,
 				DA565C2C1C048F40009DDB46 /* mainViewController.swift */,
+				DAB092131C3B36F2007BDC37 /* coreData.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
+				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,

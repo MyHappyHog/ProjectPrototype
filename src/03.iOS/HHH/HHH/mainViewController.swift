@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 import Alamofire
 import Kanna
+import Social
 
-
-class mainViewController: UIViewController {
+class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var profileImg:UIImage = UIImage(named: "samplehog")!
     var profileName: String = "Happyhog"
@@ -30,43 +30,51 @@ class mainViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var profileView: UIView!
     
+    
+    override func viewWillDisappear(animated: Bool) {
+        http_timer.invalidate()
+    }
+    override func viewWillAppear(animated: Bool) {
+        settingProfile()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //start click event for profile view
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        profileView.addGestureRecognizer(tap)
+        //end click event for profile view
+        
         ProfileImage.image = profileImg
-        
-        
         memoLabel.text = profileMemo
         nameLabel.text = profileName
-        //TitleLabel.title = profileName
-        
         
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
-        //self.revealViewController().panGestureRecognizer().enabled = true
         
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
-        
-        
         //insert core data
-        let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
+        /*let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
         
-        /*let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
-        contact.title = "고슴도치"
+        let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        contact.title = "개미개미"
         contact.memo = "내꺼"
-        contact.image = "sampleHog"*/
+        contact.image = "sampleant"
+        contact.server_addr = "http://52.68.82.234:19918"
         
         do{
-            //try managedObjectContext?.save()
+            try managedObjectContext?.save()
         }catch{
             print(error)
-        }
+        }*/
         
         //get core data
         let entityDescription = NSEntityDescription.entityForName(/*"Profile"*/"User", inManagedObjectContext: managedObjectContext!)
@@ -80,7 +88,6 @@ class mainViewController: UIViewController {
         
         do{
             var objects = try managedObjectContext!.executeFetchRequest(request)
-        
 
             print(objects.count)
             
@@ -91,17 +98,20 @@ class mainViewController: UIViewController {
                 self.server_addr = nil
             }else{
                 let value = objects[0] as! NSManagedObject
+                self.nameLabel.text = value.valueForKey("title") as? String
+                self.memoLabel.text = value.valueForKey("memo") as? String
+                self.server_addr = value.valueForKey("server_addr") as? String
+                self.ProfileImage.image = UIImage(named: (value.valueForKey("image") as? String)!)
                 //deleteAllItem()
+                
+                settingProfile()
             }
         }catch{
             print(error)
         }
-        
-        settingProfile()
-        
-        
     }
     
+    //for debuging
     func deleteAllItem(){
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context: NSManagedObjectContext = appDel.managedObjectContext!
@@ -117,7 +127,9 @@ class mainViewController: UIViewController {
                     context.deleteObject(result as! NSManagedObject)
                     print("NSManagedObject has been Deleted")
                 }
-                try context.save() } } catch {}
+                try context.save()
+            }
+        } catch {}
     }
 
     
@@ -164,33 +176,36 @@ class mainViewController: UIViewController {
     }
     
     
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
+        
+        self.navigationController!.pushViewController(secondViewController, animated: true)
+        
+    }
+    @IBAction func clickShareBtn(sender: AnyObject) {
+                self.revealViewController().revealToggleAnimated(true)
+        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.setInitialText("Share on Facebook")
+            self.presentViewController(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        self.revealViewController().revealToggleAnimated(true)
         
         switch segue.identifier! {
         case "Setting":
             
-            http_timer.invalidate()
-            
-            
-            //            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            //            let nextViewController = destinationNavigationController.topViewController as! SettingViewController//segue.destinationViewController as! SettingViewController
-            //            nextViewController.profileImg = ProfileImage.image
-            //            nextViewController.profileName = NameLabel.text
-            //            nextViewController.profileMemo = MemoLabel.text
-            
-            //core data save
-            
-            
             break
-        case "Web":
-            
-            break;
         default:
             break
             
         }
-        print("aaawerwera")
     }
-    
 }
 

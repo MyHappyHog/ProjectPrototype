@@ -10,7 +10,7 @@ import UIKit
 
 class SettingViewController: UITableViewController {
     //var isExpanding : Bool = false
-    var clickForExpanding = [false, false, false]
+    var clickForExpanding = [false, false, false, false]
     var now_expanding : Int = -1
     var num_expanded : Int = 0
     
@@ -20,8 +20,10 @@ class SettingViewController: UITableViewController {
     
     func cellHeight(index: Int) -> CGFloat{
         if(index == 1){
-            return 200.0
+            return 400.0
         }else if(index == 3){
+            return 200.0
+        }else if(index == 5){
             return 300.0
         }else{
             return 44.0
@@ -46,7 +48,7 @@ class SettingViewController: UITableViewController {
             tableView.reloadData()
         }*/
         
-        if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4){
+        if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
             clickForExpanding[indexPath.row / 2] = !clickForExpanding[indexPath.row / 2]
             tableView.reloadData()
         }
@@ -68,12 +70,18 @@ class SettingViewController: UITableViewController {
         
         if(index == 1){
             if(clickForExpanding[0]){
-                return 200.0
+                return 400.0
             }else{
                 return 0.0
             }
         }else if(index == 3){
             if(clickForExpanding[1]){
+                return 200.0
+            }else{
+                return 0.0
+            }
+        }else if(index == 5){
+            if(clickForExpanding[2]){
                 return 300.0
             }else{
                 return 0.0

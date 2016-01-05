@@ -31,7 +31,6 @@ class HttpReference{
     func getResponse(completionHandler: (result: Bool, temperature: String, humidity: String) -> Void){
         //get http source
         //use Alamofire library
-        print("aaaa")
         Alamofire.request(.GET, server_address!)
             .responseString { response in
                 //성공시
