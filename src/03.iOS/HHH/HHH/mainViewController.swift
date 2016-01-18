@@ -35,14 +35,55 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillDisappear(animated: Bool) {
         http_timer.invalidate()
+        //print("close")
+    }
+    /*override func viewDidAppear(animated: Bool) {
+        print("on")
+    }
+    override func viewDidDisappear(animated: Bool) {
+        print("out")
     }
     override func viewWillAppear(animated: Bool) {
+        //print("open")
         settingProfile()
-    }
+        print(dataStore.isClicked)
+        print(dataStore.isClickedAdd)
+        
+        if(dataStore.isClicked == true){
+            dataStore.isClicked = false
+            if(dataStore.isClickedAdd == true){
+                dataStore.isClickedAdd = false
+                let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("addPet") as! addPetViewController
+                
+                self.navigationController!.pushViewController(secondViewController, animated: true)
+            }else if(dataStore.isClickedShare == true){
+                
+            }else if(dataStore.isClickedSetting == true){
+                
+            }
+        }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //deleteAllItem()
+        
+        
+        //set dataStroe
+        let coredata_user = coreData(entity: "User")
+        let coredata_profile = coreData(entity: "Profile")
+        
+        if(coredata_profile.getCount() == 0){
+            dataStore.index = nil
+        }else{
+            dataStore.index = coredata_user.getsearchIndex(coredata_profile.getDatasIndex(0, key: "name") as! String
+                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
+                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
+            
+        }
         
         //start click event for profile view
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
@@ -54,20 +95,24 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         memoLabel.text = profileMemo
         nameLabel.text = profileName
         
+        //start set side bar
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
+        //end set side bar
         
+        
+        ////start get coredata
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         //insert core data
         /*let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
         
         let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
-        contact.title = "개미개미"
-        contact.memo = "내꺼"
-        contact.image = "sampleant"
+        contact.title = "고슴도치"
+        contact.memo = "니꺼"
+        contact.image = "samplehog"
         contact.server_addr = "http://52.68.82.234:19918"
         
         do{
@@ -89,7 +134,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         do{
             var objects = try managedObjectContext!.executeFetchRequest(request)
 
-            print(objects.count)
+            //print(objects.count)
+            
             
             if objects.count == 0{
                 self.nameLabel.text = "--"
@@ -102,7 +148,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.memoLabel.text = value.valueForKey("memo") as? String
                 self.server_addr = value.valueForKey("server_addr") as? String
                 self.ProfileImage.image = UIImage(named: (value.valueForKey("image") as? String)!)
-                //deleteAllItem()
+                
                 
                 settingProfile()
             }
@@ -180,7 +226,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
         
         self.navigationController!.pushViewController(secondViewController, animated: true)
-        
     }
     @IBAction func clickShareBtn(sender: AnyObject) {
                 self.revealViewController().revealToggleAnimated(true)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 /*let petData = [
     //SidePets(image: "Temp")//,
@@ -16,7 +17,7 @@ SidePets(image: "samplehog", server_addr: "http://52.68.82.234:19918")
 ]*/
 
 class PetListTableViewController: UITableViewController {
-
+    var count : Int = 0
 
     @IBOutlet weak var btnAddCell: UIBarButtonItem!
     
@@ -29,45 +30,49 @@ class PetListTableViewController: UITableViewController {
         UIColor(red: 41/255, green: 2/255, blue: 48/255, alpha: 1.0),
         UIColor(red: 33/255, green: 35/255, blue: 33/255, alpha: 1.0),
     ]
-    
+
+    override func viewDidAppear(animated: Bool) {
+        let user_coredata = coreData(entity: "User")
+        
+        for(var i = count; i < user_coredata.getCount()!; i++){
+            let image = user_coredata.getDatasIndex(i, key: "image") as! String
+            let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
+            
+            pets.append(SidePets(name: user_coredata.getDatasIndex(i, key: "title") as? String,
+                memo: user_coredata.getDatasIndex(i, key: "memo") as? String,
+                image: image, server_addr: server))
+            
+        }
+    }
     override func viewWillAppear(animated: Bool) {
-        print("--")
-        self.navigationController?.navigationBarHidden = true
+        
     }
     override func viewWillDisappear(animated: Bool) {
-        print("++")
-                self.navigationController?.navigationBarHidden = false
+
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let user_coredata = coreData(entity: "User")
         
+        count = user_coredata.getCount()!
         
-        for(var i = 0; i < user_coredata.getCount(); i++){
+        for(var i = 0; i < count; i++){
             let image = user_coredata.getDatasIndex(i, key: "image") as! String
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
             
-            pets.append(SidePets(image: image, server_addr: server))
+            pets.append(SidePets(name: user_coredata.getDatasIndex(i, key: "title") as? String,
+                memo: user_coredata.getDatasIndex(i, key: "memo") as? String,
+                image: image, server_addr: server))
             
         }
     
     }
     @IBAction func clickBtnAddCell(sender: AnyObject) {
-        //pets.append(SidePets(image: "samplehog", server_addr: "http://52.68.82.234:19918"))
-        
-        let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
-        
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        
-        let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("addpet") as! SettingViewController
-
-        let _main = self.revealViewController().frontViewController//.childViewControllers
-//        _main.pushViewController(secondViewController, animated: true)
         self.revealViewController().revealToggleAnimated(true)
-        //self.navigationController!.pushViewController(secondViewController, animated: true)
-//        _main.navigationController!.pushViewController(secondViewController, animated: true)
-
+        dataStore.isClicked = true
+        dataStore.isClickedAdd = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,17 +92,32 @@ class PetListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("PetListTableViewCell", forIndexPath: indexPath) as! PetListTableViewCell
         let pet = pets[indexPath.row] as SidePets
         cell.sidePet = pet
-        print(pet)
-        cell.cellToolBar.barTintColor = colors[pets.count % 4]
+        //print(pet)
+        cell.cellToolBar.barTintColor = colors[indexPath.row % 4]
+        
+        cell.onButtonTapped = {
+            //Do whatever you want to do when the button is tapped here
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+                let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                let index = dataStore.index
+                let coredata = coreData(entity: "User")
+                facebookSheet.setInitialText("name : \(coredata.getDatasIndex(index!, key: "title"))    memo : \(coredata.getDatasIndex(index!, key: "memo"))")
+                self.presentViewController(facebookSheet, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
         
         return cell
     }
-    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         print(indexPath.row)
+        
         /*if indexPath.row == pets.count - 1{
         pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
         
@@ -106,6 +126,4 @@ class PetListTableViewController: UITableViewController {
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }*/
     }
-    
-    
 }

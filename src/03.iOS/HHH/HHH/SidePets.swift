@@ -12,9 +12,14 @@ struct SidePets{
     var image: String?
     var server_addr: String?
     
-    init(image: String?, server_addr: String?){
+    var name: String?
+    var memo: String?
+    
+    init(name: String?, memo: String?, image: String?, server_addr: String?){
         self.image = image
         self.server_addr = server_addr
+        self.name = name
+        self.memo = memo
     }
 }
 

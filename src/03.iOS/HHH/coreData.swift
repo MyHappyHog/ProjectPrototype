@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+
 class coreData{
     let managedObjectContext:NSManagedObjectContext?
     var entity: String?
@@ -20,6 +21,7 @@ class coreData{
     
     
     //insert
+    
     
     init(entity: String){
         managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -65,4 +67,42 @@ class coreData{
         
         return value.valueForKey(key)
     }
+    
+    func getsearchIndex(_name: String!, _memo: String!, _server_addr: String!) -> Int?{
+        print("in serch index")
+        print(_name)
+        print(_memo)
+        print(_server_addr)
+        for(var i = 0; i < objects!.count; i++){
+            let value = objects![i] as! NSManagedObject
+            
+            let name = value.valueForKey("title") as! String
+            let memo = value.valueForKey("memo") as! String
+            let server_addr = value.valueForKey("server_addr") as! String
+            
+            if(name == _name && memo == _memo && server_addr == _server_addr){
+                return i as Int?
+            }
+        }
+        
+        return nil
+    }
+    
+    func insertData(data: data_user!){
+        let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
+        
+        let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        contact.title = data.name
+        contact.memo = data.memo
+        contact.image = "samplehog"
+        contact.server_addr = data.server_addr
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
+
+    }
 }
+

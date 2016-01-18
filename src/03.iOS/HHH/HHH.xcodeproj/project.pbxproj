@@ -36,7 +36,11 @@
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
 		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
+		DAAB0FAA1C4C18590061978C /* data_user.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB0FA91C4C18590061978C /* data_user.swift */; };
+		DAAB0FAC1C4C1BF50061978C /* eachCellSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB0FAB1C4C1BF50061978C /* eachCellSetting.swift */; };
 		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
+		DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092231C40BBEB007BDC37 /* dataStore.swift */; };
+		DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092311C40E976007BDC37 /* addPetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,7 +223,11 @@
 		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
 		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
 		DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingSchedulerCell.swift; path = HHH/SettingSchedulerCell.swift; sourceTree = "<group>"; };
+		DAAB0FA91C4C18590061978C /* data_user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = data_user.swift; sourceTree = "<group>"; };
+		DAAB0FAB1C4C1BF50061978C /* eachCellSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = eachCellSetting.swift; path = HHH/eachCellSetting.swift; sourceTree = "<group>"; };
 		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
+		DAB092231C40BBEB007BDC37 /* dataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataStore.swift; sourceTree = "<group>"; };
+		DAB092311C40E976007BDC37 /* addPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = addPetViewController.swift; path = HHH/addPetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +342,8 @@
 				DA565CD01C04D373009DDB46 /* http */,
 				DA565C2C1C048F40009DDB46 /* mainViewController.swift */,
 				DAB092131C3B36F2007BDC37 /* coreData.swift */,
+				DAB092231C40BBEB007BDC37 /* dataStore.swift */,
+				DAAB0FA91C4C18590061978C /* data_user.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -393,6 +403,8 @@
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
 				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
+				DAB092311C40E976007BDC37 /* addPetViewController.swift */,
+				DAAB0FAB1C4C1BF50061978C /* eachCellSetting.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -478,6 +490,7 @@
 				TargetAttributes = {
 					DA565C261C048F40009DDB46 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = ESSVA2V535;
 					};
 					DA565C3D1C048F40009DDB46 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -655,11 +668,14 @@
 				DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */,
 				DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */,
 				DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */,
+				DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */,
 				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
 				DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */,
 				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
+				DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */,
 				DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */,
+				DAAB0FAA1C4C18590061978C /* data_user.swift in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
 				DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */,
 				DA5294F91C377843002E696A /* User.swift in Sources */,
@@ -673,6 +689,7 @@
 				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
+				DAAB0FAC1C4C1BF50061978C /* eachCellSetting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,11 +842,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = HHH/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HHH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -840,11 +860,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = HHH/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HHH-Bridging-Header.h";
 			};
 			name = Release;

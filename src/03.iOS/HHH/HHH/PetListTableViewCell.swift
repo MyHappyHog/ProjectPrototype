@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class PetListTableViewCell: UITableViewCell {
     @IBOutlet weak var petImage: UIImageView!
@@ -16,6 +17,9 @@ class PetListTableViewCell: UITableViewCell {
     @IBOutlet weak var lightLabel: UILabel!
     @IBOutlet weak var humidLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+    
+    var name: String?
+    var memo: String?
     
     var http_reference : HttpReference?
     var http_timer = NSTimer();
@@ -30,6 +34,8 @@ class PetListTableViewCell: UITableViewCell {
         didSet{
             petImage.image = strToImage(sidePet.image)
             server_addr = sidePet.server_addr
+            name = sidePet.name
+            memo = sidePet.memo
             
             http_reference = HttpReference(server_addr)
             
@@ -60,6 +66,26 @@ class PetListTableViewCell: UITableViewCell {
         })
     }
     
+   var onButtonTapped : (() -> Void)? = nil
+    
+    @IBAction func clickShare(sender: AnyObject) {
+        let coredata = coreData(entity: "User")
+        dataStore.isClicked = true
+        dataStore.isClickedShare = true
+        dataStore.index = coredata.getsearchIndex(name!, _memo: memo!, _server_addr: server_addr!)
+        print("datastore index")
+        print(dataStore.index)
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
+    }
+    
+    @IBAction func clickSetting(sender: AnyObject) {
+        print("setting")
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
+    }
     
 }
 
