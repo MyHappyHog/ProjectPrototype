@@ -6,6 +6,8 @@
 //  Copyright © 2016년 hhh. All rights reserved.
 //
 
+
+//datastruct for once user
 import Foundation
 
 class dataStore{

@@ -6,6 +6,8 @@
 //  Copyright © 2015년 Yoonseung Choi. All rights reserved.
 //
 
+
+//data struct for side list
 import UIKit
 
 struct SidePets{

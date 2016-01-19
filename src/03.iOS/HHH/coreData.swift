@@ -104,5 +104,26 @@ class coreData{
         }
 
     }
+    
+    //for debuging
+    static func deleteAllItem(){
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDel.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let incidents = try context.executeFetchRequest(request)
+            
+            if incidents.count > 0 {
+                
+                for result: AnyObject in incidents{
+                    context.deleteObject(result as! NSManagedObject)
+                    print("NSManagedObject has been Deleted")
+                }
+                try context.save()
+            }
+        } catch {}
+    }
 }
 

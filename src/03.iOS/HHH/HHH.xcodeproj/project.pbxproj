@@ -31,7 +31,6 @@
 		DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */; };
 		DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC21C04D363009DDB46 /* SettingViewController.swift */; };
 		DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC31C04D363009DDB46 /* SidePets.swift */; };
-		DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */; };
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
@@ -216,7 +215,6 @@
 		DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetListTableViewController.swift; path = HHH/PetListTableViewController.swift; sourceTree = "<group>"; };
 		DA565CC21C04D363009DDB46 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = HHH/SettingViewController.swift; sourceTree = "<group>"; };
 		DA565CC31C04D363009DDB46 /* SidePets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SidePets.swift; path = HHH/SidePets.swift; sourceTree = "<group>"; };
-		DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SWPetListviewController.swift; path = HHH/SWPetListviewController.swift; sourceTree = "<group>"; };
 		DA565CC61C04D363009DDB46 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = HHH/WebViewController.swift; sourceTree = "<group>"; };
 		DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HHH-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -399,7 +397,6 @@
 			children = (
 				DA565CBE1C04D363009DDB46 /* HLSViewController.swift */,
 				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
-				DA565CC41C04D363009DDB46 /* SWPetListviewController.swift */,
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
 				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
@@ -686,7 +683,6 @@
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
 				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
-				DA565CCD1C04D363009DDB46 /* SWPetListviewController.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
 				DAAB0FAC1C4C1BF50061978C /* eachCellSetting.swift in Sources */,

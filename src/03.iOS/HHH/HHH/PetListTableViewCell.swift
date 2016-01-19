@@ -26,10 +26,13 @@ class PetListTableViewCell: UITableViewCell {
 
     var server_addr : String?
     
+    var onButtonTapped : (() -> Void)? = nil
+    
     func strToImage(name: String?) -> UIImage?{
         let Name = name
         return UIImage(named: Name!)
     }
+    
     var sidePet: SidePets!{
         didSet{
             petImage.image = strToImage(sidePet.image)
@@ -42,31 +45,14 @@ class PetListTableViewCell: UITableViewCell {
             let http_timer_interval:NSTimeInterval = 50.0
             
             //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
-            changeData()
+            getHttpMsg()
             
-            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "changeData", userInfo:  nil, repeats: true)
+            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
             
         }
     }
     
-    func changeData(){
-        http_reference!.getResponse({(result, temperature, humidity) -> Void in
-            if(result == true){
-                //self.TempLabel.text = self.http_reference!.getData(0)
-                //self.HumidLabel.text = self.http_reference!.getData(1
-                self.temperatureLabel.text = temperature
-                self.humidLabel.text = humidity
-                self.lightLabel.text = "--"
-            }else{
-                self.temperatureLabel.text = temperature
-                self.humidLabel.text = humidity
-                self.lightLabel.text = "--"
-                return
-            }
-        })
-    }
-    
-   var onButtonTapped : (() -> Void)? = nil
+    //////////////////////////////////////////////////////////////////////////////////
     
     @IBAction func clickShare(sender: AnyObject) {
         let coredata = coreData(entity: "User")
@@ -87,5 +73,23 @@ class PetListTableViewCell: UITableViewCell {
         }
     }
     
+    //////////////////////////////////////////////////////////////////////////////////
+    
+    func getHttpMsg(){
+        http_reference!.getResponse({(result, temperature, humidity) -> Void in
+            if(result == true){
+                //self.TempLabel.text = self.http_reference!.getData(0)
+                //self.HumidLabel.text = self.http_reference!.getData(1
+                self.temperatureLabel.text = temperature
+                self.humidLabel.text = humidity
+                self.lightLabel.text = "--"
+            }else{
+                self.temperatureLabel.text = temperature
+                self.humidLabel.text = humidity
+                self.lightLabel.text = "--"
+                return
+            }
+        })
+    }
 }
 

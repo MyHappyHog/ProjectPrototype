@@ -9,19 +9,12 @@
 import UIKit
 import Social
 
-/*let petData = [
-    //SidePets(image: "Temp")//,
-SidePets(image: "samplehog", server_addr: "http://52.68.82.234:19918")
-    //SidePets(title: "2", memo: "3", image: "Temp"),
-    //SidePets(title: "3", memo: "4", image: "Temp")
-]*/
-
 class PetListTableViewController: UITableViewController {
-    var count : Int = 0
+    
 
     @IBOutlet weak var btnAddCell: UIBarButtonItem!
     
-    //var pets:[SidePets] = petData
+    var count : Int = 0
     var pets = [SidePets]()
     
     let colors : [UIColor] = [
@@ -58,7 +51,7 @@ class PetListTableViewController: UITableViewController {
         
         count = user_coredata.getCount()!
         
-        for(var i = 0; i < count; i++){
+        /*for(var i = 0; i < count; i++){
             let image = user_coredata.getDatasIndex(i, key: "image") as! String
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
             
@@ -66,13 +59,8 @@ class PetListTableViewController: UITableViewController {
                 memo: user_coredata.getDatasIndex(i, key: "memo") as? String,
                 image: image, server_addr: server))
             
-        }
+        }*/
     
-    }
-    @IBAction func clickBtnAddCell(sender: AnyObject) {
-        self.revealViewController().revealToggleAnimated(true)
-        dataStore.isClicked = true
-        dataStore.isClickedAdd = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,15 +103,17 @@ class PetListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         print(indexPath.row)
-        
-        /*if indexPath.row == pets.count - 1{
-        pets.append(SidePets(title:"5",memo: "634", image: "Temp"))
-        
-        let indexPath = NSIndexPath(forRow: pets.count-1, inSection: 0)
-        
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        }*/
+
     }
+    
+    //////////////////////////////////////////////////////////////////////////////////
+    
+    @IBAction func clickBtnAddCell(sender: AnyObject) {
+        self.revealViewController().revealToggleAnimated(true)
+        dataStore.isClicked = true
+        dataStore.isClickedAdd = true
+    }
+    
+    
 }

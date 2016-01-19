@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import Alamofire
 import Kanna
 import Social
@@ -33,48 +32,18 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var profileView: UIView!
     
     
-    override func viewWillDisappear(animated: Bool) {
-        http_timer.invalidate()
-        //print("close")
-    }
-    /*override func viewDidAppear(animated: Bool) {
-        print("on")
-    }
-    override func viewDidDisappear(animated: Bool) {
-        print("out")
-    }
-    override func viewWillAppear(animated: Bool) {
-        //print("open")
-        settingProfile()
-        print(dataStore.isClicked)
-        print(dataStore.isClickedAdd)
-        
-        if(dataStore.isClicked == true){
-            dataStore.isClicked = false
-            if(dataStore.isClickedAdd == true){
-                dataStore.isClickedAdd = false
-                let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("addPet") as! addPetViewController
-                
-                self.navigationController!.pushViewController(secondViewController, animated: true)
-            }else if(dataStore.isClickedShare == true){
-                
-            }else if(dataStore.isClickedSetting == true){
-                
-            }
-        }
-    }*/
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
-        //deleteAllItem()
+        //for debuging
+        //coreData.deleteAllItem()
         
         
         //set dataStroe
         let coredata_user = coreData(entity: "User")
         let coredata_profile = coreData(entity: "Profile")
+        
         
         if(coredata_profile.getCount() == 0){
             dataStore.index = nil
@@ -85,114 +54,101 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
             
         }
         
+        
         //start click event for profile view
         let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
         tap.delegate = self
         profileView.addGestureRecognizer(tap)
-        //end click event for profile view
-        
-        ProfileImage.image = profileImg
-        memoLabel.text = profileMemo
-        nameLabel.text = profileName
-        
+
         //start set side bar
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
-        //end set side bar
         
+        
+        ProfileImage.image = profileImg
+        memoLabel.text = profileMemo
+        nameLabel.text = profileName
         
         ////start get coredata
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let coredata = coreData(entity: "User")
         
-        //insert core data
-        /*let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
+        //init profile
+        if coredata.getCount() == 0{
+            self.nameLabel.text = "--"
+            self.memoLabel.text = "--"
+            self.ProfileImage.image = UIImage(named: "sampleant")
+            self.server_addr = nil
+        }else{
+            self.nameLabel.text = coredata.getDatasIndex(0, key: "title") as? String
+            self.memoLabel.text = coredata.getDatasIndex(0, key: "memo") as? String
+            self.server_addr = coredata.getDatasIndex(0, key: "server_addr") as? String
+            self.ProfileImage.image = UIImage(named: (coredata.getDatasIndex(0, key: "image") as? String)!)
         
-        let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
-        contact.title = "고슴도치"
-        contact.memo = "니꺼"
-        contact.image = "samplehog"
-        contact.server_addr = "http://52.68.82.234:19918"
-        
-        do{
-            try managedObjectContext?.save()
-        }catch{
-            print(error)
-        }*/
-        
-        //get core data
-        let entityDescription = NSEntityDescription.entityForName(/*"Profile"*/"User", inManagedObjectContext: managedObjectContext!)
-        
-        let request = NSFetchRequest()
-        request.entity = entityDescription
-        
-        //let pred = NSPredicate(format: "(title = %@)", TitleLabel.text)
-        //request.predicate = pred
-
-        
-        do{
-            var objects = try managedObjectContext!.executeFetchRequest(request)
-
-            //print(objects.count)
-            
-            
-            if objects.count == 0{
-                self.nameLabel.text = "--"
-                self.memoLabel.text = "--"
-                self.ProfileImage.image = UIImage(named: "sampleant")
-                self.server_addr = nil
-            }else{
-                let value = objects[0] as! NSManagedObject
-                self.nameLabel.text = value.valueForKey("title") as? String
-                self.memoLabel.text = value.valueForKey("memo") as? String
-                self.server_addr = value.valueForKey("server_addr") as? String
-                self.ProfileImage.image = UIImage(named: (value.valueForKey("image") as? String)!)
-                
-                
-                settingProfile()
-            }
-        }catch{
-            print(error)
+            checkDataForProfile()
         }
     }
     
-    //for debuging
-    func deleteAllItem(){
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context: NSManagedObjectContext = appDel.managedObjectContext!
-        let request = NSFetchRequest(entityName: "User")
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let incidents = try context.executeFetchRequest(request)
-            
-            if incidents.count > 0 {
-                
-                for result: AnyObject in incidents{
-                    context.deleteObject(result as! NSManagedObject)
-                    print("NSManagedObject has been Deleted")
-                }
-                try context.save()
-            }
-        } catch {}
-    }
-
     
-    func settingProfile(){
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        self.revealViewController().revealToggleAnimated(true)
+        
+        switch segue.identifier! {
+        case "Setting":
+            
+            break
+        default:
+            break
+            
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////
+    
+    @IBAction func SettingOnClicked(sender: AnyObject) {
+        performSegueWithIdentifier("Setting", sender: self)
+    }
+    
+    
+    
+    @IBAction func clickShareBtn(sender: AnyObject) {
+                self.revealViewController().revealToggleAnimated(true)
+        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.setInitialText("Share on Facebook")
+            self.presentViewController(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////
+    
+    func checkDataForProfile(){
         if server_addr != nil {
-        http_reference = HttpReference(server_addr)
-        
-        
-        //타이머 시간 설정
-        let http_timer_interval:NSTimeInterval = 50.0
-        
-        //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
-        getHttpMsg();
-        
-        http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
+            http_reference = HttpReference(server_addr)
+            
+            //http_reference?.postSensorData(20, minTemprature: 15, maxHumidity: 70, minHumidity: 10)
+            
+            //타이머 시간 설정
+            let http_timer_interval:NSTimeInterval = 50.0
+            
+            //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
+            getHttpMsg();
+            
+            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
         }
-
+        
     }
     
     func getHttpMsg(){
@@ -209,48 +165,12 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         })
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    @IBAction func SettingOnClicked(sender: AnyObject) {
-        performSegueWithIdentifier("Setting", sender: self)
-    }
-    
+
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
         
         self.navigationController!.pushViewController(secondViewController, animated: true)
-    }
-    @IBAction func clickShareBtn(sender: AnyObject) {
-                self.revealViewController().revealToggleAnimated(true)
-        
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
-            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            facebookSheet.setInitialText("Share on Facebook")
-            self.presentViewController(facebookSheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.revealViewController().revealToggleAnimated(true)
-        
-        switch segue.identifier! {
-        case "Setting":
-            
-            break
-        default:
-            break
-            
-        }
     }
 }
 
