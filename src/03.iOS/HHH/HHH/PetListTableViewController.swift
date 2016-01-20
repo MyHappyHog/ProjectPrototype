@@ -51,7 +51,7 @@ class PetListTableViewController: UITableViewController {
         
         count = user_coredata.getCount()!
         
-        /*for(var i = 0; i < count; i++){
+        for(var i = 0; i < count; i++){
             let image = user_coredata.getDatasIndex(i, key: "image") as! String
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
             
@@ -59,7 +59,7 @@ class PetListTableViewController: UITableViewController {
                 memo: user_coredata.getDatasIndex(i, key: "memo") as? String,
                 image: image, server_addr: server))
             
-        }*/
+        }
     
     }
     

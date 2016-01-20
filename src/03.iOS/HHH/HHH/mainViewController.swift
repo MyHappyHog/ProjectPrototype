@@ -101,8 +101,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         self.revealViewController().revealToggleAnimated(true)
         
         switch segue.identifier! {
-        case "Setting":
-            
+        case "setting":
+            dataStore.index = 0
             break
         default:
             break

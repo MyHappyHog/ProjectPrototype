@@ -19,6 +19,10 @@ class addPetViewController: UITableViewController {
     @IBOutlet weak var memoTxt: UITextField!
     @IBOutlet weak var serverTxt: UITextField!
     //
+    @IBOutlet weak var textfieldMinTemp: UITextField!
+    @IBOutlet weak var textfieldMaxTemp: UITextField!
+    @IBOutlet weak var textfieldMinHumi: UITextField!
+    @IBOutlet weak var textfieldMaxHumi: UITextField!
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
@@ -69,8 +73,17 @@ class addPetViewController: UITableViewController {
         if(segue.identifier == "saveSegue"){
             //coredata save
             let credata = coreData(entity: "User")
-            let dP = data_user(name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!) as data_user
+            let dP = data_user(name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
+                minTemp: Int(textfieldMinTemp.text! as String)!,
+                maxTemp: Int(textfieldMaxTemp.text! as String)!,
+                minHumid: Int(textfieldMinHumi.text! as String)!,
+                maxHumid: Int(textfieldMaxHumi.text! as String)!) as data_user
             credata.insertData(dP)
+            let http_reference = HttpReference(serverTxt.text! as String)
+            http_reference.postSensorData(Int(textfieldMaxTemp.text! as String)!
+                , minTemprature: Int(textfieldMinTemp.text! as String)!,
+                maxHumidity: Int(textfieldMaxHumi.text! as String)!,
+                minHumidity: Int(textfieldMinHumi.text! as String)!)
         }
     }
     

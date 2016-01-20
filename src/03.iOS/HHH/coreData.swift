@@ -64,7 +64,7 @@ class coreData{
     
     func getDatasIndex(index: Int, key: String) -> AnyObject?{
         let value = objects![index] as! NSManagedObject
-        
+
         return value.valueForKey(key)
     }
     
@@ -96,6 +96,10 @@ class coreData{
         contact.memo = data.memo
         contact.image = "samplehog"
         contact.server_addr = data.server_addr
+        contact.minTemp = data.minTemp
+        contact.maxTemp = data.maxTemp
+        contact.minhum = data.minHumid
+        contact.maxhum = data.maxHumid
         
         do{
             try managedObjectContext?.save()

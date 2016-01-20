@@ -13,12 +13,18 @@ class data_user{
     var name : String?
     var memo : String?
     var server_addr : String?
+    var minTemp: Int?, maxTemp: Int?, minHumid: Int?, maxHumid: Int?
+    
     
     var index : Int?
     
-    init(name: String, memo: String, server: String){
+    init(name: String, memo: String, server: String, minTemp: Int, maxTemp: Int, minHumid: Int, maxHumid: Int){
         self.name = name
         self.memo = memo
         self.server_addr = server
+        self.minTemp = minTemp
+        self.maxTemp = maxTemp
+        self.minHumid = minHumid
+        self.maxHumid = maxHumid
     }
 }

@@ -112,8 +112,8 @@ class eachCellSetting: UITableViewController {
         if(segue.identifier == "saveSegue"){
             //coredata save
             let credata = coreData(entity: "User")
-            let dP = data_user(name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!) as data_user
-            credata.insertData(dP)
+            //let dP = data_user(name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!) as data_user
+            //credata.insertData(dP)
         }
     }
     

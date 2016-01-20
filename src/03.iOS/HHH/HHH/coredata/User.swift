@@ -2,7 +2,7 @@
 //  User.swift
 //  HHH
 //
-//  Created by Cho YoungHun on 2016. 1. 2..
+//  Created by Cho YoungHun on 2016. 1. 21..
 //  Copyright © 2016년 hhh. All rights reserved.
 //
 

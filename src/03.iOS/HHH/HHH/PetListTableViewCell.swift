@@ -14,6 +14,7 @@ class PetListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellToolBar: UIToolbar!
     
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lightLabel: UILabel!
     @IBOutlet weak var humidLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -39,6 +40,8 @@ class PetListTableViewCell: UITableViewCell {
             server_addr = sidePet.server_addr
             name = sidePet.name
             memo = sidePet.memo
+            
+            nameLabel.text = name
             
             http_reference = HttpReference(server_addr)
             

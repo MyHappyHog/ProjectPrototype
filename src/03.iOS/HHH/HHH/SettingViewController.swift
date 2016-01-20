@@ -14,6 +14,15 @@ class SettingViewController: UITableViewController {
     var now_expanding : Int = -1
     var num_expanded : Int = 0
     
+    @IBOutlet weak var textfieldMinTemperature: UITextField!
+    @IBOutlet weak var textfieldMaxTemperature: UITextField!
+    @IBOutlet weak var textfieldMinHunidity: UITextField!
+    @IBOutlet weak var textfieldMaxHumidity: UITextField!
+    
+    @IBOutlet weak var textfieldName: UITextField!
+    @IBOutlet weak var textfieldMemo: UITextField!
+    @IBOutlet weak var textfieldServer: UITextField!
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
             clickForExpanding[indexPath.row / 2] = !clickForExpanding[indexPath.row / 2]
@@ -56,5 +65,39 @@ class SettingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-    }    
+        let coredata = coreData(entity: "User")
+        if(coredata.getCount() != 0){
+            let index = dataStore.index!
+            self.textfieldName.text = coredata.getDatasIndex(index, key: "title") as? String
+            self.textfieldMemo.text = coredata.getDatasIndex(index, key: "memo") as? String
+            self.textfieldServer.text = coredata.getDatasIndex(index, key: "server_addr") as? String
+            
+            print(coredata.getDatasIndex(index, key: "minTemp") as! Int)
+            self.textfieldMinTemperature.text = String(coredata.getDatasIndex(index, key: "minTemp") as! Int)
+            self.textfieldMaxTemperature.text = String(coredata.getDatasIndex(index, key: "maxTemp") as! Int)
+            self.textfieldMinHunidity.text = String(coredata.getDatasIndex(index, key: "minhum") as! Int)
+            self.textfieldMaxHumidity.text = String(coredata.getDatasIndex(index, key: "maxhum") as! Int)
+        }
+        
+    }
+  
+    
+    @IBAction func clickSaveBtn(sender: AnyObject) {
+        let coredata = coreData(entity: "User")
+        let http_reference = HttpReference(coredata.getDatasIndex(0, key: "server_addr") as? String)
+        
+        if textfieldMaxTemperature == nil{
+
+        }
+        
+        
+        http_reference.postSensorData(Int((textfieldMaxTemperature.text! as String))!,
+            minTemprature: Int((textfieldMinTemperature.text! as String))!,
+            maxHumidity: Int((textfieldMaxHumidity.text! as String))!,
+            minHumidity: Int((textfieldMinHunidity.text! as String))!)
+        
+        
+        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
