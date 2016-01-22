@@ -387,7 +387,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="Label">
                                                     <attributes>
-                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                     </attributes>
@@ -659,6 +659,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileImage" destination="Qmn-Qn-lQh" id="VR9-Pt-EEb"/>
                         <outlet property="textfieldMaxHumidity" destination="wDr-in-gyJ" id="Ef2-Jt-UFF"/>
                         <outlet property="textfieldMaxTemperature" destination="qdc-h9-qZc" id="DIk-qx-tuu"/>
                         <outlet property="textfieldMemo" destination="jLX-4N-LqY" id="nc5-iO-CjZ"/>
@@ -925,6 +926,7 @@
                     <connections>
                         <outlet property="memoTxt" destination="bP5-rr-Mty" id="LTl-ae-KJd"/>
                         <outlet property="nameTxt" destination="2A9-jn-ill" id="B5v-92-u49"/>
+                        <outlet property="profileImage" destination="RdH-Do-5bf" id="vPt-fz-UG2"/>
                         <outlet property="serverTxt" destination="vA9-kR-swb" id="qpH-MJ-MnK"/>
                         <outlet property="textfieldMaxHumi" destination="Gdc-CG-ieg" id="yn0-lp-kBb"/>
                         <outlet property="textfieldMaxTemp" destination="9Ut-y5-GIc" id="Vb6-J3-pii"/>

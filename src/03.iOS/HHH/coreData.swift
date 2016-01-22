@@ -21,8 +21,6 @@ class coreData{
     
     
     //insert
-    
-    
     init(entity: String){
         managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         self.entity = entity
@@ -94,12 +92,14 @@ class coreData{
         let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
         contact.title = data.name
         contact.memo = data.memo
-        contact.image = "samplehog"
+        //contact.image = "samplehog"
         contact.server_addr = data.server_addr
         contact.minTemp = data.minTemp
         contact.maxTemp = data.maxTemp
         contact.minhum = data.minHumid
         contact.maxhum = data.maxHumid
+        
+        (dataStore.extenstion == "JPG") ? (contact.image = UIImageJPEGRepresentation(data.image!, 1)) : (contact.image = UIImagePNGRepresentation(data.image!))
         
         do{
             try managedObjectContext?.save()

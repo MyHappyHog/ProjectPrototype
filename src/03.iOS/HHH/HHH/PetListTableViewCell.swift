@@ -36,7 +36,7 @@ class PetListTableViewCell: UITableViewCell {
     
     var sidePet: SidePets!{
         didSet{
-            petImage.image = strToImage(sidePet.image)
+            petImage.image = sidePet.image
             server_addr = sidePet.server_addr
             name = sidePet.name
             memo = sidePet.memo
@@ -80,18 +80,9 @@ class PetListTableViewCell: UITableViewCell {
     
     func getHttpMsg(){
         http_reference!.getResponse({(result, temperature, humidity) -> Void in
-            if(result == true){
-                //self.TempLabel.text = self.http_reference!.getData(0)
-                //self.HumidLabel.text = self.http_reference!.getData(1
-                self.temperatureLabel.text = temperature
-                self.humidLabel.text = humidity
-                self.lightLabel.text = "--"
-            }else{
-                self.temperatureLabel.text = temperature
-                self.humidLabel.text = humidity
-                self.lightLabel.text = "--"
-                return
-            }
+            self.temperatureLabel.text = temperature
+            self.humidLabel.text = humidity
+            self.lightLabel.text = "--"
         })
     }
 }

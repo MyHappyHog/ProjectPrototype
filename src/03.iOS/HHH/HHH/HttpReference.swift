@@ -33,6 +33,10 @@ class HttpReference{
         //use Alamofire library
         Alamofire.request(.GET, server_address!)
             .responseString { response in
+                var r_result : Bool = false;
+                var r_temperature : String = "--"
+                var r_humidity : String = "--"
+                
                 //성공시
                 if(response.result.isSuccess){
                     //self.response_result_value = response.result.value!
@@ -45,14 +49,19 @@ class HttpReference{
                     }else{
                         self.response_result_value = nil
                     }
-                    completionHandler(result: true, temperature: self.getData(self.type_temperature), humidity: self.getData(self.type_humidity))
+                    r_result = true
+                    r_temperature = self.getData(self.type_temperature)
+                    r_humidity = self.getData(self.type_humidity)
                     
                 }else{
                     print("nono")
                     self.response_result_value = nil
-                    completionHandler(result: false, temperature: "--", humidity: "--")
+                    r_result = false
+                    r_temperature = "--"
+                    r_humidity = "--"
                 }
                 
+                completionHandler(result: r_result, temperature: r_temperature, humidity: r_humidity)
         }
     }
     
@@ -78,7 +87,7 @@ class HttpReference{
             if(type == type_temperature){
                 return_value = data_string_split[0].componentsSeparatedByString(": ")[1] + " 도"
             }else if(type == type_humidity){
-                return_value = data_string_split[01].componentsSeparatedByString(": ")[1] + " %"
+                return_value = data_string_split[1].componentsSeparatedByString(": ")[1] + " %"
             }
         }else{
             if(type == type_temperature){

@@ -38,8 +38,8 @@
 		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
 		DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092231C40BBEB007BDC37 /* dataStore.swift */; };
 		DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092311C40E976007BDC37 /* addPetViewController.swift */; };
-		DAE811B61C4FF3310073B0BD /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE811B41C4FF3310073B0BD /* User+CoreDataProperties.swift */; };
-		DAE811B71C4FF3310073B0BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE811B51C4FF3310073B0BD /* User.swift */; };
+		DAC490971C526570008865F6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC490951C526570008865F6 /* User+CoreDataProperties.swift */; };
+		DAC490981C526570008865F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC490961C526570008865F6 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,8 +224,8 @@
 		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
 		DAB092231C40BBEB007BDC37 /* dataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataStore.swift; sourceTree = "<group>"; };
 		DAB092311C40E976007BDC37 /* addPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = addPetViewController.swift; path = HHH/addPetViewController.swift; sourceTree = "<group>"; };
-		DAE811B41C4FF3310073B0BD /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "HHH/coredata/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DAE811B51C4FF3310073B0BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = HHH/coredata/User.swift; sourceTree = "<group>"; };
+		DAC490951C526570008865F6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "HHH/coredata/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAC490961C526570008865F6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = HHH/coredata/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,8 +258,8 @@
 		DA5295061C377858002E696A /* coredata */ = {
 			isa = PBXGroup;
 			children = (
-				DAE811B41C4FF3310073B0BD /* User+CoreDataProperties.swift */,
-				DAE811B51C4FF3310073B0BD /* User.swift */,
+				DAC490951C526570008865F6 /* User+CoreDataProperties.swift */,
+				DAC490961C526570008865F6 /* User.swift */,
 				DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */,
 				DA52950A1C37845E002E696A /* coredataprofileProfile.swift */,
 				DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */,
@@ -681,8 +681,8 @@
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
 				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
-				DAE811B61C4FF3310073B0BD /* User+CoreDataProperties.swift in Sources */,
-				DAE811B71C4FF3310073B0BD /* User.swift in Sources */,
+				DAC490971C526570008865F6 /* User+CoreDataProperties.swift in Sources */,
+				DAC490981C526570008865F6 /* User.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
 				DAAB0FAC1C4C1BF50061978C /* eachCellSetting.swift in Sources */,

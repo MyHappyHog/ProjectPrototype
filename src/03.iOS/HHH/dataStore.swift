@@ -22,6 +22,8 @@ class dataStore{
     //if changed data
     static var index : Int?
     
+    //type image
+    static var extenstion: String = "JPG"
     
 }
 

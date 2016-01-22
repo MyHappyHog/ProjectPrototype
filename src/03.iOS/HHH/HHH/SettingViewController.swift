@@ -8,11 +8,15 @@
 
 import UIKit
 
-class SettingViewController: UITableViewController {
+class SettingViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     //var isExpanding : Bool = false
     var clickForExpanding = [false, false, false, false]
+    var cellHeightArray : [CGFloat] = [0.0, 400.0, 200.0, 300.0]
     var now_expanding : Int = -1
     var num_expanded : Int = 0
+    
+    let imgPicker = UIImagePickerController()
+    var image: UIImage? = nil
     
     @IBOutlet weak var textfieldMinTemperature: UITextField!
     @IBOutlet weak var textfieldMaxTemperature: UITextField!
@@ -22,6 +26,8 @@ class SettingViewController: UITableViewController {
     @IBOutlet weak var textfieldName: UITextField!
     @IBOutlet weak var textfieldMemo: UITextField!
     @IBOutlet weak var textfieldServer: UITextField!
+    
+    @IBOutlet weak var profileImage: UIImageView!
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
@@ -34,28 +40,12 @@ class SettingViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let index = indexPath.row
-        
-        if(index == 1){
-            if(clickForExpanding[0]){
-                return 400.0
-            }else{
-                return 0.0
-            }
-        }else if(index == 3){
-            if(clickForExpanding[1]){
-                return 200.0
-            }else{
-                return 0.0
-            }
-        }else if(index == 5){
-            if(clickForExpanding[2]){
-                return 300.0
-            }else{
-                return 0.0
-            }
+         
+        if index % 2 == 0 || index > 5{
+            return 44.0
         }
         
-        return 44.0
+        return cellHeightArray[((clickForExpanding[index / 2]) ? index / 2 + 1 : 0)]
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -66,7 +56,7 @@ class SettingViewController: UITableViewController {
         super.viewDidLoad()
     
         let coredata = coreData(entity: "User")
-        if(coredata.getCount() != 0){
+        if(coredata.getCount() != 0){//
             let index = dataStore.index!
             self.textfieldName.text = coredata.getDatasIndex(index, key: "title") as? String
             self.textfieldMemo.text = coredata.getDatasIndex(index, key: "memo") as? String
@@ -77,8 +67,16 @@ class SettingViewController: UITableViewController {
             self.textfieldMaxTemperature.text = String(coredata.getDatasIndex(index, key: "maxTemp") as! Int)
             self.textfieldMinHunidity.text = String(coredata.getDatasIndex(index, key: "minhum") as! Int)
             self.textfieldMaxHumidity.text = String(coredata.getDatasIndex(index, key: "maxhum") as! Int)
+            self.profileImage.image = UIImage(data: coredata.getDatasIndex(index, key: "image") as! NSData)
         }
         
+        imgPicker.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        profileImage.userInteractionEnabled = true
+        profileImage.addGestureRecognizer(tap)
+
     }
   
     
@@ -99,5 +97,45 @@ class SettingViewController: UITableViewController {
         
         
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    /* shows the photo library when the changing profile image button pressed */
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        imgPicker.allowsEditing = false
+        imgPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        self.presentViewController(imgPicker, animated: true, completion: nil)
+    }
+    /* change the profile image when user choose the new profile image in the photo library */
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let imageUrl          = info[UIImagePickerControllerReferenceURL] as! NSURL
+        let imageName : String    = imageUrl.lastPathComponent!
+        dataStore.extenstion = imageName
+        print(imageName)
+        
+        let pathExtention = (imageName as NSString).pathExtension
+        print(pathExtention)
+        
+        let newImage: UIImage
+        
+        if let possibleImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            newImage = possibleImage
+        } else if let possibleImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            newImage = possibleImage
+        } else {
+            return
+        }
+        
+        self.image = newImage
+        self.profileImage.image = self.image
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    /* did not change the profile image when user choose the cancel in the photo library */
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

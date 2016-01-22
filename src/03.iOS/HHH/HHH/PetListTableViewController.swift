@@ -28,7 +28,7 @@ class PetListTableViewController: UITableViewController {
         let user_coredata = coreData(entity: "User")
         
         for(var i = count; i < user_coredata.getCount()!; i++){
-            let image = user_coredata.getDatasIndex(i, key: "image") as! String
+            let image : UIImage? = UIImage(data: user_coredata.getDatasIndex(i, key: "image") as! NSData)
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
             
             pets.append(SidePets(name: user_coredata.getDatasIndex(i, key: "title") as? String,
@@ -52,7 +52,7 @@ class PetListTableViewController: UITableViewController {
         count = user_coredata.getCount()!
         
         for(var i = 0; i < count; i++){
-            let image = user_coredata.getDatasIndex(i, key: "image") as! String
+            let image : UIImage? = UIImage(data: user_coredata.getDatasIndex(i, key: "image") as! NSData)
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
             
             pets.append(SidePets(name: user_coredata.getDatasIndex(i, key: "title") as? String,

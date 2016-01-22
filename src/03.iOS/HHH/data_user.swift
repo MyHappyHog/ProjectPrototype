@@ -9,7 +9,7 @@
 import Foundation
 
 class data_user{
-    var image: String?
+    var image: UIImage?
     var name : String?
     var memo : String?
     var server_addr : String?
@@ -18,7 +18,8 @@ class data_user{
     
     var index : Int?
     
-    init(name: String, memo: String, server: String, minTemp: Int, maxTemp: Int, minHumid: Int, maxHumid: Int){
+    init(image: UIImage, name: String, memo: String, server: String, minTemp: Int, maxTemp: Int, minHumid: Int, maxHumid: Int){
+        self.image = image
         self.name = name
         self.memo = memo
         self.server_addr = server

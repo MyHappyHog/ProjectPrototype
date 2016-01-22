@@ -23,6 +23,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //var now_pet = [NSManagedObject]()
     
+    
+    
     @IBOutlet weak var TempLabel: UILabel!
     @IBOutlet weak var HumidLabel: UILabel!
     @IBOutlet weak var ProfileImage: UIImageView!
@@ -84,7 +86,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
             self.nameLabel.text = coredata.getDatasIndex(0, key: "title") as? String
             self.memoLabel.text = coredata.getDatasIndex(0, key: "memo") as? String
             self.server_addr = coredata.getDatasIndex(0, key: "server_addr") as? String
-            self.ProfileImage.image = UIImage(named: (coredata.getDatasIndex(0, key: "image") as? String)!)
+            self.ProfileImage.image = UIImage(data: (coredata.getDatasIndex(0, key: "image") as? NSData)!)
         
             checkDataForProfile()
         }
@@ -120,7 +122,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func clickShareBtn(sender: AnyObject) {
                 self.revealViewController().revealToggleAnimated(true)
-        
+        //
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             facebookSheet.setInitialText("Share on Facebook")
