@@ -8,10 +8,11 @@
 
 import UIKit
 
+
 class addPetViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     //var isExpanding : Bool = false
     var clickForExpanding = [false, false, false, false]
-    var cellHeightArray : [CGFloat] = [0.0, 400.0, 200.0, 300.0]
+    var cellHeightArray : [CGFloat] = [0.0, 400.0, 200.0, 220.0]
     var now_expanding : Int = -1
     var num_expanded : Int = 0
     
@@ -28,6 +29,12 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     @IBOutlet weak var textfieldMinHumi: UITextField!
     @IBOutlet weak var textfieldMaxHumi: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    
+    @IBOutlet weak var segmentTemp: UISegmentedControl!
+    @IBOutlet weak var segementLight: UISegmentedControl!
+    @IBOutlet weak var segementHumid: UISegmentedControl!
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
@@ -62,11 +69,17 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         tap.delegate = self
         profileImage.userInteractionEnabled = true
         profileImage.addGestureRecognizer(tap)
-    }
         
+        segementHumid.selectedSegmentIndex = 1
+        segementLight.selectedSegmentIndex = 2
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "saveSegue"){
             //coredata save
+            
+            /////센서 콘피그도 넘기기
             let credata = coreData(entity: "User")
             let dP = data_user(image: image, name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
                 minTemp: Int(textfieldMinTemp.text! as String)!,
@@ -82,6 +95,39 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         }
     }
     
+    
+    @IBAction func changeSegue(sender: UISegmentedControl) {
+        let indexTemp = segmentTemp.selectedSegmentIndex + 1
+        let indexHumid = segementHumid.selectedSegmentIndex + 1
+        let indexLight = segementLight.selectedSegmentIndex + 1
+        if(segementHumid.selectedSegmentIndex == indexTemp - 1){
+            segementHumid.selectedSegmentIndex = 6 / indexTemp / indexLight - 1
+        }else if(segementLight.selectedSegmentIndex == indexTemp - 1){
+            segementLight.selectedSegmentIndex = 6 / indexTemp / indexHumid - 1
+        }
+    }
+    
+    @IBAction func changeSegeHumid(sender: UISegmentedControl) {
+        let indexTemp = segmentTemp.selectedSegmentIndex + 1
+        let indexHumid = segementHumid.selectedSegmentIndex + 1
+        let indexLight = segementLight.selectedSegmentIndex + 1
+        if(segmentTemp.selectedSegmentIndex == indexHumid - 1){
+            segmentTemp.selectedSegmentIndex = 6 / indexHumid / indexLight - 1
+        }else if(segementLight.selectedSegmentIndex == indexHumid - 1){
+            segementLight.selectedSegmentIndex = 6 / indexHumid / indexTemp - 1
+        }
+    }
+    
+    @IBAction func changeSegeLight(sender: UISegmentedControl) {
+        let indexTemp = segmentTemp.selectedSegmentIndex + 1
+        let indexHumid = segementHumid.selectedSegmentIndex + 1
+        let indexLight = segementLight.selectedSegmentIndex + 1
+        if(segmentTemp.selectedSegmentIndex == indexLight - 1){
+            segmentTemp.selectedSegmentIndex = 6 / indexHumid / indexLight - 1
+        }else if(segementHumid.selectedSegmentIndex == indexLight - 1){
+            segementHumid.selectedSegmentIndex = 6 / indexLight / indexTemp - 1
+        }
+    }
     
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
@@ -122,5 +168,4 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
 }
