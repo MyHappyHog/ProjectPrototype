@@ -6,22 +6,10 @@
 #include <Stepper.h>
 
 extern "C" {
-#include "user_interface.h"
+  #include "user_interface.h"
 }
 
-/*
-   HTML 템플릿. String Object를 이용해서 <titleContent> 부분과 <bodyContent> 부분을
-   replace 하여 사용.
-*/
-#define HTML_TEMPLATE \
-  "<html>\
-  <head><meta charset=\"UTF-8\">\
-  <title> <titleContent> </title>\
-  </head>\
-  <body>\
-  <bodyContent>\
-  </body>\
-</html>"
+#define DEBUG_MODE
 
 /*
    EEPROM에서 사용할 size. 아마도.. 20KB까지 가능하지 않나 생각됨.
@@ -42,8 +30,6 @@ extern "C" {
 #define FIRST_ADDRESS_OF_PASSWORD 200
 #define IS_FIRST_BOOT 500
 
-#define ARG_NAME_SSID "ssid"
-#define ARG_NAME_PASSWORD "password"
 /*
    해피호구의 웹사이트를 열을 포트 주소.
 */
@@ -72,10 +58,14 @@ void write_password_to_eeprom(int address, String _password );
 void openSoftAP();
 void openStation();
 void startServer();
+
 void handleRoot();
 void handleNotFound();
-void handleSettingForm();
-void handleStep();
+void handleShowSetting();
+void handleInitConfig();
+void handleShowSettingPut();
+void handlePutFood();
+void handlePutIn();
 
 void checkTemData(double* temp, int i);      // storing on the array
 void checkHumData(double* humid, int i);
@@ -93,8 +83,6 @@ String ssid;
 String password;
 byte bootMode;
 
-const char HTML[] PROGMEM = HTML_TEMPLATE;
-
 double temperature[NUM_OF_DATA];
 double humidity[NUM_OF_DATA];
 int count = 0;
@@ -107,6 +95,9 @@ ESP8266WebServer *server;
 DHT dht1(DHT11_PIN_1, DHT11);
 DHT dht2(DHT11_PIN_2, DHT11);
 Stepper motor(MOTER_STEP, STEP_IN_1, STEP_IN_2, STEP_IN_3, STEP_IN_4);
+//Servo servo;
+//boolean isCw = true;
+//int pos = 180;
 
 /*
     설정된 값들을 eeprom에서 읽어오는 함수
@@ -125,6 +116,9 @@ String loadConfigure() {
 
   // flash에 configure 정보를 저장하지 않음.
   WiFi.persistent(false);
+
+  //servo.attach(STEP_IN_1);
+  //servo.write(pos);
 }
 
 /*
@@ -132,14 +126,18 @@ String loadConfigure() {
     EEPROM의 모드에 따라 AP 혹은 STATION 웹 서버를 엶.
 */
 void setup() {
-  Serial.begin(115200);
-
+  #ifdef DEBUG_MODE
+    Serial.begin(115200);
+  #endif
+  
   dht1.begin();
   dht2.begin();
 
-  Serial.setDebugOutput(true);
-  Serial.println();
-
+  #ifdef DEBUG_MODE
+    Serial.setDebugOutput(true);
+    Serial.println();
+  #endif
+  
   loadConfigure();
 
   server = new ESP8266WebServer(WEB_PORT);
