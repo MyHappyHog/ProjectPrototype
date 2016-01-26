@@ -235,6 +235,10 @@ void handleNew() {
     return ;
   }
 
+  // TODO
+  // 비어있는 ESP가 본인이면 본인에게 create
+  // 아니라면 다른 ESP에 create 요청을 보냄.
+
   // 구조체로 변경해야함.
   String nAnimalName = server->arg(ARG_NAME_ANIMAL_NAME);
   String nMaxTemperature = server->arg(ARG_NAME_MAX_TEMPERATURE);
@@ -309,7 +313,85 @@ void handleNew() {
 
 void handleUpdate() {
   if ( server->arg("_method").equals("put") ) {
-    server->send(200, "text/html", "update it");
+
+    // TODO
+    // 동물 테이블에서 같은 이름이 있는지 확인
+    // 없으면 수정 불가능.
+    String nAnimalName = server->arg(ARG_NAME_ANIMAL_NAME);
+    nAnimalName.trim();
+    if ( !animalName.equals(nAnimalName) ) {
+      server->send(200, "text/html; charset=utf-8", "해당하는 esp가 없습니다.");
+      return ;
+    }
+
+    // TODO
+    // update 요청이 본인의 요청이면 본인이 처리
+    // 다른 ESP의 update를 요청한거라면 다른 ESP에 update 요청
+
+    // 구조체로 변경해야함.
+    String nMaxTemperature = server->arg(ARG_NAME_MAX_TEMPERATURE);
+    String nMinTemperature = server->arg(ARG_NAME_MIN_TEMPERATURE);
+    String nMaxHumidity = server->arg(ARG_NAME_MAX_HUMIDITY);
+    String nMinHumidity = server->arg(ARG_NAME_MIN_HUMIDITY);
+    String nMaxillumination = server->arg(ARG_NAME_MAX_ILLUMINATION);
+    String nMinillumination = server->arg(ARG_NAME_MIN_ILLUMINATION);
+    String nTemperatureRelay = server->arg(ARG_NAME_TEMP_RELAY);
+    String nHumidityRelay = server->arg(ARG_NAME_HUMID_RELAY);
+    String nilluminationRelay = server->arg(ARG_NAME_ILLUM_RELAY);
+
+    // white space 제거
+    nMaxTemperature.trim();
+    nMinTemperature.trim();
+    nMaxHumidity.trim();
+    nMinHumidity.trim();
+    nMaxillumination.trim();
+    nMinillumination.trim();
+    nTemperatureRelay.trim();
+    nHumidityRelay.trim();
+    nilluminationRelay.trim();
+
+    // 빈 곳에는 기존값 설정
+    if (nMaxTemperature.equals("")) nMaxTemperature += maxTemperature;
+    if (nMinTemperature.equals("")) nMinTemperature += minTemperature;
+    if (nMaxHumidity.equals("")) nMaxHumidity += maxHumidity;
+    if (nMinHumidity.equals("")) nMinHumidity += minHumidity;
+    if (nMaxillumination.equals("")) nMaxillumination += maxillumination;
+    if (nMinillumination.equals("")) nMinillumination += minillumination;
+
+    if (nTemperatureRelay.equals("")) nTemperatureRelay += temperatureRelay;
+    if (nHumidityRelay.equals("")) nHumidityRelay += humidityRelay;
+    if (nilluminationRelay.equals("")) nilluminationRelay += illuminationRelay;
+
+    // 예외 처리
+    // - 동물 이름 입력안했을 때
+    // - 최고 온, 습, 조도가 최저의 온, 습, 조도보다 낮거나 같을 때
+    // TODO 측정 가능한 최대 최소 온습조도 밖의 값 예외처리
+    if (nMaxTemperature.toInt() <= nMinTemperature.toInt()) {
+      server->send(200, "text/html; charset=utf-8", "최고 온도가 최저 온도보다 높아야 합니다.");
+      return ;
+    }
+    if (nMaxHumidity.toInt() <= nMinHumidity.toInt()) {
+      server->send(200, "text/html; charset=utf-8", "최고 습도가 최저 습도보다 높아야 합니다.");
+      return ;
+    }
+    if (nMaxillumination.toInt() <= nMinillumination.toInt()) {
+      server->send(200, "text/html; charset=utf-8", "최고 조도가 최저 조도보다 높아야 합니다.");
+      return ;
+    }
+
+    // 변경하려는 값으로 수정
+    maxTemperature = nMaxTemperature.toInt();
+    minTemperature = nMinTemperature.toInt();
+    maxHumidity = nMaxHumidity.toInt();
+    minHumidity = nMinHumidity.toInt();
+    maxillumination = nMaxillumination.toInt();
+    minillumination = nMinillumination.toInt();
+
+    temperatureRelay = nTemperatureRelay.toInt();
+    humidityRelay = nHumidityRelay.toInt();
+    illuminationRelay = nilluminationRelay.toInt();
+
+    server->send(200, "text/html; charset=utf-8", "수정이 완료되었습니다.");
   } else {
     handleNotFound();
   }
