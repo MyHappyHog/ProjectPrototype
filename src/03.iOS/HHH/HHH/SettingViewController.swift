@@ -180,4 +180,9 @@ class SettingViewController: UITableViewController, UIImagePickerControllerDeleg
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func cancl(segue: UIStoryboardSegue){
+        
+    }
+    
 }

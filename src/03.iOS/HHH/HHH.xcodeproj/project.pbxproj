@@ -342,6 +342,7 @@
 				DAB092131C3B36F2007BDC37 /* coreData.swift */,
 				DAB092231C40BBEB007BDC37 /* dataStore.swift */,
 				DAAB0FA91C4C18590061978C /* data_user.swift */,
+				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -399,7 +400,6 @@
 				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
-				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
 				DAB092311C40E976007BDC37 /* addPetViewController.swift */,
 				DAAB0FAB1C4C1BF50061978C /* eachCellSetting.swift */,
 			);

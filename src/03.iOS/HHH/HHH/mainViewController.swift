@@ -104,6 +104,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         switch segue.identifier! {
         case "setting":
+            dataStore.prev_vc = "main"
             dataStore.index = 0
             break
         default:
@@ -115,7 +116,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     //////////////////////////////////////////////////////////////////////////////////
     
     @IBAction func SettingOnClicked(sender: AnyObject) {
-        performSegueWithIdentifier("Setting", sender: self)
+        //performSegueWithIdentifier("Setting", sender: self)
     }
     
     

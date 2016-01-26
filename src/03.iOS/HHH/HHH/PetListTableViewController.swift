@@ -111,8 +111,9 @@ class PetListTableViewController: UITableViewController {
     
     @IBAction func clickBtnAddCell(sender: AnyObject) {
         self.revealViewController().revealToggleAnimated(true)
-        dataStore.isClicked = true
-        dataStore.isClickedAdd = true
+        //dataStore.isClicked = true
+        //dataStore.isClickedAdd = true
+        dataStore.prev_vc = "add"
     }
     
     
