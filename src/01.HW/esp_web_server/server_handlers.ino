@@ -13,16 +13,26 @@
 #define ARG_NAME_HUMID_RELAY "humidRelay"
 #define ARG_NAME_ILLUM_RELAY "illumRelay"
 
-String animalName = "바보";
-int maxTemperature = 30;
-int minTemperature = 25;
-int maxHumidity = 50;
-int minHumidity = 30;
-int maxillumination = 100;
-int minillumination = 50;
-int tempRelay = 1;
-int humidRelay = 2;
-int illumRelay = 3;
+#define DEFAULT_MAX_TEMPERATURE 30
+#define DEFAULT_MIN_TEMPERATURE 20
+#define DEFAULT_MAX_HUMIDITY 50
+#define DEFAULT_MIN_HUMIDITY 30
+#define DEFAULT_MAX_ILLUMINATION 80
+#define DEFAULT_MIN_ILLUMINATION 50
+#define DEFAULT_TEMP_RELAY 1
+#define DEFAULT_HUMID_RELAY 2
+#define DEFAULT_ILLUM_RELAY 3
+
+String animalName = "";
+int maxTemperature = DEFAULT_MAX_TEMPERATURE;
+int minTemperature = DEFAULT_MIN_TEMPERATURE;
+int maxHumidity = DEFAULT_MAX_HUMIDITY;
+int minHumidity = DEFAULT_MIN_HUMIDITY;
+int maxillumination = DEFAULT_MAX_ILLUMINATION;
+int minillumination = DEFAULT_MIN_ILLUMINATION;
+int temperatureRelay = DEFAULT_TEMP_RELAY;
+int humidityRelay = DEFAULT_HUMID_RELAY;
+int illuminationRelay = DEFAULT_ILLUM_RELAY;
 String ip;
 /*
    HTML 템플릿. String Object를 이용해서 <titleContent> 부분과 <bodyContent> 부분을
@@ -126,7 +136,7 @@ void handleWifiConfig() {
   // mdns 서버를 실행.
 
   server->send(200);
-  
+
   if (availableEditWifi == true) {
     // form 으로 전달된 데이터 중에서 아규먼트 이름이 ssid나 password 인 아규먼트를
     // ssid 와 password 로 assign 하고 eeprom을 업데이트.(write)
@@ -207,16 +217,90 @@ void handleShowEditDataForm() {
   formMessage.replace("<minHumidContent>", String("") + ARG_NAME_MIN_HUMIDITY + "\" value = \"" + minHumidity);
   formMessage.replace("<maxillumContent>", String("") + ARG_NAME_MAX_ILLUMINATION + "\" value = \"" + maxillumination);
   formMessage.replace("<minillumContent>", String("") + ARG_NAME_MIN_ILLUMINATION + "\" value = \"" + minillumination);
-  formMessage.replace("<tempRelayContent>", String("") + ARG_NAME_TEMP_RELAY + "\" value = \"" + tempRelay);
-  formMessage.replace("<humidRelayContent>", String("") + ARG_NAME_HUMID_RELAY + "\" value = \"" + humidRelay);
-  formMessage.replace("<illumRelayContent>", String("") + ARG_NAME_ILLUM_RELAY + "\" value = \"" + illumRelay);
+  formMessage.replace("<tempRelayContent>", String("") + ARG_NAME_TEMP_RELAY + "\" value = \"" + temperatureRelay);
+  formMessage.replace("<humidRelayContent>", String("") + ARG_NAME_HUMID_RELAY + "\" value = \"" + humidityRelay);
+  formMessage.replace("<illumRelayContent>", String("") + ARG_NAME_ILLUM_RELAY + "\" value = \"" + illuminationRelay);
   formMessage.replace("<hiddenContent>", "<input type=\"hidden\" name=\"_method\" value=\"put\"/>");
 
   server->send(200, "text/html", formMessage);
 }
 
 void handleNew() {
-  server->send(200, "text/html", "create it");
+
+  // TODO
+  // 동물 테이블에서 현재 이름이 없는 테이블이 있는지 확인하는 코드 추가하기
+  // 없으면 새로 만들 수 없음.
+
+  // 구조체로 변경해야함.
+  String nAnimalName = server->arg(ARG_NAME_ANIMAL_NAME);
+  String nMaxTemperature = server->arg(ARG_NAME_MAX_TEMPERATURE);
+  String nMinTemperature = server->arg(ARG_NAME_MIN_TEMPERATURE);
+  String nMaxHumidity = server->arg(ARG_NAME_MAX_HUMIDITY);
+  String nMinHumidity = server->arg(ARG_NAME_MIN_HUMIDITY);
+  String nMaxillumination = server->arg(ARG_NAME_MAX_ILLUMINATION);
+  String nMinillumination = server->arg(ARG_NAME_MIN_ILLUMINATION);
+  String nTemperatureRelay = server->arg(ARG_NAME_TEMP_RELAY);
+  String nHumidityRelay = server->arg(ARG_NAME_HUMID_RELAY);
+  String nilluminationRelay = server->arg(ARG_NAME_ILLUM_RELAY);
+
+  // white space 제거
+  nAnimalName.trim();
+  nMaxTemperature.trim();
+  nMinTemperature.trim();
+  nMaxHumidity.trim();
+  nMinHumidity.trim();
+  nMaxillumination.trim();
+  nMinillumination.trim();
+  nTemperatureRelay.trim();
+  nHumidityRelay.trim();
+  nilluminationRelay.trim();
+
+  // 빈 곳에는 초기값 설정
+  if (nMaxTemperature.equals("")) nMaxTemperature += DEFAULT_MAX_TEMPERATURE;
+  if (nMinTemperature.equals("")) nMinTemperature += DEFAULT_MIN_TEMPERATURE;
+  if (nMaxHumidity.equals("")) nMaxHumidity += DEFAULT_MAX_HUMIDITY;
+  if (nMinHumidity.equals("")) nMinHumidity += DEFAULT_MIN_HUMIDITY;
+  if (nMaxillumination.equals("")) nMaxillumination += DEFAULT_MAX_ILLUMINATION;
+  if (nMinillumination.equals("")) nMinillumination += DEFAULT_MIN_ILLUMINATION;
+
+  if (nTemperatureRelay.equals("")) nTemperatureRelay += DEFAULT_TEMP_RELAY;
+  if (nHumidityRelay.equals("")) nHumidityRelay += DEFAULT_HUMID_RELAY;
+  if (nilluminationRelay.equals("")) nilluminationRelay += DEFAULT_ILLUM_RELAY;
+
+  // 예외 처리
+  // - 동물 이름 입력안했을 때
+  // - 최고 온, 습, 조도가 최저의 온, 습, 조도보다 낮거나 같을 때
+  // TODO 측정 가능한 최대 최소 온습조도 밖의 값 예외처리
+  if (nAnimalName.equals("")) {
+    server->send(200, "text/html; charset=utf-8", "동물 이름이 입력되지 않았습니다.");
+    return ;
+  }
+  if (nMaxTemperature.toInt() <= nMinTemperature.toInt()) {
+    server->send(200, "text/html; charset=utf-8", "최고 온도가 최저 온도보다 높아야 합니다.");
+    return ;
+  }
+  if (nMaxHumidity.toInt() <= nMinHumidity.toInt()) {
+    server->send(200, "text/html; charset=utf-8", "최고 습도가 최저 습도보다 높아야 합니다.");
+    return ;
+  }
+  if (nMaxillumination.toInt() <= nMinillumination.toInt()) {
+    server->send(200, "text/html; charset=utf-8", "최고 조도가 최저 조도보다 높아야 합니다.");
+    return ;
+  }
+
+  animalName = nAnimalName;
+  maxTemperature = nMaxTemperature.toInt();
+  minTemperature = nMinTemperature.toInt();
+  maxHumidity = nMaxHumidity.toInt();
+  minHumidity = nMinHumidity.toInt();
+  maxillumination = nMaxillumination.toInt();
+  minillumination = nMinillumination.toInt();
+
+  temperatureRelay = nTemperatureRelay.toInt();
+  humidityRelay = nHumidityRelay.toInt();
+  illuminationRelay = nilluminationRelay.toInt();
+
+  server->send(200, "text/html; charset=utf-8", "설정 되었습니다.");
 }
 
 void handleUpdate() {
