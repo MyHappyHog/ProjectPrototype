@@ -230,6 +230,10 @@ void handleNew() {
   // TODO
   // 동물 테이블에서 현재 이름이 없는 테이블이 있는지 확인하는 코드 추가하기
   // 없으면 새로 만들 수 없음.
+  if ( !animalName.equals("") ) {
+    server->send(200, "text/html; charset=utf-8", "비어 있는 esp가 없습니다.");
+    return ;
+  }
 
   // 구조체로 변경해야함.
   String nAnimalName = server->arg(ARG_NAME_ANIMAL_NAME);
