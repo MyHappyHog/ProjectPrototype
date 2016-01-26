@@ -70,6 +70,7 @@ void addHandlerToServer() {
 
   server->on ( "/edit", HTTP_GET, handleShowEditDataForm );
   server->on ( "/update", HTTP_POST, handleUpdate );
+  server->on ( "/update", HTTP_PUT, handleUpdate );
   
   server->on ( "/delete", HTTP_POST, handleDelete );
 

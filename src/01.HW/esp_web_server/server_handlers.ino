@@ -312,7 +312,7 @@ void handleNew() {
 }
 
 void handleUpdate() {
-  if ( server->arg("_method").equals("put") ) {
+  if ( server->method() == HTTP_PUT || server->arg("_method").equals("put") ) {
 
     // TODO
     // 동물 테이블에서 같은 이름이 있는지 확인
