@@ -1,6 +1,29 @@
 #define ARG_NAME_SSID "ssid"
 #define ARG_NAME_PASSWORD "password"
+#define ARG_NAME_RELAY_MAC "relayMac"
 
+#define ARG_NAME_ANIMAL_NAME "animalName"
+#define ARG_NAME_MAX_TEMPERATURE "maxTemperature"
+#define ARG_NAME_MIN_TEMPERATURE "minTemperature"
+#define ARG_NAME_MAX_HUMIDITY "maxHumidity"
+#define ARG_NAME_MIN_HUMIDITY "minHumidity"
+#define ARG_NAME_MAX_ILLUMINATION "maxillumination"
+#define ARG_NAME_MIN_ILLUMINATION "minillumination"
+#define ARG_NAME_TEMP_RELAY "tempRelay"
+#define ARG_NAME_HUMID_RELAY "humidRelay"
+#define ARG_NAME_ILLUM_RELAY "illumRelay"
+
+String animalName = "바보";
+int maxTemperature = 30;
+int minTemperature = 25;
+int maxHumidity = 50;
+int minHumidity = 30;
+int maxillumination = 100;
+int minillumination = 50;
+int tempRelay = 1;
+int humidRelay = 2;
+int illumRelay = 3;
+String ip;
 /*
    HTML 템플릿. String Object를 이용해서 <titleContent> 부분과 <bodyContent> 부분을
    replace 하여 사용.
@@ -16,25 +39,32 @@
 </html>"
 
 #define WIFI_FORM_TEMPLATE \
-  "<form action=\"<UrlContent>\" method=\"<MethodContent>\">\
+  "<form action=\"/init\" method=\"POST\">\
+  relay Mac : <input type=\"text\" name=\"<macContent>\" value=\"<relayValueContent>\"/><br/>\
   ssid : <input type=\"text\" name=\"<ssidContent>\"/><br/>\
   password : <input type=\"password\" name=\"<passwordContent>\"/><br/>\
-  <input type=\"submit\" value=\"변경하기\"/>\
-  <moreContent> \
+  <input type=\"submit\" value=\"설정하기\"/>\
+</form>"
+
+#define DATA_FORM_TEMPLATE \
+  "<form action=\"<urlContent>\" method=\"POST\">\
+  동물 이름 : <input type=\"text\" name=\"<animalContent>\" required /><br/>\
+  최고 온도 : <input type=\"text\" name=\"<maxTempContent>\" /><br/>\
+  최저 온도 : <input type=\"text\" name=\"<minTempContent>\" /><br/>\
+  최고 습도 : <input type=\"text\" name=\"<maxHumidContent>\" /><br/>\
+  최저 습도 : <input type=\"text\" name=\"<minHumidContent>\" /><br/>\
+  최고 조도 : <input type=\"text\" name=\"<maxillumContent>\" /><br/>\
+  최저 조도 : <input type=\"text\" name=\"<minillumContent>\" /><br/>\
+  온도 릴레이 : <input type=\"text\" name=\"<tempRelayContent>\" /><br/>\
+  습도 릴레이 : <input type=\"text\" name=\"<humidRelayContent>\" /><br/>\
+  조도 릴레이 : <input type=\"text\" name=\"<illumRelayContent>\" /><br/>\
+  <input type=\"submit\" value=\"설정하기\"/>\
+  <hiddenContent>\
 </form>"
 
 const char HTML[] PROGMEM = HTML_TEMPLATE;
 const char WIFI_FORM[] PROGMEM = WIFI_FORM_TEMPLATE;
-
-// 메인화면을 출력해준다.
-void handleRoot() {
-  String rootText = FPSTR(HTML);
-  rootText.replace("<titleContent>", "ESP8266 Demo");
-  rootText.replace("<bodyContent>", String("<h1>Hello from Happy Hedgehog house !!</h1>")
-                   + "<h1>안녕하세요. 해피 호구 하우스입니다!!</h1>"
-                   + "<p>Temperature: " + temp + ", Humidity: " + humid + "</p>");
-  server->send(200, "text/html;", rootText);
-}
+const char DATA_FORM[] PROGMEM = DATA_FORM_TEMPLATE;
 
 // 요청한 주소가 없을 때 요청을 한 주소와 args를 찍어서 보내줌..
 void handleNotFound() {
@@ -54,6 +84,25 @@ void handleNotFound() {
   server->send ( 404, "text/plain", message );
 }
 
+// 메인화면을 출력해준다.
+void handleShowData() {
+  String rootText = FPSTR(HTML);
+  rootText.replace("<titleContent>", "ESP8266 Demo");
+  rootText.replace("<bodyContent>", String("<h1>Hello from Happy Hedgehog house !!</h1>")
+                   + "<h1>안녕하세요. 해피 호구 하우스입니다!!</h1>"
+                   + "<p>Temperature: " + temp + ", Humidity: " + humid + "</p>");
+  server->send(200, "text/html;", rootText);
+}
+
+void handleShowTable() {
+  String message = "show the tables";
+
+  message += "<br/>";
+  message += String("ip : ") + WiFi.localIP().toString() + ", 동물 이름 : " + animalName + "<br/>";
+
+  server->send(200, "text/html; charset=utf-8", message);
+}
+
 // 먹이 한번 분량을 준다.
 void handlePutFood() {
   motor.setSpeed(10);
@@ -67,14 +116,7 @@ void handlePutFood() {
    리다이렉션시 POST메소드로 arg에 입력한 내용이 들어있음.
    TOOD : 허용하지 않는 입력 처리하기.
 */
-void handleInitConfig() {
-  // form 으로 전달된 데이터 중에서 아규먼트 이름이 ssid나 password 인 아규먼트를
-  // ssid 와 password 로 assign 하고 eeprom을 업데이트.(write)
-  ssid = server->arg(ARG_NAME_SSID);
-  write_ssid_to_eeprom( FIRST_ADDRESS_OF_SSID, ssid );
-  password = server->arg(ARG_NAME_PASSWORD);
-  write_password_to_eeprom( FIRST_ADDRESS_OF_PASSWORD, password );
-
+void handleWifiConfig() {
   // @@@@@@@@@@@ make it
   // 12345(라우트) 포트가 열려있는지 확인하는 기능.
   //
@@ -82,77 +124,113 @@ void handleInitConfig() {
   // esp를 처음 실행시켰을 경우에는
   // 입력한 ssid와 password 를 가진 공유기로 접속하여
   // mdns 서버를 실행.
-  if (bootMode == AP_BOOT_MODE) {
-    // 이후에 상태 보존을 위해 eeprom에 상태 저장.
-    // eeprom에 write 해야됨.
-    bootMode = STATION_BOOT_MODE;
-    EEPROM.write( IS_FIRST_BOOT, bootMode );
-    EEPROM.commit();
 
-    // softAP의 연결을 종료하고 WiFi를 끔.
-    WiFi.softAPdisconnect();
-    Serial.println( "close AP mode" );
-    Serial.println( "" );
+  server->send(200);
+  
+  if (availableEditWifi == true) {
+    // form 으로 전달된 데이터 중에서 아규먼트 이름이 ssid나 password 인 아규먼트를
+    // ssid 와 password 로 assign 하고 eeprom을 업데이트.(write)
+    ssid = server->arg(ARG_NAME_SSID);
+    write_ssid_to_eeprom( FIRST_ADDRESS_OF_SSID, ssid );
+    password = server->arg(ARG_NAME_PASSWORD);
+    write_password_to_eeprom( FIRST_ADDRESS_OF_PASSWORD, password );
 
-    // 인스턴스를 다시 만듦.
-    if (server != NULL) {
-      delete server;
-    }
-    server = new ESP8266WebServer(WEB_PORT);
-    openStation();
-    startServer();
-  } else {
-    Serial.println( "" );
-    Serial.println( "change WIFI" );
+    // relay 접속
+
+    // relay 세팅
 
     // 현재 WiFi 연결을 끊음.
-    WiFi.disconnect();
+    WiFi.disconnect(true);
 
-    // Station모드로 새로운 ssid에 연결
-    openStation();
+    // 변경된 wifi 접속.
+    openStation(ssid, password);
+    startServer();
 
-    Serial.println( "" );
-    Serial.println("HTTP server started");
+    // 메인 라우트가 있는지 확인
+    // 있으면 자신의 데이터 전달
+
+    ip = WiFi.localIP().toString();
+
+    // 현재 ip 정보 수정
+    availableEditWifi = false;
   }
 
-  // 설정된 ip 알려 줌.
-  server->send(200, "text/html; charset=utf-8", "당신의 ip는" + WiFi.localIP());
+  // make
+  // 값 세팅 부분
 }
 
-// Setting Form을 반환
-void handleShowSetting() {
+// Wifi form을 반환
+void handleShowWifiForm() {
   // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
   String formMessage = FPSTR(HTML);
   formMessage.replace("<titleContent>", "MyHappyHog Init");
   formMessage.replace("<bodyContent>", FPSTR(WIFI_FORM));
-  formMessage.replace("<UrlContent>", server->uri());
-  formMessage.replace("<MethodContent>", "POST");
+  formMessage.replace("<macContent>", ARG_NAME_RELAY_MAC);
+  formMessage.replace("<relayValueContent>", relay_mac);
   formMessage.replace("<ssidContent>", ARG_NAME_SSID);
   formMessage.replace("<passwordContent>", ARG_NAME_PASSWORD);
-  formMessage.replace("<moreContent>", "");
 
   server->send(200, "text/html", formMessage);
 }
 
-void handleShowSettingPut() {
-  // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
+// Data 생성하는 Setting Form을 반환
+void handleShowNewDataForm() {
   String formMessage = FPSTR(HTML);
-  formMessage.replace("<titleContent>", "MyHappyHog Init");
-  formMessage.replace("<bodyContent>", FPSTR(WIFI_FORM));
-  formMessage.replace("<UrlContent>", "/edit");
-  formMessage.replace("<MethodContent>", "POST");
-  formMessage.replace("<ssidContent>", ARG_NAME_SSID);
-  formMessage.replace("<passwordContent>", ARG_NAME_PASSWORD);
-  formMessage.replace("<moreContent>", "<input type=\"hidden\" name=\"_method\" value=\"put\"/>");
+  formMessage.replace("<titleContent>", "MyHappyHog new Data");
+  formMessage.replace("<bodyContent>", FPSTR(DATA_FORM));
+  formMessage.replace("<urlContent>", "/create");
+  formMessage.replace("<animalContent>", ARG_NAME_ANIMAL_NAME);
+  formMessage.replace("<maxTempContent>", ARG_NAME_MAX_TEMPERATURE);
+  formMessage.replace("<minTempContent>", ARG_NAME_MIN_TEMPERATURE);
+  formMessage.replace("<maxHumidContent>", ARG_NAME_MAX_HUMIDITY);
+  formMessage.replace("<minHumidContent>", ARG_NAME_MIN_HUMIDITY);
+  formMessage.replace("<maxillumContent>", ARG_NAME_MAX_ILLUMINATION);
+  formMessage.replace("<minillumContent>", ARG_NAME_MIN_ILLUMINATION);
+  formMessage.replace("<tempRelayContent>", ARG_NAME_TEMP_RELAY);
+  formMessage.replace("<humidRelayContent>", ARG_NAME_HUMID_RELAY);
+  formMessage.replace("<illumRelayContent>", ARG_NAME_ILLUM_RELAY);
+  formMessage.replace("<hiddenContent>", "");
 
   server->send(200, "text/html", formMessage);
 }
 
-void handlePutIn() {
-  if (server->arg("_method").equals("put")) {
-    server->send(200, "text/html", "com in");
+// Data 변경하는 Setting Form을 반환
+void handleShowEditDataForm() {
+  String formMessage = FPSTR(HTML);
+  formMessage.replace("<titleContent>", "MyHappyHog new Data");
+  formMessage.replace("<bodyContent>", FPSTR(DATA_FORM));
+  formMessage.replace("<urlContent>", "/update");
+  formMessage.replace("<animalContent>", String("") + ARG_NAME_ANIMAL_NAME + "\" value = \"" + animalName);
+  formMessage.replace("<maxTempContent>", String("") + ARG_NAME_MAX_TEMPERATURE + "\" value = \"" + maxTemperature);
+  formMessage.replace("<minTempContent>", String("") + ARG_NAME_MIN_TEMPERATURE + "\" value = \"" + minTemperature);
+  formMessage.replace("<maxHumidContent>", String("") + ARG_NAME_MAX_HUMIDITY + "\" value = \"" + maxHumidity);
+  formMessage.replace("<minHumidContent>", String("") + ARG_NAME_MIN_HUMIDITY + "\" value = \"" + minHumidity);
+  formMessage.replace("<maxillumContent>", String("") + ARG_NAME_MAX_ILLUMINATION + "\" value = \"" + maxillumination);
+  formMessage.replace("<minillumContent>", String("") + ARG_NAME_MIN_ILLUMINATION + "\" value = \"" + minillumination);
+  formMessage.replace("<tempRelayContent>", String("") + ARG_NAME_TEMP_RELAY + "\" value = \"" + tempRelay);
+  formMessage.replace("<humidRelayContent>", String("") + ARG_NAME_HUMID_RELAY + "\" value = \"" + humidRelay);
+  formMessage.replace("<illumRelayContent>", String("") + ARG_NAME_ILLUM_RELAY + "\" value = \"" + illumRelay);
+  formMessage.replace("<hiddenContent>", "<input type=\"hidden\" name=\"_method\" value=\"put\"/>");
+
+  server->send(200, "text/html", formMessage);
+}
+
+void handleNew() {
+  server->send(200, "text/html", "create it");
+}
+
+void handleUpdate() {
+  if ( server->arg("_method").equals("put") ) {
+    server->send(200, "text/html", "update it");
   } else {
     handleNotFound();
   }
 }
 
+void handleDelete() {
+  if ( server->arg("_method").equals("delete") ) {
+    server->send(200, "text/html", "delete it");
+  } else {
+    handleNotFound();
+  }
+}

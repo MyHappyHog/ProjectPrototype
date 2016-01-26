@@ -6,10 +6,10 @@
 #include <Stepper.h>
 
 extern "C" {
-  #include "user_interface.h"
+#include "user_interface.h"
 }
 
-#define DEBUG_MODE
+#define DEBUG_MODE 0
 
 /*
    EEPROM에서 사용할 size. 아마도.. 20KB까지 가능하지 않나 생각됨.
@@ -17,7 +17,7 @@ extern "C" {
    https://github.com/esp8266/Arduino/blob/master/tools/sdk/ld/eagle.flash.4m.ld
    https://github.com/esp8266/Arduino/blob/master/tools/sdk/ld/eagle.flash.4m1m.ld
 */
-#define EEPROM_SIZE 4096
+#define EEPROM_SIZE 512
 
 /*
    각 데이터들이 들어있는 주소. 여러 주소에 걸쳐있는 데이터인 경우에는
@@ -45,6 +45,7 @@ extern "C" {
 #define STEP_IN_2 14
 #define STEP_IN_3 12
 #define STEP_IN_4 13
+
 #define MOTER_STEP 200
 
 #define NUM_OF_DATA 30    // number of nomalization data
@@ -55,17 +56,22 @@ String read_ssid_from_eeprom( int firstAddress );
 void write_ssid_to_eeprom( int address, String _ssid );
 String read_password_from_eeprom( int firstAddress );
 void write_password_to_eeprom(int address, String _password );
-void openSoftAP();
-void openStation();
+
+void openDualMode(String& mac, String& ssid, String& password);
+void addHandlerToServer();
 void startServer();
 
-void handleRoot();
 void handleNotFound();
-void handleShowSetting();
-void handleInitConfig();
-void handleShowSettingPut();
+void handleShowData();
+void handleShowTable();
 void handlePutFood();
-void handlePutIn();
+void handleShowWifiForm();
+void handleShowNewDataForm();
+void handleShowEditDataForm();
+void handleWifiConfig();
+void handleNew();
+void handleUpdate();
+void handleDelete();
 
 void checkTemData(double* temp, int i);      // storing on the array
 void checkHumData(double* humid, int i);
@@ -81,7 +87,9 @@ void sort(double arr[], int num);
 /* 와이파이 ssid 와 password */
 String ssid;
 String password;
-byte bootMode;
+bool availableEditWifi;
+String mac;
+String relay_mac;
 
 double temperature[NUM_OF_DATA];
 double humidity[NUM_OF_DATA];
@@ -105,20 +113,19 @@ Stepper motor(MOTER_STEP, STEP_IN_1, STEP_IN_2, STEP_IN_3, STEP_IN_4);
 */
 String loadConfigure() {
   EEPROM.begin( EEPROM_SIZE );
-  ssid = read_ssid_from_eeprom( FIRST_ADDRESS_OF_SSID );
-  password = read_password_from_eeprom( FIRST_ADDRESS_OF_PASSWORD );
-  bootMode = EEPROM.read( IS_FIRST_BOOT );
+  ssid = "";
+  password = "";
+  mac = WiFi.softAPmacAddress();
+  relay_mac = "";
+  //ssid = read_ssid_from_eeprom( FIRST_ADDRESS_OF_SSID );
+  //password = read_password_from_eeprom( FIRST_ADDRESS_OF_PASSWORD );
+  availableEditWifi = true;
+
   WiFi.mode(WIFI_OFF);
-  while (WiFi.getMode() != WIFI_OFF) {
-    Serial.print('.');
-  }
   // randomSeed(analogRead(A0));
 
   // flash에 configure 정보를 저장하지 않음.
   WiFi.persistent(false);
-
-  //servo.attach(STEP_IN_1);
-  //servo.write(pos);
 }
 
 /*
@@ -126,38 +133,34 @@ String loadConfigure() {
     EEPROM의 모드에 따라 AP 혹은 STATION 웹 서버를 엶.
 */
 void setup() {
-  #ifdef DEBUG_MODE
-    Serial.begin(115200);
-  #endif
-  
+#ifdef DEBUG_MODE
+  Serial.begin(115200);
+#endif
+
   dht1.begin();
   dht2.begin();
 
-  #ifdef DEBUG_MODE
-    Serial.setDebugOutput(true);
-    Serial.println();
-  #endif
-  
+#ifdef DEBUG_MODE
+  Serial.setDebugOutput(true);
+  Serial.println("start");
+#endif
+
   loadConfigure();
 
   server = new ESP8266WebServer(WEB_PORT);
 
-  // 모드에 따라 다른 서버를 엶.
-  switch (bootMode) {
-    case AP_BOOT_MODE:
-      openSoftAP();
-      break;
-    case STATION_BOOT_MODE:
-      openStation();
-      break;
-  }
+  Serial.println(ssid);
+  Serial.println(password);
 
+  openDualMode(mac, ssid, password);
+  addHandlerToServer();
   startServer();
 }
 
 void loop() {
   server->handleClient();
 
+  /*
   uint32_t currenttime = millis();
   if ( (currenttime - lastreadtime) > 2000 ) {
 
@@ -179,5 +182,15 @@ void loop() {
     count++;
 
     lastreadtime = currenttime;
+
+#ifdef DEBUG_MODE
+    Serial.print("softap mac address : ");
+    Serial.println(WiFi.softAPmacAddress());
+
+    Serial.print("sta mac address : ");
+    Serial.println(WiFi.macAddress());
+    Serial.println(system_get_free_heap_size());
+#endif
   }
+  */
 }
