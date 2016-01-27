@@ -8,11 +8,10 @@
 
 import UIKit
 
-struct SettingSchedulerCell {
+struct SettingSchedulerCell{
     var isChecked : Bool = false
     var time_hour : Int?
     var time_minute : Int?
-    var isChecked_week  = [ false, false, false, false, false, false, false]
     
     init(isChecked: Bool, time_hour: Int, time_minute: Int){
         self.isChecked = isChecked

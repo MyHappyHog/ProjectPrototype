@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */; };
-		DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5294F11C377843002E696A /* coredataAlarm.swift */; };
-		DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */; };
-		DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52950A1C37845E002E696A /* coredataprofileProfile.swift */; };
 		DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2A1C048F40009DDB46 /* AppDelegate.swift */; };
 		DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2C1C048F40009DDB46 /* mainViewController.swift */; };
 		DA565C301C048F40009DDB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA565C2E1C048F40009DDB46 /* Main.storyboard */; };
@@ -30,6 +26,16 @@
 		DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC21C04D363009DDB46 /* SettingViewController.swift */; };
 		DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC31C04D363009DDB46 /* SidePets.swift */; };
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
+		DA5CB28A1C592B6C00AE22C7 /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */; };
+		DA5CB28B1C592B6C00AE22C7 /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */; };
+		DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */; };
+		DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */; };
+		DA5CB28E1C592B6C00AE22C7 /* credataUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */; };
+		DA5CB28F1C592B6C00AE22C7 /* credataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2891C592B6C00AE22C7 /* credataUser.swift */; };
+		DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */; };
+		DA5CB2951C5951FB00AE22C7 /* schedulerDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2941C5951FB00AE22C7 /* schedulerDataViewController.swift */; };
+		DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */; };
+		DA5CB2991C59594100AE22C7 /* schedulerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */; };
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
 		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
@@ -38,8 +44,6 @@
 		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
 		DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092231C40BBEB007BDC37 /* dataStore.swift */; };
 		DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092311C40E976007BDC37 /* addPetViewController.swift */; };
-		DAC490971C526570008865F6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC490951C526570008865F6 /* User+CoreDataProperties.swift */; };
-		DAC490981C526570008865F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC490961C526570008865F6 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,10 +191,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA5294F11C377843002E696A /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
-		DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataprofileProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataprofileProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA52950A1C37845E002E696A /* coredataprofileProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataprofileProfile.swift; path = HHH/coredata/coredataprofileProfile.swift; sourceTree = "<group>"; };
 		DA565C271C048F40009DDB46 /* HHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA565C2A1C048F40009DDB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA565C2C1C048F40009DDB46 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = mainViewController.swift; path = HHH/mainViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +215,16 @@
 		DA565CC31C04D363009DDB46 /* SidePets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SidePets.swift; path = HHH/SidePets.swift; sourceTree = "<group>"; };
 		DA565CC61C04D363009DDB46 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = HHH/WebViewController.swift; sourceTree = "<group>"; };
 		DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HHH-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
+		DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataProfile.swift; path = HHH/coredata/coredataProfile.swift; sourceTree = "<group>"; };
+		DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "credataUser+CoreDataProperties.swift"; path = "HHH/coredata/credataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA5CB2891C592B6C00AE22C7 /* credataUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = credataUser.swift; path = HHH/coredata/credataUser.swift; sourceTree = "<group>"; };
+		DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = schedulerViewController.swift; path = HHH/schedulerViewController.swift; sourceTree = "<group>"; };
+		DA5CB2941C5951FB00AE22C7 /* schedulerDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = schedulerDataViewController.swift; path = HHH/schedulerDataViewController.swift; sourceTree = "<group>"; };
+		DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
+		DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = schedulerViewControllerCell.swift; sourceTree = "<group>"; };
 		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
 		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
 		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
@@ -224,8 +234,6 @@
 		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
 		DAB092231C40BBEB007BDC37 /* dataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataStore.swift; sourceTree = "<group>"; };
 		DAB092311C40E976007BDC37 /* addPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = addPetViewController.swift; path = HHH/addPetViewController.swift; sourceTree = "<group>"; };
-		DAC490951C526570008865F6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "HHH/coredata/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DAC490961C526570008865F6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = HHH/coredata/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,12 +266,12 @@
 		DA5295061C377858002E696A /* coredata */ = {
 			isa = PBXGroup;
 			children = (
-				DAC490951C526570008865F6 /* User+CoreDataProperties.swift */,
-				DAC490961C526570008865F6 /* User.swift */,
-				DA5295091C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift */,
-				DA52950A1C37845E002E696A /* coredataprofileProfile.swift */,
-				DA5294F01C377843002E696A /* coredataAlarm+CoreDataProperties.swift */,
-				DA5294F11C377843002E696A /* coredataAlarm.swift */,
+				DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */,
+				DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */,
+				DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */,
+				DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */,
+				DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */,
+				DA5CB2891C592B6C00AE22C7 /* credataUser.swift */,
 			);
 			name = coredata;
 			sourceTree = "<group>";
@@ -343,6 +351,7 @@
 				DAB092231C40BBEB007BDC37 /* dataStore.swift */,
 				DAAB0FA91C4C18590061978C /* data_user.swift */,
 				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
+				DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -389,6 +398,7 @@
 				DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */,
 				DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */,
 				DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */,
+				DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -402,6 +412,8 @@
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
 				DAB092311C40E976007BDC37 /* addPetViewController.swift */,
 				DAAB0FAB1C4C1BF50061978C /* eachCellSetting.swift */,
+				DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */,
+				DA5CB2941C5951FB00AE22C7 /* schedulerDataViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -663,29 +675,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */,
+				DA5CB28A1C592B6C00AE22C7 /* coredataAlarm+CoreDataProperties.swift in Sources */,
+				DA5CB28B1C592B6C00AE22C7 /* coredataAlarm.swift in Sources */,
 				DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */,
 				DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */,
+				DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */,
 				DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */,
+				DA5CB28E1C592B6C00AE22C7 /* credataUser+CoreDataProperties.swift in Sources */,
 				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
-				DA52950C1C37845E002E696A /* coredataprofileProfile.swift in Sources */,
 				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
+				DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */,
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
 				DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */,
-				DA52950B1C37845E002E696A /* coredataprofileProfile+CoreDataProperties.swift in Sources */,
 				DAAB0FAA1C4C18590061978C /* data_user.swift in Sources */,
+				DA5CB2991C59594100AE22C7 /* schedulerViewControllerCell.swift in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
 				DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */,
 				DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */,
-				DA5294F61C377843002E696A /* coredataAlarm+CoreDataProperties.swift in Sources */,
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
-				DA5294F71C377843002E696A /* coredataAlarm.swift in Sources */,
 				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
-				DAC490971C526570008865F6 /* User+CoreDataProperties.swift in Sources */,
-				DAC490981C526570008865F6 /* User.swift in Sources */,
+				DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
+				DA5CB2951C5951FB00AE22C7 /* schedulerDataViewController.swift in Sources */,
+				DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */,
 				DAAB0FAC1C4C1BF50061978C /* eachCellSetting.swift in Sources */,
+				DA5CB28F1C592B6C00AE22C7 /* credataUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

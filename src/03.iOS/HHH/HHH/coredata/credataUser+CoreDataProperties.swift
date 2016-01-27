@@ -1,8 +1,8 @@
 //
-//  User+CoreDataProperties.swift
+//  credataUser+CoreDataProperties.swift
 //  HHH
 //
-//  Created by Cho YoungHun on 2016. 1. 22..
+//  Created by Cho YoungHun on 2016. 1. 28..
 //  Copyright © 2016년 hhh. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension User {
+extension credataUser {
 
     @NSManaged var image: NSData?
     @NSManaged var maxhum: NSNumber?
@@ -23,5 +23,6 @@ extension User {
     @NSManaged var server_addr: String?
     @NSManaged var title: String?
     @NSManaged var user_number: NSNumber?
+    @NSManaged var alram: coredataAlarm?
 
 }

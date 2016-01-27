@@ -98,30 +98,6 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "saveSegue"){
-            //coredata save
-            if(prev_vc == "add"){
-                /////센서 콘피그도 넘기기
-                let credata = coreData(entity: "User")
-                let dP = data_user(image: image, name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
-                    minTemp: Int(textfieldMinTemp.text! as String)!,
-                    maxTemp: Int(textfieldMaxTemp.text! as String)!,
-                    minHumid: Int(textfieldMinHumi.text! as String)!,
-                    maxHumid: Int(textfieldMaxHumi.text! as String)!) as data_user
-                credata.insertData(dP)
-                let http_reference = HttpReference(serverTxt.text! as String)
-                http_reference.postSensorData(Int(textfieldMaxTemp.text! as String)!
-                    , minTemprature: Int(textfieldMinTemp.text! as String)!,
-                    maxHumidity: Int(textfieldMaxHumi.text! as String)!,
-                    minHumidity: Int(textfieldMinHumi.text! as String)!)
-            }else if(prev_vc == "main"){
-                //값 수정
-            }
-        }
-    }
-    
-    
     @IBAction func changeSegue(sender: UISegmentedControl) {
         let num = preventOverlap(segementHumid.selectedSegmentIndex + 1, second: segementLight.selectedSegmentIndex + 1,
             pivot: segmentTemp.selectedSegmentIndex + 1)
@@ -149,6 +125,36 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             pivot: segementLight.selectedSegmentIndex + 1)
         segmentTemp.selectedSegmentIndex = num.first - 1
         segementHumid.selectedSegmentIndex = num.second - 1
+    }
+    
+    @IBAction func clickCancel(sender: AnyObject) {
+        dataStore.prev_vc = "else"
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func clickSave(sender: AnyObject) {
+        //coredata save
+        if(prev_vc == "add"){
+            /////센서 콘피그도 넘기기
+            let credata = coreData(entity: "User")
+            let dP = data_user(image: image, name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
+                minTemp: Int(textfieldMinTemp.text! as String)!,
+                maxTemp: Int(textfieldMaxTemp.text! as String)!,
+                minHumid: Int(textfieldMinHumi.text! as String)!,
+                maxHumid: Int(textfieldMaxHumi.text! as String)!) as data_user
+            credata.insertData(dP)
+            let http_reference = HttpReference(serverTxt.text! as String)
+            http_reference.postSensorData(Int(textfieldMaxTemp.text! as String)!
+                , minTemprature: Int(textfieldMinTemp.text! as String)!,
+                maxHumidity: Int(textfieldMaxHumi.text! as String)!,
+                minHumidity: Int(textfieldMinHumi.text! as String)!)
+        }else if(prev_vc == "main"){
+            //값 수정
+        }
+
+        
+        dataStore.prev_vc = "else"
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func  preventOverlap(var first: Int, var second: Int, pivot: Int)-> (first: Int, second: Int){
@@ -194,10 +200,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         
     }
     
-    @IBAction func clickCancel(sender: AnyObject) {
-        dataStore.prev_vc = "else"
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    
     /* did not change the profile image when user choose the cancel in the photo library */
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)

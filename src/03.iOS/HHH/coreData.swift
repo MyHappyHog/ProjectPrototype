@@ -89,7 +89,7 @@ class coreData{
     func insertData(data: data_user!){
         let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
         
-        let contact = User(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        let contact = credataUser(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
         contact.title = data.name
         contact.memo = data.memo
         //contact.image = "samplehog"

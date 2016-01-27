@@ -26,6 +26,5 @@ class dataStore{
     static var extenstion: String = "JPG"
     
     static var prev_vc: String?
-    
 }
 

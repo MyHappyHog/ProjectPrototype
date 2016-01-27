@@ -1,5 +1,5 @@
 //
-//  coredataAlarm+CoreDataProperties.swift
+//  coredataProfile+CoreDataProperties.swift
 //  HHH
 //
 //  Created by Cho YoungHun on 2016. 1. 28..
@@ -12,11 +12,8 @@
 import Foundation
 import CoreData
 
-extension coredataAlarm {
+extension coredataProfile {
 
-    @NSManaged var hour: NSNumber?
-    @NSManaged var isChecked: NSNumber?
-    @NSManaged var minute: NSNumber?
-    @NSManaged var user_number: NSNumber?
+    @NSManaged var user_index: NSNumber?
 
 }
