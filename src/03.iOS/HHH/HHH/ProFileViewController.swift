@@ -27,6 +27,7 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let user_coredata = coreData(entity: "User")
         
         //self.currentProfileImg.image = UIImage(named: (user_coredata.getDatasIndex(0, key: "image") as? String)!)
+        self.currentProfileImg.image = UIImage(data: user_coredata.getDatasIndex(0, key: "image") as! NSData)
         self.textFieldDevice.text = user_coredata.getDatasIndex(0, key: "server_addr") as? String
         self.textFieldMemo.text = user_coredata.getDatasIndex(0, key: "memo") as? String
         self.textFieldName.text = user_coredata.getDatasIndex(0, key: "title") as? String

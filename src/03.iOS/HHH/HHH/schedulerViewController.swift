@@ -10,9 +10,31 @@ import UIKit
 
 class schedulerViewController: UITableViewController{
     var schedules = [SettingSchedulerCell]()//(isChecked: false, time_hour: 1, time_minute: 2)]
+    var data: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //data parser 하기
+        dataToTime(dataStore.parserTime)
+    }
+    
+    func dataToTime(data: String){
+        if data == ""{
+            return
+        }
+        
+        let arrFull = data.componentsSeparatedByString(";")
+        print(arrFull.count)
+        for(var i = 0; i < arrFull.count - 1; i++){
+            print(arrFull[i])
+            let temp = arrFull[i].componentsSeparatedByString(":")
+            print(temp)
+            let hour: Int? = Int(temp[0])
+            let min: Int? = Int(temp[1])
+            let check: Bool = (temp[2] == "false" ? false : true)
+            
+            schedules.append(SettingSchedulerCell(isChecked: check, time_hour: hour!, time_minute: min!))
+        }
         
     }
     
@@ -27,11 +49,14 @@ class schedulerViewController: UITableViewController{
         return schedules.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("in")
         let cell = tableView.dequeueReusableCellWithIdentifier("schedulerViewControllerCell", forIndexPath: indexPath) as! schedulerViewControllerCell
         let alarm = schedules[indexPath.row] as SettingSchedulerCell
         
         cell.list = alarm
+        
+        cell.onButtonTapped = {
+            self.schedules[indexPath.row].isChecked = !self.schedules[indexPath.row].isChecked
+        }
         
         return cell
     }
@@ -51,9 +76,25 @@ class schedulerViewController: UITableViewController{
         }
     }
     
-    
+    var onDataAvailable: ((data: String) -> ())?
     
     @IBAction func clickCancel(sender: AnyObject) {
+        var parser: String = ""
+        
+        for(var i = 0; i < schedules.count; i++){
+            parser += String(schedules[i].time_hour! as Int)
+            parser += ":"
+            parser += String(schedules[i].time_minute! as Int)
+            parser += ":"
+            parser += ((schedules[i].isChecked) ? "true" : "false")
+            parser += ";"
+        }
+        //여기서는 값 다시 돌려보내주기
+        
+        print(parser)
+        
+        dataStore.parserTime = parser
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func clickAdd(sender: AnyObject) {

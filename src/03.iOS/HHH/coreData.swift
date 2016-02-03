@@ -108,12 +108,29 @@ class coreData{
         }
 
     }
+
+    func insertTimer(hour: Int, min: Int, check: Bool, index: Int){
+        let userEntity = NSEntityDescription.entityForName("Alarm", inManagedObjectContext: managedObjectContext!)
+        
+        let contact = coredataAlarm(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        contact.user_number = index
+        contact.hour = hour
+        contact.minute = min
+        contact.isChecked = check
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
+    }
+    
     
     //for debuging
-    static func deleteAllItem(){
+    static func deleteAllItem(name: String){
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context: NSManagedObjectContext = appDel.managedObjectContext!
-        let request = NSFetchRequest(entityName: "User")
+        let request = NSFetchRequest(entityName: name)
         request.returnsObjectsAsFaults = false
         
         do {
@@ -128,6 +145,25 @@ class coreData{
                 try context.save()
             }
         } catch {}
+    }
+    
+    func insertProfile(index: Int){
+        let userEntity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: managedObjectContext!)
+        
+        let contact = coredataProfile(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+        contact.user_index = index
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
+    }
+    
+    func setProfile(index: Int){
+        let value = objects![0] as! NSManagedObject
+        
+        value.setValue(index, forKey: "user_index")
     }
 }
 

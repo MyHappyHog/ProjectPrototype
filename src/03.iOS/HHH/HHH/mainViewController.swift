@@ -23,6 +23,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //var now_pet = [NSManagedObject]()
     
+    var index: Int?
     
     
     @IBOutlet weak var TempLabel: UILabel!
@@ -33,63 +34,60 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var profileView: UIView!
     
+    @IBOutlet weak var stateView: UIView!
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var memoView: UIView!
+    
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        print("change")
+    }
+    func abc(){
+        print("abc")
+        index = dataStore.index
+        
+        setProfile()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "abc", name: "asdf", object: nil)
+        
         //for debuging
-        //coreData.deleteAllItem()
+        coreData.deleteAllItem("User")
+        coreData.deleteAllItem("Alarm")
+        coreData.deleteAllItem("Profile")
         
         
         //set dataStroe
-        let coredata_user = coreData(entity: "User")
+        //let coredata_user = coreData(entity: "User")
         let coredata_profile = coreData(entity: "Profile")
         
         
         if(coredata_profile.getCount() == 0){
             dataStore.index = nil
+            //index = 0
         }else{
-            dataStore.index = coredata_user.getsearchIndex(coredata_profile.getDatasIndex(0, key: "name") as! String
-                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
-                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
+            dataStore.index = coredata_profile.getDatasIndex(0, key: "user_index") as? Int
+            //index = dataStore.index!
+            //coredata_user.getsearchIndex(coredata_profile.getDatasIndex(0, key: "name") as! String
+//                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
+//                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
             
         }
         
-        
-        //start click event for profile view
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-        tap.delegate = self
-        profileView.addGestureRecognizer(tap)
-
         //start set side bar
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
         
-        
-        ProfileImage.image = profileImg
-        memoLabel.text = profileMemo
-        nameLabel.text = profileName
-        
-        ////start get coredata
-        let coredata = coreData(entity: "User")
-        
-        //init profile
-        if coredata.getCount() == 0{
-            self.nameLabel.text = "--"
-            self.memoLabel.text = "--"
-            self.ProfileImage.image = UIImage(named: "sampleant")
-            self.server_addr = nil
-        }else{
-            self.nameLabel.text = coredata.getDatasIndex(0, key: "title") as? String
-            self.memoLabel.text = coredata.getDatasIndex(0, key: "memo") as? String
-            self.server_addr = coredata.getDatasIndex(0, key: "server_addr") as? String
-            self.ProfileImage.image = UIImage(data: (coredata.getDatasIndex(0, key: "image") as? NSData)!)
-        
-            checkDataForProfile()
-        }
+        setProfile()
+
+
     }
     
     
@@ -105,7 +103,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         switch segue.identifier! {
         case "setting":
             dataStore.prev_vc = "main"
-            dataStore.index = 0
+            dataStore.index = index
             break
         default:
             break
@@ -135,6 +133,20 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    @IBAction func clickFeedBtn(sender: AnyObject) {
+        let alert = UIAlertController(title: "밥주기", message: "밥을 주나요?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+            print("Handle Ok logic here")
+            self.http_reference?.postFedd()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+            print("Handle Cancel Logic here")
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
     //////////////////////////////////////////////////////////////////////////////////
     
     func checkDataForProfile(){
@@ -174,6 +186,42 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
         
         self.navigationController!.pushViewController(secondViewController, animated: true)
+    }
+    
+    
+    
+    func setGesture(){
+        //start click event for profile view
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap1.delegate = self
+        
+        memoView.addGestureRecognizer(tap1)
+        titleView.addGestureRecognizer(tap)
+        
+    }
+    
+    func setProfile(){
+        ////start get coredata
+        let coredata = coreData(entity: "User")
+        
+        //init profile
+        if coredata.getCount() == 0{
+            self.nameLabel.text = "--"
+            self.memoLabel.text = "--"
+            self.ProfileImage.image = UIImage(named: "sampleant")
+            self.server_addr = nil
+        }else{
+            
+            self.nameLabel.text = coredata.getDatasIndex(index!, key: "title") as? String
+            self.memoLabel.text = coredata.getDatasIndex(index!, key: "memo") as? String
+            self.server_addr = coredata.getDatasIndex(index!, key: "server_addr") as? String
+            self.ProfileImage.image = UIImage(data: (coredata.getDatasIndex(index!, key: "image") as? NSData)!)
+            
+            setGesture()
+            checkDataForProfile()
+        }
     }
 }
 

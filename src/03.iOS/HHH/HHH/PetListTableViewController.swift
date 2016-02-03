@@ -9,7 +9,7 @@
 import UIKit
 import Social
 
-class PetListTableViewController: UITableViewController {
+class PetListTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
 
     @IBOutlet weak var btnAddCell: UIBarButtonItem!
@@ -26,7 +26,6 @@ class PetListTableViewController: UITableViewController {
 
     override func viewDidAppear(animated: Bool) {
         let user_coredata = coreData(entity: "User")
-        
         for(var i = count; i < user_coredata.getCount()!; i++){
             let image : UIImage? = UIImage(data: user_coredata.getDatasIndex(i, key: "image") as! NSData)
             let server = user_coredata.getDatasIndex(i, key: "server_addr") as! String
@@ -36,6 +35,8 @@ class PetListTableViewController: UITableViewController {
                 image: image, server_addr: server))
             
         }
+        count = user_coredata.getCount()!
+        self.tableView.reloadData()
     }
     override func viewWillAppear(animated: Bool) {
         
@@ -61,6 +62,28 @@ class PetListTableViewController: UITableViewController {
             
         }
     
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPress:")
+        self.view.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    func longPress(longPressGestureRecognizer: UIGestureRecognizer){
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            
+            let touchPoint = longPressGestureRecognizer.locationInView(self.view)
+            if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+                print(indexPath.row)
+                // your code here, get the row for the indexPath or do whatever you want
+                
+                dataStore.index = indexPath.row
+                NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
+                
+                /*let alertController = UIAlertController(title: "iOScreator", message:
+                    "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)*/
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,7 +110,7 @@ class PetListTableViewController: UITableViewController {
             //Do whatever you want to do when the button is tapped here
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
                 let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                let index = dataStore.index
+                let index = dataStore.now_index
                 let coredata = coreData(entity: "User")
                 facebookSheet.setInitialText("name : \(coredata.getDatasIndex(index!, key: "title"))    memo : \(coredata.getDatasIndex(index!, key: "memo"))")
                 self.presentViewController(facebookSheet, animated: true, completion: nil)
@@ -107,13 +130,25 @@ class PetListTableViewController: UITableViewController {
 
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "add"{
+            dataStore.prev_vc = "add"
+            dataStore.now_index = pets.count
+            self.revealViewController().revealToggleAnimated(true)
+
+        }
+    }
+    
     //////////////////////////////////////////////////////////////////////////////////
+    
+    
     
     @IBAction func clickBtnAddCell(sender: AnyObject) {
         self.revealViewController().revealToggleAnimated(true)
         //dataStore.isClicked = true
         //dataStore.isClickedAdd = true
         dataStore.prev_vc = "add"
+        dataStore.now_index = pets.count
     }
     
     

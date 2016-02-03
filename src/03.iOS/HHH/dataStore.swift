@@ -26,5 +26,11 @@ class dataStore{
     static var extenstion: String = "JPG"
     
     static var prev_vc: String?
+    
+    //shcudler
+    static var parserTime: String = ""
+    static var prev_sch: String = ""
+    
+    static var now_index: Int?
 }
 

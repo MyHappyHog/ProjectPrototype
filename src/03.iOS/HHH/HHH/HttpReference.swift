@@ -67,13 +67,17 @@ class HttpReference{
     
     func postSensorData(maxTemprature: Int, minTemprature: Int, maxHumidity: Int, minHumidity: Int){
         let addr = "\(server_address! as String)/set"
-        print(addr)
+//        print(addr)
         Alamofire.request(.POST, addr, parameters: ["maxTemprature" : maxTemprature,
                                                     "minTemprature" : minTemprature,
                                                     "maxHumidity" : maxHumidity,
                                                     "minHumidity" : minHumidity])
     }
     
+    func postFedd(){
+        let addr = "\(server_address! as String)/food"
+        Alamofire.request(.GET, addr)
+    }
     func getData(type : Int) -> String{
         var return_value : String = "--"
         

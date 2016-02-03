@@ -15,6 +15,8 @@ class schedulerViewControllerCell: UITableViewCell{
     var no_check_img: UIImage = UIImage(named: "blank32-2")!
     var check_img: UIImage = UIImage(named: "check51-2")!
     
+    var onButtonTapped : (() -> Void)? = nil
+    
     /*init(hour: Int, min: Int){
         self.time_hour = hour
         self.time_minute = min
@@ -47,6 +49,9 @@ class schedulerViewControllerCell: UITableViewCell{
     @IBAction func clickCheck(sender: AnyObject) {
         isChecked = !isChecked
         check_condition()
+        if let onButtonTapped = self.onButtonTapped{
+            onButtonTapped()
+        }
     }
     func check_condition() {
         if isChecked{
