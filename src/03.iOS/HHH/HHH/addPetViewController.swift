@@ -91,7 +91,6 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
                 self.memoTxt.text = coredata.getDatasIndex(index, key: "memo") as? String
                 self.serverTxt.text = coredata.getDatasIndex(index, key: "server_addr") as? String
                 
-                print(coredata.getDatasIndex(index, key: "minTemp") as! Int)
                 self.textfieldMinTemp.text = String(coredata.getDatasIndex(index, key: "minTemp") as! Int)
                 self.textfieldMaxTemp.text = String(coredata.getDatasIndex(index, key: "maxTemp") as! Int)
                 self.textfieldMinHumi.text = String(coredata.getDatasIndex(index, key: "minhum") as! Int)

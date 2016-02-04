@@ -86,6 +86,7 @@ class coreData{
         return nil
     }
     
+    /////
     func insertData(data: data_user!){
         let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
         
@@ -108,6 +109,31 @@ class coreData{
         }
 
     }
+    
+    func setProfileViewData(data:data_user, index: Int){
+        let value = objects![index] as! NSManagedObject
+        
+        value.setValue(data.name, forKey: "title")
+        value.setValue(data.memo, forKey: "memo")
+        value.setValue(data.server_addr, forKey: "server_addr")
+        value.setValue(data.minTemp, forKey: "minTemp")
+        value.setValue(data.maxTemp, forKey: "maxTemp")
+        value.setValue(data.minHumid, forKey: "minhum")
+        value.setValue(data.maxHumid, forKey: "maxhum")
+        
+        (dataStore.extenstion == "JPG") ? (value.setValue(UIImageJPEGRepresentation(data.image!, 1), forKey: "image")) : (value.setValue(UIImagePNGRepresentation(data.image!), forKey: "image"))
+
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
+        
+        
+    }
+    /////
+    
 
     func insertTimer(hour: Int, min: Int, check: Bool, index: Int){
         let userEntity = NSEntityDescription.entityForName("Alarm", inManagedObjectContext: managedObjectContext!)
@@ -147,6 +173,8 @@ class coreData{
         } catch {}
     }
     
+    
+    /////
     func insertProfile(index: Int){
         let userEntity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: managedObjectContext!)
         
@@ -171,5 +199,6 @@ class coreData{
             print(error)
         }
     }
+    /////
 }
 

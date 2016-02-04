@@ -24,13 +24,41 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imgPicker.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        tap.delegate = self
+        
+        currentProfileImg.userInteractionEnabled = true
+        currentProfileImg.addGestureRecognizer(tap)
+        
         let user_coredata = coreData(entity: "User")
+        let index = dataStore.index
+        
         
         //self.currentProfileImg.image = UIImage(named: (user_coredata.getDatasIndex(0, key: "image") as? String)!)
-        self.currentProfileImg.image = UIImage(data: user_coredata.getDatasIndex(0, key: "image") as! NSData)
-        self.textFieldDevice.text = user_coredata.getDatasIndex(0, key: "server_addr") as? String
-        self.textFieldMemo.text = user_coredata.getDatasIndex(0, key: "memo") as? String
-        self.textFieldName.text = user_coredata.getDatasIndex(0, key: "title") as? String
+        self.currentProfileImg.image = UIImage(data: user_coredata.getDatasIndex(index!, key: "image") as! NSData)
+        self.textFieldDevice.text = user_coredata.getDatasIndex(index!, key: "server_addr") as? String
+        self.textFieldMemo.text = user_coredata.getDatasIndex(index!, key: "memo") as? String
+        self.textFieldName.text = user_coredata.getDatasIndex(index!, key: "title") as? String
+    }
+    
+    @IBAction func clickSave(sender: AnyObject) {
+        let title: String = textFieldName.text!
+        let memo: String = textFieldMemo.text!
+        let server_addr: String = textFieldDevice.text!
+        let image: UIImage = currentProfileImg.image!
+        
+        let dp = data_user(image: image, name: title, memo: memo, server: server_addr,
+            minTemp: 0, maxTemp: 0, minHumid: 0, maxHumid: 0) as data_user
+        let coredata = coreData(entity: "User")
+        coredata.setProfileViewData(dp, index: dataStore.index!)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func clickCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /* shows the photo library when the changing profile image button pressed */
@@ -40,6 +68,7 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.presentViewController(imgPicker, animated: true, completion: nil)
     }
+    
     /* change the profile image when user choose the new profile image in the photo library */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let imageUrl          = info[UIImagePickerControllerReferenceURL] as! NSURL
@@ -60,8 +89,8 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
-        self.image = newImage
-        self.currentProfileImg.image = self.image
+        //self.image = newImage
+        self.currentProfileImg.image =  newImage//self.image
         
         dismissViewControllerAnimated(true, completion: nil)
         

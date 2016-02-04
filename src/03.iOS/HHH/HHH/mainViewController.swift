@@ -58,6 +58,9 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         setProfile()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        setProfile()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +91,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
 //                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
             
         }
-        print(index)
         
         //start set side bar
         if self.revealViewController() != nil {
@@ -97,71 +99,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         setProfile()
-        
-        //ProfileImage.image = ProfileImage.image?.resized(CGSizeMake(19, 19))
-        //ProfileImage.image = CGSize(width: 50.0, height: 50.0)
-        print(ProfileImage.frame.height)
-        //ProfileImage.frame = CGRectMake(ProfileImage.frame.origin.x, ProfileImage.frame.origin.y, 200, 200)
-        print(ProfileImage.frame.height)
-       // ProfileImage.frame.    
-        
-        //ProfileImage.frame = CGRectMake(0,0,50.0, 050.0);
-        //ProfileImage.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        //ProfileImage.image = RBSquareImageTo(ProfileImage.image!, size: CGSize(width: 200, height: 200))
     }
     
-
-    
-    
-    func RBSquareImageTo(image: UIImage, size: CGSize) -> UIImage {
-        return RBResizeImage(RBSquareImage(image), targetSize: size)
-    }
-    
-    func RBSquareImage(image: UIImage) -> UIImage {
-        var originalWidth  = image.size.width
-        var originalHeight = image.size.height
-        
-        var edge: CGFloat
-        if originalWidth > originalHeight {
-            edge = originalHeight
-        } else {
-            edge = originalWidth
-        }
-        
-        var posX = (originalWidth  - edge) / 2.0
-        var posY = (originalHeight - edge) / 2.0
-        
-        var cropSquare = CGRectMake(posX, posY, edge, edge)
-        
-        var imageRef = CGImageCreateWithImageInRect(image.CGImage, cropSquare);
-        return UIImage(CGImage: imageRef!, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
-    }
-    
-    func RBResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSizeMake(size.width * heightRatio, size.height * heightRatio)
-        } else {
-            newSize = CGSizeMake(size.width * widthRatio,  size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRectMake(0, 0, newSize.width, newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.drawInRect(rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
     
     
     
@@ -257,9 +196,13 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
+        dataStore.index = index
+        
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
         
-        self.navigationController!.pushViewController(secondViewController, animated: true)
+        let sVC: ProFileViewController = ProFileViewController()
+        self.presentViewController(UINavigationController(rootViewController: secondViewController), animated: true, completion: nil)
+        //self.navigationController!.pushViewController(secondViewController, animated: true)
     }
     
     
@@ -298,17 +241,3 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 }
-
-
-extension UIImage {
-    
-    func resized(newSize:CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(newSize, false, UIScreen.mainScreen().scale)
-        self.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
-}
-
