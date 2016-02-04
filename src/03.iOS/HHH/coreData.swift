@@ -164,6 +164,12 @@ class coreData{
         let value = objects![0] as! NSManagedObject
         
         value.setValue(index, forKey: "user_index")
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
     }
 }
 
