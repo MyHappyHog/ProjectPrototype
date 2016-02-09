@@ -62,8 +62,6 @@ class PetListTableViewCell: UITableViewCell {
         dataStore.isClicked = true
         dataStore.isClickedShare = true
         dataStore.index = coredata.getsearchIndex(name!, _memo: memo!, _server_addr: server_addr!)
-        print("datastore index")
-        print(dataStore.index)
         if let onButtonTapped = self.onButtonTapped {
             onButtonTapped()
         }

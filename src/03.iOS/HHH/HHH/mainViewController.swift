@@ -38,13 +38,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var memoView: UIView!
     
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        print("change")
-    }
     func abc(){
-        print("abc")
-        index = dataStore.index
+        index = dataStore.profile_index
         
         let coredata = coreData(entity: "Profile")
         
@@ -54,7 +49,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
             coredata.setProfile(index!)
         }
         
-        print(index)
         setProfile()
     }
     
@@ -81,11 +75,10 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         
         if(coredata_profile.getCount() == 0){
-            dataStore.index = nil
-            index = 0
+            
         }else{
-            dataStore.index = coredata_profile.getDatasIndex(0, key: "user_index") as? Int
-            index = dataStore.index!
+            dataStore.profile_index = coredata_profile.getDatasIndex(0, key: "user_index") as? Int
+            index = dataStore.profile_index!
             //coredata_user.getsearchIndex(coredata_profile.getDatasIndex(0, key: "name") as! String
 //                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
 //                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
@@ -116,7 +109,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         switch segue.identifier! {
         case "setting":
             dataStore.prev_vc = "main"
-            dataStore.index = index
+            //dataStore.profile_index = index
             break
         default:
             break
@@ -196,8 +189,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
-        dataStore.index = index
-        
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
         
         let sVC: ProFileViewController = ProFileViewController()

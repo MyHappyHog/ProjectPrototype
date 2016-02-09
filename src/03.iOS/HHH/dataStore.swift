@@ -32,5 +32,11 @@ class dataStore{
     static var prev_sch: String = ""
     
     static var now_index: Int?
+    
+    
+    static var profile_index: Int?
+    static var timer_index: Int?
+    
+    static var numOfUser: Int?
 }
 

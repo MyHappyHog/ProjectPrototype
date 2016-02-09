@@ -134,7 +134,7 @@ class coreData{
     }
     /////
     
-
+    ///timer
     func insertTimer(hour: Int, min: Int, check: Bool, index: Int){
         let userEntity = NSEntityDescription.entityForName("Alarm", inManagedObjectContext: managedObjectContext!)
         
@@ -150,6 +150,20 @@ class coreData{
             print(error)
         }
     }
+    
+    func getCountTimer(index: Int) -> Int{
+        var count:Int = 0
+        for(var i = 0; i < objects!.count; i++){
+            let value = objects![i] as! NSManagedObject
+            
+            if(value.valueForKey("user_number") as! Int == index){
+                count++
+            }
+        }
+        return count
+    }
+    
+    ///
     
     
     //for debuging
@@ -174,7 +188,7 @@ class coreData{
     }
     
     
-    /////
+    ///// profile
     func insertProfile(index: Int){
         let userEntity = NSEntityDescription.entityForName("Profile", inManagedObjectContext: managedObjectContext!)
         

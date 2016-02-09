@@ -74,14 +74,37 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
                 print(indexPath.row)
                 // your code here, get the row for the indexPath or do whatever you want
                 
-                dataStore.index = indexPath.row
-                NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
                 
-                /*let alertController = UIAlertController(title: "iOScreator", message:
+                
+                let optionMenu = UIAlertController(title: nil, message:  "Choose Option", preferredStyle: .ActionSheet)
+                
+                let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    print("deleteeeeeeeee")
+                })
+                
+                let setProfile = UIAlertAction(title: "Profile", style: .Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    dataStore.profile_index = indexPath.row
+                    NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
+                    
+                    /*let alertController = UIAlertController(title: "iOScreator", message:
                     "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)*/
+                })
                 
-                self.presentViewController(alertController, animated: true, completion: nil)*/
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    print("cancel")
+                })
+                
+                optionMenu.addAction(deleteAction)
+                optionMenu.addAction(setProfile)
+                optionMenu.addAction(cancelAction)
+                
+                self.presentViewController(optionMenu, animated: true, completion: nil)
             }
         }
     }
@@ -133,7 +156,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "add"{
             dataStore.prev_vc = "add"
-            dataStore.now_index = pets.count
+            dataStore.numOfUser = pets.count
             self.revealViewController().revealToggleAnimated(true)
 
         }
@@ -148,7 +171,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
         //dataStore.isClicked = true
         //dataStore.isClickedAdd = true
         dataStore.prev_vc = "add"
-        dataStore.now_index = pets.count
+        dataStore.numOfUser = pets.count
     }
     
     

@@ -19,6 +19,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     let imgPicker = UIImagePickerController()
     var image :UIImage = UIImage(named: "sampleant")!
     
+    var index: Int?
     
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var memoTxt: UITextField!
@@ -62,9 +63,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     }
     
     //////
-    override func viewDidAppear(animated: Bool) {
 
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,29 +78,30 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         segementLight.selectedSegmentIndex = 2
         
         prev_vc = dataStore.prev_vc
-        print(prev_vc)
+        print("prev_vc is \(prev_vc)")
         
         if(prev_vc == "main"){
             let coredata = coreData(entity: "User")
             if(coredata.getCount() == 0){
                 return
             }else{//
-                let index = dataStore.index!
-                self.nameTxt.text = coredata.getDatasIndex(index, key: "title") as? String
-                self.memoTxt.text = coredata.getDatasIndex(index, key: "memo") as? String
-                self.serverTxt.text = coredata.getDatasIndex(index, key: "server_addr") as? String
+                index = dataStore.profile_index
+                self.nameTxt.text = coredata.getDatasIndex(index!, key: "title") as? String
+                self.memoTxt.text = coredata.getDatasIndex(index!, key: "memo") as? String
+                self.serverTxt.text = coredata.getDatasIndex(index!, key: "server_addr") as? String
                 
-                self.textfieldMinTemp.text = String(coredata.getDatasIndex(index, key: "minTemp") as! Int)
-                self.textfieldMaxTemp.text = String(coredata.getDatasIndex(index, key: "maxTemp") as! Int)
-                self.textfieldMinHumi.text = String(coredata.getDatasIndex(index, key: "minhum") as! Int)
-                self.textfieldMaxHumi.text = String(coredata.getDatasIndex(index, key: "maxhum") as! Int)
-                self.profileImage.image = UIImage(data: coredata.getDatasIndex(index, key: "image") as! NSData)
+                self.textfieldMinTemp.text = String(coredata.getDatasIndex(index!, key: "minTemp") as! Int)
+                self.textfieldMaxTemp.text = String(coredata.getDatasIndex(index!, key: "maxTemp") as! Int)
+                self.textfieldMinHumi.text = String(coredata.getDatasIndex(index!, key: "minhum") as! Int)
+                self.textfieldMaxHumi.text = String(coredata.getDatasIndex(index!, key: "maxhum") as! Int)
+                self.profileImage.image = UIImage(data: coredata.getDatasIndex(index!, key: "image") as! NSData)
             }
 
-        }else if(prev_vc == "setting"){
-            
+        }else if(prev_vc == "add"){
+            index = dataStore.numOfUser
+        }else{
+            //index = dataStore.now_index
         }
-        
     }
     
     var schedulStr: String = ""
@@ -113,14 +113,16 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             //let navigationController = segue.destinationViewController as! UINavigationController
             //let VC = navigationController.topViewController as! schedulerViewController
             //VC.data = schedulStr
+            if(dataStore.parserTime != ""){
+                return
+            }
             
             let alarmData = coreData(entity: "Alarm")
             
-            
             var parser: String = ""
-            let index = dataStore.now_index
+            //let index = dataStore.now_index
             
-            for(var i = 0; i < alarmData.getCount(); i++){
+            for(var i = 0; i < alarmData.getCountTimer(index!); i++){
                 parser += String(alarmData.getDatasIndex(index!, key: "hour") as! Int)
                 parser += ":"
                 parser += String(alarmData.getDatasIndex(index!, key: "minute") as! Int)
@@ -190,8 +192,9 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             if dataStore.parserTime != ""{
                 insertTime()
             }
+            
             if(credata.getCount() == 0){
-                dataStore.index = 0
+                dataStore.profile_index = 0
                 NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
             }
         }else{// if(prev_vc == "main"){
@@ -206,7 +209,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     func insertTime(){
         let coredata = coreData(entity: "Alarm")
         let data = dataStore.parserTime
-        let index: Int? = dataStore.now_index
+        //let index: Int? = dataStore.now_index
         let arrFull = data.componentsSeparatedByString(";")
         print(arrFull.count)
         for(var i = 0; i < arrFull.count - 1; i++){

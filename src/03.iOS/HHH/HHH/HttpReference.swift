@@ -24,7 +24,7 @@ class HttpReference{
     
     init(_ addr: String?){
         self.server_address = addr
-        print(server_address)
+        //print(server_address)
     }
     
     
