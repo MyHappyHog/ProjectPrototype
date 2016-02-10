@@ -25,9 +25,9 @@ int Wifi::deserialize(String json) {
 	}
 
 	// 분석한 데이터 입력
-	data->ssid = root[SSID_KEY];
-	data->password = root[PASSWORD_KEY];
-	data->dropboxKey = root[DROPBOX_ACCESS_KEY];
+	data->ssid = root[SSID_KEY].asString();
+	data->password = root[PASSWORD_KEY].asString();
+	data->dropboxKey = root[DROPBOX_ACCESS_KEY].asString();
 
 	return 0;
 }
