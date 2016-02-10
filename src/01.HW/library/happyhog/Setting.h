@@ -16,10 +16,10 @@ public:
 	virtual int deserialize(String json) = 0;
 	virtual String serialize() = 0;
 		
-	String& getFilePath();
-	String& getFileName();
+	String getFilePath();
+	String getFileName();
 
-protected:
+private:
 	String filePath;
 	String fileName;
 };

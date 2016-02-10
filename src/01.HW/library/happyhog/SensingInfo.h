@@ -19,14 +19,14 @@ typedef struct _SensorData {
 /// @date		2016-02-11
 /// @version	0.0.1
 
-class SensingInfo : Setting {
+class SensingInfo : public Setting {
 public :
 	SensingInfo(String fileName);
 	SensingInfo(String filePath, String fileName);
-	~SensingInfo();
+	virtual ~SensingInfo();
 	
-	int deserialize(String json);
-	String serialize();
+	virtual int deserialize(String json);
+	virtual String serialize();
 
 private :
 	SensorData* data;

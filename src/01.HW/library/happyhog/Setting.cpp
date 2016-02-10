@@ -8,10 +8,10 @@ Setting::Setting(String& filePath, String& fileName) {
 };
 Setting::~Setting() { }
 
-String& Setting::getFilePath() {
+String Setting::getFilePath() {
 	return filePath;
 }
 
-String& Setting::getFileName() {
+String Setting::getFileName() {
 	return fileName;
 }

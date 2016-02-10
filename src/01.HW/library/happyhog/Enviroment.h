@@ -22,14 +22,14 @@ typedef struct _EnviromentData {
 	int humidity[2];
 } EnviromentData;
 
-class Enviroment : Setting {
+class Enviroment : public Setting {
 public :
 	Enviroment(String fileName);
 	Enviroment(String filePath, String fileName);
-	~Enviroment();
+	virtual ~Enviroment();
 
-	int deserialize(String json);
-	String serialize();
+	virtual int deserialize(String json);
+	virtual String serialize();
 
 private :
 	EnviromentData* data;
