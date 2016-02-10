@@ -15,8 +15,8 @@ public:
 	DataStore() { };
 	virtual ~DataStore() { };
 	
-	virtual String download(Setting* data, String key) = 0;
-	virtual int upload(Setting* data, String key) = 0;
+	virtual int download(Setting* data) = 0;
+	virtual int upload(Setting* data) = 0;
 };
 
 #endif
