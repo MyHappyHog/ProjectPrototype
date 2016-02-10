@@ -22,6 +22,12 @@ typedef struct _EnviromentData {
 	int humidity[2];
 } EnviromentData;
 
+/// @brief		사용자가 설정한 온, 습도 정보를 담고 있는 클래스
+/// @details	
+/// @author		Jongho Lim, sloth@kookmin.ac.kr
+/// @date		2016-02-11
+/// @version	0.0.1
+
 class Enviroment : public Setting {
 public :
 	Enviroment(String fileName);
