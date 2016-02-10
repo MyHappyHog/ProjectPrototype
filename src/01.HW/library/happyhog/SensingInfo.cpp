@@ -2,17 +2,32 @@
 #include <ArduinoJson.h>
 #include "SensingInfo.h"
 
-SensingInfo::SensingInfo(String& fileName) : Setting(){
-	SensingInfo::SensingInfo(String("/"), fileName);
-}
+SensingInfo::SensingInfo(String fileName) : SensingInfo(String("/"), fileName) { }
 
-SensingInfo::SensingInfo(String& filePath, String& fileName) : Setting(filePath, fileName) {
+SensingInfo::SensingInfo(String filePath, String fileName) : Setting(filePath, fileName) {
 	data = new SensorData;
 	data->temperature = data->humidity = 0;
 }
 
 SensingInfo::~SensingInfo() {
 	delete data;
+}
+
+int SensingInfo::deserialize(String json) {
+	// Jsonbuffer 동적할당
+	StaticJsonBuffer<SENSORDATA_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<SENSORDATA_JSON_SIZE>;
+
+	// JSON 분석
+	JsonObject& root = jsonBuffer->parseObject(json);
+	if( !root.success() ) {
+		return -1;
+	}
+
+	// 분석한 데이터 입력
+	data->temperature = root[TEMPERATURE_KEY];
+	data->humidity = root[HUMIDITY_KEY];
+
+	return 0;
 }
 
 String SensingInfo::serialize() {
@@ -34,19 +49,3 @@ String SensingInfo::serialize() {
 	return json;
 }
 
-int SensingInfo::deserialize(String& json) {
-	// Jsonbuffer 동적할당
-	StaticJsonBuffer<SENSORDATA_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<SENSORDATA_JSON_SIZE>;
-
-	// JSON 분석
-	JsonObject& root = jsonBuffer->parseObject(json);
-	if( !root.success() ) {
-		return -1;
-	}
-
-	// 분석한 데이터 입력
-	data->temperature = root[TEMPERATURE_KEY];
-	data->humidity = root[HUMIDITY_KEY];
-
-	return 0;
-}

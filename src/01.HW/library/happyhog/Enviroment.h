@@ -24,11 +24,11 @@ typedef struct _EnviromentData {
 
 class Enviroment : Setting {
 public :
-	Enviroment(String& fileName);
-	Enviroment(String& filePath, String& fileName);
+	Enviroment(String fileName);
+	Enviroment(String filePath, String fileName);
 	~Enviroment();
 
-	int deserialize(String& json);
+	int deserialize(String json);
 	String serialize();
 
 private :

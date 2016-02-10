@@ -21,11 +21,11 @@ typedef struct _SensorData {
 
 class SensingInfo : Setting {
 public :
-	SensingInfo(String& fileName);
-	SensingInfo(String& filePath, String& fileName);
+	SensingInfo(String fileName);
+	SensingInfo(String filePath, String fileName);
 	~SensingInfo();
 	
-	int deserialize(String& json);
+	int deserialize(String json);
 	String serialize();
 
 private :

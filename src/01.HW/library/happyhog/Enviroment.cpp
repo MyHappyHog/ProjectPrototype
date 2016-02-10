@@ -3,11 +3,9 @@
 
 #include "Enviroment.h"
 
-Enviroment::Enviroment(String& fileName) {
-	Enviroment(String("/"), fileName);
-}
+Enviroment::Enviroment(String fileName) : Enviroment("/", fileName) { }
 
-Enviroment::Enviroment(String& filePath, String& fileName) : Setting(filePath, fileName) {
+Enviroment::Enviroment(String filePath, String fileName) : Setting(filePath, fileName) {
 	data = new EnviromentData;
 	data->temperature[MAX_TEMPERATURE] = DEFAULT_MAX_TEMPERATURE;
 	data->temperature[MIN_TEMPERATURE] = DEFAULT_MIN_TEMPERATURE;
@@ -19,7 +17,7 @@ Enviroment::~Enviroment() {
 	delete data;
 }
 
-int Enviroment::deserialize(String& json) {
+int Enviroment::deserialize(String json) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<ENVIROMENT_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<ENVIROMENT_JSON_SIZE>;
 
