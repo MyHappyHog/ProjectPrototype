@@ -10,10 +10,11 @@
 class Setting {
 public:
 	Setting::Setting();
+	Setting::Setting(String& filePath, String& fileName);
 	virtual ~Setting();
-
+	
+	virtual int deserialize(String& json) = 0;
 	virtual String serialize() = 0;
-	virtual int deserialize() = 0;
 		
 	String& getFilePath();
 	String& getFileName();
