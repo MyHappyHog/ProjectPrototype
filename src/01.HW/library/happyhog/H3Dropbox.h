@@ -30,8 +30,8 @@ public:
 	H3Dropbox(String _key);
 	virtual ~H3Dropbox();
 
-	virtual int download(Setting* data);
-	virtual int upload(Setting* data);
+	virtual bool download(Setting* data);
+	virtual bool upload(Setting* data);
 	
 private:
 	bool invaildKey;

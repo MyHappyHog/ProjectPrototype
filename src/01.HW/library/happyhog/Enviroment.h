@@ -34,7 +34,7 @@ public :
 	Enviroment(String filePath, String fileName);
 	virtual ~Enviroment();
 
-	virtual int deserialize(String json);
+	virtual bool deserialize(String json);
 	virtual String serialize();
 
 private :

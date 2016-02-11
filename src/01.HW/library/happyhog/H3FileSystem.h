@@ -15,8 +15,8 @@ public:
 	H3FileSystem(bool formatting);
 	virtual ~H3FileSystem();
 
-	virtual int download(Setting* data);
-	virtual int upload(Setting* data);
+	virtual bool download(Setting* data);
+	virtual bool upload(Setting* data);
 
 private:
 	bool spiffsReady;

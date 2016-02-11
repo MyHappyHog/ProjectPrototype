@@ -27,7 +27,7 @@ public :
 	Wifi(String filePath, String fileName);
 	virtual ~Wifi();
 
-	virtual int deserialize(String json);
+	virtual bool deserialize(String json);
 	virtual String serialize();
 
 private :

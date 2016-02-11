@@ -17,14 +17,14 @@ Enviroment::~Enviroment() {
 	delete data;
 }
 
-int Enviroment::deserialize(String json) {
+bool Enviroment::deserialize(String json) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<ENVIROMENT_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<ENVIROMENT_JSON_SIZE>;
 
 	// JSON 분석
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
-		return -1;
+		return false;
 	}
 
 	// 분석한 데이터 입력
@@ -34,7 +34,7 @@ int Enviroment::deserialize(String json) {
 	data->humidity[MAX_HUMIDITY] = root[HUMIDITY_ARRAY_KEY][MAX_HUMIDITY];
 	data->humidity[MIN_HUMIDITY] = root[HUMIDITY_ARRAY_KEY][MIN_HUMIDITY];
 
-	return 0;
+	return true;
 }
 String Enviroment::serialize() {
 	// Jsonbuffer 동적할당

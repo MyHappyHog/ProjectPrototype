@@ -29,7 +29,7 @@ public :
 	Relay(String filePath, String fileName);
 	virtual ~Relay();
 
-	virtual int deserialize(String json);
+	virtual bool deserialize(String json);
 	virtual String serialize();
 
 private :

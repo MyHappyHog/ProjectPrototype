@@ -13,7 +13,7 @@ public:
 	Setting(String& filePath, String& fileName);
 	virtual ~Setting();
 	
-	virtual int deserialize(String json) = 0;
+	virtual bool deserialize(String json) = 0;
 	virtual String serialize() = 0;
 		
 	String getFilePath();

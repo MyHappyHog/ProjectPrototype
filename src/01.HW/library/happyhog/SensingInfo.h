@@ -25,7 +25,7 @@ public :
 	SensingInfo(String filePath, String fileName);
 	virtual ~SensingInfo();
 	
-	virtual int deserialize(String json);
+	virtual bool deserialize(String json);
 	virtual String serialize();
 
 private :

@@ -13,21 +13,21 @@ SensingInfo::~SensingInfo() {
 	delete data;
 }
 
-int SensingInfo::deserialize(String json) {
+bool SensingInfo::deserialize(String json) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<SENSORDATA_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<SENSORDATA_JSON_SIZE>;
 
 	// JSON 분석
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
-		return -1;
+		return false;
 	}
 
 	// 분석한 데이터 입력
 	data->temperature = root[TEMPERATURE_KEY];
 	data->humidity = root[HUMIDITY_KEY];
 
-	return 0;
+	return true;
 }
 
 String SensingInfo::serialize() {

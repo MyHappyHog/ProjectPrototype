@@ -19,14 +19,14 @@ Relay::~Relay() {
 	delete data;
 }
 
-int Relay::deserialize(String json) {
+bool Relay::deserialize(String json) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<RELAY_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<RELAY_JSON_SIZE>;
 
 	// JSON 분석
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
-		return -1;
+		return false;
 	}
 
 	// 분석한 데이터 입력
@@ -37,7 +37,7 @@ int Relay::deserialize(String json) {
 	data->humidity[RELAY_POSITION] = root[HUMIDITY_RELAY_KEY][RELAY_POSITION];
 	data->humidity[RELAY_STATE] = root[HUMIDITY_RELAY_KEY][RELAY_STATE];
 
-	return 0;
+	return true;
 }
 String Relay::serialize() {
 	// Jsonbuffer 동적할당

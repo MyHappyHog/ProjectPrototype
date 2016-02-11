@@ -8,7 +8,7 @@ H3Dropbox::H3Dropbox(String _key) : key(_key) {
 }
 H3Dropbox::~H3Dropbox() { }
 
-int H3Dropbox::download(Setting* data) {
+bool H3Dropbox::download(Setting* data) {
 	// http request 설정
 	HTTPClient* http = new HTTPClient();
 	
@@ -31,7 +31,7 @@ int H3Dropbox::download(Setting* data) {
 	/// @TODO invaild key 일 때 처리하기. 즉 에러처리..
 	if(httpCode != 200) {
 		delete http;
-		return -1;
+		return false;
 	} 
 
 	// response 가져와서
@@ -42,14 +42,10 @@ int H3Dropbox::download(Setting* data) {
 	// httpclient 메모리 반환
 	delete http;
 
-	if (data->deserialize(result) != 0) {
-		return -1;
-	}
-
-	return 0;
+	return data->deserialize(result);
 }
 
-int H3Dropbox::upload(Setting* data) {
+bool H3Dropbox::upload(Setting* data) {
 	// http request 설정
 	HTTPClient* http = new HTTPClient();
 	
@@ -76,7 +72,7 @@ int H3Dropbox::upload(Setting* data) {
 	/// @TODO invaild key 일 때 처리하기. 즉 에러처리..
 	if(httpCode != 200) {
 		delete http;
-		return -1;
+		return false;
 	} 
 
 	// response 가져와서
@@ -89,5 +85,5 @@ int H3Dropbox::upload(Setting* data) {
 
 	/// @TODO rev 확인해서 저장하기 추가.
 
-	return 0;
+	return true;
 }
