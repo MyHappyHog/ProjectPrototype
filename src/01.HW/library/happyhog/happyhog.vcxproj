@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Arduino\hardware\arduino\avr\cores\arduino;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Arduino\hardware\arduino\avr\cores\arduino;C:\Users\sloth\Documents\Arduino\libraries\ArduinoJson-master\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -77,9 +77,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enviroment.h" />
+    <ClInclude Include="SensingInfo.h" />
     <ClInclude Include="Setting.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enviroment.cpp" />
+    <ClCompile Include="SensingInfo.cpp" />
     <ClCompile Include="Setting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

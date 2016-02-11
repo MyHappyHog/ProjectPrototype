@@ -40,7 +40,7 @@ String Enviroment::serialize() {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<ENVIROMENT_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<ENVIROMENT_JSON_SIZE>;
 
-	// Senser Data를 JSON 로 변환
+	// Enviroment Data를 JSON 로 변환
 	JsonObject& root = jsonBuffer->createObject();
 	JsonArray& temperature = root.createNestedArray(TEMPERATURE_ARRAY_KEY);
 	temperature.add(data->temperature[MAX_TEMPERATURE]);

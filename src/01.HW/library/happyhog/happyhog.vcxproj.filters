@@ -18,9 +18,21 @@
     <ClInclude Include="Setting.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="SensingInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Enviroment.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Setting.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SensingInfo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enviroment.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
