@@ -2,6 +2,7 @@
 
 #include "H3Dropbox.h"
 #include "FoodSchedule.h"
+#include "H3Scheduler.h"
 
 #define UPLOAD_TEST 0
 
@@ -25,22 +26,23 @@ void setup() {
   }
 
   Serial.println("done");
-  Serial.println(ESP.getFreeHeap());
-  H3Dropbox box("ZNY3ZFrtCuAAAAAAAAAAklDRKrgOO_gppTu2E964CCE2fPe38B4tddtnqYB54Xdb");
-  
-  Serial.print("box create done : ");
+
   String mac = WiFi.softAPmacAddress();
   mac.replace(":", "");
   String filePath = "/" + mac;
-  
+
+  Serial.println(ESP.getFreeHeap());
+  Serial.print("box create done : ");
+  H3Dropbox* box = new H3Dropbox("ZNY3ZFrtCuAAAAAAAAAAklDRKrgOO_gppTu2E964CCE2fPe38B4tddtnqYB54Xdb");
+  FoodSchedule* foodSchedule = new FoodSchedule(filePath, "/foodSchedule.json");
+
   if (UPLOAD_TEST) {
     Serial.println("upload TEST--------------------------------");
 
-    FoodSchedule foodSchedule(filePath, "/foodSchedule.json");
     Serial.print("foodSchedule create done : ");
     Serial.println(ESP.getFreeHeap());
-    Serial.println("box.upload(dynamic_cast<Setting*>(&foodSchedule)) test .... ");
-    Serial.println( box.upload(dynamic_cast<Setting*>(&foodSchedule)) ? "OK" : "FAIL");
+    Serial.println("box->upload(dynamic_cast<Setting*>(foodSchedule)) test .... ");
+    Serial.println( box->upload(dynamic_cast<Setting*>(foodSchedule)) ? "OK" : "FAIL");
     Serial.println();
 
     Serial.println("End--------------------------------\n\n");
@@ -48,19 +50,20 @@ void setup() {
 
     Serial.println("download TEST--------------------------------");
 
-    uint32_t startTime = millis();
-    FoodSchedule foodSchedule(filePath, "/foodSchedule.json");
-    Serial.println("box.download(dynamic_cast<Setting*>(&foodSchedule)) test .... ");
-    Serial.println( box.download(dynamic_cast<Setting*>(&foodSchedule)) ? "OK" : "FAIL");
-    Serial.println(foodSchedule.serialize());
+    Serial.println("box->download(dynamic_cast<Setting*>(foodSchedule)) test .... ");
+    Serial.println( box->download(dynamic_cast<Setting*>(foodSchedule)) ? "OK" : "FAIL");
+    Serial.println(foodSchedule->serialize());
     Serial.println();
-    
-    uint32_t endTime = millis();
-    
+
     Serial.println("End--------------------------------\n\n");
     Serial.print("running time : ");
-    Serial.println( endTime - startTime);
   }
+
+  uint32_t startTime = millis();
+  H3Scheduler* h3schedule = new H3Scheduler();
+  h3schedule->runSchedule(foodSchedule);
+  uint32_t endTime = millis();
+  Serial.println( endTime - startTime);
 }
 
 void loop() {
