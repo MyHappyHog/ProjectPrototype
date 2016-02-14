@@ -107,3 +107,7 @@ void FoodSchedule::removeSchedule(FoodScheduleList* delSchedule) {
 		p->nextSchedule = nnp;
 	}
 }
+
+FoodScheduleList* FoodSchedule::getFoodScheduleHeader() {
+	return schedule;
+}

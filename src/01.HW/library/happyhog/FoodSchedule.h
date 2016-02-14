@@ -30,6 +30,7 @@ public:
 	void addSchedule(int numRotation, String time);
 	void removeSchedule(FoodScheduleList* delSchedule);
 
+	FoodScheduleList* getFoodScheduleHeader();
 private :
 	FoodScheduleList* schedule;
 };
