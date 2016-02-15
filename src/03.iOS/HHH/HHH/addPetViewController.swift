@@ -37,7 +37,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     @IBOutlet weak var segementHumid: UISegmentedControl!
     
     var prev_vc: String?
-
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6){
@@ -63,7 +63,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     }
     
     //////
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,7 +96,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
                 self.textfieldMaxHumi.text = String(coredata.getDatasIndex(index!, key: "maxhum") as! Int)
                 self.profileImage.image = UIImage(data: coredata.getDatasIndex(index!, key: "image") as! NSData)
             }
-
+            
         }else if(prev_vc == "add"){
             index = dataStore.numOfUser
         }else{
@@ -105,9 +105,9 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     }
     
     var schedulStr: String = ""
- 
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  
+        
         let id: String = segue.identifier!
         if id == "timer"{
             //let navigationController = segue.destinationViewController as! UINavigationController
@@ -154,9 +154,9 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         let indexHumid = segementHumid.selectedSegmentIndex + 1
         let indexLight = segementLight.selectedSegmentIndex + 1
         if(segmentTemp.selectedSegmentIndex == indexLight - 1){
-            segmentTemp.selectedSegmentIndex = 6 / indexHumid / indexLight - 1
+        segmentTemp.selectedSegmentIndex = 6 / indexHumid / indexLight - 1
         }else if(segementHumid.selectedSegmentIndex == indexLight - 1){
-            segementHumid.selectedSegmentIndex = 6 / indexLight / indexTemp - 1
+        segementHumid.selectedSegmentIndex = 6 / indexLight / indexTemp - 1
         }*/
         let num = preventOverlap(segmentTemp.selectedSegmentIndex + 1, second: segementHumid.selectedSegmentIndex + 1,
             pivot: segementLight.selectedSegmentIndex + 1)
@@ -170,24 +170,19 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         //dataStore.index = -1
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     @IBAction func clickSave(sender: AnyObject) {
+        let credata = coreData(entity: "User")
+        let dP = data_user(image: profileImage.image!, name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
+            minTemp: Int(textfieldMinTemp.text! as String)!,
+            maxTemp: Int(textfieldMaxTemp.text! as String)!,
+            minHumid: Int(textfieldMinHumi.text! as String)!,
+            maxHumid: Int(textfieldMaxHumi.text! as String)!) as data_user
+        
         //coredata save
         if(prev_vc == "add"){
             /////센서 콘피그도 넘기기
-            let credata = coreData(entity: "User")
-            let dP = data_user(image: image, name: nameTxt.text!, memo: memoTxt.text!, server: serverTxt.text!,
-                minTemp: Int(textfieldMinTemp.text! as String)!,
-                maxTemp: Int(textfieldMaxTemp.text! as String)!,
-                minHumid: Int(textfieldMinHumi.text! as String)!,
-                maxHumid: Int(textfieldMaxHumi.text! as String)!) as data_user
             credata.insertData(dP)
-            
-            let http_reference = HttpReference(serverTxt.text! as String)
-            http_reference.postSensorData(Int(textfieldMaxTemp.text! as String)!
-                , minTemprature: Int(textfieldMinTemp.text! as String)!,
-                maxHumidity: Int(textfieldMaxHumi.text! as String)!,
-                minHumidity: Int(textfieldMinHumi.text! as String)!)
             
             if dataStore.parserTime != ""{
                 insertTime()
@@ -199,14 +194,23 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             }
         }else{// if(prev_vc == "main"){
             //값 수정
+            credata.setUserData(dP, index: index!)
         }
-
         
+        dropbox.setEnviromentSetting(serverTxt.text!,
+            maxTemperature: Int(textfieldMaxTemp.text! as String)!,
+            minTemperature: Int(textfieldMinTemp.text! as String)!,
+            maxHumiidity:   Int(textfieldMaxHumi.text! as String)!,
+            minHumidity:    Int(textfieldMinHumi.text! as String)!)
+        
+        
+        dataStore.parserTime = ""
         dataStore.prev_vc = "else"
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func insertTime(){
+        /////알람 다 삭제하고 하기
         let coredata = coreData(entity: "Alarm")
         let data = dataStore.parserTime
         //let index: Int? = dataStore.now_index
@@ -239,7 +243,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         
         self.presentViewController(imgPicker, animated: true, completion: nil)
     }
-
+    
     /* change the profile image when user choose the new profile image in the photo library */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let imageUrl          = info[UIImagePickerControllerReferenceURL] as! NSURL

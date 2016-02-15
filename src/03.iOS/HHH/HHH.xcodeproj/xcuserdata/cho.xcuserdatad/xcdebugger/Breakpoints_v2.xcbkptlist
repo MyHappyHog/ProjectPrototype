@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HHH/AppDelegate.swift"
-            timestampString = "473380869.637368"
+            timestampString = "476904508.924832"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "managedObjectContext"
             landmarkType = "19">
          </BreakpointContent>
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HHH/PetListTableViewController.swift"
-            timestampString = "475630182.50607"
+            timestampString = "477177477.983604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HHH/PetListTableViewController.swift"
-            timestampString = "476713406.943955"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "clickBtnAddCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -144,115 +128,6 @@
             startingLineNumber = "36"
             endingLineNumber = "36"
             landmarkName = "dataToTime(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HHH/mainViewController.swift"
-            timestampString = "476292059.120281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "mainViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HHH.mainViewController.ProfileImage.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIImageView&gt;"
-                  moduleName = "HHH"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cho/Desktop/HHH_comit/ProjectPrototype/src/03.iOS/HHH/HHH/mainViewController.swift"
-                  timestampString = "476292059.199927"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "18">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HHH.mainViewController.ProfileImage.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIImageView&gt;"
-                  moduleName = "HHH"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cho/Desktop/HHH_comit/ProjectPrototype/src/03.iOS/HHH/HHH/mainViewController.swift"
-                  timestampString = "476292059.211343"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HHH.mainViewController.ProfileImage.materializeForSet : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIImageView&gt;"
-                  moduleName = "HHH"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cho/Desktop/HHH_comit/ProjectPrototype/src/03.iOS/HHH/HHH/mainViewController.swift"
-                  timestampString = "476292059.211635"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HHH.mainViewController.init (HHH.mainViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; HHH.mainViewController"
-                  moduleName = "HHH"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cho/Desktop/HHH_comit/ProjectPrototype/src/03.iOS/HHH/HHH/mainViewController.swift"
-                  timestampString = "476292059.211873"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "955">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HHH.mainViewController.init (HHH.mainViewController.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;HHH.mainViewController&gt;"
-                  moduleName = "HHH"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cho/Desktop/HHH_comit/ProjectPrototype/src/03.iOS/HHH/HHH/mainViewController.swift"
-                  timestampString = "476292059.212074"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "837">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coreData.swift"
-            timestampString = "476308491.240828"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "setProfileViewData(_:index:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

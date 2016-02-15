@@ -62,7 +62,7 @@ class coreData{
     
     func getDatasIndex(index: Int, key: String) -> AnyObject?{
         let value = objects![index] as! NSManagedObject
-
+        
         return value.valueForKey(key)
     }
     
@@ -86,7 +86,7 @@ class coreData{
         return nil
     }
     
-    /////
+    /////user
     func insertData(data: data_user!){
         let userEntity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext!)
         
@@ -107,10 +107,10 @@ class coreData{
         }catch{
             print(error)
         }
-
+        
     }
     
-    func setProfileViewData(data:data_user, index: Int){
+    func setUserData(data:data_user, index: Int){
         let value = objects![index] as! NSManagedObject
         
         value.setValue(data.name, forKey: "title")
@@ -122,15 +122,32 @@ class coreData{
         value.setValue(data.maxHumid, forKey: "maxhum")
         
         (dataStore.extenstion == "JPG") ? (value.setValue(UIImageJPEGRepresentation(data.image!, 1), forKey: "image")) : (value.setValue(UIImagePNGRepresentation(data.image!), forKey: "image"))
-
         
         do{
             try managedObjectContext?.save()
         }catch{
             print(error)
         }
+    }
+    
+    func setProfileViewData(data:data_user, index: Int){
+        let value = objects![index] as! NSManagedObject
         
+        value.setValue(data.name, forKey: "title")
+        value.setValue(data.memo, forKey: "memo")
+        value.setValue(data.server_addr, forKey: "server_addr")
+        //value.setValue(data.minTemp, forKey: "minTemp")
+        //value.setValue(data.maxTemp, forKey: "maxTemp")
+        //value.setValue(data.minHumid, forKey: "minhum")
+        //value.setValue(data.maxHumid, forKey: "maxhum")
         
+        (dataStore.extenstion == "JPG") ? (value.setValue(UIImageJPEGRepresentation(data.image!, 1), forKey: "image")) : (value.setValue(UIImagePNGRepresentation(data.image!), forKey: "image"))
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
     }
     /////
     
@@ -163,30 +180,19 @@ class coreData{
         return count
     }
     
-    ///
-    
-    
-    //for debuging
-    static func deleteAllItem(name: String){
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context: NSManagedObjectContext = appDel.managedObjectContext!
-        let request = NSFetchRequest(entityName: name)
-        request.returnsObjectsAsFaults = false
+    func setTimer(index: Int, num: Int){
+        let value = objects![index] as! NSManagedObject
         
-        do {
-            let incidents = try context.executeFetchRequest(request)
-            
-            if incidents.count > 0 {
-                
-                for result: AnyObject in incidents{
-                    context.deleteObject(result as! NSManagedObject)
-                    print("NSManagedObject has been Deleted")
-                }
-                try context.save()
-            }
-        } catch {}
+        value.setValue(num, forKey: "user_number")
+        
+        do{
+            try managedObjectContext?.save()
+        }catch{
+            print(error)
+        }
     }
     
+    ///
     
     ///// profile
     func insertProfile(index: Int){
@@ -214,5 +220,48 @@ class coreData{
         }
     }
     /////
+    
+    
+    //for debuging
+    static func deleteAllItem(name: String){
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDel.managedObjectContext!
+        let request = NSFetchRequest(entityName: name)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let incidents = try context.executeFetchRequest(request)
+            
+            if incidents.count > 0 {
+                
+                for result: AnyObject in incidents{
+                    context.deleteObject(result as! NSManagedObject)
+                    print("NSManagedObject has been Deleted")
+                }
+                try context.save()
+            }
+        } catch {}
+    }
+    
+    static func deleteItem(name: String, index: Int){
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDel.managedObjectContext!
+        let request = NSFetchRequest(entityName: name)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let incidents = try context.executeFetchRequest(request)
+            
+            if incidents.count > 0 {
+                context.deleteObject(incidents[index] as! NSManagedObject)
+                /*for result: AnyObject in incidents{
+                context.deleteObject(result as! NSManagedObject)
+                print("NSManagedObject has been Deleted")
+                }*/
+                try context.save()
+            }
+        } catch {}
+        
+    }
 }
 

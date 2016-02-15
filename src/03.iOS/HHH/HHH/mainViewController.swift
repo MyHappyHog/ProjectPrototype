@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Kanna
 import Social
+import SwiftyDropbox
 
 class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -50,17 +51,149 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         setProfile()
+
     }
     
     override func viewDidAppear(animated: Bool) {
         setProfile()
+        
+        
+        /*
+        // Verify user is logged into Dropbox
+        if let client = Dropbox.authorizedClient {
+            /*
+            // Get the current user's account info
+            client.users.getCurrentAccount().response { response, error in
+                print("*** Get current account ***")
+                if let account = response {
+                    //print("Hello \(account.name.givenName)!")
+                } else {
+                    print(error!)
+                }
+            }*/
+            
+            // List folder
+            client.files.listFolder(path: "").response { response, error in
+                print("*** List folder ***")
+                if let result = response {
+                    print("Folder contents:")
+                    for entry in result.entries {
+                        print(entry.name)
+                    }
+                } else {
+                    print(error!)
+                }
+            }
+            
+            let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                let fileManager = NSFileManager.defaultManager()
+                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                // generate a unique name for this file in case we've seen it before
+                let UUID = NSUUID().UUIDString
+                let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                return directoryURL.URLByAppendingPathComponent(pathComponent)
+            }
+
+
+            client.files.download(path: "/1/SensingInfo.json", destination: destination).response { response, error in
+                if let (metadata, url) = response {
+                    print("*** Download file ***")
+                    print("Downloaded file rev: \(metadata.rev)")
+                    let data = NSData(contentsOfURL: url)
+                    print("-------\(NSString(data: data!, encoding: NSUTF8StringEncoding) as! String)------")
+                    
+                    
+                    
+                    let string = "{\"tempeature\": 10, \"Humidity\": 20}"
+                    print(string)
+                    
+                    let fileData_ = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                    
+                    client.files.upload(path: "/1/SensingInfo.json", mode: Files.WriteMode.Update(metadata.rev), autorename: false, clientModified: nil, mute: false, body: fileData_!)
+                    
+                    
+                    
+                } else {
+                    print(error!)
+                }
+            }
+            
+            
+            
+            
+            // Upload a file
+            /*let fileData = "Hello!\ndfgsdfg".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            client.files.upload(path: "/hello.txt", body: fileData!).response { response, error in
+                if let metadata = response {
+                    print("*** Upload file ****")
+                    print("Uploaded file name: \(metadata.name)")
+                    print("Uploaded file revision: \(metadata.rev)")
+                    
+                    // Get file (or folder) metadata
+                    client.files.getMetadata(path: "/hello.txt").response { response, error in
+                        print("*** Get file metadata ***")
+                        if let metadata = response {
+                            if let file = metadata as? Files.FileMetadata {
+                                print("This is a file with path: \(file.pathLower)")
+                                print("File size: \(file.size)")
+                            } else if let folder = metadata as? Files.FolderMetadata {
+                                print("This is a folder with path: \(folder.pathLower)")
+                            }
+                        } else {
+                            print(error!)
+                        }
+                    }
+                    
+                    // Download a file
+                    
+                    let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                        let fileManager = NSFileManager.defaultManager()
+                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                        // generate a unique name for this file in case we've seen it before
+                        let UUID = NSUUID().UUIDString
+                        let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                        return directoryURL.URLByAppendingPathComponent(pathComponent)
+                    }
+                    
+                    client.files.download(path: "/hello.txt", destination: destination).response { response, error in
+                        if let (metadata, url) = response {
+                            print("*** Download file ***")
+                            let data = NSData(contentsOfURL: url)
+                            print("Downloaded file name: \(metadata.name)")
+                            print("Downloaded file url: \(url)")
+                            print("Downloaded file data: \(data)")
+                            print("Downloaded file rev: \(metadata.rev)")
+                            print("-------\(NSString(data: data!, encoding: NSUTF8StringEncoding))------")
+                            
+
+                        } else {
+                            print(error!)
+                        }
+                    }
+                    
+                } else {
+                    print(error!)
+                }
+            }*/
+
+
+        }*/
     }
+    
+    
+    func handleDidLinkNotification(notification: NSNotification) {
+        print("Disconnect")
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "abc", name: "asdf", object: nil)
+        
+        
         
         //for debuging
         //coreData.deleteAllItem("User")
@@ -72,31 +205,25 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         //let coredata_user = coreData(entity: "User")
         let coredata_profile = coreData(entity: "Profile")
         
-        
-        
         if(coredata_profile.getCount() == 0){
             
         }else{
             dataStore.profile_index = coredata_profile.getDatasIndex(0, key: "user_index") as? Int
             index = dataStore.profile_index!
             //coredata_user.getsearchIndex(coredata_profile.getDatasIndex(0, key: "name") as! String
-//                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
-//                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
-            
+            //                , _memo: coredata_profile.getDatasIndex(0, key: "memo") as! String
+            //                , _server_addr: coredata_profile.getDatasIndex(0, key: "server_addr") as! String)
         }
         
         //start set side bar
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
         }
         
-        setProfile()
+        //setProfile()
+        
+        //dropbox.setEnviromentSetting("1", maxTemperature: 30, minTemperature: 20, maxHumiidity: 50, minHumidity: 20)
     }
-    
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,7 +253,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func clickShareBtn(sender: AnyObject) {
-                self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggleAnimated(true)
         //
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -156,37 +283,19 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     //////////////////////////////////////////////////////////////////////////////////
     
     func checkDataForProfile(){
-        if server_addr != nil {
-            http_reference = HttpReference(server_addr)
-            
-            //http_reference?.postSensorData(20, minTemprature: 15, maxHumidity: 70, minHumidity: 10)
-            
-            //타이머 시간 설정
-            let http_timer_interval:NSTimeInterval = 50.0
-            
-            //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
-            getHttpMsg();
-            
-            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
+        if (Dropbox.authorizedClient == nil) {
+            Dropbox.authorizeFromController(self)
+        } else {
+            print("User is already authorized!")
         }
         
-    }
-    
-    func getHttpMsg(){
-        http_reference!.getResponse({(result, temperature, humidity) -> Void in
-            if(result == true){
-                //self.TempLabel.text = self.http_reference!.getData(0)
-                //self.HumidLabel.text = self.http_reference!.getData(1)
-                self.TempLabel.text = temperature
-                self.HumidLabel.text = humidity
-            }else{
-                self.TempLabel.text = temperature
-                self.HumidLabel.text = humidity
-                return
-            }
+        dropbox.getSensingData(server_addr!, completionHandler: {(temperature, humidity) -> Void in
+            print("\(temperature)  ------ \(humidity)")
+            self.TempLabel.text = (temperature == nil) ? "-- 도" : "\(String(temperature! as Int)) 도"
+            self.HumidLabel.text = (humidity == nil) ? "-- %" : "\(String(humidity! as Int)) %"
         })
     }
-
+    
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
         let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController

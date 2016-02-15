@@ -38,5 +38,7 @@ class dataStore{
     static var timer_index: Int?
     
     static var numOfUser: Int?
+    
+    static var feeding_index: Int?
 }
 

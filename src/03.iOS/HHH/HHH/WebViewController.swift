@@ -27,7 +27,7 @@ class WebViewController: UIViewController {
         //link webview address
         
         //set url
-        let url = NSURL(string: "http://52.68.82.234:19918")
+        let url = NSURL(string: "https://www.youtube.com/watch?v=7XML2ZnUWVU")//http://52.68.82.234:19918")
         //set urlrequest
         let requestObj = NSURLRequest(URL: url!)
         //load address

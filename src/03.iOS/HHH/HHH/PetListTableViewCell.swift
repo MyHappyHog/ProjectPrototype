@@ -19,12 +19,16 @@ class PetListTableViewCell: UITableViewCell {
     @IBOutlet weak var humidLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     
+    ///
+    @IBOutlet weak var topView: UIView!
+    ///
+    
     var name: String?
     var memo: String?
     
     var http_reference : HttpReference?
     var http_timer = NSTimer();
-
+    
     var server_addr : String?
     
     var onButtonTapped : (() -> Void)? = nil
@@ -43,19 +47,26 @@ class PetListTableViewCell: UITableViewCell {
             
             nameLabel.text = name
             
-            http_reference = HttpReference(server_addr)
+            /*http_reference = HttpReference(server_addr)
             
             let http_timer_interval:NSTimeInterval = 50.0
             
             //타이머를 설정해주면 처음 시작도 정해진 시간뒤여서 우선 맨처음 실행 후 타잇=머 설정
             getHttpMsg()
             
-            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)
+            http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)*/
             
         }
     }
     
     //////////////////////////////////////////////////////////////////////////////////
+    @IBAction func clickFeed(sender: AnyObject) {
+        let coredata = coreData(entity: "User")
+        dataStore.feeding_index = coredata.getsearchIndex(name!, _memo: memo!, _server_addr: server_addr!)
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
+    }
     
     @IBAction func clickShare(sender: AnyObject) {
         let coredata = coreData(entity: "User")

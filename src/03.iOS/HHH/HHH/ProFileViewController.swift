@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate{
-
+    
     @IBOutlet weak var textFieldDevice: UITextField!
     @IBOutlet weak var textFieldMemo: UITextField!
     @IBOutlet weak var textFieldName: UITextField!

@@ -24,11 +24,11 @@ class schedulerViewController: UITableViewController{
         }
         
         let arrFull = data.componentsSeparatedByString(";")
-        print(arrFull.count)
+        //print(arrFull.count)
         for(var i = 0; i < arrFull.count - 1; i++){
-            print(arrFull[i])
+            //print(arrFull[i])
             let temp = arrFull[i].componentsSeparatedByString(":")
-            print(temp)
+            //print(temp)
             let hour: Int? = Int(temp[0])
             let min: Int? = Int(temp[1])
             let check: Bool = (temp[2] == "false" ? false : true)
@@ -66,7 +66,7 @@ class schedulerViewController: UITableViewController{
         DatePickerDialog().show("DatePicker", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Time) {
             (date) -> Void in
             //self.textField.text = "\(date)"
-            print(date)
+            //print(date)
             let format = NSDateFormatter()
             format.dateFormat = "HH:mm"
             let time = format.stringFromDate(date).componentsSeparatedByString(":")
@@ -91,7 +91,7 @@ class schedulerViewController: UITableViewController{
         }
         //여기서는 값 다시 돌려보내주기
         
-        print(parser)
+        print("parser \(parser)")
         
         dataStore.parserTime = parser
         
@@ -101,10 +101,10 @@ class schedulerViewController: UITableViewController{
         DatePickerDialog().show("DatePicker", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Time) {
             (date) -> Void in
             //self.textField.text = "\(date)"
-            print(date)
+            //print(date)
             let format = NSDateFormatter()
             format.dateFormat = "HH:mm"
-            print(format.stringFromDate(date))
+            //print(format.stringFromDate(date))
             let time = format.stringFromDate(date).componentsSeparatedByString(":")
             self.schedules.append(SettingSchedulerCell(isChecked: false, time_hour: Int(time[0])!, time_minute: Int(time[1])!))
             self.tableView.reloadData()
