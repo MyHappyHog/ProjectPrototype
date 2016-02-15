@@ -30,6 +30,12 @@ public :
 	virtual bool deserialize(String json);
 	virtual String serialize();
 
+	String getSSID();
+	String getPassword();
+	String getDropboxKey();
+
+	void setData(WIFIData* wifiData);
+
 private :
 	WIFIData* data;
 };

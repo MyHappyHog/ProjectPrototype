@@ -1,7 +1,7 @@
 #ifndef __DATASTORE_H__
 #define __DATASTORE_H__
 
-#include <Arduino.h>
+
 #include "Setting.h"
 
 /// @brief		HTTPS나 ESP의 FS을 위한 DataStore 추상클래스

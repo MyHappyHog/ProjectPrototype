@@ -18,6 +18,7 @@ typedef struct _FoodScheduleList {
 	String time;
 } FoodScheduleList;
 
+
 class FoodSchedule : public Setting {
 public:
 	FoodSchedule(String fileName);

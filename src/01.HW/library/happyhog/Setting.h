@@ -15,13 +15,16 @@ public:
 	
 	virtual bool deserialize(String json) = 0;
 	virtual String serialize() = 0;
-		
+	
+	bool parseReversion(String json);	
+	String getReversion();
 	String getFilePath();
 	String getFileName();
 
 private:
 	String filePath;
 	String fileName;
+	String reversion;
 };
 
 #endif

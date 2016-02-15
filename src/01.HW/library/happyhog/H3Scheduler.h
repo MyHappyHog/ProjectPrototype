@@ -10,6 +10,12 @@
 
 #define MOTER_STEP 200
 
+/// @brief		Schedule을 받아 처리해주는 클래스. 현재는 푸드만 됨.
+/// @details	
+/// @author		Jongho Lim, sloth@kookmin.ac.kr
+/// @date		2016-02-11
+/// @version	0.0.1
+
 class H3Scheduler {
 public:
 	H3Scheduler();

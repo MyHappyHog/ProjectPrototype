@@ -20,12 +20,15 @@ bool SensingInfo::deserialize(String json) {
 	// JSON 분석
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
+		delete jsonBuffer;
 		return false;
 	}
 
 	// 분석한 데이터 입력
 	data->temperature = root[TEMPERATURE_KEY];
 	data->humidity = root[HUMIDITY_KEY];
+	
+	delete jsonBuffer;
 
 	return true;
 }

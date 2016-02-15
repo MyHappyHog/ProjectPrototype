@@ -80,10 +80,12 @@ bool H3Dropbox::upload(Setting* data) {
 	String result = http->getString();
 	result = result.substring(result.indexOf("{"), result.lastIndexOf("}") + 1);
 	
+	/// @TODO rev 확인해서 저장하기 추가.
+	data->parseReversion(result);
+
 	// httpclient 메모리 반환
 	delete http;
 
-	/// @TODO rev 확인해서 저장하기 추가.
 
 	return true;
 }

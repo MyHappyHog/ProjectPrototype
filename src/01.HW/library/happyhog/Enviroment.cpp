@@ -24,6 +24,7 @@ bool Enviroment::deserialize(String json) {
 	// JSON ºÐ¼®
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
+	delete jsonBuffer;
 		return false;
 	}
 
@@ -33,6 +34,8 @@ bool Enviroment::deserialize(String json) {
 	data->temperature[MIN_TEMPERATURE] = root[TEMPERATURE_ARRAY_KEY][MIN_TEMPERATURE];
 	data->humidity[MAX_HUMIDITY] = root[HUMIDITY_ARRAY_KEY][MAX_HUMIDITY];
 	data->humidity[MIN_HUMIDITY] = root[HUMIDITY_ARRAY_KEY][MIN_HUMIDITY];
+	
+	delete jsonBuffer;
 
 	return true;
 }

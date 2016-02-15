@@ -26,6 +26,7 @@ bool Relay::deserialize(String json) {
 	// JSON ºÐ¼®
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
+		delete jsonBuffer;
 		return false;
 	}
 
@@ -37,6 +38,7 @@ bool Relay::deserialize(String json) {
 	data->humidity[RELAY_POSITION] = root[HUMIDITY_RELAY_KEY][RELAY_POSITION];
 	data->humidity[RELAY_STATE] = root[HUMIDITY_RELAY_KEY][RELAY_STATE];
 
+	delete jsonBuffer;
 	return true;
 }
 String Relay::serialize() {

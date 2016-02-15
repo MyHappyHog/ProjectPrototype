@@ -3,8 +3,8 @@
 
 #include "DataStore.h"
 
-#define DOWNLOAD_URL "https://content.dropboxapi.com/2/files/download"
-#define UPLOAD_URL "https://content.dropboxapi.com/2/files/upload"
+#define DOWNLOAD_CONTENT_URL "https://content.dropboxapi.com/2/files/download"
+#define UPLOAD_CONTENT_URL "https://content.dropboxapi.com/2/files/upload"
 #define CONTENT_FINGER_PRINT "E3 7F B0 09 DE E0 4E AB 3D 9D 44 F1 EC 38 64 C0 2B 85 90 12"
 
 #define HEADER_AUTORIZATION "Authorization"

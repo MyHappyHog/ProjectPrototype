@@ -1,4 +1,3 @@
-
 #include "FS.h"
 #include "H3FileSystem.h"
 
@@ -33,6 +32,7 @@ bool H3FileSystem::download(Setting* data) {
 	
 	return data->deserialize(result);
 }
+
 bool H3FileSystem::upload(Setting* data) {
 
 	String filePathName = data->getFilePath() + data->getFileName();
