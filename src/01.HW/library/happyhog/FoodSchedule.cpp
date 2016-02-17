@@ -4,7 +4,9 @@
 #include "FoodSchedule.h"
 
 FoodSchedule::FoodSchedule(String fileName) : FoodSchedule(String("/"), fileName) { }
-FoodSchedule::FoodSchedule(String filePath, String fileName) : Setting(filePath, fileName) { }
+FoodSchedule::FoodSchedule(String filePath, String fileName) : Setting(filePath, fileName) {
+	schedule = nullptr;
+}
 FoodSchedule::~FoodSchedule() {
 	while (schedule != NULL) {
 		removeSchedule(schedule);
@@ -13,24 +15,35 @@ FoodSchedule::~FoodSchedule() {
 
 bool FoodSchedule::deserialize(String json) {
 	DynamicJsonBuffer jsonBuffer;
+	
+	// 기존의 스케줄 초기화
+	while (schedule != nullptr) {
+		removeSchedule(schedule);
+	}
 
+	// 스케줄이 비었으면 바로 리턴.
 	// json 스트링에 대괄호를 씌워서 배열로 만들어 줌.
-	String jsonArray = "[C]";
-	jsonArray.replace("C", json);
-
-	// Array 파싱
-	JsonArray& scheduleArray = jsonBuffer.parseArray(jsonArray);
-	if (!scheduleArray.success()) {
-		return false;
+	if(json.equals("[]")) {
+		return true;
 	}
+	else {
+		String jsonArray = "[C]";
+		jsonArray.replace("C", json);
 
-	// 파싱한 Json Array를 데이터로 변환
-	for (JsonArray::iterator it = scheduleArray.begin(); it != scheduleArray.end(); ++it) {
-		JsonObject& obj = *it;
-		addSchedule(obj[NUM_ROTATION_KEY], obj[TIME_KEY].asString());
+		// Array 파싱
+		JsonArray& scheduleArray = jsonBuffer.parseArray(jsonArray);
+		if (!scheduleArray.success()) {
+			return false;
+		}
+
+		// 파싱한 Json Array를 데이터로 변환
+		for (JsonArray::iterator it = scheduleArray.begin(); it != scheduleArray.end(); ++it) {
+			JsonObject& obj = *it;
+			addSchedule(obj[NUM_ROTATION_KEY], obj[TIME_KEY].asString());
+		}
+
+		return true;
 	}
-
-	return true;
 }
 
 String FoodSchedule::serialize() {
@@ -83,7 +96,7 @@ void FoodSchedule::addSchedule(int numRotation, String time) {
 }
 
 void FoodSchedule::removeSchedule(FoodScheduleList* delSchedule) {
-	if (schedule == NULL || delSchedule == NULL) {
+	if (schedule == nullptr || delSchedule == nullptr) {
 		return ;
 	}
 	
