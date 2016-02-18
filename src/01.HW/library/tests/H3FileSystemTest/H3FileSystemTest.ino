@@ -32,22 +32,22 @@ void setup() {
 
     SensingInfo sensing(filePath, "/sensing.json");
     Serial.println("fs.upload(dynamic_cast<Setting*>(&sensing)) test .... ");
-    Serial.println( (fs.upload(dynamic_cast<Setting*>(&sensing)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.upload(dynamic_cast<Setting*>(&sensing))? "OK" : "FAIL");
     Serial.println();
 
     Enviroment enviroment(filePath, "/enviroment.json");
     Serial.println("fs.upload(dynamic_cast<Setting*>(&enviroment)) test .... ");
-    Serial.println( (fs.upload(dynamic_cast<Setting*>(&enviroment)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.upload(dynamic_cast<Setting*>(&enviroment))? "OK" : "FAIL");
     Serial.println();
 
     Relay relay(filePath, "/relay.json");
     Serial.println("fs.upload(dynamic_cast<Setting*>(&Relay)) test .... ");
-    Serial.println( (fs.upload(dynamic_cast<Setting*>(&relay)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.upload(dynamic_cast<Setting*>(&relay))? "OK" : "FAIL");
     Serial.println();
 
     Wifi wifi(filePath, "/wifi.json");
     Serial.println("fs.upload(dynamic_cast<Setting*>(&Wifi)) test .... ");
-    Serial.println( (fs.upload(dynamic_cast<Setting*>(&wifi)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.upload(dynamic_cast<Setting*>(&wifi))? "OK" : "FAIL");
     Serial.println();
     
     Serial.println("End--------------------------------\n\n");
@@ -58,25 +58,25 @@ void setup() {
     uint32_t startTime = millis();
     SensingInfo sensing(filePath, "/sensing.json");
     Serial.println("fs.download(dynamic_cast<Setting*>(&sensing)) test .... ");
-    Serial.println( (fs.download(dynamic_cast<Setting*>(&sensing)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.download(dynamic_cast<Setting*>(&sensing))? "OK" : "FAIL");
     Serial.println(sensing.serialize());
     Serial.println();
 
     Enviroment enviroment(filePath, "/enviroment.json");
     Serial.println("fs.download(dynamic_cast<Setting*>(&enviroment)) test .... ");
-    Serial.println( (fs.download(dynamic_cast<Setting*>(&enviroment)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.download(dynamic_cast<Setting*>(&enviroment))? "OK" : "FAIL");
     Serial.println(enviroment.serialize());
     Serial.println();
 
     Relay relay(filePath, "/relay.json");
     Serial.println("fs.download(dynamic_cast<Setting*>(&Relay)) test .... ");
-    Serial.println( (fs.download(dynamic_cast<Setting*>(&relay)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.download(dynamic_cast<Setting*>(&relay))? "OK" : "FAIL");
     Serial.println(relay.serialize());
     Serial.println();
 
     Wifi wifi(filePath, "/wifi.json");
     Serial.println("fs.download(dynamic_cast<Setting*>(&Wifi)) test .... ");
-    Serial.println( (fs.download(dynamic_cast<Setting*>(&wifi)) == 0) ? "OK" : "FAIL");
+    Serial.println( fs.download(dynamic_cast<Setting*>(&wifi))? "OK" : "FAIL");
     Serial.println(wifi.serialize());
     Serial.println();
 
