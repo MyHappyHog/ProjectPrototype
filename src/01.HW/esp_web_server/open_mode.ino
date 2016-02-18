@@ -14,11 +14,11 @@ void openSoftAP(Wifi* wifiInfo, bool hidden) {
     password = "hog12345";
   }
 
+  WiFi.softAP( WiFi.softAPmacAddress().c_str(), password.c_str(), 0, hidden );
+#ifdef DEBUG_MODE
   Serial.println(ssid);
   Serial.println(password);
 
-  WiFi.softAP( WiFi.softAPmacAddress().c_str(), password.c_str(), 0, hidden );
-#ifdef DEBUG_MODE
   WiFi.printDiag(Serial);
 
   IPAddress myIP = WiFi.softAPIP();
@@ -41,11 +41,13 @@ void openStation(Wifi* wifiInfo) {
     return ;
   }
 
+#ifdef DEBUG_MODE
   Serial.println(ssid);
   Serial.println(password);
+#endif
 
-  //WiFi.begin ( ssid.c_str(), password.c_str() );
-  WiFi.begin ( "joh2", "jongho123" );
+  WiFi.begin ( ssid.c_str(), password.c_str() );
+  //WiFi.begin ( "joh", "jongho123" );
 
   // Wait for connection
   // 연결되지 않으면 계속 연결 시도 함.
@@ -70,17 +72,11 @@ void openStation(Wifi* wifiInfo) {
 #endif
 }
 
-void addHandlerToServer() {
-//  server->on ( "/", HTTP_GET, handleShowWifiForm );
-//  server->on ( "/", HTTP_POST, handleWifiConfig );
-//  server->onNotFound ( handleNotFound );
-}
-//
-///*
-//   웹 서버를 시작한다.
-//   만약 begin 이후에도 서버가 close 상태라면
-//   연결이 될 때까지 계속 시도 함.
-//*/
+/*
+   웹 서버를 시작한다.
+   만약 begin 이후에도 서버가 close 상태라면
+   연결이 될 때까지 계속 시도 함.
+*/
 void startServer() {
   server->begin();
 #ifdef DEBUG_MODE
