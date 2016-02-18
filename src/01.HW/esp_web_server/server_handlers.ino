@@ -29,71 +29,65 @@
 const char HTML[] PROGMEM = HTML_TEMPLATE;
 const char WIFI_FORM[] PROGMEM = WIFI_FORM_TEMPLATE;
 
-// 요청한 주소가 없을 때 요청을 한 주소와 args를 찍어서 보내줌..
-void handleNotFound() {
-  String message = "File Not Found\n\n";
-  message += "URI: ";
-  message += server->uri();
-  message += "\nMethod: ";
-  message += ( server->method() == HTTP_GET ) ? "GET" : "POST";
-  message += "\nArguments: ";
-  message += server->args();
-  message += "\n";
+void addHandlerToServer() {
+  // Wifi form을 반환
+  server->on ( "/", HTTP_GET, []() {
+    // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
+    String formMessage = FPSTR(HTML);
+    formMessage.replace("<titleContent>", "MyHappyHog Init");
+    formMessage.replace("<bodyContent>", FPSTR(WIFI_FORM));
+    formMessage.replace("<macContent>", ARG_NAME_RELAY_MAC);
+    formMessage.replace("<ssidContent>", ARG_NAME_SSID);
+    formMessage.replace("<passwordContent>", ARG_NAME_PASSWORD);
+    formMessage.replace("<keyContent>", ARG_NAME_DROPBOX_KEY);
 
-  for ( uint8_t i = 0; i < server->args(); i++ ) {
-    message += " " + server->argName ( i ) + ": " + server->arg ( i ) + "\n";
-  }
+    server->send(200, "text/html", formMessage);
+  });
 
-  server->send ( 404, "text/plain", message );
-}
+  server->on ( "/", HTTP_POST, []() {
+    // WiFi 관련된 설정 적용
+    //key = server->arg(ARG_NAME_DROPBOX_KEY);
+    WIFIData* wifiData = new WIFIData;
 
-// 먹이 한번 분량을 준다.
-void handlePutFood() {
-  motor.setSpeed(10);
-  motor.step(MOTER_STEP / 4); // 90도
+    {
+      String key = "ZNY3ZFrtCuAAAAAAAAAAklDRKrgOO_gppTu2E964CCE2fPe38B4tddtnqYB54Xdb";
 
-  server->send(200);
-}
+      wifiData->ssid = server->arg(ARG_NAME_SSID);
+      wifiData->password = server->arg(ARG_NAME_PASSWORD);
+      wifiData->dropboxKey = key;
+    }
 
-void handleWifiConfig() {
-  // WiFi 관련된 설정 적용
-  ssid = server->arg(ARG_NAME_SSID);
-  password = server->arg(ARG_NAME_PASSWORD);
-  //key = server->arg(ARG_NAME_DROPBOX_KEY);
-  key = "ZNY3ZFrtCuAAAAAAAAAAixHiExrefwfIjd_DGN_to-_YTfQVEh_ZUHXPHH689KOR";
-  // Relay에 연결하여 본체의 정보를 제공해줌으로써
-  // 릴레이 모듈이 직접 본체에 접속할 수 있도록 해줌.
+    fileSystem = new H3FileSystem();
+    wifiInfo = new Wifi(filePath, FPSTR(WIFI_INFO_FILENAME));
+    wifiInfo->setData(wifiData);
 
-  // 완료되었으면 WiFi 연결
-  // 초기 세팅 적용.
-  // 드랍박스에 초기 세팅 적용한 파일 생성
+    fileSystem->upload(dynamic_cast<Setting*>(wifiInfo));
+    delete fileSystem;
 
-  openStation(ssid, password);
+    // Relay에 연결하여 드랍박스 키 정보를 제공해줌으로써
+    // 드랍박스에 직접 접속할 수 있도록 해줌.
 
-  server->send(200, "text/html; charset=utf-8", "완료되었습니다");
-  if (server != NULL) {
-    delete server;
-    server = NULL;
-  }
-  
-  Serial.println("------------------------------------------------------------------------------");
-  Serial.println(system_get_free_heap_size());
-  box.upload("/configure.txt", "");
-  
-  // 웹서버 종료.
-  // 다음부터는 웹서버는 열지 않도록 함.
-}
+    Serial.print("before open station : ");
+    Serial.println(ESP.getFreeHeap());
+    setWifiInfo = true;
+    server->send(200);
+  });
 
-// Wifi form을 반환
-void handleShowWifiForm() {
- // 현재 주소로 리다이렉션을 위해 form의 action attribute에 현재 url을 넣어 줌.
-  String formMessage = FPSTR(HTML);
-  formMessage.replace("<titleContent>", "MyHappyHog Init");
-  formMessage.replace("<bodyContent>", FPSTR(WIFI_FORM));
-  formMessage.replace("<macContent>", ARG_NAME_RELAY_MAC);
-  formMessage.replace("<ssidContent>", ARG_NAME_SSID);
-  formMessage.replace("<passwordContent>", ARG_NAME_PASSWORD);
-  formMessage.replace("<keyContent>", ARG_NAME_DROPBOX_KEY);
+  // 요청한 주소가 없을 때 요청을 한 주소와 args를 찍어서 보내줌..
+  server->onNotFound ( []() {
+    String message = "File Not Found\n\n";
+    message += "URI: ";
+    message += server->uri();
+    message += "\nMethod: ";
+    message += ( server->method() == HTTP_GET ) ? "GET" : "POST";
+    message += "\nArguments: ";
+    message += server->args();
+    message += "\n";
 
-  server->send(200, "text/html", formMessage);
+    for ( uint8_t i = 0; i < server->args(); i++ ) {
+      message += " " + server->argName ( i ) + ": " + server->arg ( i ) + "\n";
+    }
+
+    server->send ( 404, "text/plain", message );
+  });
 }

@@ -1,7 +1,6 @@
 #ifndef __DATASTORE_H__
 #define __DATASTORE_H__
 
-#include <Arduino.h>
 #include "Setting.h"
 
 /// @brief		HTTPS나 ESP의 FS을 위한 DataStore 추상클래스
@@ -15,8 +14,8 @@ public:
 	DataStore() { };
 	virtual ~DataStore() { };
 	
-	virtual int download(Setting* data) = 0;
-	virtual int upload(Setting* data) = 0;
+	virtual bool download(Setting* data) = 0;
+	virtual bool upload(Setting* data) = 0;
 };
 
 #endif

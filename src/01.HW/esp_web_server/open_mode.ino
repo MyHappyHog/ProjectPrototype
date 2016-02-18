@@ -1,14 +1,24 @@
 // AP 모드로 Server 열기
-void openSoftAP(String& ssid, String& password, bool hidden) {
+void openSoftAP(Wifi* wifiInfo, bool hidden) {
 #ifdef DEBUG_MODE
   Serial.println( "" );
   Serial.print("Configuring access point...");
 #endif
+  String ssid = wifiInfo->getSSID();
+  if (!ssid.equals("")) {
+    return ;
+  }
+
+  String password = wifiInfo->getPassword();
   if ( password.equals("") || password.length() < 8 ) {
     password = "hog12345";
   }
-  WiFi.softAP( ssid.c_str(), password.c_str(), 0, hidden );
+
+  WiFi.softAP( WiFi.softAPmacAddress().c_str(), password.c_str(), 0, hidden );
 #ifdef DEBUG_MODE
+  Serial.println(ssid);
+  Serial.println(password);
+
   WiFi.printDiag(Serial);
 
   IPAddress myIP = WiFi.softAPIP();
@@ -17,27 +27,34 @@ void openSoftAP(String& ssid, String& password, bool hidden) {
 #endif
 }
 
-// Station 모드로 공유기를 이용하여 mdns 서버 열기
-void openStation(String& ssid, String& password) {
+// Station 모드로 wifi에 접속
+void openStation(Wifi* wifiInfo) {
 #ifdef DEBUG_MODE
   Serial.println( "" );
   Serial.println("Configuring station mode...");
 #endif
 
+  String ssid = wifiInfo->getSSID();
+  String password = wifiInfo->getPassword();
+
   if (ssid.equals("")) {
     return ;
   }
 
+#ifdef DEBUG_MODE
   Serial.println(ssid);
   Serial.println(password);
-  
+#endif
+
   WiFi.begin ( ssid.c_str(), password.c_str() );
+  //WiFi.begin ( "joh", "jongho123" );
 
   // Wait for connection
   // 연결되지 않으면 계속 연결 시도 함.
   while ( WiFi.waitForConnectResult() != WL_CONNECTED ) {
     delay(500);
     Serial.print(".");
+    WiFi.begin ( ssid.c_str(), password.c_str() );
   };
 
 #ifdef DEBUG_MODE
@@ -53,14 +70,6 @@ void openStation(String& ssid, String& password) {
   Serial.println ( WiFi.localIP() );
   Serial.println ( "" );
 #endif
-}
-
-void addHandlerToServer() {
-  // 모든 테이블을 보여줌.
-  server->on ( "/", HTTP_GET, handleShowWifiForm );
-  server->on ( "/", HTTP_POST, handleWifiConfig );
-  server->on ( "/food", HTTP_GET, handlePutFood );
-  server->onNotFound ( handleNotFound );
 }
 
 /*

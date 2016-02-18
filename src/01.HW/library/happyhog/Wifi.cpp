@@ -14,24 +14,28 @@ Wifi::~Wifi() {
 	delete data;
 }
 
-int Wifi::deserialize(String json) {
+bool Wifi::deserialize(String json, bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<WIFI_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<WIFI_JSON_SIZE>;
 
 	// JSON 분석
 	JsonObject& root = jsonBuffer->parseObject(json);
 	if( !root.success() ) {
-		return -1;
+		delete jsonBuffer;
+		return false;
 	}
 
 	// 분석한 데이터 입력
 	data->ssid = root[SSID_KEY].asString();
 	data->password = root[PASSWORD_KEY].asString();
 	data->dropboxKey = root[DROPBOX_ACCESS_KEY].asString();
+	
+	delete jsonBuffer;
 
-	return 0;
+	return true;
 }
-String Wifi::serialize() {
+
+String Wifi::serialize(bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<WIFI_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<WIFI_JSON_SIZE>;
 
@@ -50,4 +54,24 @@ String Wifi::serialize() {
 	delete jsonBuffer;
 
 	return json;
+}
+
+String Wifi::getSSID() {
+	return data->ssid;
+}
+
+String Wifi::getPassword() {
+	return data->password;
+}
+
+String Wifi::getDropboxKey() {
+	return data->dropboxKey;
+}
+
+void Wifi::setData(WIFIData* wifiData) {
+	if (data != nullptr) {
+		delete data;
+	}
+
+	data = wifiData;
 }

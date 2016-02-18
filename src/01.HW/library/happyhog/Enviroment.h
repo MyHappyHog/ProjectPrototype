@@ -3,9 +3,7 @@
 
 #include "Setting.h"
 
-#define TEMPERATURE_ARRAY_KEY "temperature"
-#define HUMIDITY_ARRAY_KEY "humidity"
-
+#define DEFAULT_ENVIROMENT_FILENAME "/enviroment.json"
 #define ENVIROMENT_JSON_SIZE 400
 
 #define DEFAULT_MAX_TEMPERATURE 28
@@ -34,8 +32,8 @@ public :
 	Enviroment(String filePath, String fileName);
 	virtual ~Enviroment();
 
-	virtual int deserialize(String json);
-	virtual String serialize();
+	virtual bool deserialize(String json, bool rev = false);
+	virtual String serialize(bool rev = false);
 
 private :
 	EnviromentData* data;

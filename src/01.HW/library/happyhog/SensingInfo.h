@@ -3,8 +3,7 @@
 
 #include "Setting.h"
 
-#define TEMPERATURE_KEY "temperature"
-#define HUMIDITY_KEY "humidity"
+#define DEFAULT_SENSINGINFO_FILENAME "/sensingInfo.json"
 
 #define SENSORDATA_JSON_SIZE 200
 
@@ -25,8 +24,8 @@ public :
 	SensingInfo(String filePath, String fileName);
 	virtual ~SensingInfo();
 	
-	virtual int deserialize(String json);
-	virtual String serialize();
+	virtual bool deserialize(String json, bool rev = false);
+	virtual String serialize(bool rev = false);
 
 private :
 	SensorData* data;

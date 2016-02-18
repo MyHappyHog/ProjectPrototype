@@ -1,183 +1,220 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
-#include <ArduinoJson.h>
+#include <Thread.h>
+#include <ThreadController.h>
+
+#include <SensingInfo.h>
+#include <FoodSchedule.h>
+#include <Wifi.h>
+//
 #include <H3Dropbox.h>
+#include <H3FileSystem.h>
+//
+#include <H3Scheduler.h>
+#include <Sensor.h>
 
-#include <DHT.h>
-#include <Stepper.h>
-
-extern "C" {
-#include "user_interface.h"
-}
-
-#define DEBUG_MODE 0
-
-/*
-   EEPROM에서 사용할 size. 아마도.. 20KB까지 가능하지 않나 생각됨.
-   ESP-12E 의 flash size 는 4MB임. 아래는 참고자료
-   https://github.com/esp8266/Arduino/blob/master/tools/sdk/ld/eagle.flash.4m.ld
-   https://github.com/esp8266/Arduino/blob/master/tools/sdk/ld/eagle.flash.4m1m.ld
-*/
-#define EEPROM_SIZE 512
-
+//#define DEBUG_MODE 1
 /*
    해피호구의 웹사이트를 열을 포트 주소.
 */
 #define WEB_PORT 12345
 
-#define DHT11_PIN_1 5
-#define DHT11_PIN_2 4
+#define TIME_SNYCHRONIZE_SERVER1 "pool.ntp.org"
+#define TIME_SNYCHRONIZE_SERVER2 "time.nist.gov"
 
-#define STEP_IN_1 16
-#define STEP_IN_2 14
-#define STEP_IN_3 12
-#define STEP_IN_4 13
-
-#define MOTER_STEP 200
-
-#define NUM_OF_DATA 30    // number of nomalization data
-#define TRIM_PERCENT 10   // percent of trimmed mean
-
-void openSoftAP(String& ssid, String& password, bool hidden);
-void openStation(String& ssid, String& password);
+void openSoftAP(Wifi* wifiInfo, bool hidden);
+void openStation(Wifi* wifiInfo);
 
 void addHandlerToServer();
 void startServer();
 
-void handleNotFound();
-void handlePutFood();
-void handleShowWifiForm();
-void handleWifiConfig();
+ESP8266WebServer *server = nullptr;
 
-void checkTemData(double* temp, int i);      // storing on the array
-void checkHumData(double* humid, int i);
-void printDHTData(double temp, double humid);
+H3Dropbox* box;
+H3FileSystem* fileSystem;
+//
+SensingInfo* sensingInfo = nullptr;
+FoodSchedule* foodSchedule = nullptr;
+Wifi* wifiInfo = nullptr;
 
-double findMean(double arr[]);                // finding mean value
-double findMedian(double arr[]);              // sorting in ascending power and finding median value
-double findTrimmed(double arr[], double percent);  // cut-off TRIM_PERCENT up and down
-double zScore(double arr[]);                  // if not zScore range, put in median value
-double nomalization(double* tempOrHumid);     // return final nomalization value
-void sort(double arr[], int num);
+H3Scheduler* scheduler = nullptr;
+Sensor* sensor = nullptr;
 
-/* 와이파이 ssid 와 password */
-String ssid;
-String password;
-String relay_mac;
-String mac;
-String key = "";
+ThreadController controll = ThreadController();
 
-double temperature[NUM_OF_DATA];
-double humidity[NUM_OF_DATA];
+Thread myThread = Thread();
+Thread sensingThread = Thread();
 
 int count = 0;
-int countNum = NUM_OF_DATA / 2;   // parameters per sensor
-double temp, humid;  // final nomalization value
-float celsiustemp = 0;
-uint32_t lastreadtime = millis();
+bool updateCursor = false;
+bool setWifiInfo = false;
+String filePath = "/";
 
-ESP8266WebServer *server;
-DHT dht1(DHT11_PIN_1, DHT11);
-DHT dht2(DHT11_PIN_2, DHT11);
-Stepper motor(MOTER_STEP, STEP_IN_1, STEP_IN_2, STEP_IN_3, STEP_IN_4);
-H3Dropbox box("/helloworld", key);
+const char SENSING_INFO_FILENAME[] PROGMEM = DEFAULT_SENSINGINFO_FILENAME;
+const char FOODSCHEDULE_FILENAME[] PROGMEM = DEFAULT_FOODSCHEDULE_FILENAME;
+const char WIFI_INFO_FILENAME[] PROGMEM = DEFAULT_WIFI_FILENAME;
+
+const char TIME_SERVER1[] PROGMEM = TIME_SNYCHRONIZE_SERVER1;
+const char TIME_SERVER2[] PROGMEM = TIME_SNYCHRONIZE_SERVER2;
 
 /*
     설정된 값들을 eeprom에서 읽어오는 함수
     ssid, password, bootmode 를 읽어 옴.
 */
-String loadConfigure() {
-
-  ssid = "";
-  password = "";
-  mac = WiFi.softAPmacAddress();
-  relay_mac = "";
+void loadWifiInfo() {
+  filePath += WiFi.softAPmacAddress();
+  filePath.replace(":", "");
 
   WiFi.mode(WIFI_OFF);
-  // randomSeed(analogRead(A0));
+
+  fileSystem = new H3FileSystem();
+  wifiInfo = new Wifi(filePath, FPSTR(WIFI_INFO_FILENAME));
+  fileSystem->download(dynamic_cast<Setting*>(wifiInfo));
+  delete fileSystem;
 
   // flash에 configure 정보를 저장하지 않음.
   WiFi.persistent(false);
-
 }
 
-/*
-    Serial을 연결하고 EEPROM의 설정을 로드함.
-    EEPROM의 모드에 따라 AP 혹은 STATION 웹 서버를 엶.
-*/
-void setup() {
-#ifdef DEBUG_MODE
-  Serial.begin(115200);
-#endif
+// 다운로드 드랍박스 데이터
+bool downloadCurrentSetting() {
+  box = new H3Dropbox(wifiInfo->getDropboxKey());
+  delete wifiInfo;
 
-  dht1.begin();
-  dht2.begin();
+  sensingInfo = new SensingInfo(filePath, FPSTR(SENSING_INFO_FILENAME));
+
+  // 다운로드 안되면 디폴트값으로..
+  fileSystem = new H3FileSystem();
+  fileSystem->download(dynamic_cast<Setting*>(sensingInfo));
+  if ( !box->upload(dynamic_cast<Setting*>(sensingInfo)) )
+    return false;
+
+  if ( !fileSystem->upload(dynamic_cast<Setting*>(sensingInfo)) )
+    return false;
+  delete fileSystem;
+
+  foodSchedule = new FoodSchedule(filePath, FPSTR(FOODSCHEDULE_FILENAME));
+  if ( !box->download(dynamic_cast<Setting*>(foodSchedule)) )
+    return false;
+
+  sensor = new Sensor();
+  sensor->begin();
+  Serial.print("begin done : ");
+  Serial.println(ESP.getFreeHeap());
+
+  return true;
+}
+
+void setup() {
+  Serial.begin(115200);
+  Serial.print("begin memory : ");
+  Serial.println(ESP.getFreeHeap());
+#ifdef DEBUG_MODE
+#endif
 
 #ifdef DEBUG_MODE
   Serial.setDebugOutput(true);
   Serial.println("start");
 #endif
 
-  loadConfigure();
+  loadWifiInfo();
 
+  openSoftAP(wifiInfo, false);
+  openStation(wifiInfo);
 
-  Serial.println(ssid);
-  Serial.println(password);
+  if (WiFi.status() == WL_CONNECTED) {
+    configTime(9 * 3600, 0, String(FPSTR(TIME_SERVER1)).c_str(), String(FPSTR(TIME_SERVER2)).c_str());
+    for (int i = 0; i < 1000; i++) {
+      delay(1);
+    }
+    Serial.print("setting : ");
+    Serial.println(downloadCurrentSetting() ? "OK" : "FAIL");
 
-  openSoftAP(mac, password, false);
-  openStation(ssid, password);
+    myThread.onRun([]() {
+      if (sensor->getRequireUpdate()) {
+        Serial.print("upload SensingInfo : ");
+        Serial.println(box->upload(dynamic_cast<Setting*>(sensingInfo)) ? "OK" : "FAIL");
+        fileSystem = new H3FileSystem();
+        fileSystem->upload(dynamic_cast<Setting*>(sensingInfo));
+        delete fileSystem;
+        sensor->setRequireUpdate(false);
+      }
 
-  if (ssid.equals("")) {
+      bool changeCursor = false;
+      if ( box->longPoll(dynamic_cast<Setting*>(sensingInfo), 30) ) {
+        changeCursor = box->requestLatestCursor(dynamic_cast<Setting*>(sensingInfo));
+        if ( box->isChangeReversions(dynamic_cast<Setting*>(foodSchedule)) ) {
+          box->download(dynamic_cast<Setting*>(foodSchedule));
+        }
+      }
+
+      scheduler = new H3Scheduler();
+      scheduler->runSchedule(foodSchedule);
+      delete scheduler;
+
+      Serial.println(count++);
+      Serial.print("crruent memory : ");
+      Serial.println(ESP.getFreeHeap());
+
+      updateCursor = changeCursor;
+    });
+    myThread.setInterval(35000);
+
+    sensingThread.onRun([]() {
+      sensor->Sensing(sensingInfo);
+      Serial.println("sensing");
+    });
+    sensingThread.setInterval(2000);
+
+    // Adds both threads to the controller
+    controll.add(&myThread);
+    controll.add(&sensingThread);
+  }
+  else {
     server = new ESP8266WebServer(WEB_PORT);
     addHandlerToServer();
     startServer();
+    Serial.print("server done : ");
+    Serial.println(ESP.getFreeHeap());
   }
 }
 
 void loop() {
-  if (server != NULL) server->handleClient();
+  if (server != nullptr) {
+    if (!setWifiInfo) server->handleClient();
+    else {
+      delete server;
+      server = nullptr;
 
-  /*
-    uint32_t currenttime = millis();
-    if ( (currenttime - lastreadtime) > 2000 ) {
+      // 완료되었으면 WiFi 연결
+      // 초기 세팅 적용.
+      // 드랍박스에 초기 세팅 적용한 파일 생성
+      WiFi.softAPdisconnect(true);
 
-     /////////////////////////////////test
-     //    Serial.print("inputArray");
-     //   Serial.println();
-     //   testingArray(temperature);
-     ////////////////////////////////
+      openStation(wifiInfo);
 
-     if (count >= countNum) {
-       temp = nomalization(temperature);
-       humid = nomalization(humidity);
-       printDHTData(temp, humid);
-       count = 0;
+      Serial.print("delete server : ");
+      Serial.println(ESP.getFreeHeap());
 
-       if (server == NULL) {
-         StaticJsonBuffer<200> jsonBuffer;
-         JsonObject& root = jsonBuffer.createObject();
-         root["temperature"] = temp;
-         root["humidity"] = humid;
-         String body;
-         root.printTo(body);
-         box.upload("sensingFile.txt", body);
-       }
-     }
+      configTime(9 * 3600, 0, String(FPSTR(TIME_SERVER1)).c_str(), String(FPSTR(TIME_SERVER2)).c_str());
+      for (int i = 0; i < 1000; i++) {
+        delay(1);
+      }
 
-     checkHumData(humidity, count);
-     checkTemData(temperature, count);
-     count++;
+      Serial.print("setting : ");
+      Serial.println(downloadCurrentSetting() ? "OK" : "FAIL");
 
-     lastreadtime = currenttime;
-    #ifdef DEBUG_MODE
-     Serial.print("softap mac address : ");
-     Serial.println(WiFi.softAPmacAddress());
-
-     Serial.print("sta mac address : ");
-     Serial.println(WiFi.macAddress());
-     Serial.println(system_get_free_heap_size());
-    #endif
+      Serial.println("begin restart!!");
+      ESP.restart();
     }
-  */
+  }
+  else {
+    controll.run();
+
+    if (updateCursor) {
+      updateCursor = false;
+      myThread.run();
+    }
+  }
 }
