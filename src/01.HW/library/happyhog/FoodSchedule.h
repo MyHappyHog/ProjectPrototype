@@ -3,6 +3,8 @@
 
 #include "Setting.h"
 
+#define DEFAULT_FOODSCHEDULE_FILENAME "/foodSchedule.json"
+
 #define NUM_ROTATION_KEY "numRotation"
 #define TIME_KEY "time"
 
@@ -25,8 +27,8 @@ public:
 	FoodSchedule(String filePath, String fileName);
 	virtual ~FoodSchedule();
 	
-	virtual bool deserialize(String json);
-	virtual String serialize();
+	virtual bool deserialize(String json, bool rev = false);
+	virtual String serialize(bool rev = false);
 
 	void addSchedule(int numRotation, String time);
 	void removeSchedule(FoodScheduleList* delSchedule);

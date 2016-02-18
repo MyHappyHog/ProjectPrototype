@@ -7,6 +7,8 @@
 #define PASSWORD_KEY "password"
 #define DROPBOX_ACCESS_KEY "boxkey"
 
+#define DEFAULT_WIFI_FILENAME "/wifiInfo.json"
+
 #define WIFI_JSON_SIZE 200
 
 typedef struct _WIFIData {
@@ -27,8 +29,8 @@ public :
 	Wifi(String filePath, String fileName);
 	virtual ~Wifi();
 
-	virtual bool deserialize(String json);
-	virtual String serialize();
+	virtual bool deserialize(String json, bool rev = false);
+	virtual String serialize(bool rev = false);
 
 	String getSSID();
 	String getPassword();

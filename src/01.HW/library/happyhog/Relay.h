@@ -3,8 +3,7 @@
 
 #include "Setting.h"
 
-#define TEMPERATURE_RELAY_KEY "temperature"
-#define HUMIDITY_RELAY_KEY "humidity"
+#define DEFAULT_RELAY_FILENAME "/relay.json"
 
 #define RELAY_JSON_SIZE 200
 #define DEFAULT_STATE 0
@@ -29,8 +28,8 @@ public :
 	Relay(String filePath, String fileName);
 	virtual ~Relay();
 
-	virtual bool deserialize(String json);
-	virtual String serialize();
+	virtual bool deserialize(String json, bool rev = false);
+	virtual String serialize(bool rev = false);
 
 private :
 	RelayData* data;

@@ -28,9 +28,10 @@ bool H3FileSystem::download(Setting* data) {
 
 	in.setTimeout(0);
 	String result = in.readString();
+	Serial.println(result);
 	in.close();
 	
-	return data->deserialize(result);
+	return data->deserialize(result, true);
 }
 
 bool H3FileSystem::upload(Setting* data) {
@@ -45,7 +46,7 @@ bool H3FileSystem::upload(Setting* data) {
 	if (!out) {
 		return false;
 	}
-	out.print(data->serialize());
+	out.print(data->serialize(true));
 
 	out.close();
 	return true;

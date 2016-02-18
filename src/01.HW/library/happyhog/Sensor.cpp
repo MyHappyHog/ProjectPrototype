@@ -4,6 +4,9 @@
 
 #include "Sensor.h"
 
+const char TEMPERATURE_KEY[] PROGMEM = TEMPERATURE_ARGUMENT_KEY;
+const char HUMIDITY_KEY[] PROGMEM = HUMIDITY_ARGUMENT_KEY;
+
 Sensor::Sensor() {
 	dht[0] = new DHT(DHT11_PIN_1, DHT11);
 	dht[1] = new DHT(DHT11_PIN_2, DHT11);
@@ -30,8 +33,8 @@ void Sensor::Sensing(SensingInfo* info) {
 			StaticJsonBuffer<SENSORDATA_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<SENSORDATA_JSON_SIZE>; 
 			JsonObject& root = jsonBuffer->createObject();
 			
-			root[TEMPERATURE_KEY] = prevTemp = nomalization(temperature);
-			root[HUMIDITY_KEY] = prevHumid = nomalization(humidity);
+			root[FPSTR(TEMPERATURE_KEY)] = prevTemp = nomalization(temperature);
+			root[FPSTR(HUMIDITY_KEY)] = prevHumid = nomalization(humidity);
 			
 			String SensingData = "";
 			

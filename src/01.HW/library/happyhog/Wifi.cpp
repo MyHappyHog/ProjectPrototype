@@ -14,7 +14,7 @@ Wifi::~Wifi() {
 	delete data;
 }
 
-bool Wifi::deserialize(String json) {
+bool Wifi::deserialize(String json, bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<WIFI_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<WIFI_JSON_SIZE>;
 
@@ -35,7 +35,7 @@ bool Wifi::deserialize(String json) {
 	return true;
 }
 
-String Wifi::serialize() {
+String Wifi::serialize(bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<WIFI_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<WIFI_JSON_SIZE>;
 

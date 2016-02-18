@@ -8,12 +8,12 @@ FoodSchedule::FoodSchedule(String filePath, String fileName) : Setting(filePath,
 	schedule = nullptr;
 }
 FoodSchedule::~FoodSchedule() {
-	while (schedule != NULL) {
+	while (schedule != nullptr) {
 		removeSchedule(schedule);
 	}
 }
 
-bool FoodSchedule::deserialize(String json) {
+bool FoodSchedule::deserialize(String json, bool rev) {
 	DynamicJsonBuffer jsonBuffer;
 	
 	// 기존의 스케줄 초기화
@@ -46,14 +46,14 @@ bool FoodSchedule::deserialize(String json) {
 	}
 }
 
-String FoodSchedule::serialize() {
+String FoodSchedule::serialize(bool rev) {
 	// json array 생성
 	DynamicJsonBuffer jsonBuffer;
 	JsonArray& scheduleArray = jsonBuffer.createArray();
 
 	// 모든 schedule 데이터를 json array로 변환
 	FoodScheduleList* p = schedule;
-	while (p != NULL) {
+	while (p != nullptr) {
 		// object 생성 및 데이터 변환
 		JsonObject& node = jsonBuffer.createObject();
 		node[NUM_ROTATION_KEY] = p->numRotation;
@@ -64,7 +64,7 @@ String FoodSchedule::serialize() {
 
 		p = p->nextSchedule;
 	}
-	
+
 	// json array를 스트링으로 변환
 	String result;
 	scheduleArray.printTo(result);
@@ -75,21 +75,21 @@ String FoodSchedule::serialize() {
 
 void FoodSchedule::addSchedule(int numRotation, String time) {
 	// 스케줄 리스트의 헤더가 없을 때
-	if (schedule == NULL) {
+	if (schedule == nullptr) {
 		schedule = new FoodScheduleList;
-		schedule->nextSchedule = NULL;
+		schedule->nextSchedule = nullptr;
 		schedule->numRotation = numRotation;
 		schedule->time = time;
 	} 
 	// 헤더가 존재 할 때.
 	else {
 		FoodScheduleList* p = schedule;
-		while ( p->nextSchedule != NULL ) {
+		while ( p->nextSchedule != nullptr ) {
 			p = p->nextSchedule;
 		}
 
 		p->nextSchedule = new FoodScheduleList;
-		p->nextSchedule->nextSchedule = NULL;
+		p->nextSchedule->nextSchedule = nullptr;
 		p->nextSchedule->numRotation = numRotation;
 		p->nextSchedule->time = time;
 	}
