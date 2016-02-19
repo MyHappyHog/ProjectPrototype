@@ -1,14 +1,14 @@
-#ifndef __RELAY_H__
-#define __RELAY_H__
+#ifndef __RELAYSETTING_H__
+#define __RELAYSETTING_H__
 
 #include "Setting.h"
 
-#define DEFAULT_RELAY_FILENAME "/relay.json"
+#define DEFAULT_RELAY_FILENAME "/relaySetting.json"
 
 #define RELAY_JSON_SIZE 200
 #define DEFAULT_STATE 0
 
-enum default_relays { DEFAULT_TEMPERATURE_RELAY = 1, DEFAULT_HUMIDITY_RELAY };
+enum default_relays { DEFAULT_TEMPERATURE_RELAY, DEFAULT_HUMIDITY_RELAY };
 enum relay_index { RELAY_POSITION, RELAY_STATE };
 
 typedef struct _RelayData {
@@ -22,11 +22,11 @@ typedef struct _RelayData {
 /// @date		2016-02-11
 /// @version	0.0.1
 
-class Relay : public Setting {
+class RelaySetting : public Setting {
 public :
-	Relay(String fileName);
-	Relay(String filePath, String fileName);
-	virtual ~Relay();
+	RelaySetting(String fileName);
+	RelaySetting(String filePath, String fileName);
+	virtual ~RelaySetting();
 
 	virtual bool deserialize(String json, bool rev = false);
 	virtual String serialize(bool rev = false);

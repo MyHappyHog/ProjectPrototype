@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
-#include "Relay.h"
+#include "RelaySetting.h"
 
 const char TEMPERATURE_KEY[] PROGMEM = TEMPERATURE_ARGUMENT_KEY;
 const char HUMIDITY_KEY[] PROGMEM = HUMIDITY_ARGUMENT_KEY;
 
-Relay::Relay(String fileName) : Relay("/", fileName) { }
+RelaySetting::RelaySetting(String fileName) : RelaySetting("/", fileName) { }
 
-Relay::Relay(String filePath, String fileName) : Setting(filePath, fileName) {
+RelaySetting::RelaySetting(String filePath, String fileName) : Setting(filePath, fileName) {
 	data = new RelayData;
 	
 	data->temperature[RELAY_POSITION] = DEFAULT_TEMPERATURE_RELAY;
@@ -18,11 +18,11 @@ Relay::Relay(String filePath, String fileName) : Setting(filePath, fileName) {
 	data->humidity[RELAY_STATE] = DEFAULT_STATE;
 }
 
-Relay::~Relay() {
+RelaySetting::~RelaySetting() {
 	delete data;
 }
 
-bool Relay::deserialize(String json, bool rev) {
+bool RelaySetting::deserialize(String json, bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<RELAY_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<RELAY_JSON_SIZE>;
 
@@ -50,7 +50,7 @@ bool Relay::deserialize(String json, bool rev) {
 	
 	return true;
 }
-String Relay::serialize(bool rev) {
+String RelaySetting::serialize(bool rev) {
 	// Jsonbuffer 동적할당
 	StaticJsonBuffer<RELAY_JSON_SIZE>* jsonBuffer = new StaticJsonBuffer<RELAY_JSON_SIZE>;
 

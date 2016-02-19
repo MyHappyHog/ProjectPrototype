@@ -3,7 +3,7 @@
 
 #include "Setting.h"
 
-#define DEFAULT_FOODSCHEDULE_FILENAME "/foodSchedule.json"
+#define DEFAULT_FOODSCHEDULE_FILENAME "/FoodSchedule.json"
 
 #define NUM_ROTATION_KEY "numRotation"
 #define TIME_KEY "time"

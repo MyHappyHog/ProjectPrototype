@@ -3,7 +3,7 @@
 
 #include "Setting.h"
 
-#define DEFAULT_SENSINGINFO_FILENAME "/sensingInfo.json"
+#define DEFAULT_SENSINGINFO_FILENAME "/SensingInfo.json"
 
 #define SENSORDATA_JSON_SIZE 200
 
