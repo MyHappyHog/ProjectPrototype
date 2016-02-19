@@ -61,3 +61,7 @@ String SensingInfo::serialize(bool rev) {
 	
 	return json;
 }
+
+SensorData SensingInfo::getSensorData() {
+	return *data;
+}

@@ -27,6 +27,8 @@ public :
 	virtual bool deserialize(String json, bool rev = false);
 	virtual String serialize(bool rev = false);
 
+	SensorData getSensorData();
+
 private :
 	SensorData* data;
 };

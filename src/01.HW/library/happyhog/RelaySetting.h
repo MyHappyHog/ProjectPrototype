@@ -3,18 +3,16 @@
 
 #include "Setting.h"
 
-#define DEFAULT_RELAY_FILENAME "/relaySetting.json"
+#define DEFAULT_RELAYSETTING_FILENAME "/RelaySetting.json"
 
 #define RELAY_JSON_SIZE 200
-#define DEFAULT_STATE 0
 
 enum default_relays { DEFAULT_TEMPERATURE_RELAY, DEFAULT_HUMIDITY_RELAY };
-enum relay_index { RELAY_POSITION, RELAY_STATE };
 
-typedef struct _RelayData {
-	int temperature[2];
-	int humidity[2];
-} RelayData;
+typedef struct _RelayPosition {
+	int temperature;
+	int humidity;
+} RelayPosition;
 
 /// @brief		릴레이 정보를 담고 있는 클래스
 /// @details	
@@ -31,8 +29,10 @@ public :
 	virtual bool deserialize(String json, bool rev = false);
 	virtual String serialize(bool rev = false);
 
+	RelayPosition getRelayData();
+
 private :
-	RelayData* data;
+	RelayPosition* data;
 };
 
 #endif
