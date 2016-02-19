@@ -1,38 +1,24 @@
 #ifndef __RELAY_H__
 #define __RELAY_H__
 
-#include "Setting.h"
+#define DEFAULT_TEMPERATURE_RELAY_PIN 12
+#define DEFAULT_HUMIDITY_RELAY_PIN 13
 
-#define DEFAULT_RELAY_FILENAME "/relay.json"
-
-#define RELAY_JSON_SIZE 200
-#define DEFAULT_STATE 0
-
-enum default_relays { DEFAULT_TEMPERATURE_RELAY = 1, DEFAULT_HUMIDITY_RELAY };
-enum relay_index { RELAY_POSITION, RELAY_STATE };
-
-typedef struct _RelayData {
-	int temperature[2];
-	int humidity[2];
-} RelayData;
-
-/// @brief		릴레이 정보를 담고 있는 클래스
+/// @brief		릴레이를 제어하는 클래스
 /// @details	
 /// @author		Jongho Lim, sloth@kookmin.ac.kr
 /// @date		2016-02-11
 /// @version	0.0.1
 
-class Relay : public Setting {
+class Relay {
 public :
-	Relay(String fileName);
-	Relay(String filePath, String fileName);
+	Relay(int temperaturePin = DEFAULT_TEMPERATURE_RELAY_PIN, int humidityPin = DEFAULT_HUMIDITY_RELAY_PIN);
 	virtual ~Relay();
 
-	virtual bool deserialize(String json, bool rev = false);
-	virtual String serialize(bool rev = false);
+	void run(SensingInfo* info, Enviroment* env, RelaySetting* relay);
 
 private :
-	RelayData* data;
+	int pin[2];
 };
 
 #endif

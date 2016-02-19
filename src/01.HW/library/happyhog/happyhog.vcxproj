@@ -82,6 +82,7 @@
     <ClInclude Include="H3Dropbox.h" />
     <ClInclude Include="H3FileSystem.h" />
     <ClInclude Include="Relay.h" />
+    <ClInclude Include="RelaySetting.h" />
     <ClInclude Include="SensingInfo.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Wifi.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="H3Dropbox.cpp" />
     <ClCompile Include="H3FileSystem.cpp" />
     <ClCompile Include="Relay.cpp" />
+    <ClCompile Include="RelaySetting.cpp" />
     <ClCompile Include="SensingInfo.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="Wifi.cpp" />

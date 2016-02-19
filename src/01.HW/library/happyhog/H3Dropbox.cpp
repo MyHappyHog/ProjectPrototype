@@ -196,7 +196,6 @@ bool H3Dropbox::longPoll(Setting* data, int timeout) {
 
 	// request 요청
 	int httpCode = http->POST(String("{\"cursor\":\"" + data->getCurrentCursor() + "\", \"timeout\":" + timeout + "}"));
-
 	// response가 200(OK)이 아니면 종료.
 	/// @TODO invaild key 일 때 처리하기. 즉 에러처리..
 	if(httpCode != 200) {
@@ -212,8 +211,7 @@ bool H3Dropbox::longPoll(Setting* data, int timeout) {
 	delete http;
 
 	result = result.substring(result.indexOf("{"), result.lastIndexOf("}") + 1);
-
-	if(result.indexOf("true")) {
+	if(result.indexOf("true") != -1) {
 		return true;
 	}
 

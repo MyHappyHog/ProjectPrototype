@@ -65,3 +65,7 @@ String Enviroment::serialize(bool rev) {
 
 	return json;
 }
+
+EnviromentData Enviroment::getEnviromentData() {
+	return *data;
+}
