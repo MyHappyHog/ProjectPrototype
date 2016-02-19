@@ -16,6 +16,7 @@ void openSoftAP(Wifi* wifiInfo, bool hidden) {
 
   ssid = WiFi.softAPmacAddress();
   ssid.replace(":", "");
+  Serial.println(ssid);
   WiFi.softAP( ssid.c_str(), password.c_str(), 0, hidden );
 #ifdef DEBUG_MODE
   Serial.println(ssid);

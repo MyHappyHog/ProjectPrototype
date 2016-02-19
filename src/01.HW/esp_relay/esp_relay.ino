@@ -1,9 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
-#include <Thread.h>
-#include <ThreadController.h>
-
 #include <SensingInfo.h>
 #include <Enviroment.h>
 #include <RelaySetting.h>
@@ -12,7 +9,7 @@
 #include <H3Dropbox.h>
 #include <H3FileSystem.h>
 //
-// #include <RelayController.h>
+#include <Relay.h>
 
 //#define DEBUG_MODE 1
 /*
@@ -38,14 +35,9 @@ SensingInfo* sensingInfo = nullptr;
 Enviroment* enviroment = nullptr;
 RelaySetting* relaySetting = nullptr;
 Wifi* wifiInfo = nullptr;
-
-ThreadController controll = ThreadController();
-
-Thread downloadThread = Thread();
-Thread relayThread = Thread();
+Relay* relayController = nullptr;
 
 int count = 0;
-bool updateCursor = false;
 bool setWifiInfo = false;
 String filePath = "/";
 
@@ -85,6 +77,7 @@ bool downloadCurrentSetting() {
   if ( !box->download(dynamic_cast<Setting*>(sensingInfo)) )
     return false;
   box->reversions(dynamic_cast<Setting*>(sensingInfo));
+  box->requestLatestCursor(dynamic_cast<Setting*>(sensingInfo));
 
   enviroment = new Enviroment(filePath, FPSTR(ENVIROMENT_FILENAME));
   if ( !box->download(dynamic_cast<Setting*>(enviroment)) )
@@ -96,7 +89,9 @@ bool downloadCurrentSetting() {
     return false;
   box->reversions(dynamic_cast<Setting*>(relaySetting));
 
-  Serial.print("begin done : ");
+  relayController = new Relay();
+
+  Serial.print("relay ready : ");
   Serial.println(ESP.getFreeHeap());
 
   return true;
@@ -126,41 +121,6 @@ void setup() {
     }
     Serial.print("setting : ");
     Serial.println(downloadCurrentSetting() ? "OK" : "FAIL");
-
-    downloadThread.onRun([]() {
-      // 업데이트 커서 바꿔주기
-      if ( box->longPoll(dynamic_cast<Setting*>(sensingInfo), 30) ) {
-        box->requestLatestCursor(dynamic_cast<Setting*>(sensingInfo));
-
-        if ( box->isChangeReversions(dynamic_cast<Setting*>(sensingInfo)) ) {
-          box->download(dynamic_cast<Setting*>(sensingInfo));
-        }
-        if ( box->isChangeReversions(dynamic_cast<Setting*>(enviroment)) ) {
-          box->download(dynamic_cast<Setting*>(enviroment));
-        }
-        if ( box->isChangeReversions(dynamic_cast<Setting*>(relaySetting)) ) {
-          box->download(dynamic_cast<Setting*>(relaySetting));
-        }
-
-        updateCursor = true;
-      }
-      //
-      Serial.println(count++);
-      Serial.print("crruent memory : ");
-      Serial.println(ESP.getFreeHeap());
-      //
-    });
-    downloadThread.setInterval(35000);
-
-    relayThread.onRun([]() {
-      //      sensor->Sensing(sensingInfo);
-      //      Serial.println("sensing");
-    });
-    relayThread.setInterval(2000);
-
-    // Adds both threads to the controller
-    controll.add(&downloadThread);
-    controll.add(&relayThread);
   }
   else {
     server = new ESP8266WebServer(WEB_PORT);
@@ -201,11 +161,27 @@ void loop() {
     }
   }
   else {
-    controll.run();
+    Serial.println("start longPoll");
+    if ( box->longPoll(dynamic_cast<Setting*>(sensingInfo), 30) ) {
+      box->requestLatestCursor(dynamic_cast<Setting*>(sensingInfo));
 
-    if (updateCursor) {
-      updateCursor = false;
-      downloadThread.run();
+      if ( box->isChangeReversions(dynamic_cast<Setting*>(sensingInfo)) ) {
+        box->download(dynamic_cast<Setting*>(sensingInfo));
+      }
+      if ( box->isChangeReversions(dynamic_cast<Setting*>(enviroment)) ) {
+        box->download(dynamic_cast<Setting*>(enviroment));
+      }
+      if ( box->isChangeReversions(dynamic_cast<Setting*>(relaySetting)) ) {
+        box->download(dynamic_cast<Setting*>(relaySetting));
+      }
+
+      relayController->run(sensingInfo, enviroment, relaySetting);
+      Serial.println("run relay");
     }
+    //
+    Serial.println(count++);
+    Serial.print("crruent memory : ");
+    Serial.println(ESP.getFreeHeap());
+    //
   }
 }
