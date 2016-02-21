@@ -55,6 +55,7 @@ void addHandlerToServer() {
       wifiData->ssid = server->arg(ARG_NAME_SSID);
       wifiData->password = server->arg(ARG_NAME_PASSWORD);
       wifiData->dropboxKey = key;
+      wifiData->relayMac = server->arg(ARG_NAME_RELAY_MAC);
     }
 
     fileSystem = new H3FileSystem();

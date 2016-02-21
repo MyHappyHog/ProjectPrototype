@@ -14,7 +14,10 @@ void openSoftAP(Wifi* wifiInfo, bool hidden) {
     password = "hog12345";
   }
 
-  WiFi.softAP( WiFi.softAPmacAddress().c_str(), password.c_str(), 0, hidden );
+  ssid = WiFi.softAPmacAddress();
+  ssid.replace(":", "");
+  WiFi.softAP( ssid.c_str(), password.c_str(), 0, hidden );
+
 #ifdef DEBUG_MODE
   Serial.println(ssid);
   Serial.println(password);
