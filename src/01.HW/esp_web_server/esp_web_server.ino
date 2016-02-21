@@ -50,6 +50,8 @@ int count = 0;
 bool updateCursor = false;
 bool setWifiInfo = false;
 String filePath = "/";
+String relayMac = "/";
+String relaySensorInfoRev;
 
 const char SENSING_INFO_FILENAME[] PROGMEM = DEFAULT_SENSINGINFO_FILENAME;
 const char FOODSCHEDULE_FILENAME[] PROGMEM = DEFAULT_FOODSCHEDULE_FILENAME;
@@ -73,6 +75,9 @@ void loadWifiInfo() {
   fileSystem->download(dynamic_cast<Setting*>(wifiInfo));
   delete fileSystem;
 
+  relayMac += wifiInfo->getRelayMac();
+  relayMac.replace(":", "");
+
   // flash에 configure 정보를 저장하지 않음.
   WiFi.persistent(false);
 }
@@ -90,6 +95,12 @@ bool downloadCurrentSetting() {
   if ( !box->upload(dynamic_cast<Setting*>(sensingInfo)) )
     return false;
 
+  SensingInfo* sensingInfoForRelay = new SensingInfo(relayMac, FPSTR(SENSING_INFO_FILENAME));
+  sensingInfoForRelay->setSensorData(sensingInfo->getSensorData());
+  box->upload(dynamic_cast<Setting*>(sensingInfoForRelay));
+  relaySensorInfoRev = dynamic_cast<Setting*>(sensingInfoForRelay)->getReversion();
+  delete sensingInfoForRelay;
+
   if ( !fileSystem->upload(dynamic_cast<Setting*>(sensingInfo)) )
     return false;
   delete fileSystem;
@@ -97,6 +108,11 @@ bool downloadCurrentSetting() {
   foodSchedule = new FoodSchedule(filePath, FPSTR(FOODSCHEDULE_FILENAME));
   if ( !box->download(dynamic_cast<Setting*>(foodSchedule)) )
     return false;
+  box->reversions(dynamic_cast<Setting*>(foodSchedule));
+
+  scheduler = new H3Scheduler();
+  scheduler->runSchedule(foodSchedule);
+  delete scheduler;
 
   sensor = new Sensor();
   sensor->begin();
@@ -119,7 +135,6 @@ void setup() {
 #endif
 
   loadWifiInfo();
-
   openSoftAP(wifiInfo, false);
   openStation(wifiInfo);
 
@@ -135,6 +150,14 @@ void setup() {
       if (sensor->getRequireUpdate()) {
         Serial.print("upload SensingInfo : ");
         Serial.println(box->upload(dynamic_cast<Setting*>(sensingInfo)) ? "OK" : "FAIL");
+
+        SensingInfo* sensingInfoForRelay = new SensingInfo(relayMac, FPSTR(SENSING_INFO_FILENAME));
+        sensingInfoForRelay->setSensorData(sensingInfo->getSensorData());
+        dynamic_cast<Setting*>(sensingInfoForRelay)->setReversion(relaySensorInfoRev);
+        box->upload(dynamic_cast<Setting*>(sensingInfoForRelay));
+        relaySensorInfoRev = dynamic_cast<Setting*>(sensingInfoForRelay)->getReversion();
+        delete sensingInfoForRelay;
+
         fileSystem = new H3FileSystem();
         fileSystem->upload(dynamic_cast<Setting*>(sensingInfo));
         delete fileSystem;
@@ -184,27 +207,6 @@ void loop() {
   if (server != nullptr) {
     if (!setWifiInfo) server->handleClient();
     else {
-      delete server;
-      server = nullptr;
-
-      // 완료되었으면 WiFi 연결
-      // 초기 세팅 적용.
-      // 드랍박스에 초기 세팅 적용한 파일 생성
-      WiFi.softAPdisconnect(true);
-
-      openStation(wifiInfo);
-
-      Serial.print("delete server : ");
-      Serial.println(ESP.getFreeHeap());
-
-      configTime(9 * 3600, 0, String(FPSTR(TIME_SERVER1)).c_str(), String(FPSTR(TIME_SERVER2)).c_str());
-      for (int i = 0; i < 1000; i++) {
-        delay(1);
-      }
-
-      Serial.print("setting : ");
-      Serial.println(downloadCurrentSetting() ? "OK" : "FAIL");
-
       Serial.println("begin restart!!");
       ESP.restart();
     }

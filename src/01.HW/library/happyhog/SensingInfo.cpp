@@ -65,3 +65,8 @@ String SensingInfo::serialize(bool rev) {
 SensorData SensingInfo::getSensorData() {
 	return *data;
 }
+
+void SensingInfo::setSensorData(SensorData data) {
+	this->data->temperature = data.temperature;
+	this->data->humidity = data.humidity;
+}
