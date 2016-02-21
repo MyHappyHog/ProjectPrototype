@@ -11,7 +11,7 @@
 //
 #include <Relay.h>
 
-//#define DEBUG_MODE 1
+#define DEBUG_MODE 1
 /*
    해피호구의 웹사이트를 열을 포트 주소.
 */
@@ -90,6 +90,7 @@ bool downloadCurrentSetting() {
   box->reversions(dynamic_cast<Setting*>(relaySetting));
 
   relayController = new Relay();
+  relayController->run(sensingInfo, enviroment, relaySetting);
 
   Serial.print("relay ready : ");
   Serial.println(ESP.getFreeHeap());
@@ -135,27 +136,6 @@ void loop() {
   if (server != nullptr) {
     if (!setWifiInfo) server->handleClient();
     else {
-      delete server;
-      server = nullptr;
-
-      // 완료되었으면 WiFi 연결
-      // 초기 세팅 적용.
-      // 드랍박스에 초기 세팅 적용한 파일 생성
-      WiFi.softAPdisconnect(true);
-
-      openStation(wifiInfo);
-
-      Serial.print("delete server : ");
-      Serial.println(ESP.getFreeHeap());
-
-      configTime(9 * 3600, 0, String(FPSTR(TIME_SERVER1)).c_str(), String(FPSTR(TIME_SERVER2)).c_str());
-      for (int i = 0; i < 1000; i++) {
-        delay(1);
-      }
-
-      Serial.print("setting : ");
-      Serial.println(downloadCurrentSetting() ? "OK" : "FAIL");
-
       Serial.println("begin restart!!");
       ESP.restart();
     }
