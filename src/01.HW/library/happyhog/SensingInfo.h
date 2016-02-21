@@ -28,6 +28,7 @@ public :
 	virtual String serialize(bool rev = false);
 
 	SensorData getSensorData();
+	void setSensorData(SensorData data);
 
 private :
 	SensorData* data;

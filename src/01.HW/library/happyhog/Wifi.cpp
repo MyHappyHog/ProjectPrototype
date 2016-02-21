@@ -29,6 +29,7 @@ bool Wifi::deserialize(String json, bool rev) {
 	data->ssid = root[SSID_KEY].asString();
 	data->password = root[PASSWORD_KEY].asString();
 	data->dropboxKey = root[DROPBOX_ACCESS_KEY].asString();
+	data->relayMac = root[RELAY_MAC_KEY].asString();
 	
 	delete jsonBuffer;
 
@@ -45,6 +46,7 @@ String Wifi::serialize(bool rev) {
 	root[SSID_KEY] = data->ssid;
 	root[PASSWORD_KEY] = data->password;
 	root[DROPBOX_ACCESS_KEY] = data->dropboxKey;
+	root[RELAY_MAC_KEY] = data->relayMac;
 
 	// JSON을 스트링으로 변환
 	String json = "";
@@ -66,6 +68,10 @@ String Wifi::getPassword() {
 
 String Wifi::getDropboxKey() {
 	return data->dropboxKey;
+}
+
+String Wifi::getRelayMac() {
+	return data->relayMac;
 }
 
 void Wifi::setData(WIFIData* wifiData) {
