@@ -37,7 +37,7 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         //self.currentProfileImg.image = UIImage(named: (user_coredata.getDatasIndex(0, key: "image") as? String)!)
         self.currentProfileImg.image = UIImage(data: user_coredata.getDatasIndex(index!, key: "image") as! NSData)
-        self.textFieldDevice.text = user_coredata.getDatasIndex(index!, key: "server_addr") as? String
+        self.textFieldDevice.text = user_coredata.getDatasIndex(index!, key: "numRotate") as? String
         self.textFieldMemo.text = user_coredata.getDatasIndex(index!, key: "memo") as? String
         self.textFieldName.text = user_coredata.getDatasIndex(index!, key: "title") as? String
     }
@@ -48,8 +48,8 @@ class ProFileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let server_addr: String = textFieldDevice.text!
         let image: UIImage = currentProfileImg.image!
         
-        let dp = data_user(image: image, name: title, memo: memo, server: server_addr,
-            minTemp: 0, maxTemp: 0, minHumid: 0, maxHumid: 0) as data_user
+        let dp = data_user(image: image, name: title, memo: memo, server: server_addr, server1:  server_addr,
+            minTemp: 0, maxTemp: 0, minHumid: 0, maxHumid: 0, temperature_index: 0, humidity_index: 0, numRotate: 0) as data_user
         let coredata = coreData(entity: "User")
         coredata.setProfileViewData(dp, index: dataStore.profile_index!)
         

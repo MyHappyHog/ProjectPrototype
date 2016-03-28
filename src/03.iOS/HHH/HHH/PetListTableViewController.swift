@@ -18,10 +18,10 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
     var pets = [SidePets]()
     
     let colors : [UIColor] = [
-        UIColor(red: 16/255, green: 2/255, blue: 48/255, alpha: 1.0),
-        UIColor(red: 205/255, green: 204/255, blue: 195/255, alpha: 1.0),
-        UIColor(red: 41/255, green: 2/255, blue: 48/255, alpha: 1.0),
-        UIColor(red: 33/255, green: 35/255, blue: 33/255, alpha: 1.0),
+        UIColor(red: 60/255, green: 151/255, blue: 169/255, alpha: 1.0),
+        UIColor(red: 239/255, green: 234/255, blue: 232/255, alpha: 1.0),
+        UIColor(red: 69/255, green: 62/255, blue: 55/255, alpha: 1.0),
+        UIColor(red: 219/255, green: 80/255, blue: 49/255, alpha: 1.0),
     ]
     
     override func viewDidAppear(animated: Bool) {
@@ -43,7 +43,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
         
         for(var i = 0; i < count; i++){
             let image : UIImage? = UIImage(data: user_coredata!.getDatasIndex(i, key: "image") as! NSData)
-            let server = user_coredata!.getDatasIndex(i, key: "server_addr") as! String
+            let server = user_coredata!.getDatasIndex(i, key: "server_addr1") as! String
             
             pets.append(SidePets(name: user_coredata!.getDatasIndex(i, key: "title") as? String,
                 memo: user_coredata!.getDatasIndex(i, key: "memo") as? String,
@@ -109,11 +109,13 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
                     if click_index < profile_coredata.getDatasIndex(0, key: "user_index") as! Int{
                         profile_coredata.setProfile(click_index)
                         dataStore.profile_index = click_index
-                        
                     }else if click_index == profile_coredata.getDatasIndex(0, key: "user_index") as! Int{
                         let user = coreData(entity: "User")
                         if user.getCount() > 1{
                             dataStore.profile_index = 0
+                        }else if user.getCount() == 0{
+                            coreData.deleteAllItem("Profile")
+                            dataStore.profile_index = nil
                         }
                     }
                     
@@ -176,9 +178,28 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
         cell.petImage.image = UIImage(data: user_coredata!.getDatasIndex(indexPath.row, key: "image") as! NSData)
         
         cell.onButtonTapped = {
+            self.revealViewController().revealToggleAnimated(true)
             //feedding
-            //dataStore.feed_index
+            print(dataStore.feeding_index)
             print("feeeeeeed")
+            
+            let alert = UIAlertController(title: "밥주기", message: "밥을 주나요?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+                //self.http_reference?.postFedd()
+                //let _rotate = Int(self.tField.text! as String)
+                let rotate = self.user_coredata?.getDatasIndex(dataStore.feeding_index! as Int, key: "numRotate") as! Int
+                //let rotate = (_rotate == nil) ? 1 : _rotate
+                
+                dropbox.putTheFeed((self.user_coredata?.getDatasIndex(dataStore.feeding_index!, key: "server_addr1"))! as! String, rotate: rotate)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+
         }
         /*cell.onButtonTapped = {
         //Do whatever you want to do when the button is tapped here

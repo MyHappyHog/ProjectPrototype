@@ -10,13 +10,17 @@
         <attribute name="user_index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".credataUser" syncable="YES">
+        <attribute name="humidity_index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="maxhum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="maxTemp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="memo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="minhum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="minTemp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="server_addr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numRotate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="server_addr1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="server_addr2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temperature_index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_number" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="alram" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Alarm" syncable="YES"/>
@@ -24,6 +28,6 @@
     <elements>
         <element name="Alarm" positionX="-137" positionY="129" width="128" height="103"/>
         <element name="Profile" positionX="-63" positionY="-18" width="128" height="58"/>
-        <element name="User" positionX="-407" positionY="-18" width="128" height="193"/>
+        <element name="User" positionX="-407" positionY="-18" width="128" height="255"/>
     </elements>
 </model>

@@ -1,9 +1,9 @@
 //
 //  credataUser.swift
-//  HHH
+//  
 //
-//  Created by Cho YoungHun on 2016. 1. 28..
-//  Copyright © 2016년 hhh. All rights reserved.
+//  Created by Cho YoungHun on 2016. 2. 20..
+//
 //
 
 import Foundation

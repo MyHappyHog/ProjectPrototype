@@ -22,11 +22,11 @@ class schedulerViewController: UITableViewController{
         if data == ""{
             return
         }
-        
+        print("-----start data to time------")
         let arrFull = data.componentsSeparatedByString(";")
         //print(arrFull.count)
         for(var i = 0; i < arrFull.count - 1; i++){
-            //print(arrFull[i])
+            print(arrFull[i])
             let temp = arrFull[i].componentsSeparatedByString(":")
             //print(temp)
             let hour: Int? = Int(temp[0])
@@ -35,7 +35,7 @@ class schedulerViewController: UITableViewController{
             
             schedules.append(SettingSchedulerCell(isChecked: check, time_hour: hour!, time_minute: min!))
         }
-        
+        print("-----end data to time------")
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,9 +54,9 @@ class schedulerViewController: UITableViewController{
         
         cell.list = alarm
         
-        cell.onButtonTapped = {
+        /*cell.onButtonTapped = {
             self.schedules[indexPath.row].isChecked = !self.schedules[indexPath.row].isChecked
-        }
+        }*/
         
         return cell
     }
@@ -76,6 +76,21 @@ class schedulerViewController: UITableViewController{
         }
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            self.schedules.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()
+        }
+        delete.backgroundColor = UIColor.redColor()
+ 
+        return [delete]
+    }
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    
     var onDataAvailable: ((data: String) -> ())?
     
     @IBAction func clickCancel(sender: AnyObject) {
@@ -86,7 +101,7 @@ class schedulerViewController: UITableViewController{
             parser += ":"
             parser += String(schedules[i].time_minute! as Int)
             parser += ":"
-            parser += ((schedules[i].isChecked) ? "true" : "false")
+            parser += "false"//((schedules[i].isChecked) ? "true" : "false")
             parser += ";"
         }
         //여기서는 값 다시 돌려보내주기

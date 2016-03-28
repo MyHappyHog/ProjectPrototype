@@ -76,7 +76,7 @@ class coreData{
             
             let name = value.valueForKey("title") as! String
             let memo = value.valueForKey("memo") as! String
-            let server_addr = value.valueForKey("server_addr") as! String
+            let server_addr = value.valueForKey("server_addr1") as! String
             
             if(name == _name && memo == _memo && server_addr == _server_addr){
                 return i as Int?
@@ -94,11 +94,15 @@ class coreData{
         contact.title = data.name
         contact.memo = data.memo
         //contact.image = "samplehog"
-        contact.server_addr = data.server_addr
+        contact.server_addr1 = data.server_addr1
+        contact.server_addr2 = data.server_addr2
         contact.minTemp = data.minTemp
         contact.maxTemp = data.maxTemp
         contact.minhum = data.minHumid
         contact.maxhum = data.maxHumid
+        contact.temperature_index = data.temperature_index
+        contact.humidity_index = data.humidity_index
+        contact.numRotate = data.numRotate
         
         (dataStore.extenstion == "JPG") ? (contact.image = UIImageJPEGRepresentation(data.image!, 1)) : (contact.image = UIImagePNGRepresentation(data.image!))
         
@@ -115,11 +119,15 @@ class coreData{
         
         value.setValue(data.name, forKey: "title")
         value.setValue(data.memo, forKey: "memo")
-        value.setValue(data.server_addr, forKey: "server_addr")
+        value.setValue(data.server_addr1, forKey: "server_addr1")
+        value.setValue(data.server_addr2, forKey: "server_addr2")
         value.setValue(data.minTemp, forKey: "minTemp")
         value.setValue(data.maxTemp, forKey: "maxTemp")
         value.setValue(data.minHumid, forKey: "minhum")
         value.setValue(data.maxHumid, forKey: "maxhum")
+        value.setValue(data.temperature_index, forKey: "temperature_index")
+        value.setValue(data.humidity_index, forKey: "humidity_index")
+        value.setValue(data.numRotate, forKey: "numRotate")
         
         (dataStore.extenstion == "JPG") ? (value.setValue(UIImageJPEGRepresentation(data.image!, 1), forKey: "image")) : (value.setValue(UIImagePNGRepresentation(data.image!), forKey: "image"))
         
@@ -135,7 +143,9 @@ class coreData{
         
         value.setValue(data.name, forKey: "title")
         value.setValue(data.memo, forKey: "memo")
-        value.setValue(data.server_addr, forKey: "server_addr")
+        value.setValue(data.numRotate, forKey: "numRotate")
+        //value.setValue(data.server_addr1, forKey: "server_addr1")
+        //value.setValue(data.server_addr2, forKey: "server_addr2")
         //value.setValue(data.minTemp, forKey: "minTemp")
         //value.setValue(data.maxTemp, forKey: "maxTemp")
         //value.setValue(data.minHumid, forKey: "minhum")
@@ -178,6 +188,18 @@ class coreData{
             }
         }
         return count
+    }
+    
+    func getStartTimer(index: Int) -> Int{
+        for(var i = 0; i < objects!.count; i++){
+            let value = objects![i] as! NSManagedObject
+            
+            if(value.valueForKey("user_number") as! Int == index){
+                return i
+            }
+        }
+        
+        return -1
     }
     
     func setTimer(index: Int, num: Int){

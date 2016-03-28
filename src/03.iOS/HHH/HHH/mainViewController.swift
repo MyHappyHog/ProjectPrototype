@@ -8,16 +8,17 @@
 
 import UIKit
 import Alamofire
-import Kanna
 import Social
+import YouTubePlayer
 import SwiftyDropbox
 
 class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var profileImg:UIImage = UIImage(named: "samplehog")!
+    var profileImg:UIImage = UIImage(named: "tem(32)")!
     var profileName: String = "Happyhog"
     var profileMemo: String = "Happy Hedgehog House !"
     var server_addr: String? = "http://52.68.82.234:19918"
+    var numRotate: Int = 1
     
     var http_reference : HttpReference?
     var http_timer = NSTimer();
@@ -26,6 +27,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var index: Int?
     
+    var youtubeClicked: Bool = false
     
     @IBOutlet weak var TempLabel: UILabel!
     @IBOutlet weak var HumidLabel: UILabel!
@@ -38,14 +40,18 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var stateView: UIView!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var memoView: UIView!
+    @IBOutlet weak var toggle: UIBarButtonItem!
     
+    @IBOutlet weak var youtube: YouTubePlayerView!
     func abc(){
         index = dataStore.profile_index
         
         let coredata = coreData(entity: "Profile")
         
         if(coredata.getCount() == 0){
-            coredata.insertProfile(index!)
+            if (index != nil){
+                coredata.insertProfile(index!)
+            }
         }else{
             coredata.setProfile(index!)
         }
@@ -56,128 +62,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         setProfile()
-        
-        
-        /*
-        // Verify user is logged into Dropbox
-        if let client = Dropbox.authorizedClient {
-            /*
-            // Get the current user's account info
-            client.users.getCurrentAccount().response { response, error in
-                print("*** Get current account ***")
-                if let account = response {
-                    //print("Hello \(account.name.givenName)!")
-                } else {
-                    print(error!)
-                }
-            }*/
-            
-            // List folder
-            client.files.listFolder(path: "").response { response, error in
-                print("*** List folder ***")
-                if let result = response {
-                    print("Folder contents:")
-                    for entry in result.entries {
-                        print(entry.name)
-                    }
-                } else {
-                    print(error!)
-                }
-            }
-            
-            let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
-                let fileManager = NSFileManager.defaultManager()
-                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-                // generate a unique name for this file in case we've seen it before
-                let UUID = NSUUID().UUIDString
-                let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
-                return directoryURL.URLByAppendingPathComponent(pathComponent)
-            }
-
-
-            client.files.download(path: "/1/SensingInfo.json", destination: destination).response { response, error in
-                if let (metadata, url) = response {
-                    print("*** Download file ***")
-                    print("Downloaded file rev: \(metadata.rev)")
-                    let data = NSData(contentsOfURL: url)
-                    print("-------\(NSString(data: data!, encoding: NSUTF8StringEncoding) as! String)------")
-                    
-                    
-                    
-                    let string = "{\"tempeature\": 10, \"Humidity\": 20}"
-                    print(string)
-                    
-                    let fileData_ = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-                    
-                    client.files.upload(path: "/1/SensingInfo.json", mode: Files.WriteMode.Update(metadata.rev), autorename: false, clientModified: nil, mute: false, body: fileData_!)
-                    
-                    
-                    
-                } else {
-                    print(error!)
-                }
-            }
-            
-            
-            
-            
-            // Upload a file
-            /*let fileData = "Hello!\ndfgsdfg".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-            client.files.upload(path: "/hello.txt", body: fileData!).response { response, error in
-                if let metadata = response {
-                    print("*** Upload file ****")
-                    print("Uploaded file name: \(metadata.name)")
-                    print("Uploaded file revision: \(metadata.rev)")
-                    
-                    // Get file (or folder) metadata
-                    client.files.getMetadata(path: "/hello.txt").response { response, error in
-                        print("*** Get file metadata ***")
-                        if let metadata = response {
-                            if let file = metadata as? Files.FileMetadata {
-                                print("This is a file with path: \(file.pathLower)")
-                                print("File size: \(file.size)")
-                            } else if let folder = metadata as? Files.FolderMetadata {
-                                print("This is a folder with path: \(folder.pathLower)")
-                            }
-                        } else {
-                            print(error!)
-                        }
-                    }
-                    
-                    // Download a file
-                    
-                    let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
-                        let fileManager = NSFileManager.defaultManager()
-                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-                        // generate a unique name for this file in case we've seen it before
-                        let UUID = NSUUID().UUIDString
-                        let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
-                        return directoryURL.URLByAppendingPathComponent(pathComponent)
-                    }
-                    
-                    client.files.download(path: "/hello.txt", destination: destination).response { response, error in
-                        if let (metadata, url) = response {
-                            print("*** Download file ***")
-                            let data = NSData(contentsOfURL: url)
-                            print("Downloaded file name: \(metadata.name)")
-                            print("Downloaded file url: \(url)")
-                            print("Downloaded file data: \(data)")
-                            print("Downloaded file rev: \(metadata.rev)")
-                            print("-------\(NSString(data: data!, encoding: NSUTF8StringEncoding))------")
-                            
-
-                        } else {
-                            print(error!)
-                        }
-                    }
-                    
-                } else {
-                    print(error!)
-                }
-            }*/
-
-
-        }*/
     }
     
     
@@ -185,18 +69,25 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         print("Disconnect")
     }
     
-    
+    override func viewDidDisappear(animated: Bool) {
+        youtube.hidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "abc", name: "asdf", object: nil)
+ 
         
+        //youtube.loadVideoID("wQg3bXrVLtg")
+        
+        //Dropbox.authorizedClient = nil
+        youtube.hidden = true
         
         
         //for debuging
-        //coreData.deleteAllItem("User")
+        //coreData.deleteAllItem("User")`
         //coreData.deleteAllItem("Alarm")
         //coreData.deleteAllItem("Profile")
         
@@ -219,6 +110,9 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        //toggle.target = self.revealViewController()
+        //toggle.action = Selector("revealToggle:")
         
         //setProfile()
         
@@ -250,7 +144,78 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         //performSegueWithIdentifier("Setting", sender: self)
     }
     
-    
+    @IBAction func clickVideo(sender: AnyObject) {
+        self.navigationController?.revealViewController().revealToggleAnimated(true)
+        if youtubeClicked {
+            youtube.hidden = true
+            youtubeClicked = false
+        }else{
+            let alert = UIAlertController(title: "실시간 동영상", message: "저장된 파일의 이름을 적어주세요", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addTextFieldWithConfigurationHandler(configurationTextField)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+                
+                var path: String?
+            
+                if (Dropbox.authorizedClient == nil) {
+                    Dropbox.authorizeFromController(self)
+                } else {
+                    print("User is already authorized!")
+                }
+            
+                if let client = Dropbox.authorizedClient{
+                        let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                        let fileManager = NSFileManager.defaultManager()
+                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                            // generate a unique name for this file in case we've seen it before
+                            let UUID = NSUUID().UUIDString
+                            let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                            return directoryURL.URLByAppendingPathComponent(pathComponent)
+                    }
+                    let temp = ((self.tField.text! as String).componentsSeparatedByString(".url"))
+                    print("/\(temp[0]).url")
+                    
+                    client.files.download(path: "/\(temp[0]).url", destination: destination).response { response, error in
+                        if let (metadata, url) = response {
+                            print("*** Download file ***")
+                            let data = NSData(contentsOfURL: url)
+                            print(NSString(data: data!, encoding: NSUTF8StringEncoding) as! String)
+                            let a = (NSString(data: data!, encoding: NSUTF8StringEncoding) as! String).componentsSeparatedByString("\n")
+                            let index = a[1].startIndex.advancedBy(4)
+                            path = a[1].substringFromIndex(index) as String
+                            print(path! as String)
+                        
+                            self.youtube.hidden = false
+                        
+                            if(path != nil){
+                                let myVideoURL = NSURL(string: path!)
+                                self.youtube.loadVideoURL(myVideoURL!)
+                                self.youtube.play()
+                                self.youtubeClicked = true
+                            }
+                        } else {
+                            print(error!)
+                        }
+
+                    }
+                }
+            }))
+        
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+        
+            presentViewController(alert, animated: true, completion: nil)
+        }
+
+    }
+    var tField: UITextField!
+    func configurationTextField(textField: UITextField!)
+    {
+        print("generating the TextField")
+        textField.placeholder = ""
+        tField = textField
+    }
     
     @IBAction func clickShareBtn(sender: AnyObject) {
         self.revealViewController().revealToggleAnimated(true)
@@ -266,20 +231,30 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    @IBAction func clickToggle(sender: AnyObject) {
+        self.navigationController?.revealViewController().revealToggleAnimated(true)
+        //self.revealViewController().Selector("reavelToggle:")
+    }
     @IBAction func clickFeedBtn(sender: AnyObject) {
         let alert = UIAlertController(title: "밥주기", message: "밥을 주나요?", preferredStyle: UIAlertControllerStyle.Alert)
-        
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
             print("Handle Ok logic here")
-            self.http_reference?.postFedd()
+            //self.http_reference?.postFedd()
+            //let _rotate = Int(self.tField.text! as String)
+            let rotate = self.numRotate
+            //let rotate = (_rotate == nil) ? 1 : _rotate
+            
+            dropbox.putTheFeed(self.server_addr!, rotate: rotate)
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
             print("Handle Cancel Logic here")
         }))
         
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
     //////////////////////////////////////////////////////////////////////////////////
     
     func checkDataForProfile(){
@@ -291,8 +266,8 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         dropbox.getSensingData(server_addr!, completionHandler: {(temperature, humidity) -> Void in
             print("\(temperature)  ------ \(humidity)")
-            self.TempLabel.text = (temperature == nil) ? "-- 도" : "\(String(temperature! as Int)) 도"
-            self.HumidLabel.text = (humidity == nil) ? "-- %" : "\(String(humidity! as Int)) %"
+            self.TempLabel.text = (temperature == nil) ? "-- 도" : "\(String(temperature! as Double)) 도"
+            self.HumidLabel.text = (humidity == nil) ? "-- %" : "\(String(humidity! as Double)) %"
         })
     }
     
@@ -333,8 +308,9 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
             
             self.nameLabel.text = coredata.getDatasIndex(index!, key: "title") as? String
             self.memoLabel.text = coredata.getDatasIndex(index!, key: "memo") as? String
-            self.server_addr = coredata.getDatasIndex(index!, key: "server_addr") as? String
+            self.server_addr = coredata.getDatasIndex(index!, key: "server_addr1") as? String
             self.ProfileImage.image = UIImage(data: (coredata.getDatasIndex(index!, key: "image") as? NSData)!)
+            self.numRotate = coredata.getDatasIndex(index!, key: "numRotate") as! Int
             
             setGesture()
             checkDataForProfile()

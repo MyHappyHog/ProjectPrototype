@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		821B5AA0B80353A9C3ED38C7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EFA44CBD7336E71AA573D2 /* Pods.framework */; };
+		DA1F6E8A1C7B7B6B00A3BB20 /* YouTubePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1F6E891C7B7B6B00A3BB20 /* YouTubePlayer.framework */; };
 		DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2A1C048F40009DDB46 /* AppDelegate.swift */; };
 		DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2C1C048F40009DDB46 /* mainViewController.swift */; };
 		DA565C301C048F40009DDB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA565C2E1C048F40009DDB46 /* Main.storyboard */; };
@@ -18,8 +19,6 @@
 		DA565C4E1C048F40009DDB46 /* HHHUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C4D1C048F40009DDB46 /* HHHUITests.swift */; };
 		DA565CA51C04D2CD009DDB46 /* Kanna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA565C981C04D2AC009DDB46 /* Kanna.framework */; };
 		DA565CA61C04D2CD009DDB46 /* Kanna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA565C981C04D2AC009DDB46 /* Kanna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DA565CAA1C04D2D6009DDB46 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA565C681C04D26D009DDB46 /* Alamofire.framework */; };
-		DA565CAB1C04D2D6009DDB46 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA565C681C04D26D009DDB46 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CBE1C04D363009DDB46 /* HLSViewController.swift */; };
 		DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CBF1C04D363009DDB46 /* HttpReference.swift */; };
 		DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */; };
@@ -31,8 +30,6 @@
 		DA5CB28B1C592B6C00AE22C7 /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */; };
 		DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */; };
 		DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */; };
-		DA5CB28E1C592B6C00AE22C7 /* credataUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */; };
-		DA5CB28F1C592B6C00AE22C7 /* credataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2891C592B6C00AE22C7 /* credataUser.swift */; };
 		DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */; };
 		DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */; };
 		DA5CB2991C59594100AE22C7 /* schedulerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */; };
@@ -43,6 +40,8 @@
 		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
 		DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092231C40BBEB007BDC37 /* dataStore.swift */; };
 		DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092311C40E976007BDC37 /* addPetViewController.swift */; };
+		DAEA09751C78530700F07653 /* credataUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */; };
+		DAEA09761C78530700F07653 /* credataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEA09741C78530700F07653 /* credataUser.swift */; };
 		DAF304A81C721CB7006F3327 /* dropbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF304A71C721CB7006F3327 /* dropbox.swift */; };
 /* End PBXBuildFile section */
 
@@ -166,13 +165,6 @@
 			remoteGlobalIDString = 1EAFA0D71B6039D5001F3D84;
 			remoteInfo = Kanna_iOS;
 		};
-		DA565CAC1C04D2D6009DDB46 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA565C5D1C04D26D009DDB46 /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -183,7 +175,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DA565CA61C04D2CD009DDB46 /* Kanna.framework in Embed Frameworks */,
-				DA565CAB1C04D2D6009DDB46 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +185,7 @@
 		74F62F0BA1EFDE4BD890820C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C12FA22789FD0557B13A63C5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D4EFA44CBD7336E71AA573D2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1F6E891C7B7B6B00A3BB20 /* YouTubePlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubePlayer.framework; path = "Pods/../build/Debug-iphoneos/YouTubePlayer.framework"; sourceTree = "<group>"; };
 		DA565C271C048F40009DDB46 /* HHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA565C2A1C048F40009DDB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA565C2C1C048F40009DDB46 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = mainViewController.swift; path = HHH/mainViewController.swift; sourceTree = "<group>"; };
@@ -222,8 +214,6 @@
 		DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
 		DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataProfile.swift; path = HHH/coredata/coredataProfile.swift; sourceTree = "<group>"; };
-		DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "credataUser+CoreDataProperties.swift"; path = "HHH/coredata/credataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA5CB2891C592B6C00AE22C7 /* credataUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = credataUser.swift; path = HHH/coredata/credataUser.swift; sourceTree = "<group>"; };
 		DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = schedulerViewController.swift; path = HHH/schedulerViewController.swift; sourceTree = "<group>"; };
 		DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = schedulerViewControllerCell.swift; sourceTree = "<group>"; };
@@ -235,6 +225,8 @@
 		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
 		DAB092231C40BBEB007BDC37 /* dataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataStore.swift; sourceTree = "<group>"; };
 		DAB092311C40E976007BDC37 /* addPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = addPetViewController.swift; path = HHH/addPetViewController.swift; sourceTree = "<group>"; };
+		DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "credataUser+CoreDataProperties.swift"; path = "HHH/coredata/credataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAEA09741C78530700F07653 /* credataUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = credataUser.swift; path = HHH/coredata/credataUser.swift; sourceTree = "<group>"; };
 		DAF304A71C721CB7006F3327 /* dropbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dropbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,8 +235,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA1F6E8A1C7B7B6B00A3BB20 /* YouTubePlayer.framework in Frameworks */,
 				DA565CA51C04D2CD009DDB46 /* Kanna.framework in Frameworks */,
-				DA565CAA1C04D2D6009DDB46 /* Alamofire.framework in Frameworks */,
 				821B5AA0B80353A9C3ED38C7 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +270,7 @@
 		5387B66D53297FD533CECD68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA1F6E891C7B7B6B00A3BB20 /* YouTubePlayer.framework */,
 				D4EFA44CBD7336E71AA573D2 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -303,8 +296,8 @@
 				DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */,
 				DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */,
 				DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */,
-				DA5CB2881C592B6B00AE22C7 /* credataUser+CoreDataProperties.swift */,
-				DA5CB2891C592B6C00AE22C7 /* credataUser.swift */,
+				DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */,
+				DAEA09741C78530700F07653 /* credataUser.swift */,
 			);
 			name = coredata;
 			sourceTree = "<group>";
@@ -476,7 +469,6 @@
 			);
 			dependencies = (
 				DA565CA81C04D2CD009DDB46 /* PBXTargetDependency */,
-				DA565CAD1C04D2D6009DDB46 /* PBXTargetDependency */,
 			);
 			name = HHH;
 			productName = HHH;
@@ -762,7 +754,6 @@
 				DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */,
 				DAF304A81C721CB7006F3327 /* dropbox.swift in Sources */,
 				DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */,
-				DA5CB28E1C592B6C00AE22C7 /* credataUser+CoreDataProperties.swift in Sources */,
 				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
 				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
 				DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */,
@@ -776,11 +767,12 @@
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
+				DAEA09751C78530700F07653 /* credataUser+CoreDataProperties.swift in Sources */,
 				DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
 				DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */,
-				DA5CB28F1C592B6C00AE22C7 /* credataUser.swift in Sources */,
+				DAEA09761C78530700F07653 /* credataUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,11 +809,6 @@
 			isa = PBXTargetDependency;
 			name = Kanna_iOS;
 			targetProxy = DA565CA71C04D2CD009DDB46 /* PBXContainerItemProxy */;
-		};
-		DA565CAD1C04D2D6009DDB46 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Alamofire iOS";
-			targetProxy = DA565CAC1C04D2D6009DDB46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -937,6 +924,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = HHH/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;
@@ -956,6 +947,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = HHH/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;

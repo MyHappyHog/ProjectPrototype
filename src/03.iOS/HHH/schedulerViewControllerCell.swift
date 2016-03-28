@@ -33,7 +33,7 @@ class schedulerViewControllerCell: UITableViewCell{
         didSet{
             time_hour = list.time_hour
             time_minute = list.time_minute
-            isChecked = list.isChecked
+            //isChecked = list.isChecked
             
             if time_hour > 11{
                 am_pm.text = "PM"
@@ -42,24 +42,24 @@ class schedulerViewControllerCell: UITableViewCell{
             hour.text = String(time_hour! as Int)
             min.text = String(time_minute! as Int)
             
-            check_condition()
+            //check_condition()
         }
     }
     
     @IBAction func clickCheck(sender: AnyObject) {
         isChecked = !isChecked
-        check_condition()
+        //check_condition()
         if let onButtonTapped = self.onButtonTapped{
             onButtonTapped()
         }
     }
     func check_condition() {
-        if isChecked{
+        /*if isChecked{
             checkBtn.setImage(check_img, forState: .Normal)
             
         }else{
             checkBtn.setImage(no_check_img, forState: .Normal)
-        }
+        }*/
 
     }
     

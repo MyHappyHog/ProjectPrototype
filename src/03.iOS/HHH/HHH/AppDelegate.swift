@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        Dropbox.setupWithAppKey("vth41g66a4gxqdl")
+        Dropbox.setupWithAppKey("07nj8f7mehl6tvi")
+        //Dropbox.setupWithAppKey("vth41g66a4gxqdl")
         return true
     }
     
@@ -122,7 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        // ココ
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
