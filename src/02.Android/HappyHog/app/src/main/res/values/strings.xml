@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HappyHog</string>
+    <string name="txt_title">TITLE</string>
+    <string name="txt_memo">MEMO</string>
+    <string name="txt_state">STATE INFO</string>
+    <string name="txt_blank"> </string>
+
+    <string name="setting_button1">PROFILE</string>
+    <string name="setting_button2">SENSOR</string>
+    <string name="setting_button3">FEEDING</string>
+    <string name="profile_change">CHANGE</string>
+
+</resources>
