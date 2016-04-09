@@ -97,6 +97,7 @@
                     android:src="@drawable/line_darkbrown"/>
 
             <ImageButton
+                    android:id="@+id/btn_profile_arrow"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
@@ -104,11 +105,12 @@
                     android:src="@drawable/button_down_arrow"/>
 
             <RelativeLayout
+                    android:id="@+id/expandable_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rect_rounded_darkbrown"
                     android:layout_margin="5dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                 <ImageView
                         android:id="@+id/iv_profile_mac"
@@ -143,6 +145,7 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/line_darkbrown"/>
             <Button
+                    android:id="@+id/btn_profile_change"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

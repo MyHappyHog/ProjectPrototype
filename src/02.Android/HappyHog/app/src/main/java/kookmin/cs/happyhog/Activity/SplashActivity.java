@@ -33,6 +33,6 @@ public class SplashActivity extends Activity {
         // SlashActivity 화면은 제거
         finish();
       }
-    }, 3000);
+    }, 1000);
   }
 }

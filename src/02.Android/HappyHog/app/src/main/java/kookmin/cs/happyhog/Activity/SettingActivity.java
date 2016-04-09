@@ -2,11 +2,12 @@ package kookmin.cs.happyhog.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kookmin.cs.happyhog.R;
 
 /**
@@ -14,39 +15,36 @@ import kookmin.cs.happyhog.R;
  */
 public class SettingActivity extends AppCompatActivity {
 
+  /**
+   * 프로필 버튼의 콜백 함수. 프로필 변경 액티비티 호출.
+   * @param view
+   */
+  @OnClick(R.id.btn_setting_profile)
+  public void openProfileActivity(View view) {
+    startActivity(new Intent(this, ProfileActivity.class));
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_setting);
     ButterKnife.bind(this);
 
+    /**
+     * 툴바(액션바) 설정.
+     */
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_setting);
-
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
+  }
 
-    /********************************************************************
-     * 화면 전환용 테스트 코드
-     * 몇 초마다 자동 화면 전환 됨.
-     */
-    Handler handler = new Handler();
-
-    // onCreate가 호출되고 약 1초 뒤에 MainActivity로 화면 전환
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        /*
-          데이터 읽어오는 코드를 추가하기?, 초기 세팅
-         */
-
-        // MainActivity로 화면 전환
-        //startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        startActivity(new Intent(SettingActivity.this, ProfileActivity.class));
-
-        // SlashActivity 화면은 제거
-        finish();
-      }
-    }, 3000);
+  /**
+   * 툴바의 백(Back)키 콜백 함수
+   */
+  @Override
+  public boolean onSupportNavigateUp() {
+    onBackPressed();
+    return true;
   }
 }
