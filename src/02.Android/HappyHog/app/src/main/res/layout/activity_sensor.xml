@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
+    <!--
+    첫번째 행 리니어 레이아웃
+    -->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/sensor_layout_height">
+
+        <ImageView android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:src="@mipmap/ic_launcher"
+                   android:layout_weight="1"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            <Spinner android:id="@+id/spinner_min_temp"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:layout_weight="0.2"
+                     android:background="#FFFFFF00"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.8"
+                      android:gravity="center"
+                      android:background="@color/colorBackgray"
+                      android:text="Min temp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            <Spinner android:id="@+id/spinner_max_temp"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:layout_weight="0.2"
+                     android:background="#FFFFFF00"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.8"
+                      android:gravity="center"
+                      android:background="@color/colorBackgray"
+                      android:text="Max temp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--
+    두 번째 행 리니어 레이아웃
+    -->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/sensor_layout_height"
+                  android:layout_marginTop="@dimen/activity_vertical_margin"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.2">
+            <Button android:id="@+id/btn_sensor_temp_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSplash"
+                    android:text="1"
+                    android:layout_weight="1"/>
+            <Button android:id="@+id/btn_sensor_temp_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:text="2"
+                    android:layout_weight="1"/>
+            <Button android:id="@+id/btn_sensor_temp_n"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:text="N"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="0.8"
+                  android:gravity="center"
+                  android:background="@color/colorBackgray"
+                  android:text="outlet number related to temp"/>
+    </LinearLayout>
+
+    <!--
+    세 번째 행 리니어 레이아웃
+    -->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/sensor_layout_height"
+                  android:layout_marginTop="64dp">
+
+        <ImageView android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:src="@mipmap/ic_launcher"
+                   android:layout_weight="1"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            <Spinner android:id="@+id/spinner_min_humid"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:layout_weight="0.2"
+                     android:background="#FFFFFF00"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.8"
+                      android:gravity="center"
+                      android:background="@color/colorBackgray"
+                      android:text="Min humid"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            <Spinner android:id="@+id/spinner_max_humid"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:layout_weight="0.2"
+                     android:background="#FFFFFF00"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.8"
+                      android:gravity="center"
+                      android:background="@color/colorBackgray"
+                      android:text="Max humid"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--
+    네 번째 행 리니어 레이아웃
+    -->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/sensor_layout_height"
+                  android:layout_marginTop="@dimen/activity_vertical_margin"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="0.2">
+            <Button android:id="@+id/btn_sensor_humid_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:text="1"
+                    android:layout_weight="1"/>
+            <Button android:id="@+id/btn_sensor_humid_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSplash"
+                    android:text="2"
+                    android:layout_weight="1"/>
+            <Button android:id="@+id/btn_sensor_humid_n"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:text="N"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="0.8"
+                  android:gravity="center"
+                  android:background="@color/colorBackgray"
+                  android:text="outlet number related to humid"/>
+    </LinearLayout>
+</LinearLayout>
