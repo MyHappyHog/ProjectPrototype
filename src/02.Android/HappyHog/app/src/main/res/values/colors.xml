@@ -6,4 +6,5 @@
     <color name="colorSplash">#FFDF792D</color>
     <color name="colorDarkbrown">#FF453E37</color>
     <color name="colorBackgray">#FFEFEAE8</color>
+    <color name="blank">#00000000</color>
 </resources>
