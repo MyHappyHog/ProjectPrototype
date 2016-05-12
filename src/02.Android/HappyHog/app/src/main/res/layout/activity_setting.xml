@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_setting"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="250dp"
+            android:src="@drawable/test_img"
+            android:background="?attr/colorAccent"/>
+
+    <android.support.v7.widget.GridLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:columnCount="2"
+            app:rowCount="2">
+        <ImageButton
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                android:src="@drawable/setting_blank"
+                android:layout_margin="5dp"
+                android:background="?attr/colorPrimary"/>
+        <Button android:id="@+id/btn_setting_profile"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                android:text="@string/setting_button1"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <Button android:id="@+id/btn_setting_sensor"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                android:text="@string/setting_button2"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <Button android:id="@+id/btn_setting_feeding"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                android:text="@string/setting_button3"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+    </android.support.v7.widget.GridLayout>
+</LinearLayout>

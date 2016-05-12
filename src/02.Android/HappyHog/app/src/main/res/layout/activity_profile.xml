@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@drawable/test_img"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_rounded_darkbrown"
+                    android:layout_margin="5dp">
+
+                <ImageView
+                        android:id="@+id/iv_profile_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <EditText
+                        android:id="@+id/edit_profile_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/iv_profile_title"
+                        android:layout_alignTop="@+id/iv_profile_title"
+                        android:layout_alignBottom="@+id/iv_profile_title"
+                        android:background="@drawable/rect_rounded_white"
+                        android:inputType="text"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_rounded_darkbrown"
+                    android:layout_margin="5dp">
+
+                <ImageView
+                        android:id="@+id/iv_profile_memo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <EditText
+                        android:id="@+id/edit_profile_memo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/iv_profile_memo"
+                        android:layout_alignTop="@+id/iv_profile_memo"
+                        android:layout_alignBottom="@+id/iv_profile_memo"
+                        android:background="@drawable/rect_rounded_white"
+                        android:inputType="text"/>
+            </RelativeLayout>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/line_darkbrown"/>
+
+            <ImageButton
+                    android:id="@+id/btn_profile_arrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/white"
+                    android:src="@drawable/button_down_arrow"/>
+
+            <RelativeLayout
+                    android:id="@+id/expandable_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_rounded_darkbrown"
+                    android:layout_margin="5dp"
+                    android:visibility="gone">
+
+                <ImageView
+                        android:id="@+id/iv_profile_mac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <EditText
+                        android:id="@+id/edit_profile_mac"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_toRightOf="@+id/iv_profile_mac"
+                        android:layout_alignTop="@+id/iv_profile_mac"
+                        android:layout_alignBottom="@+id/iv_profile_mac"
+                        android:background="@drawable/rect_rounded_white"
+                        android:inputType="text"/>
+            </RelativeLayout>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/line_darkbrown"/>
+            <Button
+                    android:id="@+id/btn_profile_change"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/rect_rounded_orange"
+                    android:text="@string/profile_change"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
