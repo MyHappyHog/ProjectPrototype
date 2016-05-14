@@ -23,6 +23,15 @@
         <activity android:name=".Activity.ProfileActivity"/>
         <activity android:name=".Activity.SensorActivity"/>
         <activity android:name=".Activity.FeedingActivity"/>
+        <activity android:name=".Activity.InformationActivity"
+                  android:label="Preferences"/>
+
+        <activity android:name=".Activity.Information.AccountInformation"/>
+        <activity android:name=".Activity.Information.HelpInformation"/>
+        <activity android:name=".Activity.Information.PersonalInformation"/>
+        <activity android:name=".Activity.Information.ReferenceInformation"/>
+        <activity android:name=".Activity.Information.TermsInformation"/>
+        <activity android:name=".Activity.Information.VersionInformation"/>
 
     </application>
 
