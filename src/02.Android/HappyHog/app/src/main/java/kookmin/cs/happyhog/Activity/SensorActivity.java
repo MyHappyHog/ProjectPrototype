@@ -217,7 +217,7 @@ public class SensorActivity extends AppCompatActivity {
     /**
      * 툴바(액션바) 설정.
      */
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sensor);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
