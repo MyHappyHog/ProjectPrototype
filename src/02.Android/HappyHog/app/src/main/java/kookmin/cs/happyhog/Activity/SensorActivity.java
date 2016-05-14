@@ -217,7 +217,7 @@ public class SensorActivity extends AppCompatActivity {
     /**
      * 툴바(액션바) 설정.
      */
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sensor);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -225,8 +225,8 @@ public class SensorActivity extends AppCompatActivity {
     /**
      * 온, 습도를 조절하는 스피너에 들어갈 어댑터
      */
-    ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.spinner_item, R.id.tv_spitem, mPickerNum);
-    adapter.setDropDownViewResource(R.layout.spinner_item);
+    ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.sensor_spinner_item, R.id.tv_spitem, mPickerNum);
+    adapter.setDropDownViewResource(R.layout.sensor_spinner_item);
 
     minTempSpinner.setAdapter(adapter);
     maxTempSpinner.setAdapter(adapter);
