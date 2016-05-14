@@ -22,6 +22,7 @@
         <activity android:name=".Activity.SettingActivity"/>
         <activity android:name=".Activity.ProfileActivity"/>
         <activity android:name=".Activity.SensorActivity"/>
+        <activity android:name=".Activity.FeedingActivity"/>
 
     </application>
 
