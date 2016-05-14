@@ -24,6 +24,12 @@ public class SettingActivity extends AppCompatActivity {
     startActivity(new Intent(this, ProfileActivity.class));
   }
 
+  @OnClick(R.id.btn_setting_sensor)
+  public void openSensorActivity(View view) { startActivity(new Intent(this, SensorActivity.class)); }
+
+  @OnClick(R.id.btn_setting_feeding)
+  public void openFeedingActivity(View view) { startActivity(new Intent(this, FeedingActivity.class)); }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

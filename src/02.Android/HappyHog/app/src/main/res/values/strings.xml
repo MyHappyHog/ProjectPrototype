@@ -10,4 +10,6 @@
     <string name="setting_button3">FEEDING</string>
     <string name="profile_change">CHANGE</string>
 
+    <string name="feeding_add_description">1cycle은 약 50ml입니다. 플러스 버튼을 누르면 자동 밥 주기가 추가됩니다.</string>
+
 </resources>
