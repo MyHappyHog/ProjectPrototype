@@ -116,7 +116,7 @@ public class FeedingActivity extends AppCompatActivity {
     /**
      * 툴바(액션바) 설정.
      */
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_feeding);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowTitleEnabled(false);

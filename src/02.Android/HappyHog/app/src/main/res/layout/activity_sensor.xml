@@ -4,13 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_sensor"
+    <include
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
-    </android.support.v7.widget.Toolbar>
-
+            android:layout_height="wrap_content"
+            layout="@layout/toolbar"/>
     <!--
     첫번째 행 리니어 레이아웃
     -->
