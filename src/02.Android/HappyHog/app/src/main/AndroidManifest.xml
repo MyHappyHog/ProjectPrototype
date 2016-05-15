@@ -10,7 +10,7 @@
             android:theme="@style/AppTheme"
             android:name=".H3Application">
 
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,20 +18,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.MainActivity"/>
-        <activity android:name=".Activity.SettingActivity"/>
-        <activity android:name=".Activity.ProfileActivity"/>
-        <activity android:name=".Activity.SensorActivity"/>
-        <activity android:name=".Activity.FeedingActivity"/>
-        <activity android:name=".Activity.InformationActivity"
+        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.ProfileActivity"/>
+        <activity android:name=".activity.SensorActivity"/>
+        <activity android:name=".activity.FeedingActivity"/>
+        <activity android:name=".activity.InformationActivity"
                   android:label="Preferences"/>
 
-        <activity android:name=".Activity.Information.AccountInformation"/>
-        <activity android:name=".Activity.Information.HelpInformation"/>
-        <activity android:name=".Activity.Information.PersonalInformation"/>
-        <activity android:name=".Activity.Information.ReferenceInformation"/>
-        <activity android:name=".Activity.Information.TermsInformation"/>
-        <activity android:name=".Activity.Information.VersionInformation"/>
+        <activity android:name=".activity.information.AccountInformation"/>
+        <activity android:name=".activity.information.HelpInformation"/>
+        <activity android:name=".activity.information.PersonalInformation"/>
+        <activity android:name=".activity.information.ReferenceInformation"/>
+        <activity android:name=".activity.information.TermsInformation"/>
+        <activity android:name=".activity.information.VersionInformation"/>
 
     </application>
 

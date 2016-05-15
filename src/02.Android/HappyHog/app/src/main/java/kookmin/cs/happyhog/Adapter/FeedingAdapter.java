@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Adapter;
+package kookmin.cs.happyhog.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

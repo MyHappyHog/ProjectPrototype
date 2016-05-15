@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Activity;
+package kookmin.cs.happyhog.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +12,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kookmin.cs.happyhog.R;
 
-/**
- * Created by sloth on 2016-04-07.
- */
 public class ProfileActivity extends AppCompatActivity {
 
   boolean isVisible = false;
@@ -25,9 +22,17 @@ public class ProfileActivity extends AppCompatActivity {
   @Bind(R.id.expandable_option)
   RelativeLayout mExpandableGroup;
 
+//  @Bind(R.id.edit_profile_title)
+//  EditText mEditName;
+//
+//  @Bind(R.id.edit_profile_memo)
+//  EditText mEditDescriptiion;
+//
+//  @Bind(R.id.edit_profile_mac)
+//  EditText mEditMacaddress;
+
   /**
    * 확장가능한 옵션을 확장하거나 숨기는 버튼의 콜백 함수.
-   * @param view
    */
   @OnClick(R.id.btn_profile_arrow)
   public void changeVisibleOption(View view) {
@@ -43,10 +48,25 @@ public class ProfileActivity extends AppCompatActivity {
 
   /**
    * 동물 프로필을 새로 만들거나 변경하는 버튼 콜백 함수.
-   * @param view
    */
   @OnClick(R.id.btn_profile_change)
   public void changeProfile(View view) {
+//    Intent data = new Intent();
+//
+//    String editName = mEditName.getText().toString();
+//    String editDescription = mEditDescriptiion.getText().toString();
+//    String editMacaddress = mEditMacaddress.getText().toString();
+//
+//    if (editName.equals("") || editDescription.equals("") || editMacaddress.equals("")) {
+//      Toast.makeText(this, "입력하지 않은 칸이 있습니다.", Toast.LENGTH_SHORT).show();
+//      return;
+//    }
+//
+//    data.putExtra("NAME", editName);
+//    data.putExtra("DESCRIPTION", editDescription);
+//    data.putExtra("MACADDRESS", editMacaddress);
+//
+//    setResult(Activity.RESULT_OK, data);
     onBackPressed();
   }
 

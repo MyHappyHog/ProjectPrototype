@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Activity;
+package kookmin.cs.happyhog.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
