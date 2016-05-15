@@ -1,6 +1,8 @@
 package kookmin.cs.happyhog.models;
 
-public class Schedule {
+import java.io.Serializable;
+
+public class Schedule implements Serializable {
   private int mNumRotate;
   private int hour;
   private int minute;
