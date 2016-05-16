@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Fragment;
+package kookmin.cs.happyhog.fragment;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

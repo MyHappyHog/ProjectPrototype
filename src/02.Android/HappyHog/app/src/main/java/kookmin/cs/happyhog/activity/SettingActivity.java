@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Activity;
+package kookmin.cs.happyhog.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

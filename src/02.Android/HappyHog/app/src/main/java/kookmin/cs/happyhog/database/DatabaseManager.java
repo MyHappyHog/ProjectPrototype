@@ -6,36 +6,54 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import kookmin.cs.happyhog.models.Animal;
+import kookmin.cs.happyhog.models.DeviceInformation;
+import kookmin.cs.happyhog.models.EnvironmentInformation;
+import kookmin.cs.happyhog.models.RelayInformation;
+import kookmin.cs.happyhog.models.Schedule;
+import kookmin.cs.happyhog.models.SensingInformation;
 
 /**
- * DB를 조작하는 클래스. 싱글톤 패턴 적용.
- * 최초 H3Application 함수에서 create로 인스턴스화하고
- * getInstance 함수로 인스턴스를 얻을 수 있다.
+ * DB를 조작하는 클래스. 싱글톤 패턴 적용. 최초 H3Application 함수에서 create로 인스턴스화하고 getInstance 함수로 인스턴스를 얻을 수 있다.
  */
 public class DatabaseManager extends SQLiteOpenHelper {
 
   private static final String DB_NAME = "HAPPYHOG";
-  private static final int DB_VERSION = 1;
+  private static final int DB_VERSION = 2;
 
   private static final String TYPE_TEXT = " TEXT";
+  private static final String TYPE_BLOB = " BLOB";
   private static final String PRIMARY_KEY = " PRIMARY KEY";
   private static final String COMMA_SEP = ",";
 
   private static final String TABLE_HAPPYHOG = "HAPPYHOG_Animal";
   private static final String NAME = "name";
   private static final String DESCRIPTION = "description";
-  private static final String MAC_ADDRESS = "mac_address";
+  private static final String IMAGE_PATH = "image_path";
+  private static final String DEVICE_INFORMATION = "device";
+  private static final String SENSING_INFORMATION = "sensing";
+  private static final String ENVIRONMENT_INFORMATION = "environment";
+  private static final String RELAY_INFORMATION = "relay";
+  private static final String SCHEDULE_INFORMATION = "schedule";
 
   private static final String CREATE_TABLE =
       "CREATE TABLE " + TABLE_HAPPYHOG + "(" +
       NAME + TYPE_TEXT + PRIMARY_KEY + COMMA_SEP +
       DESCRIPTION + TYPE_TEXT + COMMA_SEP +
-      MAC_ADDRESS + TYPE_TEXT + ")";
+      IMAGE_PATH + TYPE_TEXT + COMMA_SEP +
+      DEVICE_INFORMATION + TYPE_BLOB + COMMA_SEP +
+      SENSING_INFORMATION + TYPE_BLOB + COMMA_SEP +
+      ENVIRONMENT_INFORMATION + TYPE_BLOB + COMMA_SEP +
+      RELAY_INFORMATION + TYPE_BLOB + COMMA_SEP +
+      SCHEDULE_INFORMATION + TYPE_BLOB + ")";
 
   private static final String DELETE_TABLE =
       "DROP TABLE IF EXISTS " + TABLE_HAPPYHOG;
@@ -78,10 +96,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
       return;
     }
 
-    ContentValues values = new ContentValues();
-    values.put(NAME, animal.getName());
-    values.put(DESCRIPTION, animal.getDescription());
-    values.put(MAC_ADDRESS, animal.getMacAdress());
+    ContentValues values = makeContentValue(animal);
 
     getWritableDatabase().insert(TABLE_HAPPYHOG, null, values);
   }
@@ -105,10 +120,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
       return;
     }
 
-    ContentValues values = new ContentValues();
-    values.put(NAME, animal.getName());
-    values.put(DESCRIPTION, animal.getDescription());
-    values.put(MAC_ADDRESS, animal.getMacAdress());
+    ContentValues values = makeContentValue(animal);
 
     getWritableDatabase().update(TABLE_HAPPYHOG, values, NAME + " = ?", new String[]{animal.getName()});
   }
@@ -116,19 +128,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
   /**
    * DB에 해당 animal 정보를 가져 오는 함수.
    */
-  public Animal getAnimal(String name) {
+  public Animal selectAnimal(String name) {
     Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPYHOG +
-                                                   "WHERE " + NAME + " = ?", new String[]{name});
+                                                   " WHERE " + NAME + " = ?", new String[]{name});
 
     if (cursor == null || cursor.getCount() == 0) {
       return null;
     }
 
     cursor.moveToFirst();
-    Animal animal = new Animal();
-    animal.setName(cursor.getString(0));
-    animal.setDescription(cursor.getString(1));
-    animal.setMacAdress(cursor.getString(2));
+    Animal animal = makeAnimalFromCursor(cursor);
+
     cursor.close();
 
     return animal;
@@ -139,26 +149,125 @@ public class DatabaseManager extends SQLiteOpenHelper {
    *
    * @return ArrayList로 저장된 모든 animal 정보 반환.
    */
-  public List<Animal> getAllAnimals() {
-    List<Animal> animals = Collections.emptyList();
+  public List<Animal> selectAllAnimals() {
+    List<Animal> animals = new ArrayList<>();
     Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPYHOG, null);
 
     if (cursor == null || cursor.getCount() == 0) {
-      return null;
+      return animals;
     }
 
-    animals = new ArrayList<>();
     while (cursor.moveToNext()) {
-      Animal animal = new Animal();
-      animal.setName(cursor.getString(0));
-      animal.setDescription(cursor.getString(1));
-      animal.setMacAdress(cursor.getString(2));
-
+      Animal animal = makeAnimalFromCursor(cursor);
       animals.add(animal);
+
+      /**
+       * Test Code
+       */
+//      Log.i("mytag", "동물 정보");
+//      Log.i("mytag", animal.getName() + " " + animal.getDescription() + " " + animal.getimagePath());
+//
+//      Log.i("mytag", "해당 동물의 기기 정보");
+//      Log.i("mytag", animal.getDeviceInfomation().getMainMacAddress() + " " + animal.getDeviceInfomation().getSubMacAddress());
+//
+//      Log.i("mytag", "해당 동물의 현재 온, 습도");
+//      Log.i("mytag", animal.getSensingInformation().getTemperature() + " " + animal.getSensingInformation().getHumidity());
+//
+//      Log.i("mytag", "해당 동물의 최대, 최소 온, 습도");
+//      Log.i("mytag", animal.getEnvironmentInformation().getMaxTemperature() + " " + animal.getEnvironmentInformation().getMinTemperature());
+//      Log.i("mytag", animal.getEnvironmentInformation().getMaxHumidity() + " " + animal.getEnvironmentInformation().getMinHumidity());
+//
+//      Log.i("mytag", "해당 동물의 릴레이 정보");
+//      Log.i("mytag", animal.getRelayInformation().getWarmer() + " " + animal.getRelayInformation().getHumidifier());
+//
+//      Log.i("mytag", "해당 동물의 스케줄 정보");
+//      ArrayList<Schedule> schedules = animal.getSchedules();
+//      for (Schedule s : schedules)
+//        Log.i("mytag", s.getNumRotate() + " " + s.getHour() +  " " + s.getMinute());
     }
     cursor.close();
 
     return animals;
+  }
+
+  private ContentValues makeContentValue(Animal animal) {
+    ContentValues values = new ContentValues();
+    values.put(NAME, animal.getName());
+    values.put(DESCRIPTION, animal.getDescription());
+    values.put(IMAGE_PATH, animal.getimagePath());
+
+    try {
+      ByteArrayOutputStream baos;
+      ObjectOutputStream oos;
+
+      String blobList[] = {DEVICE_INFORMATION, SENSING_INFORMATION, ENVIRONMENT_INFORMATION, RELAY_INFORMATION};
+      Object objs[] =
+          {animal.getDeviceInfomation(), animal.getSensingInformation(), animal.getEnvironmentInformation(), animal.getRelayInformation()};
+
+      for (int i = 0; i < blobList.length; i++) {
+        baos = new ByteArrayOutputStream();
+        oos = new ObjectOutputStream(baos);
+        oos.writeObject(objs[i]);
+        values.put(blobList[i], baos.toByteArray());
+        oos.close();
+      }
+
+      baos = new ByteArrayOutputStream();
+      oos = new ObjectOutputStream(baos);
+      ArrayList<Schedule> schedules = animal.getSchedules();
+      for (Schedule s : schedules) {
+        oos.writeObject(s);
+      }
+
+      values.put(SCHEDULE_INFORMATION, baos.toByteArray());
+      oos.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return values;
+  }
+
+  private Animal makeAnimalFromCursor(Cursor cursor) {
+    Animal animal = new Animal(cursor.getString(0), cursor.getString(1));
+    animal.setImagePath(cursor.getString(2));
+
+    try {
+      ByteArrayInputStream bais = new ByteArrayInputStream(cursor.getBlob(3));
+      ObjectInputStream ois = new ObjectInputStream(bais);
+      animal.setDeviceInfomation((DeviceInformation)ois.readObject());
+      ois.close();
+
+      bais = new ByteArrayInputStream(cursor.getBlob(4));
+      ois = new ObjectInputStream(bais);
+      animal.setSensingInformation((SensingInformation)ois.readObject());
+      ois.close();
+
+      bais = new ByteArrayInputStream(cursor.getBlob(5));
+      ois = new ObjectInputStream(bais);
+      animal.setEnvironmentInformation((EnvironmentInformation)ois.readObject());
+      ois.close();
+
+      bais = new ByteArrayInputStream(cursor.getBlob(6));
+      ois = new ObjectInputStream(bais);
+      animal.setRelayInformation((RelayInformation)ois.readObject());
+      ois.close();
+
+      bais = new ByteArrayInputStream(cursor.getBlob(7));
+      ois = new ObjectInputStream(bais);
+
+      ArrayList<Schedule> schedules = new ArrayList<>();
+      while ( bais.available() > 0 ) {
+        schedules.add((Schedule)ois.readObject());
+      }
+      animal.setSchedules(schedules);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    return animal;
   }
 
   /**

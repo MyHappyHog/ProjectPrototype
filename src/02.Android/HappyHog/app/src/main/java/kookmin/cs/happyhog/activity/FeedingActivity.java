@@ -1,4 +1,4 @@
-package kookmin.cs.happyhog.Activity;
+package kookmin.cs.happyhog.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
-import kookmin.cs.happyhog.Adapter.FeedingAdapter;
+import kookmin.cs.happyhog.adapter.FeedingAdapter;
 import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.models.Schedule;
 
