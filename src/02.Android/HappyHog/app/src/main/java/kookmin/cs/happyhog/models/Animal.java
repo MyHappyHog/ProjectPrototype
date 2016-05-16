@@ -2,6 +2,8 @@ package kookmin.cs.happyhog.models;
 
 import java.util.ArrayList;
 
+import kookmin.cs.happyhog.dropbox.DropboxUploadable;
+
 public class Animal {
   private String name;
   private String description;
@@ -27,6 +29,12 @@ public class Animal {
   public RelayInformation getRelayInformation() { return relayInformation; }
   public EnvironmentInformation getEnvironmentInformation() { return environmentInformation; }
   public ArrayList<Schedule> getSchedules() { return schedules; }
+  public ArrayList<DropboxUploadable> getUploadableSchedules() {
+    ArrayList<DropboxUploadable> array = new ArrayList<>();
+    array.addAll(schedules);
+
+    return array;
+  }
 
   public void setName(String name) { this.name = name; }
   public void setDescription(String description) { this.description = description; }

@@ -1,9 +1,15 @@
 package kookmin.cs.happyhog.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
-public class EnvironmentInformation implements Serializable {
+import kookmin.cs.happyhog.Define;
+import kookmin.cs.happyhog.dropbox.DropboxUploadable;
 
+public class EnvironmentInformation implements Serializable, DropboxUploadable {
   private int maxTemperature;
   private int minTemperature;
   private int maxHumidity;
@@ -46,5 +52,28 @@ public class EnvironmentInformation implements Serializable {
 
   public void setMinHumidity(int minHumidity) {
     this.minHumidity = minHumidity;
+  }
+
+  @Override
+  public String toJson() {
+    JSONObject jsonRoot = new JSONObject();
+    try {
+      JSONArray ja = new JSONArray();
+
+      ja.put(maxTemperature).put(minTemperature);
+      jsonRoot.put(Define.TEMPERATURE_KEY, ja);
+
+      ja = new JSONArray();
+      ja.put(maxHumidity).put(minHumidity);
+      jsonRoot.put(Define.HUMIDITY_KEY, ja);
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    return jsonRoot.toString();
+  }
+
+  @Override
+  public String getFileName() {
+    return "EnvironmentSetting.json";
   }
 }

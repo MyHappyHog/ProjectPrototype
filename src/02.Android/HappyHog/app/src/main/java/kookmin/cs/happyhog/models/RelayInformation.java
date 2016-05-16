@@ -1,8 +1,14 @@
 package kookmin.cs.happyhog.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
-public class RelayInformation implements Serializable {
+import kookmin.cs.happyhog.Define;
+import kookmin.cs.happyhog.dropbox.DropboxUploadable;
+
+public class RelayInformation implements Serializable, DropboxUploadable {
 
   private int warmer;
   private int humidifier;
@@ -26,5 +32,22 @@ public class RelayInformation implements Serializable {
 
   public void setHumidifier(int humidifier) {
     this.humidifier = humidifier;
+  }
+
+  @Override
+  public String toJson() {
+    JSONObject jsonRoot = new JSONObject();
+    try {
+      jsonRoot.put(Define.TEMPERATURE_KEY, warmer);
+      jsonRoot.put(Define.HUMIDITY_KEY, humidifier);
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    return jsonRoot.toString();
+  }
+
+  @Override
+  public String getFileName() {
+    return "RelaySetting.json";
   }
 }
