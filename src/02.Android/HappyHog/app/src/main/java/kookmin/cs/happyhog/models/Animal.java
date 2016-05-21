@@ -1,9 +1,5 @@
 package kookmin.cs.happyhog.models;
 
-import java.util.ArrayList;
-
-import kookmin.cs.happyhog.dropbox.DropboxUploadable;
-
 public class Animal {
   private String name;
   private String description;
@@ -13,9 +9,17 @@ public class Animal {
   private DeviceInformation deviceInfomation;
   private RelayInformation relayInformation;
   private EnvironmentInformation environmentInformation;
-  private ArrayList<Schedule> schedules;
+  private FoodSchedules schedules;
+
+  public Animal() {
+    sensingInformation = new SensingInformation(0, 0);
+    relayInformation = new RelayInformation(1, 2);
+    environmentInformation = new EnvironmentInformation(25, 20, 70, 50);
+    schedules = new FoodSchedules();
+  }
 
   public Animal(String name, String description) {
+    this();
     this.name = name;
     this.description = description;
   }
@@ -28,13 +32,7 @@ public class Animal {
   public DeviceInformation getDeviceInfomation() { return deviceInfomation; }
   public RelayInformation getRelayInformation() { return relayInformation; }
   public EnvironmentInformation getEnvironmentInformation() { return environmentInformation; }
-  public ArrayList<Schedule> getSchedules() { return schedules; }
-  public ArrayList<DropboxUploadable> getUploadableSchedules() {
-    ArrayList<DropboxUploadable> array = new ArrayList<>();
-    array.addAll(schedules);
-
-    return array;
-  }
+  public FoodSchedules getSchedules() { return schedules; }
 
   public void setName(String name) { this.name = name; }
   public void setDescription(String description) { this.description = description; }
@@ -44,5 +42,5 @@ public class Animal {
   public void setDeviceInfomation(DeviceInformation deviceInfomation) { this.deviceInfomation = deviceInfomation; }
   public void setRelayInformation(RelayInformation relayInformation) {this.relayInformation = relayInformation; }
   public void setEnvironmentInformation(EnvironmentInformation environmentInformation) { this.environmentInformation = environmentInformation; }
-  public void setSchedules(ArrayList<Schedule> schedules) { this.schedules = schedules; }
+  public void setSchedules(FoodSchedules schedules) { this.schedules = schedules; }
 }

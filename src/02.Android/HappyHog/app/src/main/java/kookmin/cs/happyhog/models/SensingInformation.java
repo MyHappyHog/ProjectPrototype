@@ -9,6 +9,7 @@ import kookmin.cs.happyhog.Define;
 import kookmin.cs.happyhog.dropbox.DropboxDownloadable;
 
 public class SensingInformation implements Serializable, DropboxDownloadable {
+  private static final String SENSING_FILE_NAME = "SensingInfo.json";
 
   private double temperature;
   private double humidity;
@@ -47,6 +48,6 @@ public class SensingInformation implements Serializable, DropboxDownloadable {
 
   @Override
   public String getFileName() {
-    return "SensingInfo.json";
+    return SENSING_FILE_NAME;
   }
 }

@@ -10,10 +10,15 @@ import kookmin.cs.happyhog.Define;
 import kookmin.cs.happyhog.dropbox.DropboxUploadable;
 
 public class EnvironmentInformation implements Serializable, DropboxUploadable {
+  private static final String ENVIROMENT_FILE_NAME = "EnvironmentSetting.json";
   private int maxTemperature;
   private int minTemperature;
   private int maxHumidity;
   private int minHumidity;
+
+  public EnvironmentInformation() {
+    this(25, 20, 70, 50);
+  }
 
   public EnvironmentInformation(int maxTemperature, int minTemperature, int maxHumidity, int minHumidity) {
     this.maxTemperature = maxTemperature;
@@ -74,6 +79,6 @@ public class EnvironmentInformation implements Serializable, DropboxUploadable {
 
   @Override
   public String getFileName() {
-    return "EnvironmentSetting.json";
+    return ENVIROMENT_FILE_NAME;
   }
 }
