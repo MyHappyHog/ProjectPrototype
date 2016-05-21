@@ -16,6 +16,7 @@ import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.dropbox.DropboxUpload;
 import kookmin.cs.happyhog.dropbox.H3Dropbox;
 import kookmin.cs.happyhog.models.Animal;
+import kookmin.cs.happyhog.models.DeviceInformation;
 
 public class H3WiFiManager {
   private WiFiMonitor mWifiMonitor;
@@ -43,10 +44,10 @@ public class H3WiFiManager {
     this.onCompleteAnimalListener = onCompleteAnimalListener;
   }
 
-  public void setDeviceInfo(String mainMac, String subMac, String ssid, String password) {
-    this.mainMac = mainMac;
-    this.subMac = subMac;
-    this.ssid = ssid;
+  public void setDeviceInfo(DeviceInformation devInfo, String password) {
+    mainMac = devInfo.getMainMacAddress();
+    subMac = devInfo.getSubMacAddress();
+    ssid = devInfo.getSsid();
     this.password = password;
   }
 

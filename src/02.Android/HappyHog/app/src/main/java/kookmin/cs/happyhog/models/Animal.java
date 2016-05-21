@@ -1,6 +1,9 @@
 package kookmin.cs.happyhog.models;
 
-public class Animal {
+import java.io.Serializable;
+
+public class Animal implements Serializable {
+
   private String name;
   private String description;
   private String imagePath;
@@ -24,23 +27,76 @@ public class Animal {
     this.description = description;
   }
 
-  public String getName() { return name; }
-  public String getDescription() { return description; }
-  public String getimagePath() { return imagePath; }
+  public String getName() {
+    return name;
+  }
 
-  public SensingInformation getSensingInformation() { return sensingInformation; }
-  public DeviceInformation getDeviceInfomation() { return deviceInfomation; }
-  public RelayInformation getRelayInformation() { return relayInformation; }
-  public EnvironmentInformation getEnvironmentInformation() { return environmentInformation; }
-  public FoodSchedules getSchedules() { return schedules; }
+  public String getDescription() {
+    return description;
+  }
 
-  public void setName(String name) { this.name = name; }
-  public void setDescription(String description) { this.description = description; }
-  public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+  public String getimagePath() {
+    return imagePath;
+  }
 
-  public void setSensingInformation(SensingInformation sensingInformation) { this.sensingInformation = sensingInformation; }
-  public void setDeviceInfomation(DeviceInformation deviceInfomation) { this.deviceInfomation = deviceInfomation; }
-  public void setRelayInformation(RelayInformation relayInformation) {this.relayInformation = relayInformation; }
-  public void setEnvironmentInformation(EnvironmentInformation environmentInformation) { this.environmentInformation = environmentInformation; }
-  public void setSchedules(FoodSchedules schedules) { this.schedules = schedules; }
+  public SensingInformation getSensingInformation() {
+    return sensingInformation;
+  }
+
+  public DeviceInformation getDeviceInfomation() {
+    return deviceInfomation;
+  }
+
+  public RelayInformation getRelayInformation() {
+    return relayInformation;
+  }
+
+  public EnvironmentInformation getEnvironmentInformation() {
+    return environmentInformation;
+  }
+
+  public FoodSchedules getSchedules() {
+    return schedules;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void setImagePath(String imagePath) {
+    this.imagePath = imagePath;
+  }
+
+  public void setSensingInformation(SensingInformation sensingInformation) {
+    this.sensingInformation = sensingInformation;
+  }
+
+  public void setDeviceInfomation(DeviceInformation deviceInfomation) {
+    this.deviceInfomation = deviceInfomation;
+  }
+
+  public void setRelayInformation(RelayInformation relayInformation) {
+    this.relayInformation = relayInformation;
+  }
+
+  public void setEnvironmentInformation(EnvironmentInformation environmentInformation) {
+    this.environmentInformation = environmentInformation;
+  }
+
+  public void setSchedules(FoodSchedules schedules) {
+    this.schedules = schedules;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Animal) {
+      Animal targetName = (Animal) obj;
+      return name.equals(targetName.getName());
+    }
+    return false;
+  }
 }

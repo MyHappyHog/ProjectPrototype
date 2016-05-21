@@ -5,6 +5,13 @@
     <string name="txt_state">STATE INFO</string>
     <string name="txt_blank"> </string>
 
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancle">CANCLE</string>
+
+    <string name="main_register_main_animal">메인 동물로 등록하시겠습니까?</string>
+    <string name="main_added_animal">추가 되었습니다.</string>
+    <string name="main_need_animal">메인 동물을 등록해주세요.</string>
+
     <!--
     셋팅액티비티의 문자열
     -->
@@ -16,6 +23,7 @@
     FeedingActivity의 문자열
     -->
     <string name="feeding_add_description">1cycle은 약 50ml입니다. 플러스 버튼을 누르면 자동 밥 주기가 추가됩니다.</string>
+    <string name="feeding_ask_delete">지우시겠습니까?</string>
 
     <!--
     프로파일 액티비티의 문자열
@@ -23,8 +31,9 @@
     <string name="profile_change">CHANGE</string>
     <string name="profile_request_password">의 비밀번호를 입력해주세요.</string>
     <string name="profile_no_typing">입력하지 않은 칸이 있습니다.</string>
-    <string name="profile_dialog_ok">OK</string>
-    <string name="profile_dialog_cancle">CANCLE</string>
+    <string name="profile_typing_main_mac_address">MAIN 제품 번호를 입력하세요.</string>
+    <string name="profile_typing_sub_mac_address">SUB 제품 번호를 입력하세요.</string>
+    <string name="profile_typing_ssid">공유기의 SSID를 입력하세요.</string>
 
     <string name="database_exist_animal">같은 동물 이름이 존재합니다. 다시 입력해주세요.</string>
 

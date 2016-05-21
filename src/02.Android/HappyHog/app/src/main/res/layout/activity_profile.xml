@@ -111,7 +111,7 @@
                     android:visibility="gone">
 
                 <ImageView
-                        android:id="@+id/iv_profile_mac"
+                        android:id="@+id/iv_profile_main_mac"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxWidth="100dp"
@@ -121,7 +121,7 @@
                         android:layout_marginLeft="5dp"/>
 
                 <EditText
-                        android:id="@+id/edit_profile_mac"
+                        android:id="@+id/edit_profile_main_mac"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
@@ -129,11 +129,82 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
 
-                        android:layout_toRightOf="@+id/iv_profile_mac"
-                        android:layout_alignTop="@+id/iv_profile_mac"
-                        android:layout_alignBottom="@+id/iv_profile_mac"
+                        android:layout_toRightOf="@+id/iv_profile_main_mac"
+                        android:layout_alignTop="@+id/iv_profile_main_mac"
+                        android:layout_alignBottom="@+id/iv_profile_main_mac"
                         android:background="@drawable/rect_rounded_white"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:hint="@string/profile_typing_main_mac_address"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/expandable_option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_rounded_darkbrown"
+                    android:layout_margin="5dp"
+                    android:visibility="gone">
+
+                <ImageView
+                        android:id="@+id/iv_profile_sub_mac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <EditText
+                        android:id="@+id/edit_profile_sub_mac"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_toRightOf="@+id/iv_profile_sub_mac"
+                        android:layout_alignTop="@+id/iv_profile_sub_mac"
+                        android:layout_alignBottom="@+id/iv_profile_sub_mac"
+                        android:background="@drawable/rect_rounded_white"
+                        android:inputType="text"
+                        android:hint="@string/profile_typing_sub_mac_address"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/expandable_option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_rounded_darkbrown"
+                    android:layout_margin="5dp"
+                    android:visibility="gone">
+
+                <ImageView
+                        android:id="@+id/iv_profile_ssid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                <EditText
+                        android:id="@+id/edit_profile_ssid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_toRightOf="@+id/iv_profile_ssid"
+                        android:layout_alignTop="@+id/iv_profile_ssid"
+                        android:layout_alignBottom="@+id/iv_profile_ssid"
+                        android:background="@drawable/rect_rounded_white"
+                        android:inputType="text"
+                        android:hint="@string/profile_typing_ssid"/>
             </RelativeLayout>
 
             <ImageView

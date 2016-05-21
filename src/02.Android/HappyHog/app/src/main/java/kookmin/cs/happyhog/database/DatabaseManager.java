@@ -92,7 +92,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
    * 해당 animal 정보를 DB에 저장하는 함수
    */
   public void addAnimal(Animal animal) {
-    if (existsAnimal(animal)) {
+    if (existsAnimal(animal.getName())) {
       return;
     }
 
@@ -104,19 +104,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
   /**
    * 해당 animal 정보를 삭제하는 함수
    */
-  public void delAnimal(Animal animal) {
-    if (!existsAnimal(animal)) {
+  public void delAnimal(String animalName) {
+    if (!existsAnimal(animalName)) {
       return;
     }
 
-    getWritableDatabase().delete(TABLE_HAPPYHOG, NAME + " = ?", new String[]{animal.getName()});
+    getWritableDatabase().delete(TABLE_HAPPYHOG, NAME + " = ?", new String[]{animalName});
+  }
+
+  public void delAnimal(Animal animal) {
+    delAnimal(animal.getName());
   }
 
   /**
    * 해당 animal 정보를 갱신하는 함수
    */
   public void updateAnimal(Animal animal) {
-    if (!existsAnimal(animal)) {
+    if (!existsAnimal(animal.getName())) {
       return;
     }
 
@@ -142,6 +146,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
     cursor.close();
 
     return animal;
+  }
+
+  public Animal selectAnimal(Animal animal) {
+    return selectAnimal(animal.getName());
   }
 
   /**
@@ -261,9 +269,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
    *
    * @return 존재하면 true, 존재하지 않으면 false
    */
-  public boolean existsAnimal(Animal animal) {
+  public boolean existsAnimal(String animalName) {
     Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPYHOG +
-                                                   " WHERE " + NAME + " = ? ", new String[]{animal.getName()});
+                                                   " WHERE " + NAME + " = ? ", new String[]{animalName});
 
     if (cursor != null && cursor.getCount() != 0) {
       cursor.close();
