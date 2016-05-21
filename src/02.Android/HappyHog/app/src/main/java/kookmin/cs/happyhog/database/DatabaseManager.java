@@ -17,8 +17,8 @@ import java.util.List;
 import kookmin.cs.happyhog.models.Animal;
 import kookmin.cs.happyhog.models.DeviceInformation;
 import kookmin.cs.happyhog.models.EnvironmentInformation;
+import kookmin.cs.happyhog.models.FoodSchedules;
 import kookmin.cs.happyhog.models.RelayInformation;
-import kookmin.cs.happyhog.models.Schedule;
 import kookmin.cs.happyhog.models.SensingInformation;
 
 /**
@@ -200,9 +200,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
       ByteArrayOutputStream baos;
       ObjectOutputStream oos;
 
-      String blobList[] = {DEVICE_INFORMATION, SENSING_INFORMATION, ENVIRONMENT_INFORMATION, RELAY_INFORMATION};
+      String blobList[] = {DEVICE_INFORMATION, SENSING_INFORMATION, ENVIRONMENT_INFORMATION, RELAY_INFORMATION, SCHEDULE_INFORMATION};
       Object objs[] =
-          {animal.getDeviceInfomation(), animal.getSensingInformation(), animal.getEnvironmentInformation(), animal.getRelayInformation()};
+          {animal.getDeviceInfomation(), animal.getSensingInformation(), animal.getEnvironmentInformation(), animal.getRelayInformation(), animal.getSchedules()};
 
       for (int i = 0; i < blobList.length; i++) {
         baos = new ByteArrayOutputStream();
@@ -211,16 +211,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(blobList[i], baos.toByteArray());
         oos.close();
       }
-
-      baos = new ByteArrayOutputStream();
-      oos = new ObjectOutputStream(baos);
-      ArrayList<Schedule> schedules = animal.getSchedules();
-      for (Schedule s : schedules) {
-        oos.writeObject(s);
-      }
-
-      values.put(SCHEDULE_INFORMATION, baos.toByteArray());
-      oos.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -235,32 +225,28 @@ public class DatabaseManager extends SQLiteOpenHelper {
     try {
       ByteArrayInputStream bais = new ByteArrayInputStream(cursor.getBlob(3));
       ObjectInputStream ois = new ObjectInputStream(bais);
-      animal.setDeviceInfomation((DeviceInformation)ois.readObject());
+      animal.setDeviceInfomation((DeviceInformation) ois.readObject());
       ois.close();
 
       bais = new ByteArrayInputStream(cursor.getBlob(4));
       ois = new ObjectInputStream(bais);
-      animal.setSensingInformation((SensingInformation)ois.readObject());
+      animal.setSensingInformation((SensingInformation) ois.readObject());
       ois.close();
 
       bais = new ByteArrayInputStream(cursor.getBlob(5));
       ois = new ObjectInputStream(bais);
-      animal.setEnvironmentInformation((EnvironmentInformation)ois.readObject());
+      animal.setEnvironmentInformation((EnvironmentInformation) ois.readObject());
       ois.close();
 
       bais = new ByteArrayInputStream(cursor.getBlob(6));
       ois = new ObjectInputStream(bais);
-      animal.setRelayInformation((RelayInformation)ois.readObject());
+      animal.setRelayInformation((RelayInformation) ois.readObject());
       ois.close();
 
       bais = new ByteArrayInputStream(cursor.getBlob(7));
       ois = new ObjectInputStream(bais);
-
-      ArrayList<Schedule> schedules = new ArrayList<>();
-      while ( bais.available() > 0 ) {
-        schedules.add((Schedule)ois.readObject());
-      }
-      animal.setSchedules(schedules);
+      animal.setSchedules((FoodSchedules) ois.readObject());
+      ois.close();
     } catch (IOException e) {
       e.printStackTrace();
     } catch (ClassNotFoundException e) {

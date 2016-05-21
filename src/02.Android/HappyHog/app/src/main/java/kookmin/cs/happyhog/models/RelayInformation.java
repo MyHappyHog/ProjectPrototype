@@ -9,9 +9,13 @@ import kookmin.cs.happyhog.Define;
 import kookmin.cs.happyhog.dropbox.DropboxUploadable;
 
 public class RelayInformation implements Serializable, DropboxUploadable {
-
+  private static final String RELAY_FILE_NAME = "RelaySetting.json";
   private int warmer;
   private int humidifier;
+
+  public RelayInformation() {
+    this(1, 2);
+  }
 
   public RelayInformation(int warmer, int humidifier) {
     this.warmer = warmer;
@@ -48,6 +52,6 @@ public class RelayInformation implements Serializable, DropboxUploadable {
 
   @Override
   public String getFileName() {
-    return "RelaySetting.json";
+    return RELAY_FILE_NAME;
   }
 }
