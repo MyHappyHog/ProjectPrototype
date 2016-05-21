@@ -36,6 +36,19 @@ public class AnimalAdapter extends BaseAdapter {
     notifyDataSetChanged();
   }
 
+  public void updateItem(String target, Animal animal) {
+    int index = animals.indexOf(new Animal(target, ""));
+
+    if (index != -1) {
+      animals.set(index, animal);
+      notifyDataSetChanged();
+    }
+  }
+
+  public Animal getAnimal(int index) {
+    return animals.get(index);
+  }
+
   @Override
   public int getCount() {
     return animals.size();

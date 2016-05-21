@@ -1,5 +1,6 @@
 package kookmin.cs.happyhog.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +9,20 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kookmin.cs.happyhog.Define;
 import kookmin.cs.happyhog.R;
+import kookmin.cs.happyhog.models.Animal;
+import kookmin.cs.happyhog.models.EnvironmentInformation;
+import kookmin.cs.happyhog.models.FoodSchedules;
+import kookmin.cs.happyhog.models.RelayInformation;
 
-/**
- * Created by sloth on 2016-04-07.
- */
 public class SettingActivity extends AppCompatActivity {
+
+  private static final int PROFILE_REQUEST_CODE = 2000;
+  private static final int SENSOR_REQUEST_CODE = 2001;
+  private static final int FEEDING_REQUEST_CODE = 2002;
+
+  private Animal animal;
 
   /**
    * 프로필 버튼의 콜백 함수. 프로필 변경 액티비티 호출.
@@ -21,14 +30,31 @@ public class SettingActivity extends AppCompatActivity {
    */
   @OnClick(R.id.btn_setting_profile)
   public void openProfileActivity(View view) {
-    startActivity(new Intent(this, ProfileActivity.class));
+    Intent editProfile = new Intent(this, ProfileActivity.class);
+    editProfile.putExtra(Define.EXTRA_NAME, animal.getName());
+    editProfile.putExtra(Define.EXTRA_DESCRIPTION, animal.getDescription());
+    editProfile.putExtra(Define.EXTRA_IMAGE_PATH, animal.getimagePath());
+    editProfile.putExtra(Define.EXTRA_DEVICE_INFORMATION, animal.getDeviceInfomation());
+
+    startActivityForResult(editProfile, PROFILE_REQUEST_CODE);
   }
 
   @OnClick(R.id.btn_setting_sensor)
-  public void openSensorActivity(View view) { startActivity(new Intent(this, SensorActivity.class)); }
+  public void openSensorActivity(View view) {
+    Intent editSensor = new Intent(this, SensorActivity.class);
+    editSensor.putExtra(Define.EXTRA_ENVIRONMENT_INFORMATION, animal.getEnvironmentInformation());
+    editSensor.putExtra(Define.EXTRA_RELAY_INFORMATION, animal.getRelayInformation());
+
+    startActivityForResult(editSensor, SENSOR_REQUEST_CODE);
+  }
 
   @OnClick(R.id.btn_setting_feeding)
-  public void openFeedingActivity(View view) { startActivity(new Intent(this, FeedingActivity.class)); }
+  public void openFeedingActivity(View view) {
+    Intent editFeeding = new Intent(this, FeedingActivity.class);
+    editFeeding.putExtra(Define.EXTRA_FOOD_SCHEDULES, animal.getSchedules());
+
+    startActivityForResult(editFeeding, FEEDING_REQUEST_CODE);
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +69,11 @@ public class SettingActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+    Intent data = getIntent();
+    if (data != null) {
+      animal = (Animal) data.getSerializableExtra(Define.EXTRA_ANIMAL);
+    }
   }
 
   /**
@@ -52,5 +83,27 @@ public class SettingActivity extends AppCompatActivity {
   public boolean onSupportNavigateUp() {
     onBackPressed();
     return true;
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent data = new Intent();
+    data.putExtra(Define.EXTRA_ANIMAL, animal);
+    setResult(Activity.RESULT_OK, data);
+    super.onBackPressed();
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == PROFILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+      animal.setName(data.getStringExtra(Define.EXTRA_NAME));
+      animal.setDescription(data.getStringExtra(Define.EXTRA_DESCRIPTION));
+      animal.setImagePath(data.getStringExtra(Define.EXTRA_IMAGE_PATH));
+    } else if (requestCode == SENSOR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+      animal.setEnvironmentInformation((EnvironmentInformation) data.getSerializableExtra(Define.EXTRA_ENVIRONMENT_INFORMATION));
+      animal.setRelayInformation((RelayInformation) data.getSerializableExtra(Define.EXTRA_RELAY_INFORMATION));
+    } else if (requestCode == FEEDING_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+      animal.setSchedules((FoodSchedules) data.getSerializableExtra(Define.EXTRA_FOOD_SCHEDULES));
+    }
   }
 }

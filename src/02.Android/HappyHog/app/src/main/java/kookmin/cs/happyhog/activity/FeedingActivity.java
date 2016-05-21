@@ -1,6 +1,10 @@
 package kookmin.cs.happyhog.activity;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,14 +14,20 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemLongClick;
 import butterknife.OnItemSelected;
-import kookmin.cs.happyhog.adapter.FeedingAdapter;
+import kookmin.cs.happyhog.Define;
 import kookmin.cs.happyhog.R;
+import kookmin.cs.happyhog.adapter.FeedingAdapter;
+import kookmin.cs.happyhog.models.FoodSchedules;
 import kookmin.cs.happyhog.models.Schedule;
 
 public class FeedingActivity extends AppCompatActivity {
@@ -80,6 +90,31 @@ public class FeedingActivity extends AppCompatActivity {
     Toast.makeText(this, "" + mCurrentHour + ":" + mCurrentMinute, Toast.LENGTH_SHORT).show();
   }
 
+  @OnItemLongClick(R.id.feeding_listview)
+  public boolean deleteItem(AdapterView<?> parent, View view, int position, long id) {
+    leastClickPosition = position;
+    AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+        .setTitle(getResources().getText(R.string.feeding_ask_delete));
+
+    dialog.setPositiveButton(getResources().getText(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        feedingAdapter.removeItem(leastClickPosition);
+        dialog.dismiss();
+      }
+    });
+
+    dialog.setNegativeButton(getResources().getText(R.string.dialog_cancle), new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        dialog.cancel();
+      }
+    });
+
+    dialog.show();
+    return true;
+  }
+
   @OnItemSelected(R.id.spin_feeding_am_pm)
   public void selectAmPm(AdapterView<?> parent, View view, int position, long id) {
     mCurrentMeridiem = meridiem.get(position);
@@ -106,6 +141,8 @@ public class FeedingActivity extends AppCompatActivity {
   private String mCurrentMeridiem;
 
   private FeedingAdapter feedingAdapter;
+  private FoodSchedules schedules;
+  private int leastClickPosition;
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -138,16 +175,20 @@ public class FeedingActivity extends AppCompatActivity {
     adapter.setDropDownViewResource(R.layout.spinner_item);
     cycleSpinner.setAdapter(adapter);
 
-    /**
-     * 더미 파일
-     */
-    ArrayList<Schedule> schedules = new ArrayList<>();
-    schedules.add(new Schedule(2, 10, 0));
+    Intent data = getIntent();
+    if (data != null) {
+      schedules = (FoodSchedules) data.getSerializableExtra(Define.EXTRA_FOOD_SCHEDULES);
+    }
 
-    feedingAdapter = new FeedingAdapter(this, schedules);
+    feedingAdapter = new FeedingAdapter(this, schedules.getSchedules());
     mListView.setAdapter(feedingAdapter);
 
-    hourSpinner.setSelection(hour.indexOf("10"));
+    SimpleDateFormat sdf = new SimpleDateFormat("a:KK:mm", Locale.KOREA);
+    String currentTime[] = sdf.format(new Date()).split(":");
+
+    ampmSpinner.setSelection(meridiem.indexOf(currentTime[0]));
+    hourSpinner.setSelection(hour.indexOf(currentTime[1]));
+    minuteSpinner.setSelection(minute.indexOf(currentTime[2]));
   }
 
   /**
@@ -157,5 +198,13 @@ public class FeedingActivity extends AppCompatActivity {
   public boolean onSupportNavigateUp() {
     onBackPressed();
     return true;
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent data = new Intent();
+    data.putExtra(Define.EXTRA_FOOD_SCHEDULES, schedules);
+    setResult(Activity.RESULT_OK, data);
+    super.onBackPressed();
   }
 }

@@ -11,6 +11,7 @@ public class DeviceInformation implements Serializable {
   public DeviceInformation(String mainMacAddress, String subMacAddress) {
     this.mainMacAddress = mainMacAddress;
     this.subMacAddress = subMacAddress;
+    ssid = "";
   }
 
   public String getMainMacAddress() {
