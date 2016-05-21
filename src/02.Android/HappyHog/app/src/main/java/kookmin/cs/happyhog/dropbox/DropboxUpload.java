@@ -9,22 +9,15 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 public class DropboxUpload implements Runnable {
 
   private String path;
   private DropboxUploadable uploadData;
-  private ArrayList<DropboxUploadable> uploadDatas;
 
   public DropboxUpload(String path, DropboxUploadable uploadData) {
     this.path = path;
     this.uploadData = uploadData;
-  }
-
-  public DropboxUpload(String path, ArrayList<DropboxUploadable> uploadDatas) {
-    this.path = path;
-    this.uploadDatas = uploadDatas;
   }
 
   @Override
@@ -33,21 +26,7 @@ public class DropboxUpload implements Runnable {
     String dropboxPath = makeFilePath();
 
     try {
-      InputStream stream;
-
-      if (uploadData != null) {
-        stream = new ByteArrayInputStream(uploadData.toJson().getBytes("UTF-8"));
-      } else {
-        StringBuffer sb = new StringBuffer("[");
-        for (DropboxUploadable uploadData : uploadDatas) {
-          sb.append(uploadData.toJson());
-          sb.append(",");
-        }
-        sb.setCharAt(sb.length() - 1, ']');
-
-        stream = new ByteArrayInputStream(sb.toString().getBytes("UTF-8"));
-      }
-
+      InputStream stream = new ByteArrayInputStream(uploadData.toJson().getBytes("UTF-8"));
       UploadRequest request = mApi.putFileOverwriteRequest(dropboxPath, stream, stream.available(), null);
 
       if (request != null) {
@@ -64,10 +43,6 @@ public class DropboxUpload implements Runnable {
   }
 
   private String makeFilePath() {
-    if (uploadData != null) {
-      return "/" + path + "/" + uploadData.getFileName();
-    } else {
-      return "/" + path + "/" + uploadDatas.get(0).getFileName();
-    }
+    return "/" + path + "/" + uploadData.getFileName();
   }
 }
