@@ -6,7 +6,7 @@
 
         <intent
                 android:targetPackage="kookmin.cs.happyhog"
-                android:targetClass="kookmin.cs.happyhog.activity.infomation.VersionInformation"/>
+                android:targetClass="kookmin.cs.happyhog.activity.information.VersionInformation"/>
     </Preference>
 
     <Preference
@@ -15,7 +15,7 @@
 
         <intent
                 android:targetPackage="kookmin.cs.happyhog"
-                android:targetClass="kookmin.cs.happyhog.activity.infomation.HelpInformation"/>
+                android:targetClass="kookmin.cs.happyhog.activity.information.HelpInformation"/>
     </Preference>
 
     <PreferenceCategory android:title="개인정보">
@@ -23,7 +23,7 @@
         android:summary="계정정보를 확인합니다.">
 
             <intent android:targetPackage="kookmin.cs.happyhog"
-                    android:targetClass="kookmin.cs.happyhog.activity.infomation.AccountInformation"/>
+                    android:targetClass="kookmin.cs.happyhog.activity.information.AccountInformation"/>
         </Preference>
     </PreferenceCategory>
 
@@ -31,19 +31,19 @@
         <Preference android:title="이용약관"
                     android:summary="이용약관을 확인합니다">
             <intent android:targetPackage="kookmin.cs.happyhog"
-                    android:targetClass="kookmin.cs.happyhog.activity.infomation.TermsInformation"/>
+                    android:targetClass="kookmin.cs.happyhog.activity.information.TermsInformation"/>
         </Preference>
 
         <Preference android:title="개인정보 취급방침"
                     android:summary="개인정보 취급방침을 확인합니다">
             <intent android:targetPackage="kookmin.cs.happyhog"
-                    android:targetClass="kookmin.cs.happyhog.activity.infomation.PersonalInformation"/>
+                    android:targetClass="kookmin.cs.happyhog.activity.information.PersonalInformation"/>
         </Preference>
 
         <Preference android:title="참조"
                     android:summary="어디를 참조했을까 난 모름">
             <intent android:targetPackage="kookmin.cs.happyhog"
-                    android:targetClass="kookmin.cs.happyhog.activity.infomation.ReferenceInformation"/>
+                    android:targetClass="kookmin.cs.happyhog.activity.information.ReferenceInformation"/>
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
