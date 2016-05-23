@@ -37,7 +37,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:gravity="center"
                         android:text="@string/txt_title"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
@@ -46,7 +46,7 @@
                         android:id="@+id/tv_main_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
+                        android:layout_weight="0.3"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             </LinearLayout>
@@ -60,7 +60,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:gravity="center"
                         android:text="@string/txt_memo"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
@@ -69,7 +69,7 @@
                         android:id="@+id/tv_main_memo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
+                        android:layout_weight="0.3"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             </LinearLayout>
@@ -82,7 +82,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.7"
                         android:gravity="center"
                         android:text="@string/txt_state"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
@@ -91,7 +91,7 @@
                         android:id="@+id/tv_main_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
+                        android:layout_weight="0.3"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             </LinearLayout>
@@ -100,8 +100,7 @@
         <ImageButton
                 android:id="@+id/btn_video"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="250dp"
+                android:layout_height="250dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"

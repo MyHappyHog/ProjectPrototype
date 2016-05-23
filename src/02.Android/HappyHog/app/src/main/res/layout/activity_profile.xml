@@ -19,9 +19,12 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true">
 
-            <ImageButton
+            <ImageView
+                    android:id="@+id/iv_profile_image"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="250dp"
+                    android:clickable="true"
                     android:src="@drawable/test_img"/>
 
             <RelativeLayout

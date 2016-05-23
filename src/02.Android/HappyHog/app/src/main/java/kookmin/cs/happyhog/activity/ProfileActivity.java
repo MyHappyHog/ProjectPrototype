@@ -4,18 +4,31 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,6 +41,8 @@ import kookmin.cs.happyhog.wifi.H3WiFiManager;
 
 public class ProfileActivity extends AppCompatActivity {
 
+  private static final int IMAGE_REQUEST_CODE = 3000;
+
   private boolean isVisible = false;
 
   private boolean create;
@@ -35,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
 
   private EditText editText;
 
+  private String mImagePath;
   private DeviceInformation devInfo;
   private String password;
   private String originalName;
@@ -47,6 +63,35 @@ public class ProfileActivity extends AppCompatActivity {
     }
   };
 
+  private Target mTarget = new Target() {
+    @Override
+    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+      String tempFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + getResources().getString(R.string.image_folder)
+                            + getResources().getString(R.string.image_temp_file);
+      try {
+        FileOutputStream fos = new FileOutputStream(tempFilePath);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        fos.close();
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      mAnimalProfileImage.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void onBitmapFailed(Drawable errorDrawable) {
+      Toast.makeText(ProfileActivity.this, "Bitmap Failed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPrepareLoad(Drawable placeHolderDrawable) {
+      Log.d("mytag", "[onPrepareLoad]");
+    }
+  };
   @Bind(R.id.btn_profile_arrow)
   ImageButton mArrowButton;
 
@@ -73,6 +118,16 @@ public class ProfileActivity extends AppCompatActivity {
 
   @Bind(R.id.edit_profile_ssid)
   EditText mEditSSID;
+
+  @Bind(R.id.iv_profile_image)
+  ImageView mAnimalProfileImage;
+
+  @OnClick(R.id.iv_profile_image)
+  public void changeImage(View view) {
+    Intent intent = new Intent(Intent.ACTION_PICK);
+    intent.setType("image/jpeg");
+    startActivityForResult(intent, IMAGE_REQUEST_CODE);
+  }
 
   /**
    * 확장가능한 옵션을 확장하거나 숨기는 버튼의 콜백 함수.
@@ -114,17 +169,44 @@ public class ProfileActivity extends AppCompatActivity {
       return;
     }
 
-    // DB에 동물이 존재하는지 확인
+    // 새로 생성하거나 이름을 변경한다면 DB에 같은 이름 동물이 존재하는지 확인
     DatabaseManager databaseManager = DatabaseManager.getInstance();
-    if (!originalName.equalsIgnoreCase(editName) && databaseManager.existsAnimal(editName)) {
+    if (create || !originalName.equals(editName)) {
+      if (databaseManager.existsAnimal(editName))
       Toast.makeText(this, getResources().getText(R.string.database_exist_animal), Toast.LENGTH_SHORT).show();
       return;
+    }
+
+    String tempFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                          + getResources().getString(R.string.image_folder)
+                          + getResources().getString(R.string.image_temp_file);
+
+    File newImageFile = new File(tempFilePath);
+    if (newImageFile.exists()) {
+      /**
+       * 이전 이미지 파일이 있으면 제거
+       */
+      if (!mImagePath.equals("")) {
+        File oldImageFile = new File(mImagePath);
+        if (oldImageFile.exists()) {
+          if (!oldImageFile.delete()) {
+            Toast.makeText(this, "이전 이미지를 삭제하지 못했습니다", Toast.LENGTH_SHORT).show();
+          }
+        }
+      }
+
+      mImagePath = tempFilePath.replace(getResources().getString(R.string.image_temp_file), "/" + editName + ".jpeg");
+      if (!newImageFile.renameTo(new File(mImagePath))) {
+        Toast.makeText(this, "이미지 파일 이름 변경 실패", Toast.LENGTH_SHORT).show();
+        return;
+      }
     }
 
     Intent data = new Intent();
 
     data.putExtra(Define.EXTRA_NAME, editName);
     data.putExtra(Define.EXTRA_DESCRIPTION, editDescription);
+    data.putExtra(Define.EXTRA_IMAGE_PATH, mImagePath);
     data.putExtra(Define.EXTRA_DEVICE_INFORMATION, devInfo);
 
     setResult(Activity.RESULT_OK, data);
@@ -219,19 +301,28 @@ public class ProfileActivity extends AppCompatActivity {
 
       mEditName.setText(data.getStringExtra(Define.EXTRA_NAME));
       mEditDescriptiion.setText(data.getStringExtra(Define.EXTRA_DESCRIPTION));
+      mImagePath = data.getStringExtra(Define.EXTRA_IMAGE_PATH);
+      if (mImagePath == null) {
+        mImagePath = "";
+      }
 
       devInfo = (DeviceInformation) data.getSerializableExtra(Define.EXTRA_DEVICE_INFORMATION);
 
+      originalName = mEditName.getText().toString();
       mEditMainMac.setText(devInfo.getMainMacAddress());
       mEditSubMac.setText(devInfo.getSubMacAddress());
       mEditSSID.setText(devInfo.getSsid());
-
-      originalName = mEditName.getText().toString();
 
       // startActivity 경로에 따라 ssid의 수정 가능 여부 결정
       setModifiable(mEditMainMac, create);
       setModifiable(mEditSubMac, create);
       setModifiable(mEditSSID, create);
+
+      if (!mImagePath.equals("")) {
+        Picasso.with(this).load(new File(mImagePath))
+            .fit()
+            .into(mAnimalProfileImage);
+      }
     }
   }
 
@@ -241,6 +332,7 @@ public class ProfileActivity extends AppCompatActivity {
       target.setCursorVisible(modifiable);
     }
   }
+
   @Override
   public void onDestroy() {
     super.onDestroy();
@@ -256,5 +348,24 @@ public class ProfileActivity extends AppCompatActivity {
   public boolean onSupportNavigateUp() {
     onBackPressed();
     return true;
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+      String appFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+      String imageFolderName = appFilePath + getResources().getString(R.string.image_folder);
+      File file = new File(imageFolderName);
+
+      if (!file.isDirectory()) {
+        if (!file.mkdirs()) {
+          Toast.makeText(this, "폴더 생성 실패", Toast.LENGTH_SHORT).show();
+          return;
+        }
+      }
+
+      // 픽셀 수정?
+      Picasso.with(this).load(data.getData()).resize(1080, 768).centerCrop().into(mTarget);
+    }
   }
 }
