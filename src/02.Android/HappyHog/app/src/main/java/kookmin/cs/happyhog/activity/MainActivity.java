@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
   TextView mStateMain;
 
   @Bind(R.id.btn_video)
-  ImageButton mImageButton;
+  ImageView mImageButton;
 
   private static final int CREATE_REQUEST_CODE = 1000;
   private static final int EDIT_REQUEST_CODE = 1001;
@@ -179,6 +179,11 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  @OnClick(R.id.btn_feed)
+  public void putFeedMainAnimal(View view) {
+    Toast.makeText(this, "너에게 먹이를..", Toast.LENGTH_SHORT).show();
+  }
+
   /**
    * 메인 동물의 세팅 액티비티를 호출하는 콜백 함수.
    */
@@ -202,16 +207,7 @@ public class MainActivity extends AppCompatActivity {
   public void createAnimal(View view) {
     Intent createIntent = new Intent(this, ProfileActivity.class);
     createIntent.putExtra(Define.EXTRA_CREATE, true);
-//    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
-
-    /**
-     * Test Code
-     */
-    createIntent.putExtra(Define.EXTRA_NAME, "1");
-    createIntent.putExtra(Define.EXTRA_DESCRIPTION, "2");
-    DeviceInformation dev = new DeviceInformation("5ECF7F015442", "5ECF7F0153E9");
-    dev.setSsid("joh");
-    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, dev);
+    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
 
     startActivityForResult(createIntent, CREATE_REQUEST_CODE);
   }
@@ -231,26 +227,6 @@ public class MainActivity extends AppCompatActivity {
     ButterKnife.bind(this);
 
     mDatabaseManager = DatabaseManager.getInstance();
-
-    /**
-     * Test Code
-     */
-//    Animal animal = new Animal("Name Test", "Description Test");
-//    animal.setImagePath("myPath");
-//    animal.setDeviceInfomation(new DeviceInformation("1AFE34F4B48D", "subMac"));
-//    animal.setSensingInformation(new SensingInformation(10, 20));
-//    animal.setEnvironmentInformation(new EnvironmentInformation(20 , 10, 40, 30));
-//    animal.setRelayInformation(new RelayInformation(1, 2));
-//    ArrayList<Schedule> schedules = new ArrayList<>();
-//    schedules.add(new Schedule(1, 5, 0));
-//    schedules.add(new Schedule(2, 23, 59));
-//    animal.setSchedules(schedules);
-//
-//    List<Animal> list = mDatabaseManager.selectAllAnimals();
-//    for (Animal animal : list) {
-//      mDatabaseManager.delAnimal(animal);
-//    }
-//    mDatabaseManager.addAnimal(animal);
 
     /**
      * 툴바(액션바) 설정.
@@ -291,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 메인 동물 표시
      */
-    // TODO Main 동물 sharedPreference 에 저장된 것을 불러옴.
+    // TODO Main 동물 sharedPreference 에 저장된 것을 불러오기.
     Animal mainAnimal = mDatabaseManager.selectAnimal("123");
 
     if (mainAnimal != null) {

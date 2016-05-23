@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:descendantFocusability="blocksDescendants">
 
     <ImageView
             android:id="@+id/iv_feed_individual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_empty_image"
+            tools:ignore="ContentDescription"/>
 
-    <ImageButton
+    <ImageView
             android:id="@+id/btn_feed_individual"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@mipmap/ic_launcher"
-            android:scaleType="center"
-            android:layout_alignBottom="@+id/iv_feed_individual"/>
+            android:src="@mipmap/put_feed_orange"
+            android:scaleType="fitXY"
+            android:layout_alignBottom="@+id/iv_feed_individual"
+            tools:ignore="ContentDescription"/>
 
     <TextView
             android:id="@+id/tv_list_title"

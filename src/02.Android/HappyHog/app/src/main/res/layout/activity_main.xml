@@ -97,58 +97,112 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
                 android:id="@+id/btn_video"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@mipmap/ic_launcher"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/default_empty_image"
+                tools:ignore="ContentDescription"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:baselineAligned="false"
                 android:weightSum="1">
 
-            <ImageButton
-                    android:id="@+id/btn_feed"
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="100dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:src="@drawable/button_food"
                     android:background="?attr/colorPrimary"
-                    tools:ignore="ContentDescription"/>
-            <ImageButton
-                    android:id="@+id/btn_camera"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                <ImageView
+                        android:id="@+id/btn_feed"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/put_feed_white"
+                        tools:ignore="ContentDescription"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:textColor="@color/colorBackgray"
+                          android:text="@string/main_image_food"/>
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="100dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:src="@drawable/button_media"
                     android:background="?attr/colorPrimary"
-                    tools:ignore="ContentDescription"/>
-            <ImageButton
-                    android:id="@+id/btn_share"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                <ImageView
+                        android:id="@+id/btn_camera"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/main_camera_white"
+                        tools:ignore="ContentDescription"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:textColor="@color/colorBackgray"
+                          android:text="@string/main_image_camera"/>
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="100dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:src="@drawable/button_share"
                     android:background="?attr/colorPrimary"
-                    tools:ignore="ContentDescription"/>
-            <ImageButton
-                    android:id="@+id/btn_animal_setting"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                <ImageView
+                        android:id="@+id/btn_share"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/main_share_white"
+                        tools:ignore="ContentDescription"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:textColor="@color/colorBackgray"
+                          android:text="@string/main_image_share"/>
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="100dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:src="@drawable/button_info"
                     android:background="?attr/colorPrimary"
-                    tools:ignore="ContentDescription"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                <ImageView
+                        android:id="@+id/btn_animal_setting"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/main_pet_info_white"
+                        tools:ignore="ContentDescription"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:textColor="@color/colorBackgray"
+                          android:text="@string/main_image_info"/>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -93,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
   };
   @Bind(R.id.btn_profile_arrow)
-  ImageButton mArrowButton;
+  ImageView mArrowImage;
 
   @Bind(R.id.expandable_option)
   RelativeLayout mExpandableGroup;
@@ -135,13 +134,13 @@ public class ProfileActivity extends AppCompatActivity {
   @OnClick(R.id.btn_profile_arrow)
   public void changeVisibleOption(View view) {
     if (isVisible) {
-      mArrowButton.setImageResource(R.drawable.button_down_arrow);
+      mArrowImage.setImageResource(R.mipmap.profile_open);
       mExpandableGroup.setVisibility(View.GONE);
       mExpandableGroup2.setVisibility(View.GONE);
       mExpandableGroup3.setVisibility(View.GONE);
 
     } else {
-      mArrowButton.setImageResource(R.drawable.button_up_arrow);
+      mArrowImage.setImageResource(R.mipmap.profile_close);
       mExpandableGroup.setVisibility(View.VISIBLE);
       mExpandableGroup2.setVisibility(View.VISIBLE);
       mExpandableGroup3.setVisibility(View.VISIBLE);
