@@ -172,9 +172,10 @@ public class ProfileActivity extends AppCompatActivity {
     // 새로 생성하거나 이름을 변경한다면 DB에 같은 이름 동물이 존재하는지 확인
     DatabaseManager databaseManager = DatabaseManager.getInstance();
     if (create || !originalName.equals(editName)) {
-      if (databaseManager.existsAnimal(editName))
-      Toast.makeText(this, getResources().getText(R.string.database_exist_animal), Toast.LENGTH_SHORT).show();
-      return;
+      if (databaseManager.existsAnimal(editName)) {
+        Toast.makeText(this, getResources().getText(R.string.database_exist_animal), Toast.LENGTH_SHORT).show();
+        return;
+      }
     }
 
     String tempFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -191,6 +192,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (oldImageFile.exists()) {
           if (!oldImageFile.delete()) {
             Toast.makeText(this, "이전 이미지를 삭제하지 못했습니다", Toast.LENGTH_SHORT).show();
+            return ;
           }
         }
       }
