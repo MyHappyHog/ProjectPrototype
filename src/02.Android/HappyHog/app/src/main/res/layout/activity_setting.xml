@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -12,10 +13,12 @@
     <ImageView
             android:id="@+id/iv_setting_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="250dp"
-            android:src="@drawable/test_img"
-            android:background="?attr/colorAccent"/>
+            android:layout_height="240dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_empty_image"
+            android:background="?attr/colorAccent"
+            tools:ignore="ContentDescription"/>
 
     <android.support.v7.widget.GridLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,14 +26,15 @@
             android:layout_height="match_parent"
             app:columnCount="2"
             app:rowCount="2">
-        <ImageButton
+        <ImageView
                 android:layout_width="55dp"
                 android:layout_height="50dp"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 android:src="@drawable/setting_blank"
                 android:layout_margin="5dp"
-                android:background="?attr/colorPrimary"/>
+                android:background="?attr/colorPrimary"
+                tools:ignore="ContentDescription"/>
         <Button android:id="@+id/btn_setting_profile"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
