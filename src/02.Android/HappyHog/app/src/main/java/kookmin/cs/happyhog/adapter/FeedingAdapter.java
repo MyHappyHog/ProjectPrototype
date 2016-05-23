@@ -74,9 +74,9 @@ public class FeedingAdapter extends BaseAdapter{
 
     int hour = schedule.getHour();
     if (hour < 12) {
-      sb.append("AM)");
+      sb.append("AM) ");
     } else {
-      sb.append("PM)");
+      sb.append("PM) ");
       hour -= 12;
     }
 
