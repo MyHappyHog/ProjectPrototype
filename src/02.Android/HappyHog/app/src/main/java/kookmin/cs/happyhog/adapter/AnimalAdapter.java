@@ -1,6 +1,7 @@
 package kookmin.cs.happyhog.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class AnimalAdapter extends BaseAdapter {
   public void addItem(Animal animal) {
     animals.add(animal);
     notifyDataSetChanged();
+    Log.d("mytag", "[AddItem Notify]");
   }
 
   public void updateItem(String target, Animal animal) {
@@ -42,7 +44,18 @@ public class AnimalAdapter extends BaseAdapter {
     if (index != -1) {
       animals.set(index, animal);
       notifyDataSetChanged();
+      Log.d("mytag", "[UpdateItem Notify]");
     }
+  }
+
+  public void removeItem(Animal animal) {
+    animals.remove(animal);
+    notifyDataSetChanged();
+    Log.d("mytag", "[RemoveItem Notify]");
+  }
+
+  public void updateItem(Animal animal) {
+    updateItem(animal.getName(), animal);
   }
 
   public Animal getAnimal(int index) {

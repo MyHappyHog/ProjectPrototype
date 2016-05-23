@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kookmin.cs.happyhog.Define;
@@ -23,6 +29,9 @@ public class SettingActivity extends AppCompatActivity {
   private static final int FEEDING_REQUEST_CODE = 2002;
 
   private Animal animal;
+
+  @Bind(R.id.iv_setting_image)
+  ImageView mAnimalImage;
 
   /**
    * 프로필 버튼의 콜백 함수. 프로필 변경 액티비티 호출.
@@ -74,6 +83,12 @@ public class SettingActivity extends AppCompatActivity {
     if (data != null) {
       animal = (Animal) data.getSerializableExtra(Define.EXTRA_ANIMAL);
     }
+
+    if (!animal.getimagePath().equals("")) {
+      Picasso.with(this).load(new File(animal.getimagePath()))
+          .fit()
+          .into(mAnimalImage);
+    }
   }
 
   /**
@@ -99,6 +114,14 @@ public class SettingActivity extends AppCompatActivity {
       animal.setName(data.getStringExtra(Define.EXTRA_NAME));
       animal.setDescription(data.getStringExtra(Define.EXTRA_DESCRIPTION));
       animal.setImagePath(data.getStringExtra(Define.EXTRA_IMAGE_PATH));
+
+      if (!animal.getimagePath().equals("")) {
+        File imageFile = new File(animal.getimagePath());
+        Picasso.with(this).invalidate(imageFile);
+        Picasso.with(this).load(imageFile)
+            .fit()
+            .into(mAnimalImage);
+      }
     } else if (requestCode == SENSOR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
       animal.setEnvironmentInformation((EnvironmentInformation) data.getSerializableExtra(Define.EXTRA_ENVIRONMENT_INFORMATION));
       animal.setRelayInformation((RelayInformation) data.getSerializableExtra(Define.EXTRA_RELAY_INFORMATION));

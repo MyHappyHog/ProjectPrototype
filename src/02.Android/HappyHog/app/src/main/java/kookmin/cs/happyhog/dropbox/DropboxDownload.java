@@ -49,9 +49,10 @@ public class DropboxDownload implements Runnable {
       // 특히 타입캐스팅부분 고민해보기.
       DatabaseManager dm = DatabaseManager.getInstance();
       Animal animal = dm.selectAnimal(dbKey);
-      animal.setSensingInformation((SensingInformation)downloadData);
-      dm.updateAnimal(animal);
-
+      if (animal != null) {
+        animal.setSensingInformation((SensingInformation) downloadData);
+        dm.updateAnimal(animal);
+      }
     } catch (DropboxException e) {
       e.printStackTrace();
     } catch (UnsupportedEncodingException e) {

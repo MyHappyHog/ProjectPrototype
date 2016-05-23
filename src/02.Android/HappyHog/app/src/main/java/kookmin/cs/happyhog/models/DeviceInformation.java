@@ -8,6 +8,10 @@ public class DeviceInformation implements Serializable {
   private String mainMacAddress;
   private String subMacAddress;
 
+  public DeviceInformation() {
+    this("", "");
+  }
+
   public DeviceInformation(String mainMacAddress, String subMacAddress) {
     this.mainMacAddress = mainMacAddress;
     this.subMacAddress = subMacAddress;
