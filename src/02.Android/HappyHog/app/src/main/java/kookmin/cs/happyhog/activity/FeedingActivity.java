@@ -60,8 +60,8 @@ public class FeedingActivity extends AppCompatActivity {
       minute.add(sb.toString());
     }
 
-    meridiem.add("AM");
-    meridiem.add("PM");
+    meridiem.add("오전");
+    meridiem.add("오후");
   }
 
   @Bind(R.id.spin_feeding_am_pm)
@@ -83,7 +83,7 @@ public class FeedingActivity extends AppCompatActivity {
     mCurrentHour %= 12;
 
     // 오후 시간일 때 12를 더함.
-    if (mCurrentMeridiem.equals("PM"))
+    if (mCurrentMeridiem.equals("오후"))
       mCurrentHour += 12;
 
     feedingAdapter.addItem(new Schedule(mCurrentCycle, mCurrentHour, mCurrentMinute));
