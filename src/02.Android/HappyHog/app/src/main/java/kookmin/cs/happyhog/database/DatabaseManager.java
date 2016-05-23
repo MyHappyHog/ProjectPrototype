@@ -44,6 +44,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
   private static final String RELAY_INFORMATION = "relay";
   private static final String SCHEDULE_INFORMATION = "schedule";
 
+  public interface OnUpdateDatabase {
+
+    public void OnUpdate(Animal animal);
+    public void OnInsert(Animal animal);
+    public void OnDelete(Animal animal);
+  }
+
+  private OnUpdateDatabase onUpdateDatabase;
+
+  public void setOnUpdateDatabase(OnUpdateDatabase onUpdateDatabase) {
+    this.onUpdateDatabase = onUpdateDatabase;
+  }
+
   private static final String CREATE_TABLE =
       "CREATE TABLE " + TABLE_HAPPYHOG + "(" +
       NAME + TYPE_TEXT + PRIMARY_KEY + COMMA_SEP +
@@ -99,21 +112,25 @@ public class DatabaseManager extends SQLiteOpenHelper {
     ContentValues values = makeContentValue(animal);
 
     getWritableDatabase().insert(TABLE_HAPPYHOG, null, values);
+
+    if (onUpdateDatabase != null) {
+      onUpdateDatabase.OnInsert(animal);
+    }
   }
 
   /**
    * 해당 animal 정보를 삭제하는 함수
    */
-  public void delAnimal(String animalName) {
-    if (!existsAnimal(animalName)) {
+  public void delAnimal(Animal animal) {
+    if (!existsAnimal(animal.getName())) {
       return;
     }
 
-    getWritableDatabase().delete(TABLE_HAPPYHOG, NAME + " = ?", new String[]{animalName});
-  }
+    getWritableDatabase().delete(TABLE_HAPPYHOG, NAME + " = ?", new String[]{animal.getName()});
 
-  public void delAnimal(Animal animal) {
-    delAnimal(animal.getName());
+    if (onUpdateDatabase != null) {
+      onUpdateDatabase.OnDelete(animal);
+    }
   }
 
   /**
@@ -127,6 +144,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
     ContentValues values = makeContentValue(animal);
 
     getWritableDatabase().update(TABLE_HAPPYHOG, values, NAME + " = ?", new String[]{animal.getName()});
+
+    if (onUpdateDatabase != null) {
+      onUpdateDatabase.OnUpdate(animal);
+    }
   }
 
   /**
@@ -210,7 +231,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
       String blobList[] = {DEVICE_INFORMATION, SENSING_INFORMATION, ENVIRONMENT_INFORMATION, RELAY_INFORMATION, SCHEDULE_INFORMATION};
       Object objs[] =
-          {animal.getDeviceInfomation(), animal.getSensingInformation(), animal.getEnvironmentInformation(), animal.getRelayInformation(), animal.getSchedules()};
+          {animal.getDeviceInfomation(), animal.getSensingInformation(), animal.getEnvironmentInformation(), animal.getRelayInformation(),
+           animal.getSchedules()};
 
       for (int i = 0; i < blobList.length; i++) {
         baos = new ByteArrayOutputStream();
