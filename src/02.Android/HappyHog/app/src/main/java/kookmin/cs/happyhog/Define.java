@@ -3,12 +3,18 @@ package kookmin.cs.happyhog;
 public class Define {
   public static final String APP_KEY = "your_key";
   public static final String APP_SECRET = "your_key";
+  public static final String DROPBOX_KEY = "dropboxKey";
+  public static final String AUTO_LOGIN= "autoLogin";
+  public static final String MAIN_ANIMAL_KEY= "mainAnimal";
+
   public static final String TEMPERATURE_KEY = "temperature";
   public static final String HUMIDITY_KEY = "humidity";
   public static final String CYCLE_KEY = "numRotate";
   public static final String TIME_KEY = "time";
   public static final String EXTRA_CREATE = "create";
 
+  public static final String EXTRA_MAIN_NAME = "main_animal_name";
+  public static final String EXTRA_DOWNLOAD_TIME = "download_time";
   public static final String EXTRA_ANIMAL = "animal";
   public static final String EXTRA_NAME = "name";
   public static final String EXTRA_DESCRIPTION = "description";

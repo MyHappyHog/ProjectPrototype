@@ -74,4 +74,31 @@
     <string name="sensor_max_humid">최고 습도</string>
     <string name="sensor_min_humid">최저 습도</string>
 
+
+    <!--
+    preference 관련 문자열
+    -->
+    <string name="preference_not_exist_main">메인 동물이 존재하지 않습니다.</string>
+    <string name="preference_main_animal_title">현재 메인 동물</string>
+    <string name="preference_account_setting_title">계정 설정</string>
+
+    <string name="preference_auto_login_title">자동 로그인</string>
+    <string name="preference_auto_login_summaryon">자동 로그인을 합니다.</string>
+    <string name="preference_auto_login_summaryoff">자동 로그인을 하지 않습니다.</string>
+
+    <string name="preference_individual_title">개인 정보</string>
+    <string name="preference_account_information_title">계정 정보</string>
+    <string name="preference_account_information_summary">계정 정보를 확인합니다.</string>
+
+    <string name="preference_version_information_title">버전 정보</string>
+    <string name="preference_version_information_summary">버전 정보를 확인합니다.</string>
+    <string name="preference_help_title">도움말</string>
+    <string name="preference_help_summary">도움말을 확인합니다</string>
+    <string name="preference_terms_policy_category_title">약관 및 정책</string>
+    <string name="preference_terms_title">이용 약관</string>
+    <string name="preference_terms_summary">이용 약관을 확인합니다.</string>
+    <string name="preference_policy_title">개인정보 취급방침</string>
+    <string name="preference_policy_summary">개인정보 취급방침을 확인합니다</string>
+    <string name="preference_reference_title">참조</string>
+    <string name="preference_reference_summary">어디를 참조했을까 난 모름</string>
 </resources>

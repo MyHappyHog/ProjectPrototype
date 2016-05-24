@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+            android:key="mainAnimal"
+            android:title="@string/preference_main_animal_title"
+            android:defaultValue=""
+            android:summary="@string/preference_not_exist_main"
+    />
+
+    <PreferenceCategory android:title="@string/preference_account_setting_title">
+        <SwitchPreference
+                android:defaultValue="false"
+                android:key="autoLogin"
+                android:summaryOff="@string/preference_auto_login_summaryoff"
+                android:summaryOn="@string/preference_auto_login_summaryon"
+                android:switchTextOff="OFF"
+                android:switchTextOn="ON"
+                android:title="@string/preference_auto_login_title"
+        />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_individual_title">
+        <Preference android:title="@string/preference_account_information_title"
+                    android:summary="@string/preference_account_information_summary">
+
+            <intent android:targetPackage="kookmin.cs.happyhog"
+                    android:targetClass="kookmin.cs.happyhog.activity.information.AccountInformation"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <EditTextPreference
+            android:key="dropboxKey"
+            android:defaultValue=""
+            android:selectable="false"
+    />
+</PreferenceScreen>

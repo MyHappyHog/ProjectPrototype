@@ -3,9 +3,11 @@ package kookmin.cs.happyhog.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,7 +26,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -33,6 +34,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 import kookmin.cs.happyhog.Define;
+import kookmin.cs.happyhog.H3Application;
 import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.adapter.AnimalAdapter;
 import kookmin.cs.happyhog.database.DatabaseManager;
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private String mainAnimalName = "";
+  private String mainAnimalName;
   private DatabaseManager mDatabaseManager;
   private AnimalAdapter mAnimalAdapter;
   private int selectedAnimal;
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(DialogInterface dialog, int which) {
         updateMainAnimal(mAnimalAdapter.getAnimal(selectedAnimal));
         mDrawerLayout.closeDrawers();
+
         dialog.dismiss();
       }
     });
@@ -241,10 +244,16 @@ public class MainActivity extends AppCompatActivity {
     mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
     mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+    Intent data = getIntent();
+    if (data != null) {
+      mainAnimalName = data.getStringExtra(Define.EXTRA_MAIN_NAME);
+      lastDownloadTime = data.getLongExtra(Define.EXTRA_DOWNLOAD_TIME, 0);
+    }
+
     /**
      * 동물 리스트 설정
      */
-    mAnimalAdapter = new AnimalAdapter(this, (ArrayList<Animal>) mDatabaseManager.selectAllAnimals());
+    mAnimalAdapter = new AnimalAdapter(this, mDatabaseManager.selectAllAnimals());
     mListview.setAdapter(mAnimalAdapter);
 
     mDatabaseManager.setOnUpdateDatabase(new DatabaseManager.OnUpdateDatabase() {
@@ -267,8 +276,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 메인 동물 표시
      */
-    // TODO Main 동물 sharedPreference 에 저장된 것을 불러오기.
-    Animal mainAnimal = mDatabaseManager.selectAnimal("123");
+    Animal mainAnimal = mDatabaseManager.selectAnimal(mainAnimalName);
 
     if (mainAnimal != null) {
       updateMainAnimal(mainAnimal);
@@ -316,7 +324,9 @@ public class MainActivity extends AppCompatActivity {
   public void onDestroy() {
     super.onDestroy();
 
-    H3Dropbox.getInstance().shutdownThreads();
+    H3Dropbox h3Dropbox = H3Dropbox.getInstance();
+    h3Dropbox.shutdownThreads();
+    h3Dropbox.unlink();
   }
 
   @Override
@@ -363,6 +373,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void updateMainAnimal(Animal animal) {
+    if (animal == null)
+      return ;
+
     mainAnimalName = animal.getName();
     mTitleMain.setText(animal.getName());
     mMemoMain.setText(animal.getDescription());
@@ -380,8 +393,10 @@ public class MainActivity extends AppCompatActivity {
           .fit()
           .into(mImageButton);
     } else {
-      mImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+      mImageButton.setImageDrawable(getResources().getDrawable(R.drawable.default_empty_image));
     }
+
+    updateSharedPreference(Define.MAIN_ANIMAL_KEY, animal.getName());
   }
 
   public void clearMainAnimal(Animal animal) {
@@ -394,6 +409,8 @@ public class MainActivity extends AppCompatActivity {
     mMemoMain.setText("");
     mStateMain.setText("");
     mImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+
+    updateSharedPreference(Define.MAIN_ANIMAL_KEY, "");
   }
 
   public void downloadSensingData() {
@@ -407,6 +424,12 @@ public class MainActivity extends AppCompatActivity {
       h3Dropbox.executeDropboxRequest(downloadSensing);
     }
     lastDownloadTime = System.currentTimeMillis();
+  }
+
+  private void updateSharedPreference(String key, String value) {
+    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(H3Application.getmInstance()).edit();
+    editor.putString(key, value);
+    editor.apply();
   }
 
   @Override
