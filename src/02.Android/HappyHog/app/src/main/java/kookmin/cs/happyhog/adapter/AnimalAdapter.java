@@ -6,8 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import kookmin.cs.happyhog.R;
@@ -87,6 +92,27 @@ public class AnimalAdapter extends BaseAdapter {
 
     TextView name = (TextView) convertView.findViewById(R.id.tv_list_title);
     TextView description = (TextView) convertView.findViewById(R.id.tv_list_memo);
+
+    ImageView iv = (ImageView) convertView.findViewById(R.id.btn_feed_individual);
+    iv.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Toast.makeText(context, "먹이줌", Toast.LENGTH_SHORT).show();
+      }
+    });
+
+    Animal animal = animals.get(position);
+    ImageView animalImage = (ImageView) convertView.findViewById(R.id.iv_feed_individual);
+
+    if (animal.getimagePath().equals("")) {
+      Picasso.with(context).load(R.drawable.default_empty_image)
+          .fit()
+          .into(animalImage);
+    } else {
+      Picasso.with(context).load(new File(animals.get(position).getimagePath()))
+          .fit()
+          .into(animalImage);
+    }
 
     name.setText(animals.get(position).getName());
     description.setText(animals.get(position).getDescription());

@@ -2,6 +2,7 @@ package kookmin.cs.happyhog.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -186,15 +187,15 @@ public class SensorActivity extends AppCompatActivity {
   }
 
   private void clearClickedTempButton() {
-    buttonTemp1.setBackgroundColor(getResources().getColor(R.color.blank));
-    buttonTemp2.setBackgroundColor(getResources().getColor(R.color.blank));
-    buttonTempN.setBackgroundColor(getResources().getColor(R.color.blank));
+    buttonTemp1.setBackgroundColor(Color.WHITE);
+    buttonTemp2.setBackgroundColor(Color.WHITE);
+    buttonTempN.setBackgroundColor(Color.WHITE);
   }
 
   private void clearClickedHumidButton() {
-    buttonHumid1.setBackgroundColor(getResources().getColor(R.color.blank));
-    buttonHumid2.setBackgroundColor(getResources().getColor(R.color.blank));
-    buttonHumidN.setBackgroundColor(getResources().getColor(R.color.blank));
+    buttonHumid1.setBackgroundColor(Color.WHITE);
+    buttonHumid2.setBackgroundColor(Color.WHITE);
+    buttonHumidN.setBackgroundColor(Color.WHITE);
   }
 
   @Override

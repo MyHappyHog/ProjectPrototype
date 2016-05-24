@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
-            android:title="버전정보"
-            android:summary="버전정보를 확인합니다.">
+            android:title="@string/preference_version_information_title"
+            android:summary="@string/preference_version_information_summary">
 
         <intent
                 android:targetPackage="kookmin.cs.happyhog"
@@ -10,38 +10,29 @@
     </Preference>
 
     <Preference
-            android:title="도움말"
-            android:summary="도움말을 확인합니다.">
+            android:title="@string/preference_help_title"
+            android:summary="@string/preference_help_summary">
 
         <intent
                 android:targetPackage="kookmin.cs.happyhog"
                 android:targetClass="kookmin.cs.happyhog.activity.information.HelpInformation"/>
     </Preference>
 
-    <PreferenceCategory android:title="개인정보">
-        <Preference android:title="계정정보"
-        android:summary="계정정보를 확인합니다.">
-
-            <intent android:targetPackage="kookmin.cs.happyhog"
-                    android:targetClass="kookmin.cs.happyhog.activity.information.AccountInformation"/>
-        </Preference>
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="약관 및 정책">
-        <Preference android:title="이용약관"
-                    android:summary="이용약관을 확인합니다">
+    <PreferenceCategory android:title="@string/preference_terms_policy_category_title">
+        <Preference android:title="@string/preference_terms_title"
+                    android:summary="@string/preference_terms_summary">
             <intent android:targetPackage="kookmin.cs.happyhog"
                     android:targetClass="kookmin.cs.happyhog.activity.information.TermsInformation"/>
         </Preference>
 
-        <Preference android:title="개인정보 취급방침"
-                    android:summary="개인정보 취급방침을 확인합니다">
+        <Preference android:title="@string/preference_policy_title"
+                    android:summary="@string/preference_policy_summary">
             <intent android:targetPackage="kookmin.cs.happyhog"
                     android:targetClass="kookmin.cs.happyhog.activity.information.PersonalInformation"/>
         </Preference>
 
-        <Preference android:title="참조"
-                    android:summary="어디를 참조했을까 난 모름">
+        <Preference android:title="@string/preference_reference_title"
+                    android:summary="@string/preference_reference_summary">
             <intent android:targetPackage="kookmin.cs.happyhog"
                     android:targetClass="kookmin.cs.happyhog.activity.information.ReferenceInformation"/>
         </Preference>

@@ -17,40 +17,46 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp">
 
-        <ImageView
-                android:id="@+id/iv_feeding_time_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxWidth="100dp"
-                android:maxHeight="100dp"
-                android:src="@mipmap/ic_launcher"
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"/>
+        <LinearLayout android:id="@+id/containr_time_image"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:gravity="center"
+                      android:background="@color/colorDarkbrown"
+                      android:orientation="vertical">
+
+            <ImageView android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_marginLeft="5dp"
+                       android:layout_marginRight="5dp"
+                       android:src="@mipmap/feed_time_white"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="2dp"
+                      android:gravity="center"
+                      android:textColor="@color/colorBackgray"
+                      android:text="@string/feeding_image_time"/>
+        </LinearLayout>
 
         <Spinner
                 android:id="@+id/spin_feeding_am_pm"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/iv_feeding_time_title"
-                android:layout_alignTop="@+id/iv_feeding_time_title"
-                android:layout_alignBottom="@+id/iv_feeding_time_title"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/containr_time_image"
+                android:layout_alignTop="@+id/containr_time_image"
+                android:layout_alignBottom="@+id/containr_time_image"
                 android:background="@drawable/rect_rounded_white"/>
 
         <Spinner
                 android:id="@+id/spin_feeding_hour"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_margin="5dp"
                 android:layout_toRightOf="@+id/spin_feeding_am_pm"
-                android:layout_alignTop="@+id/iv_feeding_time_title"
-                android:layout_alignBottom="@+id/iv_feeding_time_title"
+                android:layout_alignTop="@+id/containr_time_image"
+                android:layout_alignBottom="@+id/containr_time_image"
                 android:background="@drawable/rect_rounded_white"/>
 
         <Spinner
@@ -62,8 +68,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/spin_feeding_hour"
-                android:layout_alignTop="@+id/iv_feeding_time_title"
-                android:layout_alignBottom="@+id/iv_feeding_time_title"
+                android:layout_alignTop="@+id/containr_time_image"
+                android:layout_alignBottom="@+id/containr_time_image"
                 android:background="@drawable/rect_rounded_white"/>
     </RelativeLayout>
 
@@ -75,27 +81,35 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp">
 
-        <ImageView
-                android:id="@+id/iv_feeding_cycle_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxWidth="100dp"
-                android:maxHeight="100dp"
-                android:src="@mipmap/ic_launcher"
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"/>
+        <LinearLayout android:id="@+id/containr_cycle_image"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:gravity="center"
+                      android:background="@color/colorDarkbrown"
+                      android:orientation="vertical">
 
+            <ImageView android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_marginLeft="5dp"
+                       android:layout_marginRight="5dp"
+                       android:src="@mipmap/put_feed_white"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="2dp"
+                      android:gravity="center"
+                      android:textColor="@color/colorBackgray"
+                      android:text="@string/feeding_image_amount"/>
+        </LinearLayout>
         <Spinner
                 android:id="@+id/spin_feeding_cycle"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/iv_feeding_cycle_title"
-                android:layout_alignTop="@+id/iv_feeding_cycle_title"
-                android:layout_alignBottom="@+id/iv_feeding_cycle_title"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/containr_cycle_image"
+                android:layout_alignTop="@+id/containr_cycle_image"
+                android:layout_alignBottom="@+id/containr_cycle_image"
                 android:background="@drawable/rect_rounded_white"/>
 
         <TextView android:layout_width="match_parent"
@@ -111,9 +125,9 @@
     </RelativeLayout>
 
     <RelativeLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginRight="10dp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -125,13 +139,15 @@
                   android:gravity="center_vertical"/>
 
         <android.support.design.widget.FloatingActionButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/fab_add_feeding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:src="@android:drawable/ic_dialog_email"
-                android:background="@color/blank"/>
+                app:backgroundTint="@color/colorSplash"
+                android:tint="@android:color/white"
+                android:src="@mipmap/plus"/>
     </RelativeLayout>
 
     <ImageView
@@ -139,6 +155,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:tint="@color/colorSplash"
             android:src="@drawable/line_darkbrown"/>
 
     <ListView android:id="@+id/feeding_listview"

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import kookmin.cs.happyhog.models.Animal;
 import kookmin.cs.happyhog.models.DeviceInformation;
@@ -154,6 +153,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
    * DB에 해당 animal 정보를 가져 오는 함수.
    */
   public Animal selectAnimal(String name) {
+    if (name == null || name.length() == 0)
+      return null;
+
     Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPYHOG +
                                                    " WHERE " + NAME + " = ?", new String[]{name});
 
@@ -178,8 +180,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
    *
    * @return ArrayList로 저장된 모든 animal 정보 반환.
    */
-  public List<Animal> selectAllAnimals() {
-    List<Animal> animals = new ArrayList<>();
+  public ArrayList<Animal> selectAllAnimals() {
+    ArrayList<Animal> animals = new ArrayList<>();
     Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_HAPPYHOG, null);
 
     if (cursor == null || cursor.getCount() == 0) {

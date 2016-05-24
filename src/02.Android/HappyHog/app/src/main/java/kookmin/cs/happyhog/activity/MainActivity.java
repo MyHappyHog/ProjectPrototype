@@ -3,9 +3,11 @@ package kookmin.cs.happyhog.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -33,6 +34,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 import kookmin.cs.happyhog.Define;
+import kookmin.cs.happyhog.H3Application;
 import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.adapter.AnimalAdapter;
 import kookmin.cs.happyhog.database.DatabaseManager;
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
   TextView mStateMain;
 
   @Bind(R.id.btn_video)
-  ImageButton mImageButton;
+  ImageView mImageButton;
 
   private static final int CREATE_REQUEST_CODE = 1000;
   private static final int EDIT_REQUEST_CODE = 1001;
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private String mainAnimalName = "";
+  private String mainAnimalName;
   private DatabaseManager mDatabaseManager;
   private AnimalAdapter mAnimalAdapter;
   private int selectedAnimal;
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(DialogInterface dialog, int which) {
         updateMainAnimal(mAnimalAdapter.getAnimal(selectedAnimal));
         mDrawerLayout.closeDrawers();
+
         dialog.dismiss();
       }
     });
@@ -179,6 +182,11 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  @OnClick(R.id.btn_feed)
+  public void putFeedMainAnimal(View view) {
+    Toast.makeText(this, "너에게 먹이를..", Toast.LENGTH_SHORT).show();
+  }
+
   /**
    * 메인 동물의 세팅 액티비티를 호출하는 콜백 함수.
    */
@@ -202,16 +210,7 @@ public class MainActivity extends AppCompatActivity {
   public void createAnimal(View view) {
     Intent createIntent = new Intent(this, ProfileActivity.class);
     createIntent.putExtra(Define.EXTRA_CREATE, true);
-//    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
-
-    /**
-     * Test Code
-     */
-    createIntent.putExtra(Define.EXTRA_NAME, "1");
-    createIntent.putExtra(Define.EXTRA_DESCRIPTION, "2");
-    DeviceInformation dev = new DeviceInformation("5ECF7F015442", "5ECF7F0153E9");
-    dev.setSsid("joh");
-    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, dev);
+    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
 
     startActivityForResult(createIntent, CREATE_REQUEST_CODE);
   }
@@ -233,26 +232,6 @@ public class MainActivity extends AppCompatActivity {
     mDatabaseManager = DatabaseManager.getInstance();
 
     /**
-     * Test Code
-     */
-//    Animal animal = new Animal("Name Test", "Description Test");
-//    animal.setImagePath("myPath");
-//    animal.setDeviceInfomation(new DeviceInformation("1AFE34F4B48D", "subMac"));
-//    animal.setSensingInformation(new SensingInformation(10, 20));
-//    animal.setEnvironmentInformation(new EnvironmentInformation(20 , 10, 40, 30));
-//    animal.setRelayInformation(new RelayInformation(1, 2));
-//    ArrayList<Schedule> schedules = new ArrayList<>();
-//    schedules.add(new Schedule(1, 5, 0));
-//    schedules.add(new Schedule(2, 23, 59));
-//    animal.setSchedules(schedules);
-//
-//    List<Animal> list = mDatabaseManager.selectAllAnimals();
-//    for (Animal animal : list) {
-//      mDatabaseManager.delAnimal(animal);
-//    }
-//    mDatabaseManager.addAnimal(animal);
-
-    /**
      * 툴바(액션바) 설정.
      */
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -265,10 +244,16 @@ public class MainActivity extends AppCompatActivity {
     mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
     mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+    Intent data = getIntent();
+    if (data != null) {
+      mainAnimalName = data.getStringExtra(Define.EXTRA_MAIN_NAME);
+      lastDownloadTime = data.getLongExtra(Define.EXTRA_DOWNLOAD_TIME, 0);
+    }
+
     /**
      * 동물 리스트 설정
      */
-    mAnimalAdapter = new AnimalAdapter(this, (ArrayList<Animal>) mDatabaseManager.selectAllAnimals());
+    mAnimalAdapter = new AnimalAdapter(this, mDatabaseManager.selectAllAnimals());
     mListview.setAdapter(mAnimalAdapter);
 
     mDatabaseManager.setOnUpdateDatabase(new DatabaseManager.OnUpdateDatabase() {
@@ -291,8 +276,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 메인 동물 표시
      */
-    // TODO Main 동물 sharedPreference 에 저장된 것을 불러옴.
-    Animal mainAnimal = mDatabaseManager.selectAnimal("123");
+    Animal mainAnimal = mDatabaseManager.selectAnimal(mainAnimalName);
 
     if (mainAnimal != null) {
       updateMainAnimal(mainAnimal);
@@ -340,7 +324,9 @@ public class MainActivity extends AppCompatActivity {
   public void onDestroy() {
     super.onDestroy();
 
-    H3Dropbox.getInstance().shutdownThreads();
+    H3Dropbox h3Dropbox = H3Dropbox.getInstance();
+    h3Dropbox.shutdownThreads();
+    h3Dropbox.unlink();
   }
 
   @Override
@@ -387,6 +373,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void updateMainAnimal(Animal animal) {
+    if (animal == null)
+      return ;
+
     mainAnimalName = animal.getName();
     mTitleMain.setText(animal.getName());
     mMemoMain.setText(animal.getDescription());
@@ -404,8 +393,10 @@ public class MainActivity extends AppCompatActivity {
           .fit()
           .into(mImageButton);
     } else {
-      mImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+      mImageButton.setImageDrawable(getResources().getDrawable(R.drawable.default_empty_image));
     }
+
+    updateSharedPreference(Define.MAIN_ANIMAL_KEY, animal.getName());
   }
 
   public void clearMainAnimal(Animal animal) {
@@ -418,6 +409,8 @@ public class MainActivity extends AppCompatActivity {
     mMemoMain.setText("");
     mStateMain.setText("");
     mImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+
+    updateSharedPreference(Define.MAIN_ANIMAL_KEY, "");
   }
 
   public void downloadSensingData() {
@@ -431,6 +424,12 @@ public class MainActivity extends AppCompatActivity {
       h3Dropbox.executeDropboxRequest(downloadSensing);
     }
     lastDownloadTime = System.currentTimeMillis();
+  }
+
+  private void updateSharedPreference(String key, String value) {
+    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(H3Application.getmInstance()).edit();
+    editor.putString(key, value);
+    editor.apply();
   }
 
   @Override

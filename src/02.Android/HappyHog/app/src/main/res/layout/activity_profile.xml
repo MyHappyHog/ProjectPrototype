@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -22,40 +23,58 @@
             <ImageView
                     android:id="@+id/iv_profile_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="250dp"
-                    android:clickable="true"
-                    android:src="@drawable/test_img"/>
+                    android:layout_height="240dp"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_empty_image"
+                    tools:ignore="ContentDescription"/>
 
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rect_rounded_darkbrown"
-                    android:layout_margin="5dp">
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
 
-                <ImageView
-                        android:id="@+id/iv_profile_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="100dp"
-                        android:maxHeight="100dp"
-                        android:src="@mipmap/ic_launcher"
-                        android:padding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                <LinearLayout android:id="@+id/containr_info_image"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_marginLeft="5dp"
+                              android:gravity="center"
+                              android:orientation="vertical">
+
+                    <ImageView
+                            android:id="@+id/iv_profile_title"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/main_pet_info_orange"
+                            android:paddingTop="5dp"
+                            tools:ignore="ContentDescription"/>
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:textColor="@color/colorSplash"
+                              android:text="@string/profile_title"/>
+                </LinearLayout>
 
                 <EditText
                         android:id="@+id/edit_profile_title"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/rect_rounded_white"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/iv_profile_title"
-                        android:layout_alignTop="@+id/iv_profile_title"
-                        android:layout_alignBottom="@+id/iv_profile_title"
-                        android:background="@drawable/rect_rounded_white"
-                        android:inputType="text"/>
+                        android:layout_toRightOf="@+id/containr_info_image"
+                        android:layout_alignTop="@+id/containr_info_image"
+                        android:layout_alignBottom="@+id/containr_info_image"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:inputType="text"
+                        android:singleLine="true"/>
 
             </RelativeLayout>
 
@@ -65,15 +84,26 @@
                     android:background="@drawable/rect_rounded_darkbrown"
                     android:layout_margin="5dp">
 
-                <ImageView
-                        android:id="@+id/iv_profile_memo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="100dp"
-                        android:maxHeight="100dp"
-                        android:src="@mipmap/ic_launcher"
-                        android:padding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                <LinearLayout android:id="@+id/containr_memo_image"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_marginLeft="5dp"
+                              android:gravity="center"
+                              android:orientation="vertical">
+                    <ImageView
+                            android:id="@+id/iv_profile_memo"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:paddingTop="5dp"
+                            android:src="@mipmap/profile_memo"
+                            tools:ignore="ContentDescription"/>
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:textColor="@color/colorSplash"
+                              android:text="@string/profile_memo"/>
+                </LinearLayout>
 
                 <EditText
                         android:id="@+id/edit_profile_memo"
@@ -83,11 +113,16 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/iv_profile_memo"
-                        android:layout_alignTop="@+id/iv_profile_memo"
-                        android:layout_alignBottom="@+id/iv_profile_memo"
+                        android:layout_toRightOf="@+id/containr_memo_image"
+                        android:layout_alignTop="@+id/containr_memo_image"
+                        android:layout_alignBottom="@+id/containr_memo_image"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:background="@drawable/rect_rounded_white"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:includeFontPadding="false"/>
             </RelativeLayout>
 
             <ImageView
@@ -95,33 +130,35 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/line_darkbrown"/>
+                    android:src="@drawable/line_darkbrown"
+                    tools:ignore="ContentDescription"/>
 
-            <ImageButton
+            <ImageView
                     android:id="@+id/btn_profile_arrow"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:background="@android:color/white"
-                    android:src="@drawable/button_down_arrow"/>
+                    android:src="@mipmap/profile_open"
+                    tools:ignore="ContentDescription"/>
 
             <RelativeLayout
                     android:id="@+id/expandable_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rect_rounded_darkbrown"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:visibility="gone">
 
                 <ImageView
                         android:id="@+id/iv_profile_main_mac"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="100dp"
-                        android:maxHeight="100dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
                         android:padding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        tools:ignore="ContentDescription"/>
 
                 <EditText
                         android:id="@+id/edit_profile_main_mac"
@@ -131,12 +168,16 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-
                         android:layout_toRightOf="@+id/iv_profile_main_mac"
                         android:layout_alignTop="@+id/iv_profile_main_mac"
                         android:layout_alignBottom="@+id/iv_profile_main_mac"
                         android:background="@drawable/rect_rounded_white"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="10dp"
+                        android:includeFontPadding="false"
                         android:inputType="text"
+                        android:singleLine="true"
                         android:hint="@string/profile_typing_main_mac_address"/>
             </RelativeLayout>
 
@@ -150,13 +191,12 @@
 
                 <ImageView
                         android:id="@+id/iv_profile_sub_mac"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="100dp"
-                        android:maxHeight="100dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
                         android:padding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        tools:ignore="ContentDescription"/>
 
                 <EditText
                         android:id="@+id/edit_profile_sub_mac"
@@ -171,7 +211,12 @@
                         android:layout_alignTop="@+id/iv_profile_sub_mac"
                         android:layout_alignBottom="@+id/iv_profile_sub_mac"
                         android:background="@drawable/rect_rounded_white"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="10dp"
+                        android:includeFontPadding="false"
                         android:inputType="text"
+                        android:singleLine="true"
                         android:hint="@string/profile_typing_sub_mac_address"/>
             </RelativeLayout>
 
@@ -180,18 +225,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rect_rounded_darkbrown"
-                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:visibility="gone">
 
                 <ImageView
                         android:id="@+id/iv_profile_ssid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="100dp"
-                        android:maxHeight="100dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
                         android:padding="5dp"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        tools:ignore="ContentDescription"/>
 
                 <EditText
                         android:id="@+id/edit_profile_ssid"
@@ -206,7 +252,12 @@
                         android:layout_alignTop="@+id/iv_profile_ssid"
                         android:layout_alignBottom="@+id/iv_profile_ssid"
                         android:background="@drawable/rect_rounded_white"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="10dp"
+                        android:includeFontPadding="false"
                         android:inputType="text"
+                        android:singleLine="true"
                         android:hint="@string/profile_typing_ssid"/>
             </RelativeLayout>
 
@@ -215,7 +266,8 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/line_darkbrown"/>
+                    android:src="@drawable/line_darkbrown"
+                    tools:ignore="ContentDescription"/>
             <Button
                     android:id="@+id/btn_profile_change"
                     android:layout_width="match_parent"
