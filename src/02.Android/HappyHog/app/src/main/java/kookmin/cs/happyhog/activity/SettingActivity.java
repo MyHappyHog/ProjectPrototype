@@ -2,6 +2,8 @@ package kookmin.cs.happyhog.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -91,6 +93,13 @@ public class SettingActivity extends AppCompatActivity {
     }
   }
 
+  @Override
+  public void onDestroy() {
+    Bitmap bitmap = ((BitmapDrawable) mAnimalImage.getDrawable()).getBitmap();
+    bitmap.recycle();
+
+    super.onDestroy();
+  }
   /**
    * 툴바의 백(Back)키 콜백 함수
    */

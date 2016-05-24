@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
@@ -336,10 +337,14 @@ public class ProfileActivity extends AppCompatActivity {
 
   @Override
   public void onDestroy() {
-    super.onDestroy();
+    Bitmap bitmap = ((BitmapDrawable) mAnimalProfileImage.getDrawable()).getBitmap();
+    bitmap.recycle();
+
     if (wifiManager != null) {
       wifiManager.unRegisterReceiver();
     }
+
+    super.onDestroy();
   }
 
   /**
