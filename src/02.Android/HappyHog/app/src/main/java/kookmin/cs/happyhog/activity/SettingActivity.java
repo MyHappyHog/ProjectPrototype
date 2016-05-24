@@ -100,6 +100,7 @@ public class SettingActivity extends AppCompatActivity {
 
     super.onDestroy();
   }
+
   /**
    * 툴바의 백(Back)키 콜백 함수
    */

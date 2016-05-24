@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -393,6 +395,9 @@ public class MainActivity extends AppCompatActivity {
           .fit()
           .into(mImageButton);
     } else {
+      Bitmap bitmap = ((BitmapDrawable) mImageButton.getDrawable()).getBitmap();
+      bitmap.recycle();
+
       mImageButton.setImageDrawable(getResources().getDrawable(R.drawable.default_empty_image));
     }
 
