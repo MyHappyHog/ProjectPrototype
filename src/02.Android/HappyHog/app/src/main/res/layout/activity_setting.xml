@@ -14,7 +14,7 @@
             android:id="@+id/iv_setting_image"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/default_empty_image"
             android:background="?attr/colorAccent"
