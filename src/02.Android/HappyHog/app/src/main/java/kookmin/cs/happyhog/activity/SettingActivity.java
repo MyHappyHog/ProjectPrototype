@@ -41,7 +41,7 @@ public class SettingActivity extends AppCompatActivity {
    */
   @OnClick(R.id.btn_setting_profile)
   public void openProfileActivity(View view) {
-    Intent editProfile = new Intent(this, ProfileActivity.class);
+    Intent editProfile = new Intent(getApplicationContext(), ProfileActivity.class);
     editProfile.putExtra(Define.EXTRA_NAME, animal.getName());
     editProfile.putExtra(Define.EXTRA_DESCRIPTION, animal.getDescription());
     editProfile.putExtra(Define.EXTRA_IMAGE_PATH, animal.getimagePath());
@@ -52,7 +52,7 @@ public class SettingActivity extends AppCompatActivity {
 
   @OnClick(R.id.btn_setting_sensor)
   public void openSensorActivity(View view) {
-    Intent editSensor = new Intent(this, SensorActivity.class);
+    Intent editSensor = new Intent(getApplicationContext(), SensorActivity.class);
     editSensor.putExtra(Define.EXTRA_ENVIRONMENT_INFORMATION, animal.getEnvironmentInformation());
     editSensor.putExtra(Define.EXTRA_RELAY_INFORMATION, animal.getRelayInformation());
 
@@ -61,7 +61,7 @@ public class SettingActivity extends AppCompatActivity {
 
   @OnClick(R.id.btn_setting_feeding)
   public void openFeedingActivity(View view) {
-    Intent editFeeding = new Intent(this, FeedingActivity.class);
+    Intent editFeeding = new Intent(getApplicationContext(), FeedingActivity.class);
     editFeeding.putExtra(Define.EXTRA_FOOD_SCHEDULES, animal.getSchedules());
 
     startActivityForResult(editFeeding, FEEDING_REQUEST_CODE);
@@ -87,7 +87,8 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     if (!animal.getimagePath().equals("")) {
-      Picasso.with(this).load(new File(animal.getimagePath()))
+      Picasso.with(getApplicationContext()).load(new File(animal.getimagePath()))
+          .skipMemoryCache()
           .fit()
           .into(mAnimalImage);
     }
@@ -95,8 +96,10 @@ public class SettingActivity extends AppCompatActivity {
 
   @Override
   public void onDestroy() {
-    Bitmap bitmap = ((BitmapDrawable) mAnimalImage.getDrawable()).getBitmap();
-    bitmap.recycle();
+    if (mAnimalImage.getDrawable() != null) {
+      Bitmap bitmap = ((BitmapDrawable) mAnimalImage.getDrawable()).getBitmap();
+      bitmap.recycle();
+    }
 
     super.onDestroy();
   }
@@ -127,8 +130,8 @@ public class SettingActivity extends AppCompatActivity {
 
       if (!animal.getimagePath().equals("")) {
         File imageFile = new File(animal.getimagePath());
-        Picasso.with(this).invalidate(imageFile);
-        Picasso.with(this).load(imageFile)
+        Picasso.with(getApplicationContext()).invalidate(imageFile);
+        Picasso.with(getApplicationContext()).load(imageFile)
             .fit()
             .into(mAnimalImage);
       }
