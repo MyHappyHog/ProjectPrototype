@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
@@ -77,6 +78,9 @@ public class ProfileActivity extends AppCompatActivity {
       } catch (IOException e) {
         e.printStackTrace();
       }
+
+      Bitmap beforeBitmap = ((BitmapDrawable) mAnimalProfileImage.getDrawable()).getBitmap();
+      beforeBitmap.recycle();
 
       mAnimalProfileImage.setImageBitmap(bitmap);
     }
@@ -191,7 +195,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (oldImageFile.exists()) {
           if (!oldImageFile.delete()) {
             Toast.makeText(this, "이전 이미지를 삭제하지 못했습니다", Toast.LENGTH_SHORT).show();
-            return ;
+            return;
           }
         }
       }
@@ -321,6 +325,7 @@ public class ProfileActivity extends AppCompatActivity {
 
       if (!mImagePath.equals("")) {
         Picasso.with(this).load(new File(mImagePath))
+            .skipMemoryCache()
             .fit()
             .into(mAnimalProfileImage);
       }
@@ -336,10 +341,16 @@ public class ProfileActivity extends AppCompatActivity {
 
   @Override
   public void onDestroy() {
-    super.onDestroy();
+    if (mAnimalProfileImage.getDrawable() != null) {
+      Bitmap beforeBitmap = ((BitmapDrawable) mAnimalProfileImage.getDrawable()).getBitmap();
+      beforeBitmap.recycle();
+    }
+
     if (wifiManager != null) {
       wifiManager.unRegisterReceiver();
     }
+
+    super.onDestroy();
   }
 
   /**
@@ -366,7 +377,11 @@ public class ProfileActivity extends AppCompatActivity {
       }
 
       // 픽셀 수정?
-      Picasso.with(this).load(data.getData()).resize(1080, 768).centerCrop().into(mTarget);
+      Picasso.with(this).load(data.getData())
+          .skipMemoryCache()
+          .resize(1080, 768)
+          .centerCrop()
+          .into(mTarget);
     }
   }
 }

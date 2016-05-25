@@ -6,6 +6,7 @@
     <string name="txt_blank"> </string>
 
     <string name="image_folder">/happyhog/image</string>
+    <string name="screen_shot_folder">/happyhog/screenshot</string>
     <string name="image_temp_file">/temp.jpeg</string>
 
     <string name="dialog_ok">OK</string>
@@ -15,6 +16,7 @@
     <string name="main_delete_animal">동물을 삭제하시겠습니까?</string>
     <string name="main_added_animal">추가 되었습니다.</string>
     <string name="main_need_animal">메인 동물을 등록해주세요.</string>
+    <string name="main_save_screenshot">스크린샷 되었습니다.</string>
 
     <!--
     셋팅액티비티의 문자열
@@ -46,7 +48,7 @@
     <string name="database_exist_animal">같은 동물 이름이 존재합니다. 다시 입력해주세요.</string>
 
     <!--
-    프로파일 액티비티의 프로그래스 다이어로그의 문자열
+    프로파일 티비티의 프로그래스 다이어로그의 문자열
     -->
     <string name="progress_enabling">WIFI를 켜고 있습니다.</string>
     <string name="progress_searching">WIFI를 스캔 중입니다.</string>
@@ -63,6 +65,9 @@
     <string name="main_image_camera">MEDIA</string>
     <string name="main_image_share">SHARE</string>
     <string name="main_image_info">INFO</string>
+    <string name="main_already_animal">이미 메인 동물로 등록된 동물입니다.</string>
+    <string name="main_do_not_support">지원하지 않는 기능입니다.</string>
+    <string name="main_input_filename">파일명을 입력하세요.</string>
 
     <!--
     SensorActivity 레이아웃 파일의 문자열

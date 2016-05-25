@@ -10,7 +10,7 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
         <include
@@ -97,16 +97,15 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-                android:id="@+id/btn_video"
+        <FrameLayout
+                android:id="@+id/webView_container"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:scaleType="fitXY"
-                android:src="@drawable/default_empty_image"
-                tools:ignore="ContentDescription"/>
+                android:background="@drawable/default_empty_image"/>
 
         <LinearLayout
                 android:layout_width="match_parent"

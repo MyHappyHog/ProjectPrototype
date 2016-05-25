@@ -29,34 +29,37 @@ public class SplashActivity extends Activity {
   private static final int START_ACTIVITY_DELAY = 1000;
   private H3Dropbox h3Dropbox = H3Dropbox.getInstance();
   private boolean tryAuth = false;
-  String mainAnimalName;
-  long downloadTime;
+  private String mainAnimalName;
+  private long downloadTime;
+  private boolean exit = false;
 
   private Handler mHandler = new Handler();
 
   private Runnable startMain = new Runnable() {
     @Override
     public void run() {
-      /*
-          데이터 읽어오는 코드를 추가하기?, 초기 세팅
-         */
+      if (!exit) {
+        DownloadSensingDataAll();
 
-      // MainActivity로 화면 전환
-      Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-      intent.putExtra(Define.EXTRA_MAIN_NAME, mainAnimalName);
-      intent.putExtra(Define.EXTRA_DOWNLOAD_TIME, downloadTime);
-      startActivity(intent);
+        // MainActivity로 화면 전환
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        intent.putExtra(Define.EXTRA_MAIN_NAME, mainAnimalName);
+        intent.putExtra(Define.EXTRA_DOWNLOAD_TIME, downloadTime);
+        startActivity(intent);
 
-      // SlashActivity 화면은 제거
-      finish();
+        // SlashActivity 화면은 제거
+        finish();
+      }
     }
   };
 
   private Runnable startAuth = new Runnable() {
     @Override
     public void run() {
-      tryAuth = true;
-      h3Dropbox.startOAuth2Authentication(SplashActivity.this);
+      if (!exit) {
+        tryAuth = true;
+        h3Dropbox.startOAuth2Authentication(SplashActivity.this);
+      }
     }
   };
 
@@ -77,7 +80,6 @@ public class SplashActivity extends Activity {
     if (!h3Dropbox.getLoggedIn()) {
       mHandler.postDelayed(startAuth, START_ACTIVITY_DELAY);
     } else {
-      DownloadSensingDataAll();
       mHandler.postDelayed(startMain, START_ACTIVITY_DELAY);
     }
   }
@@ -98,11 +100,10 @@ public class SplashActivity extends Activity {
         Log.i("logged in", "Error authenticating", e);
       }
 
-      DownloadSensingDataAll();
       mHandler.postDelayed(startMain, START_ACTIVITY_DELAY);
     } else {
       if (tryAuth) {
-        finish();
+        onBackPressed();
       }
     }
   }
@@ -132,15 +133,25 @@ public class SplashActivity extends Activity {
                            "manifest is not set up correctly. You should have a " +
                            "com.dropbox.client2.android.AuthActivity with the " +
                            "scheme: " + scheme, Toast.LENGTH_SHORT).show();
-      finish();
+      onBackPressed();
     }
   }
 
   @Override
   public void onBackPressed() {
+    exit = true;
+    super.onBackPressed();
+  }
+
+  @Override
+  public void onDestroy() {
     mHandler.removeCallbacks(startAuth);
     mHandler.removeCallbacks(startMain);
-    super.onBackPressed();
+    if (exit) {
+      h3Dropbox.shutdownThreads();
+    }
+
+    super.onDestroy();
   }
 
   private void DownloadSensingDataAll() {

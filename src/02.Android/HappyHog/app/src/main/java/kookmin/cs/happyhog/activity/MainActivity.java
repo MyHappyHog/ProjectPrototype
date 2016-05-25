@@ -1,11 +1,18 @@
 package kookmin.cs.happyhog.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
@@ -14,18 +21,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -34,7 +50,6 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 import kookmin.cs.happyhog.Define;
-import kookmin.cs.happyhog.H3Application;
 import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.adapter.AnimalAdapter;
 import kookmin.cs.happyhog.database.DatabaseManager;
@@ -64,9 +79,10 @@ public class MainActivity extends AppCompatActivity {
   @Bind(R.id.tv_main_state)
   TextView mStateMain;
 
-  @Bind(R.id.btn_video)
-  ImageView mImageButton;
+  @Bind(R.id.webView_container)
+  FrameLayout mWebContainer;
 
+  private WebView mWebVideo;
   private static final int CREATE_REQUEST_CODE = 1000;
   private static final int EDIT_REQUEST_CODE = 1001;
   private static final int DEALY_DOWNLOAD = 60 * 1000;
@@ -76,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
   private class DatabaseEventTask implements Runnable {
 
     public class Event {
+
       public static final int DB_INSERT = 0;
       public static final int DB_DELETE = 1;
       public static final int DB_UPDATE = 2;
@@ -127,6 +144,13 @@ public class MainActivity extends AppCompatActivity {
     dialog.setPositiveButton(getResources().getText(R.string.dialog_ok), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
+        Animal animal = mAnimalAdapter.getAnimal(selectedAnimal);
+        if (mainAnimalName.equals(animal.getName())) {
+          Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_already_animal), Toast.LENGTH_SHORT).show();
+          dialog.cancel();
+          return;
+        }
+
         updateMainAnimal(mAnimalAdapter.getAnimal(selectedAnimal));
         mDrawerLayout.closeDrawers();
 
@@ -161,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
           File file = new File(imagePath);
 
           if (!file.delete()) {
-            Toast.makeText(MainActivity.this, "이미지가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "이미지가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
           }
         }
 
@@ -182,9 +206,35 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  @OnClick(R.id.btn_camera)
+  public void captureVideo(View view) {
+    if (mWebVideo == null) {
+      Toast.makeText(getApplicationContext(), "동영상이 꺼져 있습니다.", Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    Log.d("mytag", "[clicked capture]");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss", Locale.KOREA);
+    StringBuilder filename = new StringBuilder("/").append(sdf.format(new Date())).append(".jpeg");
+
+    // TODO 어떻게 해야 렌더링되고 있는 비디오 이미지를 가져올 수 있는걸까..
+    Bitmap bitmap = createPictureToBitmap(mWebVideo.capturePicture());
+    try {
+      FileOutputStream fos = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()
+                                                  + getResources().getString(R.string.screen_shot_folder)
+                                                  + filename.toString());
+
+      bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_save_screenshot), Toast.LENGTH_SHORT).show();
+  }
+
   @OnClick(R.id.btn_feed)
   public void putFeedMainAnimal(View view) {
-    Toast.makeText(this, "너에게 먹이를..", Toast.LENGTH_SHORT).show();
+    Toast.makeText(getApplicationContext(), "너에게 먹이를..", Toast.LENGTH_SHORT).show();
   }
 
   /**
@@ -194,12 +244,12 @@ public class MainActivity extends AppCompatActivity {
   public void openSettingActivity(View view) {
     if (mDatabaseManager.existsAnimal(mainAnimalName)) {
       Animal animal = mDatabaseManager.selectAnimal(mainAnimalName);
-      Intent editIntent = new Intent(this, SettingActivity.class);
+      Intent editIntent = new Intent(getApplicationContext(), SettingActivity.class);
       editIntent.putExtra(Define.EXTRA_ANIMAL, animal);
 
       startActivityForResult(editIntent, EDIT_REQUEST_CODE);
     } else {
-      Toast.makeText(this, getResources().getText(R.string.main_need_animal), Toast.LENGTH_SHORT).show();
+      Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_need_animal), Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -208,17 +258,48 @@ public class MainActivity extends AppCompatActivity {
    */
   @OnClick(R.id.fab)
   public void createAnimal(View view) {
-    Intent createIntent = new Intent(this, ProfileActivity.class);
+    Intent createIntent = new Intent(getApplicationContext(), ProfileActivity.class);
     createIntent.putExtra(Define.EXTRA_CREATE, true);
     createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
 
     startActivityForResult(createIntent, CREATE_REQUEST_CODE);
   }
 
-  @OnClick(R.id.btn_video)
-  public void playStreaming(View view) {
+  @OnClick(R.id.webView_container)
+  public void playStreaming(View v) {
     // TODO 유튜브 실시간 스트리밍 구현
-    Toast.makeText(this, "비디오를 재생합니다.", Toast.LENGTH_SHORT).show();
+
+    if (mWebVideo != null) {
+      Toast.makeText(getApplicationContext(), "이미 동영상이 재생 중입니다.", Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    mWebVideo = new WebView(this);
+    mWebContainer.addView(mWebVideo);
+
+    mWebVideo.setWebChromeClient(new WebChromeClient() {
+      @Override
+      public void onShowCustomView(View view, CustomViewCallback callback) {
+        Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_do_not_support), Toast.LENGTH_SHORT).show();
+      }
+    });
+
+    mWebVideo.setWebViewClient(new WebViewClient() {
+      @Override
+      public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        mWebContainer.removeAllViews();
+        view.destroy();
+        view = null;
+        Log.d("mytag", "[onRecivedError]");
+        super.onReceivedError(view, errorCode, description, failingUrl);
+      }
+    });
+
+    mWebVideo.getSettings().setJavaScriptEnabled(true);
+    mWebVideo.getSettings().setPluginState(WebSettings.PluginState.ON);
+    mWebVideo.loadUrl("https://www.youtube.com/embed/Og5t6H-IU7A");
+
+    Toast.makeText(getApplicationContext(), "비디오를 재생합니다.", Toast.LENGTH_SHORT).show();
   }
 
   private ActionBarDrawerToggle mDrawerToggle;
@@ -304,6 +385,13 @@ public class MainActivity extends AppCompatActivity {
       return;
     }
 
+    if (mWebContainer.getChildCount() > 0) {
+      mWebContainer.removeAllViews();
+      mWebVideo.destroy();
+      mWebVideo = null;
+      return;
+    }
+
     super.onBackPressed();
   }
 
@@ -342,7 +430,8 @@ public class MainActivity extends AppCompatActivity {
 
           mDatabaseManager.addAnimal(animal);
 
-          Toast.makeText(this, "[" + animal.getName() + "] " + getResources().getText(R.string.main_added_animal), Toast.LENGTH_SHORT).show();
+          Toast.makeText(getApplicationContext(), "[" + animal.getName() + "] " + getResources().getText(R.string.main_added_animal),
+                         Toast.LENGTH_SHORT).show();
           break;
 
         case EDIT_REQUEST_CODE:
@@ -373,8 +462,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void updateMainAnimal(Animal animal) {
-    if (animal == null)
-      return ;
+    if (animal == null) {
+      return;
+    }
 
     mainAnimalName = animal.getName();
     mTitleMain.setText(animal.getName());
@@ -387,13 +477,9 @@ public class MainActivity extends AppCompatActivity {
 
     String imagePath = animal.getimagePath();
     if (!imagePath.equals("")) {
-      File imageFile = new File(imagePath);
-      Picasso.with(this).invalidate(imageFile);
-      Picasso.with(this).load(imageFile)
-          .fit()
-          .into(mImageButton);
+      mWebContainer.setBackground(Drawable.createFromPath(imagePath));
     } else {
-      mImageButton.setImageDrawable(getResources().getDrawable(R.drawable.default_empty_image));
+      mWebContainer.setBackgroundResource(R.drawable.default_empty_image);
     }
 
     updateSharedPreference(Define.MAIN_ANIMAL_KEY, animal.getName());
@@ -408,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
     mTitleMain.setText("");
     mMemoMain.setText("");
     mStateMain.setText("");
-    mImageButton.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+    mWebContainer.setBackgroundResource(R.drawable.default_empty_image);
 
     updateSharedPreference(Define.MAIN_ANIMAL_KEY, "");
   }
@@ -427,7 +513,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateSharedPreference(String key, String value) {
-    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(H3Application.getmInstance()).edit();
+    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
     editor.putString(key, value);
     editor.apply();
   }
@@ -442,11 +528,20 @@ public class MainActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_settings:
-        Intent intent = new Intent(this, InformationActivity.class);
+        Intent intent = new Intent(getApplicationContext(), InformationActivity.class);
         startActivity(intent);
         return true;
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  private Bitmap createPictureToBitmap(Picture picture) {
+    PictureDrawable pd = new PictureDrawable(picture);
+    Bitmap bitmap = Bitmap.createBitmap(pd.getIntrinsicWidth(), pd.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+    Canvas canvas = new Canvas(bitmap);
+    canvas.drawPicture(pd.getPicture());
+
+    return bitmap;
   }
 }
