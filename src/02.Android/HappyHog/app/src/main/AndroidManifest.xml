@@ -26,11 +26,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.SettingActivity"/>
-        <activity android:name=".activity.ProfileActivity"/>
-        <activity android:name=".activity.SensorActivity"/>
-        <activity android:name=".activity.FeedingActivity"/>
+        <activity android:name=".activity.MainActivity"
+                  android:screenOrientation="portrait"
+        />
+        <activity android:name=".activity.SettingActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ProfileActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SensorActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FeedingActivity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".activity.InformationActivity"
                   android:label="Preferences"/>
 
