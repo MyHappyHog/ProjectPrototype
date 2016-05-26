@@ -11,3 +11,4 @@
     - Make a wireless connection between Mobile and Laptop
     - Module implementation: Data Plot view
     - Research about User Interface
+    - Android APP, google Play Store URL : https://play.google.com/store/apps/details?id=kookmin.cs.happyhog
