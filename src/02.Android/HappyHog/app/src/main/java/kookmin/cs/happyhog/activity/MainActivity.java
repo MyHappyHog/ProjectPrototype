@@ -1,7 +1,6 @@
 package kookmin.cs.happyhog.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
@@ -25,17 +25,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,10 +61,12 @@ import kookmin.cs.happyhog.R;
 import kookmin.cs.happyhog.adapter.AnimalAdapter;
 import kookmin.cs.happyhog.database.DatabaseManager;
 import kookmin.cs.happyhog.dropbox.DropboxDownload;
+import kookmin.cs.happyhog.dropbox.DropboxDownloadURL;
 import kookmin.cs.happyhog.dropbox.DropboxUpload;
 import kookmin.cs.happyhog.dropbox.H3Dropbox;
 import kookmin.cs.happyhog.models.Animal;
 import kookmin.cs.happyhog.models.DeviceInformation;
+import kookmin.cs.happyhog.share.ShareListDialog;
 
 // TODO 드랍박스 키 shared preference에 저장 및 불러오기 구현
 // TODO 메인동물 이름 shared preference에 저장 및 불러오기 구현
@@ -128,12 +137,55 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  private class loadWebVideoTask implements Runnable {
+
+    private String videoId;
+
+    public loadWebVideoTask(String videoId) {
+      this.videoId = videoId;
+    }
+
+    @Override
+    public void run() {
+      mWebVideo = new WebView(MainActivity.this);
+
+      mWebContainer.addView(mWebVideo);
+
+      mWebVideo.setWebChromeClient(new WebChromeClient() {
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+          Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_do_not_support), Toast.LENGTH_SHORT).show();
+        }
+      });
+
+      mWebVideo.setWebViewClient(new WebViewClient() {
+        @Override
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+          mWebContainer.removeAllViews();
+          view.destroy();
+          view = null;
+          Log.d("mytag", "[onRecivedError]");
+          super.onReceivedError(view, errorCode, description, failingUrl);
+        }
+      });
+
+      mWebVideo.getSettings().setJavaScriptEnabled(true);
+      mWebVideo.getSettings().setPluginState(WebSettings.PluginState.ON);
+      mWebVideo.loadUrl("https://www.youtube.com/embed/" + videoId);
+
+      Toast.makeText(getApplicationContext(), "비디오를 재생합니다.", Toast.LENGTH_SHORT).show();
+    }
+  }
+
   private String mainAnimalName;
   private DatabaseManager mDatabaseManager;
   private AnimalAdapter mAnimalAdapter;
   private int selectedAnimal;
 
   private long lastDownloadTime = 0;
+
+  private ShareListDialog listDialog;
+  private CallbackManager callbackManager;
 
   @OnItemClick(R.id.drawer)
   public void registerMainAnimal(AdapterView<?> parent, View view, int position, long id) {
@@ -168,6 +220,9 @@ public class MainActivity extends AppCompatActivity {
     dialog.show();
   }
 
+  /**
+   * 동물 리스트에서 동물을 롱클릭 했을 때 콜백 함수. 해당 동물을 제거한다.
+   */
   @OnItemLongClick(R.id.drawer)
   public boolean DeleteAnimal(AdapterView<?> parent, View view, int position, long id) {
     selectedAnimal = position;
@@ -206,14 +261,46 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+  /**
+   * 동물 리스트에서 동물을 추가하는 화면을 호출하는 콜백 함수.
+   */
+  @OnClick(R.id.fab)
+  public void createAnimal(View view) {
+    Intent createIntent = new Intent(getApplicationContext(), ProfileActivity.class);
+    createIntent.putExtra(Define.EXTRA_CREATE, true);
+    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
+
+    startActivityForResult(createIntent, CREATE_REQUEST_CODE);
+  }
+
+  /**
+   * 메인 동물에게 먹이를 제공하는 버튼. 시간을 정해놓을 수 있는 스케줄과 달리 누르면 바로 먹이를 제공한다.
+   */
+  @OnClick(R.id.btn_feed)
+  public void putFeedMainAnimal(View view) {
+    if (mainAnimalName.equals("")) {
+      Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_need_animal), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    Toast.makeText(getApplicationContext(), "너에게 먹이를..", Toast.LENGTH_SHORT).show();
+  }
+
+  /**
+   * 카메라 버튼 콜백 함수. 동영상의 이미지를 캡쳐한다. TODO 웹뷰로 된 동영상의 문제로 인해 현재는 캡쳐되지 않음. 웹뷰 뒷단에서 랜더링되고 있는 화면은 캡처가 안되나보다..
+   */
   @OnClick(R.id.btn_camera)
   public void captureVideo(View view) {
+    if (mainAnimalName.equals("")) {
+      Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_need_animal), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
     if (mWebVideo == null) {
       Toast.makeText(getApplicationContext(), "동영상이 꺼져 있습니다.", Toast.LENGTH_SHORT).show();
       return;
     }
 
-    Log.d("mytag", "[clicked capture]");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss", Locale.KOREA);
     StringBuilder filename = new StringBuilder("/").append(sdf.format(new Date())).append(".jpeg");
 
@@ -232,9 +319,22 @@ public class MainActivity extends AppCompatActivity {
     Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_save_screenshot), Toast.LENGTH_SHORT).show();
   }
 
-  @OnClick(R.id.btn_feed)
-  public void putFeedMainAnimal(View view) {
-    Toast.makeText(getApplicationContext(), "너에게 먹이를..", Toast.LENGTH_SHORT).show();
+  /**
+   * 공유하기 버튼 콜백 함수. 공유가 가능한 SNS의 리스트가 나온다.
+   */
+  @OnClick(R.id.btn_share)
+  public void shareFacebook(View view) {
+    callbackManager = CallbackManager.Factory.create();
+
+    listDialog = new ShareListDialog(this);
+    listDialog.setFacebookShareListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        callFacebookShareDialog();
+      }
+    });
+
+    listDialog.show();
   }
 
   /**
@@ -254,52 +354,38 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * 동물 리스트에서 동물을 추가하는 화면을 호출하는 콜백 함수.
+   * 동영상을 재생하는 함수. 드랍박스에서 비디오 URL을 읽어와서 video ID에 해당하는 동영상을 스트리밍 받는다.
+   *
+   * URL은 쓰레드를 이용하여 다운로드 받으며, 다운로드되면 핸들러를 이용하여 웹뷰를 생성 및 동영상을 불러온다.
    */
-  @OnClick(R.id.fab)
-  public void createAnimal(View view) {
-    Intent createIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-    createIntent.putExtra(Define.EXTRA_CREATE, true);
-    createIntent.putExtra(Define.EXTRA_DEVICE_INFORMATION, new DeviceInformation());
-
-    startActivityForResult(createIntent, CREATE_REQUEST_CODE);
-  }
-
   @OnClick(R.id.webView_container)
   public void playStreaming(View v) {
-    // TODO 유튜브 실시간 스트리밍 구현
-
-    if (mWebVideo != null) {
-      Toast.makeText(getApplicationContext(), "이미 동영상이 재생 중입니다.", Toast.LENGTH_SHORT).show();
+    if (mainAnimalName.equals("")) {
+      Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_need_animal), Toast.LENGTH_SHORT).show();
       return;
     }
 
-    mWebVideo = new WebView(this);
-    mWebContainer.addView(mWebVideo);
+    if (mWebVideo != null) {
+      Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_already_play_video), Toast.LENGTH_SHORT).show();
+      return;
+    }
 
-    mWebVideo.setWebChromeClient(new WebChromeClient() {
+    DropboxDownloadURL dropboxDownloadURL =
+        new DropboxDownloadURL("/" + mDatabaseManager.selectAnimal(mainAnimalName).getDeviceInfomation().getMainMacAddress());
+    dropboxDownloadURL.setOnDownloadFileListener(new DropboxDownloadURL.OnDownloadFileListener() {
       @Override
-      public void onShowCustomView(View view, CustomViewCallback callback) {
-        Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_do_not_support), Toast.LENGTH_SHORT).show();
+      public void onComplete(final String fileContent) {
+        if (fileContent.length() == 0 || fileContent.lastIndexOf("v=") == -1) {
+          Toast.makeText(getApplicationContext(), getResources().getText(R.string.main_wrong_url_string), Toast.LENGTH_SHORT).show();
+          return;
+        }
+
+        String videoId = fileContent.substring(fileContent.lastIndexOf("v=") + 2, fileContent.length());
+        mHandler.post(new loadWebVideoTask(videoId));
       }
     });
 
-    mWebVideo.setWebViewClient(new WebViewClient() {
-      @Override
-      public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        mWebContainer.removeAllViews();
-        view.destroy();
-        view = null;
-        Log.d("mytag", "[onRecivedError]");
-        super.onReceivedError(view, errorCode, description, failingUrl);
-      }
-    });
-
-    mWebVideo.getSettings().setJavaScriptEnabled(true);
-    mWebVideo.getSettings().setPluginState(WebSettings.PluginState.ON);
-    mWebVideo.loadUrl("https://www.youtube.com/embed/Og5t6H-IU7A");
-
-    Toast.makeText(getApplicationContext(), "비디오를 재생합니다.", Toast.LENGTH_SHORT).show();
+    H3Dropbox.getInstance().executeDropboxRequest(dropboxDownloadURL);
   }
 
   private ActionBarDrawerToggle mDrawerToggle;
@@ -380,11 +466,13 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
+    // 드로어 레이아웃이 열려 있을 때는 닫음.
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
       mDrawerLayout.closeDrawers();
       return;
     }
 
+    // 동영상이 스트리밍 되고 있을 때는 동영상 종료
     if (mWebContainer.getChildCount() > 0) {
       mWebContainer.removeAllViews();
       mWebVideo.destroy();
@@ -400,7 +488,7 @@ public class MainActivity extends AppCompatActivity {
     super.onResume();
 
     /**
-     * 동물 새로 만들었을 때 잠깐 인터넷 안되므로 동작 안함.
+     * 동물 새로 만들었을 때 잠깐 인터넷 안되므로 동작 안할 수 있음.
      */
     long currentTime = System.currentTimeMillis();
     if (currentTime - lastDownloadTime > DEALY_DOWNLOAD) {
@@ -419,6 +507,9 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    callbackManager.onActivityResult(requestCode, resultCode, data);
+
     if (resultCode == Activity.RESULT_OK) {
       Animal animal;
 
@@ -461,6 +552,11 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * 메인 화면의 메인 동물 정보를 업데이트 하는 함수
+   *
+   * @param animal 업데이트 될 동물의 정보
+   */
   public void updateMainAnimal(Animal animal) {
     if (animal == null) {
       return;
@@ -485,6 +581,9 @@ public class MainActivity extends AppCompatActivity {
     updateSharedPreference(Define.MAIN_ANIMAL_KEY, animal.getName());
   }
 
+  /**
+   * 메인동물의 정보가 있는 메인화면의 뷰를 초기화시키는 함수
+   */
   public void clearMainAnimal(Animal animal) {
     if (!mainAnimalName.equals(animal.getName())) {
       return;
@@ -499,6 +598,9 @@ public class MainActivity extends AppCompatActivity {
     updateSharedPreference(Define.MAIN_ANIMAL_KEY, "");
   }
 
+  /**
+   * 현재 만들어져 있는 동물들의 측정된 온, 습도값을 다운로드 하는 함수 쓰레드풀에 올려놓음으로써 다운로드 됨.
+   */
   public void downloadSensingData() {
     for (int i = 0; i < mAnimalAdapter.getCount(); i++) {
       Animal animal = mAnimalAdapter.getAnimal(i);
@@ -512,11 +614,6 @@ public class MainActivity extends AppCompatActivity {
     lastDownloadTime = System.currentTimeMillis();
   }
 
-  private void updateSharedPreference(String key, String value) {
-    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-    editor.putString(key, value);
-    editor.apply();
-  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -536,6 +633,15 @@ public class MainActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  private void updateSharedPreference(String key, String value) {
+    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+    editor.putString(key, value);
+    editor.apply();
+  }
+
+  /**
+   * 픽쳐 이미지를 비트맵으로 만들어 반환해주는 함수.
+   */
   private Bitmap createPictureToBitmap(Picture picture) {
     PictureDrawable pd = new PictureDrawable(picture);
     Bitmap bitmap = Bitmap.createBitmap(pd.getIntrinsicWidth(), pd.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -543,5 +649,50 @@ public class MainActivity extends AppCompatActivity {
     canvas.drawPicture(pd.getPicture());
 
     return bitmap;
+  }
+
+  /**
+   * 공유 다이어로그를 세팅하고 보여주는 함수
+   */
+  private void callFacebookShareDialog() {
+    ShareDialog shareDialog = new ShareDialog(this);
+    /**
+     * 다이어로그 콜백 이벤트 추가.
+     */
+    shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+      @Override
+      public void onSuccess(Sharer.Result result) {
+        Log.d("mytag", "[FacebookActivity] onSuccess");
+        listDialog.dismiss();
+      }
+
+      @Override
+      public void onCancel() {
+        Log.d("mytag", "[FacebookActivity] onCancel");
+        listDialog.dismiss();
+      }
+
+      @Override
+      public void onError(FacebookException error) {
+        Log.d("mytag", "[FacebookActivity] onError");
+        listDialog.dismiss();
+      }
+    });
+
+    if (ShareDialog.canShow(ShareLinkContent.class)) {
+
+      /**
+       * 사진 컨텐츠 추가
+       */
+      SharePhoto photo = new SharePhoto.Builder()
+          .setBitmap(((BitmapDrawable) mWebContainer.getBackground()).getBitmap())
+          .build();
+
+      SharePhotoContent content = new SharePhotoContent.Builder()
+          .addPhoto(photo)
+          .build();
+
+      shareDialog.show(content);
+    }
   }
 }

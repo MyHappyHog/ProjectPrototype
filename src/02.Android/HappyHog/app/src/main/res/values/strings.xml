@@ -4,6 +4,7 @@
     <string name="txt_memo">MEMO</string>
     <string name="txt_state">STATE</string>
     <string name="txt_blank"> </string>
+    <string name="facebook_app_id">441092226092961</string>
 
     <string name="image_folder">/happyhog/image</string>
     <string name="screen_shot_folder">/happyhog/screenshot</string>
@@ -11,12 +12,18 @@
 
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancle">CANCLE</string>
+    <string name="dialog_share_facebook">페이스북에 공유하기</string>
 
+    <!--
+    메인액티비티의 문자열
+    -->
     <string name="main_register_main_animal">메인 동물로 등록하시겠습니까?</string>
     <string name="main_delete_animal">동물을 삭제하시겠습니까?</string>
     <string name="main_added_animal">추가 되었습니다.</string>
     <string name="main_need_animal">메인 동물을 등록해주세요.</string>
     <string name="main_save_screenshot">스크린샷 되었습니다.</string>
+    <string name="main_already_play_video">이미 동영상이 재생 중입니다.</string>
+    <string name="main_wrong_url_string">잘못된 URL입니다.</string>
 
     <!--
     셋팅액티비티의 문자열
@@ -39,6 +46,7 @@
     <string name="profile_title">TITLE</string>
     <string name="profile_memo">MEMO</string>
     <string name="profile_change">CHANGE</string>
+    <string name="profile_create">CREATE</string>
     <string name="profile_request_password">의 비밀번호를 입력해주세요.</string>
     <string name="profile_no_typing">입력하지 않은 칸이 있습니다.</string>
     <string name="profile_typing_main_mac_address">MAIN 제품 번호를 입력하세요.</string>
@@ -69,6 +77,7 @@
     <string name="main_do_not_support">지원하지 않는 기능입니다.</string>
     <string name="main_input_filename">파일명을 입력하세요.</string>
 
+
     <!--
     SensorActivity 레이아웃 파일의 문자열
     -->
@@ -87,7 +96,7 @@
     <string name="preference_main_animal_title">현재 메인 동물</string>
     <string name="preference_account_setting_title">계정 설정</string>
 
-    <string name="preference_auto_login_title">자동 로그인</string>
+    <string name="preference_auto_login_title">드랍박스 자동 로그인</string>
     <string name="preference_auto_login_summaryon">자동 로그인을 합니다.</string>
     <string name="preference_auto_login_summaryoff">자동 로그인을 하지 않습니다.</string>
 
