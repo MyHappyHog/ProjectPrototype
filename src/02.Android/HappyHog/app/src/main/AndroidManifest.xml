@@ -18,6 +18,23 @@
             android:theme="@style/AppTheme"
             android:name=".H3Application">
 
+        <!--
+        Facebook 관련된 액티비티 및 프로바이더
+        -->
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:label="@string/app_name" />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider441092226092961"
+                  android:name="com.facebook.FacebookContentProvider"
+                  android:exported="true"/>
+
+        <!--
+        HappyHog 뷰 관련 액티비티
+        -->
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,6 +57,9 @@
         <activity android:name=".activity.InformationActivity"
                   android:label="Preferences"/>
 
+        <!--
+        Preference, 앱 관련 정보를 보여주기 위한 액티비티
+        -->
         <activity android:name=".activity.information.AccountInformation"/>
         <activity android:name=".activity.information.HelpInformation"/>
         <activity android:name=".activity.information.PersonalInformation"/>
@@ -54,7 +74,7 @@
                 android:configChanges="orientation|keyboard">
             <intent-filter>
                 <!-- Change this to be db- followed by your app key -->
-                <data android:scheme="db-your-key" />
+                <data android:scheme="db-07nj8f7mehl6tvi" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT" />
