@@ -17,6 +17,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -59,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
   private Runnable backPressTask = new Runnable() {
     @Override
     public void run() {
-      onBackPressed();
+      finish();
     }
   };
 
@@ -124,6 +125,9 @@ public class ProfileActivity extends AppCompatActivity {
 
   @Bind(R.id.iv_profile_image)
   ImageView mAnimalProfileImage;
+
+  @Bind(R.id.btn_profile_change)
+  Button mChangeButton;
 
   @OnClick(R.id.iv_profile_image)
   public void changeImage(View view) {
@@ -324,10 +328,15 @@ public class ProfileActivity extends AppCompatActivity {
       setModifiable(mEditSSID, create);
 
       if (!mImagePath.equals("")) {
+        // TODO 유틸로 만들기. 이미지가 들어가는 거의 모든 곳에서 사용. 내용이 비슷하므로 유틸로 만들면 좋을듯.
         Picasso.with(this).load(new File(mImagePath))
             .skipMemoryCache()
             .fit()
             .into(mAnimalProfileImage);
+      }
+
+      if (create) {
+        mChangeButton.setText(getResources().getText(R.string.profile_create));
       }
     }
   }
@@ -363,19 +372,16 @@ public class ProfileActivity extends AppCompatActivity {
   }
 
   @Override
+  public void onBackPressed() {
+    if (create) {
+      setResult(Activity.RESULT_CANCELED, null);
+    }
+    super.onBackPressed();
+  }
+
+  @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-      String appFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-      String imageFolderName = appFilePath + getResources().getString(R.string.image_folder);
-      File file = new File(imageFolderName);
-
-      if (!file.isDirectory()) {
-        if (!file.mkdirs()) {
-          Toast.makeText(this, "폴더 생성 실패", Toast.LENGTH_SHORT).show();
-          return;
-        }
-      }
-
       // 픽셀 수정?
       Picasso.with(this).load(data.getData())
           .skipMemoryCache()

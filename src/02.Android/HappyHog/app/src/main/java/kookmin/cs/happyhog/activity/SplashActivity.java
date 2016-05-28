@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AppKeyPair;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import kookmin.cs.happyhog.Define;
@@ -39,6 +41,7 @@ public class SplashActivity extends Activity {
     @Override
     public void run() {
       if (!exit) {
+        createFolderPath();
         DownloadSensingDataAll();
 
         // MainActivity로 화면 전환
@@ -165,5 +168,24 @@ public class SplashActivity extends Activity {
     }
 
     downloadTime = System.currentTimeMillis();
+  }
+
+  private void createFolderPath() {
+    String appFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    String folderName = appFilePath + getResources().getString(R.string.image_folder);
+    createDirectory(folderName);
+
+    folderName = appFilePath + getResources().getString(R.string.screen_shot_folder);
+    createDirectory(folderName);
+  }
+
+  private void createDirectory(String folderName) {
+    File file = new File(folderName);
+
+    if (!file.isDirectory()) {
+      if (!file.mkdirs()) {
+        Toast.makeText(this, "폴더 생성 실패", Toast.LENGTH_SHORT).show();
+      }
+    }
   }
 }
