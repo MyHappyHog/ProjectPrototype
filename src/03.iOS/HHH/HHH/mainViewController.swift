@@ -25,7 +25,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //var now_pet = [NSManagedObject]()
     
-    var index: Int?
+    var index: Int? = -1
     
     var youtubeClicked: Bool = false
     
@@ -35,7 +35,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
-    @IBOutlet weak var profileView: UIView!
+    //@IBOutlet weak var profileView: UIView!
     
     @IBOutlet weak var stateView: UIView!
     @IBOutlet weak var titleView: UIView!
@@ -66,7 +66,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func handleDidLinkNotification(notification: NSNotification) {
-        print("Disconnect")
+        //print("Disconnect")
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -77,7 +77,7 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "abc", name: "asdf", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(mainViewController.abc), name: "asdf", object: nil)
  
         
         //youtube.loadVideoID("wQg3bXrVLtg")
@@ -90,7 +90,6 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         //coreData.deleteAllItem("User")`
         //coreData.deleteAllItem("Alarm")
         //coreData.deleteAllItem("Profile")
-        
         
         //set dataStroe
         //let coredata_user = coreData(entity: "User")
@@ -125,33 +124,51 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.revealViewController().revealToggleAnimated(true)
+        //self.revealViewController().revealToggleAnimated(true)
         
-        switch segue.identifier! {
-        case "setting":
-            dataStore.prev_vc = "main"
+        //switch segue.identifier! {
+        if segue.identifier == "setting"{
+            if index == -1{
+                dataStore.prev_vc = "no"
+            }
+            else{
+                dataStore.prev_vc = "main"   
+            }
             //dataStore.profile_index = index
-            break
-        default:
-            break
+        //    break
+        //default:
+        //    break
             
         }
     }
     
     //////////////////////////////////////////////////////////////////////////////////
     
+    
+    
+    
+    
+    
+    
+    
     @IBAction func SettingOnClicked(sender: AnyObject) {
         //performSegueWithIdentifier("Setting", sender: self)
+        if index == -1{
+            return
+        }
     }
     
     @IBAction func clickVideo(sender: AnyObject) {
-        self.navigationController?.revealViewController().revealToggleAnimated(true)
+        if index == -1{
+            return
+        }
+        //self.navigationController?.revealViewController().revealToggleAnimated(true)
         if youtubeClicked {
             youtube.hidden = true
             youtubeClicked = false
         }else{
-            let alert = UIAlertController(title: "실시간 동영상", message: "저장된 파일의 이름을 적어주세요", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addTextFieldWithConfigurationHandler(configurationTextField)
+            let alert = UIAlertController(title: "실시간 동영상", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            //alert.addTextFieldWithConfigurationHandler(configurationTextField)
             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
                 print("Handle Ok logic here")
                 
@@ -172,10 +189,10 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
                             let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
                             return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
-                    let temp = ((self.tField.text! as String).componentsSeparatedByString(".url"))
-                    print("/\(temp[0]).url")
+                    let temp = "live"//((self.tField.text! as String).componentsSeparatedByString(".url"))
+                    //print("/\(temp[0]).url")
                     
-                    client.files.download(path: "/\(temp[0]).url", destination: destination).response { response, error in
+                    client.files.download(path: "/\(temp).url", destination: destination).response { response, error in
                         if let (metadata, url) = response {
                             print("*** Download file ***")
                             let data = NSData(contentsOfURL: url)
@@ -218,7 +235,10 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func clickShareBtn(sender: AnyObject) {
-        self.revealViewController().revealToggleAnimated(true)
+        if index == -1{
+            return
+        }
+        //self.revealViewController().revealToggleAnimated(true)
         //
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -236,15 +256,29 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
         //self.revealViewController().Selector("reavelToggle:")
     }
     @IBAction func clickFeedBtn(sender: AnyObject) {
+        if index == -1{
+            return
+        }
         let alert = UIAlertController(title: "밥주기", message: "밥을 주나요?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addTextFieldWithConfigurationHandler { (obj) -> Void in
+            //a.text = self.text_server1
+            //self.server1_temp = a.text
+            //print(a.text)
+            //obj.delegate = self
+            obj.keyboardType = .NumberPad
+
+        }
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
             print("Handle Ok logic here")
             //self.http_reference?.postFedd()
             //let _rotate = Int(self.tField.text! as String)
-            let rotate = self.numRotate
-            //let rotate = (_rotate == nil) ? 1 : _rotate
+            let a = alert.textFields![0] as UITextField
+            let _rotate = Int(a.text! as String)//self.numRotate
+            let rotate = (_rotate == nil) ? 1 : _rotate
             
-            dropbox.putTheFeed(self.server_addr!, rotate: rotate)
+            print(_rotate)
+            
+            dropbox.putTheFeed(self.server_addr!, rotate: rotate!)
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
@@ -273,9 +307,11 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func handleTap(sender: UITapGestureRecognizer? = nil) {
-        let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("profile") as! ProFileViewController
+        dataStore.prev_vc = "main"
         
-        let sVC: ProFileViewController = ProFileViewController()
+        let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProFile") as! ProFileViewController
+        
+        //let sVC: ProFileViewController = ProFileViewController()
         self.presentViewController(UINavigationController(rootViewController: secondViewController), animated: true, completion: nil)
         //self.navigationController!.pushViewController(secondViewController, animated: true)
     }
@@ -284,9 +320,9 @@ class mainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func setGesture(){
         //start click event for profile view
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(mainViewController.handleTap(_:)))
         tap.delegate = self
-        let tap1 = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(mainViewController.handleTap(_:)))
         tap1.delegate = self
         
         memoView.addGestureRecognizer(tap1)

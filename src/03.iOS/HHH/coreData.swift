@@ -93,7 +93,7 @@ class coreData{
         let contact = credataUser(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
         contact.title = data.name
         contact.memo = data.memo
-        //contact.image = "samplehog"
+        //contact.image = data.image
         contact.server_addr1 = data.server_addr1
         contact.server_addr2 = data.server_addr2
         contact.minTemp = data.minTemp
@@ -144,8 +144,8 @@ class coreData{
         value.setValue(data.name, forKey: "title")
         value.setValue(data.memo, forKey: "memo")
         value.setValue(data.numRotate, forKey: "numRotate")
-        //value.setValue(data.server_addr1, forKey: "server_addr1")
-        //value.setValue(data.server_addr2, forKey: "server_addr2")
+        value.setValue(data.server_addr1, forKey: "server_addr1")
+        value.setValue(data.server_addr2, forKey: "server_addr2")
         //value.setValue(data.minTemp, forKey: "minTemp")
         //value.setValue(data.maxTemp, forKey: "maxTemp")
         //value.setValue(data.minHumid, forKey: "minhum")
@@ -162,14 +162,16 @@ class coreData{
     /////
     
     ///timer
-    func insertTimer(hour: Int, min: Int, check: Bool, index: Int){
+    func insertTimer(time:String, num:Int, index: Int){
         let userEntity = NSEntityDescription.entityForName("Alarm", inManagedObjectContext: managedObjectContext!)
         
         let contact = coredataAlarm(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
         contact.user_number = index
-        contact.hour = hour
-        contact.minute = min
-        contact.isChecked = check
+//        contact.hour = hour
+//        contact.minute = min
+//        contact.isChecked = check
+        contact.num = num
+        contact.time = time
         
         do{
             try managedObjectContext?.save()

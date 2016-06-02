@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="Alarm" representedClassName="coredataAlarm" syncable="YES">
-        <attribute name="hour" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="isChecked" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="minute" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="num" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_number" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="Profile" representedClassName=".coredataProfile" syncable="YES">
         <attribute name="user_index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Token" representedClassName=".Token" syncable="YES">
+        <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".credataUser" syncable="YES">
         <attribute name="humidity_index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -26,8 +28,9 @@
         <relationship name="alram" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Alarm" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Alarm" positionX="-137" positionY="129" width="128" height="103"/>
+        <element name="Alarm" positionX="-137" positionY="129" width="128" height="90"/>
         <element name="Profile" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="Token" positionX="-234" positionY="99" width="128" height="60"/>
         <element name="User" positionX="-407" positionY="-18" width="128" height="255"/>
     </elements>
 </model>

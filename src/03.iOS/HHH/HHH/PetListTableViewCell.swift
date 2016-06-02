@@ -26,7 +26,7 @@ class PetListTableViewCell: UITableViewCell {
     var name: String?
     var memo: String?
     
-    var http_reference : HttpReference?
+    //var http_reference : HttpReference?
     var http_timer = NSTimer();
     
     var server_addr : String?
@@ -44,8 +44,9 @@ class PetListTableViewCell: UITableViewCell {
             server_addr = sidePet.server_addr
             name = sidePet.name
             memo = sidePet.memo
+            //memo = sidePet.memo
             
-            nameLabel.text = name
+            //nameLabel.text = name
             
             /*http_reference = HttpReference(server_addr)
             
@@ -55,6 +56,12 @@ class PetListTableViewCell: UITableViewCell {
             getHttpMsg()
             
             http_timer = NSTimer.scheduledTimerWithTimeInterval(http_timer_interval, target: self, selector:  "getHttpMsg", userInfo:  nil, repeats: true)*/
+            
+            dropbox.getSensingData(server_addr!, completionHandler: {(temperature, humidity) -> Void in
+                print("\(temperature)  ------ \(humidity)")
+                self.temperatureLabel.text = (temperature == nil) ? "-- 도" : "\(String(temperature! as Double)) 도"
+                self.humidLabel.text = (humidity == nil) ? "-- %" : "\(String(humidity! as Double)) %"
+            })
             
         }
     }
@@ -87,12 +94,12 @@ class PetListTableViewCell: UITableViewCell {
     
     //////////////////////////////////////////////////////////////////////////////////
     
-    func getHttpMsg(){
-        http_reference!.getResponse({(result, temperature, humidity) -> Void in
-            self.temperatureLabel.text = temperature
-            self.humidLabel.text = humidity
-            self.lightLabel.text = "--"
-        })
-    }
+//    func getHttpMsg(){
+//        http_reference!.getResponse({(result, temperature, humidity) -> Void in
+//            self.temperatureLabel.text = temperature
+//            self.humidLabel.text = humidity
+//            self.lightLabel.text = "--"
+//        })
+//    }
 }
 

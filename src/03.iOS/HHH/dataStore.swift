@@ -40,5 +40,8 @@ class dataStore{
     static var numOfUser: Int?
     
     static var feeding_index: Int?
+    
+    //for add
+    static var temp_user: data_user? = nil
 }
 

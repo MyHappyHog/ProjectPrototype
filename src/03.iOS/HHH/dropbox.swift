@@ -82,7 +82,7 @@ class dropbox{
             
             let path = "/\(address)/\(ENVIROMENT_SETTING)"
             
-            let string = "{\"tempeature\": [\(maxTemperature), \(minTemperature)], \"humidity\": [\(maxHumiidity), \(minHumidity)]}"
+            let string = "{\"temperature\": [\(maxTemperature), \(minTemperature)], \"humidity\": [\(maxHumiidity), \(minHumidity)]}"
             print(string)
             
             let fileData = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -220,7 +220,7 @@ class dropbox{
             
             let path = "/\(address)/\(RELAY_SETTING)"
             
-            let string = "{\"tempeature\": \(temp), \"humidity\": \(humidity)}"
+            let string = "{\"temperature\": \(temp), \"humidity\": \(humidity)}"
             print(string)
             
             let fileData = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)

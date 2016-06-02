@@ -149,6 +149,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch authResult {
             case .Success(let token):
                 print("Success! User is logged into Dropbox with token: \(token)")
+                let managedObjectContext:NSManagedObjectContext?
+                managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+
+                let userEntity = NSEntityDescription.entityForName("Token", inManagedObjectContext: managedObjectContext!)
+                
+                let contact = Token(entity: userEntity!, insertIntoManagedObjectContext: managedObjectContext!)
+                contact.token = token.accessToken
+                do{
+                //    try managedObjectContext?.save()
+                }catch{
+                    print(error)
+                }
+                
+                //print(token.accessToken)
+                //print(token.description)
+                //print(token.uid)
+                
             case .Error(let error, let description):
                 print("Error \(error): \(description)")
             }

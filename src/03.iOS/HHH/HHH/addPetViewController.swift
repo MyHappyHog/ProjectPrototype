@@ -24,7 +24,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     
     var index: Int?
     var main_addr: String? = "foo"
-    var relay_addr: String? = " foo"
+    var relay_addr: String? = "foo1"
     
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var memoTxt: UITextField!
@@ -138,7 +138,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             
             print("-----start prepareFor segue")
             let startIndex = alarmData.getStartTimer(index!)
-            for(var i = 0; i < alarmData.getCountTimer(index!); i++){
+            for(var i = 0; i < alarmData.getCountTimer(index!); i += 1){
                 parser += String(alarmData.getDatasIndex(startIndex + i, key: "hour") as! Int)
                 parser += ":"
                 parser += String(alarmData.getDatasIndex(startIndex + i, key: "minute") as! Int)
@@ -193,51 +193,65 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         //coredata save
         if(prev_vc == "add" || index == nil || credata.getCount() == 0){
             /////센서 콘피그도 넘기기
-            let alert = UIAlertController(title: "", message: "본체와 릴레이의 주소를 차례대로 적어주세요", preferredStyle: UIAlertControllerStyle.Alert)
+            /*let alert = UIAlertController(title: "", message: "본체와 릴레이의 주소를 차례대로 적어주세요", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addTextFieldWithConfigurationHandler({ (a) -> Void in
-                a.placeholder = "본체"
-                self.tField = a
+            a.placeholder = "본체"
+            self.tField = a
             })
             alert.addTextFieldWithConfigurationHandler({ (b) -> Void in
-                b.placeholder = "릴레이"
-                self.tField1 = b
+            b.placeholder = "릴레이"
+            self.tField1 = b
             })
             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-                print("Handle Ok logic here")
-                //self.http_reference?.postFedd()
-                
-                dP.server_addr1 = self.tField.text! as String
-                dP.server_addr2 = self.tField1.text! as String
-                
-                self.main_addr = self.tField.text! as String
-                self.relay_addr = self.tField1.text! as String
-                
-                
-                self.firstConnectWifi()
-                
-                if self.check_alert{
-                
-                    if dataStore.parserTime != ""{
-                        self.insertTime()
-                    }
-                
-                    if(credata.getCount() == 0){
-                        dataStore.profile_index = 0
-                        NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
-                    }
-                
-                    credata.insertData(dP)
-                    self.abcd()
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
-                
+            print("Handle Ok logic here")
+            //self.http_reference?.postFedd()
+            
+            dP.server_addr1 = self.tField.text! as String
+            dP.server_addr2 = self.tField1.text! as String
+            
+            self.main_addr = self.tField.text! as String
+            self.relay_addr = self.tField1.text! as String
+            
+            
+            self.firstConnectWifi()
+            
+            if self.check_alert{
+            
+            if dataStore.parserTime != ""{
+            self.insertTime()
+            }
+            
+            if(credata.getCount() == 0){
+            dataStore.profile_index = 0
+            NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
+            }
+            
+            credata.insertData(dP)
+            self.abcd()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
-                return
+            return
             }))
             
-            presentViewController(alert, animated: true, completion: nil)
+            presentViewController(alert, animated: true, completion: nil)*/
+            if dataStore.parserTime != ""{
+                self.insertTime()
+            }
+            
+            if(credata.getCount() == 0){
+                dataStore.profile_index = 0
+                NSNotificationCenter.defaultCenter().postNotificationName("asdf", object: self)
+            }
+            
+            credata.insertData(dP)
+            self.abcd()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            
         }else{// if(prev_vc == "main"){
             //값 수정
             print(index)
@@ -265,7 +279,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
     }
     var text_wifi_id: UITextField!, text_wifi_password: UITextField!
     var wifi_id: String = "", wifi_password: String = ""
- 
+    
     
     func firstSendMessage(){
         let alert = UIAlertController(title: "사용하시는 WIFI를 입력해주세요.", message: "", preferredStyle: UIAlertControllerStyle.Alert)
@@ -281,7 +295,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
             self.wifi_id = self.text_wifi_id.text! as String
             self.wifi_password = self.text_wifi_password.text! as String
             print("\(self.wifi_id)   \(self.wifi_password)")
-           
+            
             
             
             
@@ -311,18 +325,18 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
         
         var foodJson: String = "["
         /////알람 다 삭제하고 하기
-        let coredata = coreData(entity: "Alarm")
+        //let coredata = coreData(entity: "Alarm")
         let data = dataStore.parserTime
         //let index: Int? = dataStore.now_index
         let arrFull = data.componentsSeparatedByString(";")
         print(arrFull.count)
-        for(var i = 0; i < arrFull.count - 1; i++){
+        for(var i = 0; i < arrFull.count - 1; i += 1){
             print(arrFull[i])
             let temp = arrFull[i].componentsSeparatedByString(":")
             print(temp)
             let hour: Int? = Int(temp[0])
             let min: Int? = Int(temp[1])
-            let check: Bool = (temp[2] == "false" ? false : true)
+            //let check: Bool = (temp[2] == "false" ? false : true)
             
             let rotate: Int = Int(serverTxt.text! as String)!
             foodJson += "{\"numRotate\": \(rotate), \"time\": \"\(String(hour! as Int)):\(String(min! as Int))\"}"
@@ -330,7 +344,7 @@ class addPetViewController: UITableViewController, UIImagePickerControllerDelega
                 foodJson += ", "
             }
             
-            coredata.insertTimer(hour!, min: min!, check: check, index: index!)
+            //coredata.insertTimer(hour!, min: min!, check: check, index: index!)
         }
         foodJson += "]"
         

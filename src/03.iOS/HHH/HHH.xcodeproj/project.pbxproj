@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		821B5AA0B80353A9C3ED38C7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EFA44CBD7336E71AA573D2 /* Pods.framework */; };
+		DA15E6871CBFE98F000CE219 /* Token+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15E6851CBFE98F000CE219 /* Token+CoreDataProperties.swift */; };
+		DA15E6881CBFE98F000CE219 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15E6861CBFE98F000CE219 /* Token.swift */; };
 		DA1F6E8A1C7B7B6B00A3BB20 /* YouTubePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1F6E891C7B7B6B00A3BB20 /* YouTubePlayer.framework */; };
 		DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2A1C048F40009DDB46 /* AppDelegate.swift */; };
 		DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565C2C1C048F40009DDB46 /* mainViewController.swift */; };
@@ -23,25 +25,30 @@
 		DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CBF1C04D363009DDB46 /* HttpReference.swift */; };
 		DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */; };
 		DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */; };
-		DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC21C04D363009DDB46 /* SettingViewController.swift */; };
 		DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC31C04D363009DDB46 /* SidePets.swift */; };
 		DA565CCF1C04D363009DDB46 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA565CC61C04D363009DDB46 /* WebViewController.swift */; };
-		DA5CB28A1C592B6C00AE22C7 /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */; };
-		DA5CB28B1C592B6C00AE22C7 /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */; };
+		DA5C92531CC7F02B0030B309 /* feedingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C92521CC7F02B0030B309 /* feedingViewController.swift */; };
+		DA5C92621CC8129A0030B309 /* feedingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C92611CC8129A0030B309 /* feedingTableViewCell.swift */; };
 		DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */; };
 		DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */; };
 		DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */; };
 		DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2961C59535700AE22C7 /* DatePickerDialog.swift */; };
 		DA5CB2991C59594100AE22C7 /* schedulerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */; };
 		DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */; };
+		DA7B3D6B1CAAEB0B00B0924D /* settingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7B3D6A1CAAEB0B00B0924D /* settingViewController.swift */; };
+		DA92407C1CDFE64400C5AE6E /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92407B1CDFE64400C5AE6E /* PageContentViewController.swift */; };
+		DA92408D1CDFEC8700C5AE6E /* pageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92408C1CDFEC8700C5AE6E /* pageViewController.swift */; };
 		DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */; };
 		DA949E2C1C3512540055A1FC /* SettingSchedulerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */; };
+		DAA666911CC3FF6900D1AE3B /* sensorViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA666901CC3FF6900D1AE3B /* sensorViewContorller.swift */; };
 		DAAB0FAA1C4C18590061978C /* data_user.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB0FA91C4C18590061978C /* data_user.swift */; };
 		DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092131C3B36F2007BDC37 /* coreData.swift */; };
 		DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092231C40BBEB007BDC37 /* dataStore.swift */; };
 		DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB092311C40E976007BDC37 /* addPetViewController.swift */; };
 		DAEA09751C78530700F07653 /* credataUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */; };
 		DAEA09761C78530700F07653 /* credataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEA09741C78530700F07653 /* credataUser.swift */; };
+		DAEF0B781CC93F35001DDCCD /* coredataAlarm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEF0B761CC93F35001DDCCD /* coredataAlarm+CoreDataProperties.swift */; };
+		DAEF0B791CC93F35001DDCCD /* coredataAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEF0B771CC93F35001DDCCD /* coredataAlarm.swift */; };
 		DAF304A81C721CB7006F3327 /* dropbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF304A71C721CB7006F3327 /* dropbox.swift */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +192,8 @@
 		74F62F0BA1EFDE4BD890820C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C12FA22789FD0557B13A63C5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D4EFA44CBD7336E71AA573D2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA15E6851CBFE98F000CE219 /* Token+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Token+CoreDataProperties.swift"; path = "HHH/coredata/Token+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA15E6861CBFE98F000CE219 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = HHH/coredata/Token.swift; sourceTree = "<group>"; };
 		DA1F6E891C7B7B6B00A3BB20 /* YouTubePlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubePlayer.framework; path = "Pods/../build/Debug-iphoneos/YouTubePlayer.framework"; sourceTree = "<group>"; };
 		DA565C271C048F40009DDB46 /* HHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA565C2A1C048F40009DDB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,12 +215,11 @@
 		DA565CBF1C04D363009DDB46 /* HttpReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpReference.swift; path = HHH/HttpReference.swift; sourceTree = "<group>"; };
 		DA565CC01C04D363009DDB46 /* PetListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetListTableViewCell.swift; path = HHH/PetListTableViewCell.swift; sourceTree = "<group>"; };
 		DA565CC11C04D363009DDB46 /* PetListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetListTableViewController.swift; path = HHH/PetListTableViewController.swift; sourceTree = "<group>"; };
-		DA565CC21C04D363009DDB46 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = HHH/SettingViewController.swift; sourceTree = "<group>"; };
 		DA565CC31C04D363009DDB46 /* SidePets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SidePets.swift; path = HHH/SidePets.swift; sourceTree = "<group>"; };
 		DA565CC61C04D363009DDB46 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = HHH/WebViewController.swift; sourceTree = "<group>"; };
 		DA565CD21C04DD51009DDB46 /* HHH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HHH-Bridging-Header.h"; sourceTree = "<group>"; };
-		DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
+		DA5C92521CC7F02B0030B309 /* feedingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = feedingViewController.swift; path = HHH/feedingViewController.swift; sourceTree = "<group>"; };
+		DA5C92611CC8129A0030B309 /* feedingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = feedingTableViewCell.swift; sourceTree = "<group>"; };
 		DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataProfile+CoreDataProperties.swift"; path = "HHH/coredata/coredataProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataProfile.swift; path = HHH/coredata/coredataProfile.swift; sourceTree = "<group>"; };
 		DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = schedulerViewController.swift; path = HHH/schedulerViewController.swift; sourceTree = "<group>"; };
@@ -219,14 +227,20 @@
 		DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = schedulerViewControllerCell.swift; sourceTree = "<group>"; };
 		DA5FB5FF1C2DA29F0013845E /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = HHH/SWRevealViewController.h; sourceTree = "<group>"; };
 		DA5FB6001C2DA29F0013845E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = HHH/SWRevealViewController.m; sourceTree = "<group>"; };
+		DA7B3D6A1CAAEB0B00B0924D /* settingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingViewController.swift; sourceTree = "<group>"; };
+		DA92407B1CDFE64400C5AE6E /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
+		DA92408C1CDFEC8700C5AE6E /* pageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pageViewController.swift; sourceTree = "<group>"; };
 		DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProFileViewController.swift; path = HHH/ProFileViewController.swift; sourceTree = "<group>"; };
 		DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingSchedulerCell.swift; path = HHH/SettingSchedulerCell.swift; sourceTree = "<group>"; };
+		DAA666901CC3FF6900D1AE3B /* sensorViewContorller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = sensorViewContorller.swift; path = HHH/sensorViewContorller.swift; sourceTree = "<group>"; };
 		DAAB0FA91C4C18590061978C /* data_user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = data_user.swift; sourceTree = "<group>"; };
 		DAB092131C3B36F2007BDC37 /* coreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreData.swift; sourceTree = "<group>"; };
 		DAB092231C40BBEB007BDC37 /* dataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataStore.swift; sourceTree = "<group>"; };
 		DAB092311C40E976007BDC37 /* addPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = addPetViewController.swift; path = HHH/addPetViewController.swift; sourceTree = "<group>"; };
 		DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "credataUser+CoreDataProperties.swift"; path = "HHH/coredata/credataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAEA09741C78530700F07653 /* credataUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = credataUser.swift; path = HHH/coredata/credataUser.swift; sourceTree = "<group>"; };
+		DAEF0B761CC93F35001DDCCD /* coredataAlarm+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "coredataAlarm+CoreDataProperties.swift"; path = "HHH/coredata/coredataAlarm+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAEF0B771CC93F35001DDCCD /* coredataAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = coredataAlarm.swift; path = HHH/coredata/coredataAlarm.swift; sourceTree = "<group>"; };
 		DAF304A71C721CB7006F3327 /* dropbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dropbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +299,7 @@
 				DA949E2B1C3512540055A1FC /* SettingSchedulerCell.swift */,
 				DA5CB2981C59594100AE22C7 /* schedulerViewControllerCell.swift */,
 				DAF304A71C721CB7006F3327 /* dropbox.swift */,
+				DA5C92611CC8129A0030B309 /* feedingTableViewCell.swift */,
 			);
 			name = class;
 			sourceTree = "<group>";
@@ -292,8 +307,10 @@
 		DA5295061C377858002E696A /* coredata */ = {
 			isa = PBXGroup;
 			children = (
-				DA5CB2841C592B6B00AE22C7 /* coredataAlarm+CoreDataProperties.swift */,
-				DA5CB2851C592B6B00AE22C7 /* coredataAlarm.swift */,
+				DAEF0B761CC93F35001DDCCD /* coredataAlarm+CoreDataProperties.swift */,
+				DAEF0B771CC93F35001DDCCD /* coredataAlarm.swift */,
+				DA15E6851CBFE98F000CE219 /* Token+CoreDataProperties.swift */,
+				DA15E6861CBFE98F000CE219 /* Token.swift */,
 				DA5CB2861C592B6B00AE22C7 /* coredataProfile+CoreDataProperties.swift */,
 				DA5CB2871C592B6B00AE22C7 /* coredataProfile.swift */,
 				DAEA09731C78530700F07653 /* credataUser+CoreDataProperties.swift */,
@@ -431,11 +448,15 @@
 			isa = PBXGroup;
 			children = (
 				DA565CBE1C04D363009DDB46 /* HLSViewController.swift */,
-				DA565CC21C04D363009DDB46 /* SettingViewController.swift */,
 				DA565CC61C04D363009DDB46 /* WebViewController.swift */,
 				DA949E271C31CDCA0055A1FC /* ProFileViewController.swift */,
 				DAB092311C40E976007BDC37 /* addPetViewController.swift */,
 				DA5CB2901C592CDD00AE22C7 /* schedulerViewController.swift */,
+				DA7B3D6A1CAAEB0B00B0924D /* settingViewController.swift */,
+				DAA666901CC3FF6900D1AE3B /* sensorViewContorller.swift */,
+				DA5C92521CC7F02B0030B309 /* feedingViewController.swift */,
+				DA92407B1CDFE64400C5AE6E /* PageContentViewController.swift */,
+				DA92408C1CDFEC8700C5AE6E /* pageViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -747,18 +768,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA565CC81C04D363009DDB46 /* HttpReference.swift in Sources */,
-				DA5CB28A1C592B6C00AE22C7 /* coredataAlarm+CoreDataProperties.swift in Sources */,
-				DA5CB28B1C592B6C00AE22C7 /* coredataAlarm.swift in Sources */,
 				DA565CC91C04D363009DDB46 /* PetListTableViewCell.swift in Sources */,
 				DA565CC71C04D363009DDB46 /* HLSViewController.swift in Sources */,
+				DA92408D1CDFEC8700C5AE6E /* pageViewController.swift in Sources */,
 				DA5CB2911C592CDD00AE22C7 /* schedulerViewController.swift in Sources */,
 				DAF304A81C721CB7006F3327 /* dropbox.swift in Sources */,
 				DAB092321C40E976007BDC37 /* addPetViewController.swift in Sources */,
+				DA7B3D6B1CAAEB0B00B0924D /* settingViewController.swift in Sources */,
+				DA15E6871CBFE98F000CE219 /* Token+CoreDataProperties.swift in Sources */,
+				DA5C92621CC8129A0030B309 /* feedingTableViewCell.swift in Sources */,
 				DA949E281C31CDCA0055A1FC /* ProFileViewController.swift in Sources */,
-				DA565CCB1C04D363009DDB46 /* SettingViewController.swift in Sources */,
 				DA5CB28C1C592B6C00AE22C7 /* coredataProfile+CoreDataProperties.swift in Sources */,
 				DA565C331C048F40009DDB46 /* HHH.xcdatamodeld in Sources */,
 				DAB092241C40BBEB007BDC37 /* dataStore.swift in Sources */,
+				DAA666911CC3FF6900D1AE3B /* sensorViewContorller.swift in Sources */,
+				DA15E6881CBFE98F000CE219 /* Token.swift in Sources */,
 				DAAB0FAA1C4C18590061978C /* data_user.swift in Sources */,
 				DA5CB2991C59594100AE22C7 /* schedulerViewControllerCell.swift in Sources */,
 				DA565C2D1C048F40009DDB46 /* mainViewController.swift in Sources */,
@@ -767,11 +791,15 @@
 				DA565C2B1C048F40009DDB46 /* AppDelegate.swift in Sources */,
 				DA565CCC1C04D363009DDB46 /* SidePets.swift in Sources */,
 				DAB092141C3B36F2007BDC37 /* coreData.swift in Sources */,
+				DA5C92531CC7F02B0030B309 /* feedingViewController.swift in Sources */,
 				DAEA09751C78530700F07653 /* credataUser+CoreDataProperties.swift in Sources */,
 				DA5CB2971C59535700AE22C7 /* DatePickerDialog.swift in Sources */,
 				DA565CCA1C04D363009DDB46 /* PetListTableViewController.swift in Sources */,
+				DA92407C1CDFE64400C5AE6E /* PageContentViewController.swift in Sources */,
 				DA5FB6011C2DA29F0013845E /* SWRevealViewController.m in Sources */,
+				DAEF0B781CC93F35001DDCCD /* coredataAlarm+CoreDataProperties.swift in Sources */,
 				DA5CB28D1C592B6C00AE22C7 /* coredataProfile.swift in Sources */,
+				DAEF0B791CC93F35001DDCCD /* coredataAlarm.swift in Sources */,
 				DAEA09761C78530700F07653 /* credataUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +957,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = HHH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -952,6 +981,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = HHH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hhh.HHH;
 				PRODUCT_NAME = "$(TARGET_NAME)";

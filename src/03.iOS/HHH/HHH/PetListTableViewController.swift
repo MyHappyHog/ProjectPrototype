@@ -82,7 +82,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 300.0
+        return 100.0
     }
     
     func longPress(longPressGestureRecognizer: UIGestureRecognizer){
@@ -173,7 +173,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
         //print(pet)
         //cell.cellToolBar.barTintColor = colors[indexPath.row % 4]
         
-        cell.topView.backgroundColor = colors[indexPath.row % 4]
+        //cell.topView.backgroundColor = colors[indexPath.row % 4]
         cell.nameLabel.text = user_coredata!.getDatasIndex(indexPath.row, key: "title") as? String
         cell.petImage.image = UIImage(data: user_coredata!.getDatasIndex(indexPath.row, key: "image") as! NSData)
         
@@ -183,15 +183,20 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
             print(dataStore.feeding_index)
             print("feeeeeeed")
             
+            
             let alert = UIAlertController(title: "밥주기", message: "밥을 주나요?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addTextFieldWithConfigurationHandler { (obj) -> Void in
+                obj.keyboardType = .NumberPad
+            }
             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
                 print("Handle Ok logic here")
-                //self.http_reference?.postFedd()
-                //let _rotate = Int(self.tField.text! as String)
-                let rotate = self.user_coredata?.getDatasIndex(dataStore.feeding_index! as Int, key: "numRotate") as! Int
-                //let rotate = (_rotate == nil) ? 1 : _rotate
+                let a = alert.textFields![0] as UITextField
+                let _rotate = Int(a.text! as String)//self.numRotate
+                let rotate = (_rotate == nil) ? 1 : _rotate
                 
-                dropbox.putTheFeed((self.user_coredata?.getDatasIndex(dataStore.feeding_index!, key: "server_addr1"))! as! String, rotate: rotate)
+                print(_rotate)
+                
+                dropbox.putTheFeed((self.user_coredata?.getDatasIndex(dataStore.feeding_index!, key: "server_addr1"))! as! String, rotate: rotate!)
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: { (action: UIAlertAction!) in
@@ -199,23 +204,7 @@ class PetListTableViewController: UITableViewController, UIGestureRecognizerDele
             }))
             
             self.presentViewController(alert, animated: true, completion: nil)
-
         }
-        /*cell.onButtonTapped = {
-        //Do whatever you want to do when the button is tapped here
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
-        let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        let index = dataStore.now_index
-        let coredata = coreData(entity: "User")
-        facebookSheet.setInitialText("name : \(coredata.getDatasIndex(index!, key: "title"))    memo : \(coredata.getDatasIndex(index!, key: "memo"))")
-        self.presentViewController(facebookSheet, animated: true, completion: nil)
-        } else {
-        let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        }
-        }*/
-        
         return cell
     }
     
